@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: JavaScript | Bowen_blog</title>
+  <title>JavaScript Async | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Bowen">
-<meta name="keywords" content="前端,Html,css,JavaScript,Vue">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bowen_blog">
-<meta property="og:url" content="http://yoursite.com/tags/JavaScript/index.html">
+  <meta name="description" content="JavaScript Async同步与异步所谓同步编程，就是计算机一行一行按顺序依次执行代码，当前代码任务耗时执行会阻塞后续代码的执行  同步编程，即是一种典型的请求-响应模型，当请求调用一个函数或方法后，需等待其响应返回，然后执行后续代码  一般情况下，同步编程，代码按序依次执行，能很好的保证程序的执行，但是在某些场景下，比如读取文件内容，或请求服务器接口数据，需要根据返回的数据内容执行后续操作">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript Async">
+<meta property="og:url" content="http://yoursite.com/2018/08/12/JavaScript Async/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="Bowen">
+<meta property="og:description" content="JavaScript Async同步与异步所谓同步编程，就是计算机一行一行按顺序依次执行代码，当前代码任务耗时执行会阻塞后续代码的执行  同步编程，即是一种典型的请求-响应模型，当请求调用一个函数或方法后，需等待其响应返回，然后执行后续代码  一般情况下，同步编程，代码按序依次执行，能很好的保证程序的执行，但是在某些场景下，比如读取文件内容，或请求服务器接口数据，需要根据返回的数据内容执行后续操作">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-12T14:51:17.734Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bowen_blog">
-<meta name="twitter:description" content="Bowen">
+<meta name="twitter:title" content="JavaScript Async">
+<meta name="twitter:description" content="JavaScript Async同步与异步所谓同步编程，就是计算机一行一行按顺序依次执行代码，当前代码任务耗时执行会阻塞后续代码的执行  同步编程，即是一种典型的请求-响应模型，当请求调用一个函数或方法后，需等待其响应返回，然后执行后续代码  一般情况下，同步编程，代码按序依次执行，能很好的保证程序的执行，但是在某些场景下，比如读取文件内容，或请求服务器接口数据，需要根据返回的数据内容执行后续操作">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
   
@@ -140,36 +141,261 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JavaScript Async" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript Async
+    </h1>
+  
+
+        
+        <a href="/2018/08/12/JavaScript Async/" class="archive-article-date">
+  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="JavaScript-Async"><a href="#JavaScript-Async" class="headerlink" title="JavaScript Async"></a>JavaScript Async</h2><h3 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h3><p>所谓同步编程，就是计算机一行一行按顺序依次执行代码，当前代码任务耗时执行会阻塞后续代码的执行</p>
+<blockquote>
+<p>同步编程，即是一种典型的请求-响应模型，当请求调用一个函数或方法后，需等待其响应返回，然后执行后续代码</p>
+</blockquote>
+<p>一般情况下，同步编程，代码按序依次执行，能很好的保证程序的执行，但是在某些场景下，比如读取文件内容，或请求服务器接口数据，需要根据返回的数据内容执行后续操作，读取文件和请求接口直到数据返回这一过程是需要时间的，网络越差，耗费时间越长，如果按照同步编程方式实现，在等待数据返回这段时间，JavaScript是不能处理其他任务的，此时页面的交互，滚动等任何操作也都会被阻塞，这显然是及其不友好，不可接受的，而这正是需要异步编程大显身手的场景。例如，有两个任务A、B，如果A是耗时任务，任务A就会阻塞任务B的执行，等到任务A执行完才能继续执行B</p>
+<p>当使用异步编程时，在等待当前任务的响应返回之前，可以继续执行后续代码，即当前执行任务不会阻塞后续执行</p>
+<blockquote>
+<p>异步编程，不同于同步编程的请求-响应模式，其是一种事件驱动编程，请求调用函数或方法后，无需立即等待响应，可以继续执行其他任务，而之前任务响应返回后可以通过状态、通知和回调来通知调用者</p>
+</blockquote>
+<h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><p>异步编程能很好的解决同步编程阻塞的问题，那么实现异步的方式有哪些呢？通常实现异步方式是多线程，如C#，Java即同时开启多个线程，不同操作能并行执行</p>
+<h4 id="单线程"><a href="#单线程" class="headerlink" title="单线程"></a>单线程</h4><p>JavaScript语言执行环境是单线程的，单线程在程序执行时，所走的程序路径按照连续顺序排下来，前面的必须处理好，后面的才会执行，而使用异步实现时，多个任务可以并发执行</p>
+<h4 id="并行与并发"><a href="#并行与并发" class="headerlink" title="并行与并发"></a>并行与并发</h4><p>多线程的任务可以并行执行，而JavaScript单线程异步编程可以实现多任务并发执行，并行与并发的区别：</p>
+<ul>
+<li>并行，指同一时刻内多任务同时进行</li>
+<li>并发，指在同一时间段内，多任务同时进行着，但是某一时刻，只有某一任务执行</li>
+</ul>
+<h3 id="并发模型"><a href="#并发模型" class="headerlink" title="并发模型"></a>并发模型</h3><p>JavaScript执行异步任务时，不需要等待响应返回，可以继续执行其他任务，而在响应返回时，会得到通知，执行回调或事件处理程序。那么这一切具体是如何完成的，又以什么规则或顺序运作呢？</p>
+<p><strong>注：回调和事件处理程序本质上并无区别，只是在不同情况下，不同的叫法</strong></p>
+<p>JavaScript异步编程使得多个任务可以并发执行，而实现这一功能的基础是JavScript拥有一个基于事件循环的并发模型</p>
+<h4 id="堆栈与队列"><a href="#堆栈与队列" class="headerlink" title="堆栈与队列"></a>堆栈与队列</h4><p>介绍JavaScript并发模型之前，先简单介绍堆栈和队列的区别：</p>
+<ul>
+<li>堆（heap）：内存中某一未被阻止的区域，通常存储对象（引用类型）</li>
+<li>栈（stack）：后进先出的顺序存储数据结构，通常存储函数参数和基本类型值变量（按值访问）</li>
+<li>队列（queue）：先进先出顺序存储数据结构</li>
+</ul>
+<h4 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h4><p>JavaScript引擎负责解析，执行JavaScript代码，但它并不能单独运行，通常都得有一个宿主环境，一般如浏览器或Node服务器，前文说到的单线程是指在这些宿主环境创建单一线程，提供一种机制，调用JavaScript引擎完成多个JavaScript代码块的调度，执行（是的，JavaScript代码都是按块执行的），这种机制就称为事件循环（Event Loop）</p>
+<p><strong>注：这里的事件与DOM事件不要混淆，可以说这里的事件包括DOM事件，所有异步操作都是一个事件，诸如ajax请求就可以看作一个request请求事件</strong></p>
+<p>JavaScript执行环境中存在的两个结构需要了解：</p>
+<ul>
+<li>消息队列(message queue)，也叫任务队列（task queue）：存储待处理消息及对应的回调函数或事件处理程序</li>
+<li>执行栈(execution context stack)，也可以叫执行上下文栈：JavaScript执行栈，顾名思义，是由执行上下文组成，当函数调用时，创建并插入一个执行上下文，通常称为执行栈帧（frame），存储着函数参数和局部变量，当该函数执行结束时，弹出该执行栈帧</li>
+</ul>
+<p><strong>注：关于全局代码，由于所有的代码都是在全局上下文执行，所以执行栈顶总是全局上下文就很容易理解，直到所有代码执行完毕，全局上下文退出执行栈，栈清空了；也即是全局上下文是第一个入栈，最后一个出栈</strong></p>
+<h4 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h4><p>分析事件循环流程前，先阐述两个概念，有助于理解事件循环：同步任务和异步任务</p>
+<p>任务很好理解，JavaScript代码执行就是在完成任务，所谓任务就是一个函数或一个代码块，通常以功能或目的划分，比如完成一次加法计算，完成一次ajax请求；很自然的就分为同步任务和异步任务。同步任务是连续的，阻塞的；而异步任务则是不连续，非阻塞的，包含异步事件及其回调，当谈及执行异步任务时，通常指执行其回调函数</p>
+<h4 id="事件循环流程"><a href="#事件循环流程" class="headerlink" title="事件循环流程"></a>事件循环流程</h4><p>关于事件循环流程分解如下：</p>
+<ol>
+<li>宿主环境为JavaScript创建线程时，会创建堆(heap)和栈(stack)，堆内存储JavaScript对象，栈内存储执行上下文</li>
+<li>栈内执行上下文的同步任务按序执行，执行完即退栈，而当异步任务执行时，该异步任务进入等待状态（不入栈），同时通知线程：当触发该事件时（或该异步操作响应返回时），需向消息队列插入一个事件消息</li>
+<li>当事件触发或响应返回时，线程向消息队列插入该事件消息（包含事件及回调）</li>
+<li>当栈内同步任务执行完毕后，线程从消息队列取出一个事件消息，其对应异步任务（函数）入栈，执行回调函数，如果未绑定回调，这个消息会被丢弃，执行完任务后退栈</li>
+<li>当线程空闲（即执行栈清空）时继续拉取消息队列下一轮消息（next tick，事件循环流转一次称为一次tick）</li>
+</ol>
+<p>使用代码可以描述如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eventLoop = [];</span><br><span class="line"><span class="keyword">var</span> event;</span><br><span class="line"><span class="keyword">var</span> i = eventLoop.length - <span class="number">1</span>; <span class="comment">// 后进先出</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(eventLoop[i]) &#123;</span><br><span class="line">    event = eventLoop[i--]; </span><br><span class="line">    <span class="keyword">if</span> (event) &#123; <span class="comment">// 事件回调存在</span></span><br><span class="line">        event();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 否则事件消息被丢弃</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><em>这里注意的一点是等待下一个事件消息的过程是同步的</em></p>
+<p><strong>并发模型与事件循环：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ele = <span class="built_in">document</span>.querySelector(<span class="string">'body'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clickCb</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'clicked'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindEvent</span>(<span class="params">callback</span>) </span>&#123;</span><br><span class="line">    ele.addEventListener(<span class="string">'click'</span>, callback);</span><br><span class="line">&#125;    </span><br><span class="line"></span><br><span class="line">bindEvent(clickCb);</span><br></pre></td></tr></table></figure>
+<h4 id="Web-Workers"><a href="#Web-Workers" class="headerlink" title="Web Workers"></a>Web Workers</h4><p>每个Web Worker或一个跨域的iframe都有各自的堆栈和消息队列，这些不同的文档只能通过postMessage方法进行通信，当一方监听了message事件后，另一方才能通过该方法向其发送消息，这个message事件也是异步的，当一方接收到另一方通过postMessage方法发送来的消息后，会向自己的消息队列插入一条消息</p>
+<h3 id="异步编程"><a href="#异步编程" class="headerlink" title="异步编程"></a>异步编程</h3><p><strong>“异步模式”非常重要。在浏览器端，耗时很长的操作都应该异步执行，避免浏览器失去响应，最好的例子就是Ajax操作。在服务器端，”异步模式”甚至是唯一的模式，因为执行环境是单线程的，如果允许同步执行所有http请求，服务器性能会急剧下降，很快就会失去响应</strong></p>
+<p><strong>JS常用的异步操作：</strong></p>
+<ul>
+<li><strong>网络请求，如<code>ajax</code> <code>http.get</code></strong></li>
+<li><strong>IO 操作，如<code>readFile</code> <code>readdir</code></strong></li>
+<li><strong>定时函数，如<code>setTimeout</code> <code>setInterval</code></strong></li>
+<li><strong>事件绑定，如<code>$btn.on(&#39;click&#39;, function() {...})</code></strong></li>
+</ul>
+<p><strong>关于JavaScript的异步实现，ES6之前”异步模式”编程的几种方法：</strong></p>
+<h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><p>这是异步编程最基本的方法。假定有两个函数f1和f2，后者等待前者的执行结果：<code>f1(); f2();</code><br>如果f1是一个很耗时的任务，可以考虑改写f1，把f2写成f1的回调函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">　　　　setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">　　　　　　<span class="comment">// f1的任务代码</span></span><br><span class="line">　　　　　　callback();</span><br><span class="line">　　　　&#125;, <span class="number">1000</span>);</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+<p>执行代码就变成这样：<code>f1(f2);</code><br>采用这种方式，把同步操作变成了异步操作，f1不会堵塞程序运行，相当于先执行程序的主要逻辑，将耗时的操作推迟执行<br>回调函数的优点是简单、容易理解和部署，缺点是不利于代码的阅读和维护，各个部分之间高度耦合（Coupling），流程会很混乱，而且每个任务只能指定一个回调函数</p>
+<h4 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h4><p>另一种思路是采用事件驱动模式。任务的执行不取决于代码的顺序，而取决于某个事件是否发生<br>还是以f1和f2为例。首先，为f1绑定一个事件（这里采用的jQuery的写法）：<code>f1.on(‘done’, f2);</code><br>上面这行代码的意思是，当f1发生done事件，就执行f2。然后，对f1进行改写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">　　　　　　<span class="comment">// f1的任务代码</span></span><br><span class="line">　　　　　　f1.trigger(<span class="string">'done'</span>);   <span class="comment">//触发事件</span></span><br><span class="line">　　　　&#125;, <span class="number">1000</span>);</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+<p>f1.trigger(‘done’)表示，执行完成后，立即触发done事件，从而开始执行f2<br>这种方法的优点是比较容易理解，可以绑定多个事件，每个事件可以指定多个回调函数，而且可以”去耦合”（Decoupling），有利于实现模块化。缺点是整个程序都要变成事件驱动型，运行流程会变得很不清晰</p>
+<h4 id="发布-订阅"><a href="#发布-订阅" class="headerlink" title="发布-订阅"></a>发布-订阅</h4><p>PubSub，即Publish/Subscribe，发布、订阅模式， 用以分发事件。常见的有jQuery的自定义事件监听、Node的EventEmitter对象等</p>
+<p>上一节的”事件”，完全可以理解成”信号”。假定存在一个”信号中心”，某个任务执行完成，就向信号中心”发布”（publish）一个信号，其他任务可以向信号中心”订阅”（subscribe）这个信号，从而知道什么时候自己可以开始执行。这就叫做”发布/订阅模式”（publish-subscribe pattern），又称”观察者模式”（observer pattern）<br>这个模式有多种实现，下面采用的是Ben Alman的Tiny Pub/Sub，这是jQuery的一个插件：<br>首先，f2向”信号中心”jQuery订阅”done”信号：<code>jQuery.subscribe(“done”, f2);</code>，然后，f1进行如下改写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">　　　　　　<span class="comment">// f1的任务代码</span></span><br><span class="line">　　　　　　jQuery.publish(<span class="string">"done"</span>);</span><br><span class="line">　　　　&#125;, <span class="number">1000</span>);</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+<p>jQuery.publish(“done”)的意思是，f1执行完成后，向”信号中心”jQuery发布”done”信号，从而引发f2的执行<br>此外，f2完成执行后，也可以取消订阅（unsubscribe）：<code>jQuery.unsubscribe(“done”, f2);</code><br>这种方法的性质与”事件监听”类似，但是明显优于后者。因为可以通过查看”消息中心”，了解存在多少信号、每个信号有多少订阅者，从而监控程序的运行</p>
+<h4 id="Promise对象"><a href="#Promise对象" class="headerlink" title="Promise对象"></a>Promise对象</h4><p>Promise是CommonJS的规范之一，拥有resolve、reject、done、fail、then等方法，能够控制代码的流程：</p>
+<blockquote>
+<ol>
+<li>一个promise可能有三种状态：等待（pending）、已完成（fulfilled）、已拒绝（rejected）</li>
+<li>一个promise的状态只可能从“等待”转到“完成”态或者“拒绝”态，不能逆向转换，同时“完成”态和“拒绝”态不能相互转换</li>
+<li>promise必须实现then方法（可以说，then就是promise的核心），而且then必须返回一个promise，同一个promise的then可以调用多次，并且回调的执行顺序跟它们被定义时的顺序一致</li>
+<li>then方法接受两个参数，第一个参数是成功时的回调，在promise由“等待”态转换到“完成”态时调用，另一个是失败时的回调，在promise由“等待”态转换到“拒绝”态时调用</li>
+<li>同时，then可以接受另一个promise传入，也接受一个“类then”的对象或方法，即thenable对象</li>
+</ol>
+</blockquote>
+<p>不难想象，如果依次读取多个文件，就会出现多重嵌套。代码不是纵向发展，而是横向发展，很快就会乱成一团，无法管理。这种情况就称为”回调函数噩梦”（callback hell）。 Promise就是为了解决这个问题而提出的。它不是新的语法功能，而是一种新的写法，允许将回调函数的横向加载，改成纵向加载。采用Promise，连续读取多个文件，写法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> readFile = <span class="built_in">require</span>(<span class="string">'fs-readfile-promise'</span>);</span><br><span class="line">readFile(fileA)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data.toString());</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> readFile(fileB);</span><br><span class="line">&#125;)</span><br><span class="line">.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data.toString());</span><br><span class="line">&#125;)</span><br><span class="line">.catch(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>简单说，它的思想是，每一个异步任务返回一个Promise对象，该对象有一个then方法，允许指定回调函数。比如，f1的回调函数f2,可以写成： <code>f1().then(f2);</code>。f1要进行如下改写（这里使用的是jQuery的实现）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">　　<span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　<span class="keyword">var</span> dfd = $.Deferred();</span><br><span class="line">　　　　setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">　　　　　　<span class="comment">// f1的任务代码</span></span><br><span class="line">　　　　　　dfd.resolve();</span><br><span class="line">　　　　&#125;, <span class="number">500</span>);</span><br><span class="line">　　　　<span class="keyword">return</span> dfd.promise;</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
+<p>这样写的优点在于，回调函数变成了链式写法，程序的流程可以看得很清楚，而且有一整套的配套方法，可以实现许多强大的功能。比如，指定多个回调函数：<code>f1().then(f2).then(f3);</code>；再比如，指定发生错误时的回调函数：<code>f1().then(f2).fail(f3);</code>。而且，它还有一个前面三种方法都没有的好处：如果一个任务已经完成，再添加回调函数，该回调函数会立即执行。所以，不必担心是否错过了某个事件或信号</p>
+<p>但是，Promise 的最大问题是代码冗余，原来的任务被Promise 包装了一下，不管什么操作，一眼看去都是一堆 then，原来的语义变得很不清楚</p>
+<h3 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h3><h4 id="Generator方式"><a href="#Generator方式" class="headerlink" title="Generator方式"></a>Generator方式</h4><p>ECMAScript 2015作为下一代 JavaScript 语言，将 JavaScript 异步编程带入了一个全新的阶段</p>
+<p>Generator 函数是协程在 ES6 的实现，<strong>最大特点就是可以交出函数的执行权（即暂停执行）。Generator 函数可以暂停执行和恢复执行，这是它能封装异步任务的根本原因。除此之外，它还有两个特性，使它可以作为异步编程的完整解决方案：函数体内外的数据交换和错误处理机制。</strong>next 方法返回值的 value 属性，是 Generator 函数向外输出数据；next 方法还可以接受参数，这是向 Generator 函数体内输入数据。如下例：</p>
+<p>特性1：暂停执行与恢复执行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="keyword">yield</span> x + <span class="number">2</span>;</span><br><span class="line">  <span class="comment">//(1)每次调用next只会执行yield后面的代码</span></span><br><span class="line">  <span class="comment">//(2)第二次调用next的时候可以将上一次调用yield后的结果返回给下一次的调用</span></span><br><span class="line">  <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>也就是通过yield来暂停执行，通过next来恢复执行</p>
+<p>特性2：函数体内外的数据交换</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="keyword">yield</span> x + <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> g = gen(<span class="number">1</span>);</span><br><span class="line">g.next() </span><br><span class="line"><span class="comment">// &#123; value: 3, done: false &#125;</span></span><br><span class="line">g.next(<span class="number">2</span>) </span><br><span class="line"><span class="comment">// &#123; value: 2, done: true &#125;</span></span><br><span class="line"><span class="comment">// 这里的g.next(2)相当于向generator函数传入值(即表示上一次调用g.next得到的值为2)，作为上一个yield的返回值，所以得到的结果为2</span></span><br></pre></td></tr></table></figure>
+<p>通过调用next方法获取到的value代表函数体向外输出的数据，而调用next方法传入的参数本身代表向Generator传入数据</p>
+<p>特性3：错误处理机制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> y = <span class="keyword">yield</span> x + <span class="number">2</span>;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e)&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> g = gen(<span class="number">1</span>);</span><br><span class="line">g.next();</span><br><span class="line">g.throw（<span class="string">'出错了'</span>）;</span><br><span class="line"><span class="comment">// 出错了</span></span><br></pre></td></tr></table></figure>
+<p>上面代码的最后一行，Generator 函数体外，使用指针对象的 throw 方法抛出的错误，可以被函数体内的 try … catch 代码块捕获。这意味着，出错的代码与处理错误的代码，实现了时间和空间上的分离，这对于异步编程无疑是很重要的</p>
+<p>下面是Generator处理实际任务的一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fetch = <span class="built_in">require</span>(<span class="string">'node-fetch'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">'https://api.github.com/users/github'</span>;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="keyword">yield</span> fetch(url);</span><br><span class="line">  <span class="built_in">console</span>.log(result.bio);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体的执行过程如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> g = gen();</span><br><span class="line"><span class="keyword">var</span> result = g.next();</span><br><span class="line"><span class="comment">//(1)第一步调用g.next表示从服务端获取数据，即得到yield fetch(url)的结果</span></span><br><span class="line"><span class="comment">//(2)第一个then方法表示将yield的结果转化为json</span></span><br><span class="line"><span class="comment">//(3)第二个then方法表示将json传回到generator方法，此时可以打印result.bio的值</span></span><br><span class="line">result.value.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> data.json();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  g.next(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="thunk函数"><a href="#thunk函数" class="headerlink" title="thunk函数"></a>thunk函数</h4><p><strong>基本概念</strong></p>
+<p>编译器的”传名调用”实现，往往是将参数放到一个临时函数之中，再将这个临时函数传入函数体。这个临时函数就叫做 Thunk 函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">m</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> m * <span class="number">2</span>;     </span><br><span class="line">&#125;</span><br><span class="line">f(x + <span class="number">5</span>);</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">var</span> thunk = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x + <span class="number">5</span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">thunk</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> thunk() * <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码中，函数 f 的参数 x + 5 被一个函数替换了。凡是用到原参数的地方，对 Thunk 函数求值即可。这就是 Thunk 函数的定义，它是”传名调用”的一种实现策略，用来替换某个表达式</p>
+<p><strong>JavaScript中的thunk函数</strong></p>
+<p>JavaScript 语言是传值调用，它的 Thunk 函数含义有所不同。在 JavaScript 语言中，<strong>Thunk 函数替换的不是表达式，而是多参数函数，将其替换成单参数的版本，且只接受回调函数作为参数</strong></p>
+<p>thunk函数的实现机制还是通过闭包来完成的。其调用分为三步，首先是传入一个函数,接着是传入该函数的所有除了callback以外的参数,最后是传入回调函数callback</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">thunkify</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//第一步：传入函数</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//第二步：传入除了callback以外的参数</span></span><br><span class="line">    <span class="keyword">var</span> args = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="built_in">arguments</span>.length);</span><br><span class="line">    <span class="keyword">var</span> ctx = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; args.length; ++i) &#123;</span><br><span class="line">      args[i] = <span class="built_in">arguments</span>[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">done</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//第三步：传入回调函数</span></span><br><span class="line">      <span class="keyword">var</span> called;</span><br><span class="line">      args.push(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (called) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">//回调函数只会运行一次</span></span><br><span class="line">        called = <span class="literal">true</span>;</span><br><span class="line">        done.apply(<span class="literal">null</span>, <span class="built_in">arguments</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        fn.apply(ctx, args);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">        done(err);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="thunk与Generator"><a href="#thunk与Generator" class="headerlink" title="thunk与Generator"></a>thunk与Generator</h4><p><strong>Generator的yield返回的必须是thunkify的函数才能递归</strong></p>
+<p>Thunk 函数有什么用？回答在以前确实没什么用，但是 ES6 有了 Generator 函数，Thunk 函数现在可以用于 Generator 函数的自动流程管理</p>
+<p>以读取文件为例。下面的 Generator 函数封装了两个异步操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> thunkify = <span class="built_in">require</span>(<span class="string">'thunkify'</span>);</span><br><span class="line"><span class="keyword">var</span> readFile = thunkify(fs.readFile);</span><br><span class="line"><span class="keyword">var</span> gen = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> r1 = <span class="keyword">yield</span> readFile(<span class="string">'/etc/fstab'</span>);</span><br><span class="line">  <span class="comment">//1.交出执行权</span></span><br><span class="line">  <span class="built_in">console</span>.log(r1.toString());</span><br><span class="line">  <span class="keyword">var</span> r2 = <span class="keyword">yield</span> readFile(<span class="string">'/etc/shells'</span>);</span><br><span class="line">   <span class="comment">//1.交出执行权</span></span><br><span class="line">  <span class="built_in">console</span>.log(r2.toString());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>上面代码中，yield 命令用于将程序的执行权移出 Generator 函数，那么就需要一种方法，将执行权再交还给 Generator 函数。这种方法就是 Thunk 函数，因为它可以在回调函数里，将执行权交还给 Generator 函数。手动执行上面这Generator 函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> g = gen();</span><br><span class="line"><span class="keyword">var</span> r1 = g.next();</span><br><span class="line"><span class="comment">//2.查看这里的程序你可以清楚的看到，这里是将同一个回调函数反复的传入到g.next返回的value中。但是这个返回的value必须是thunkify过后的函数，这样它只会接受一个参数，那么就满足这里的定义了</span></span><br><span class="line">r1.value(<span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">  <span class="keyword">var</span> r2 = g.next(data);</span><br><span class="line">  r2.value(<span class="function"><span class="keyword">function</span>(<span class="params">err, data</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//2.value必须是thunkify的函数才会只接受一个callback参数</span></span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</span><br><span class="line">    g.next(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>上面代码中，变量 g 是 Generator 函数的内部指针，表示目前执行到哪一步。next 方法负责将指针移动到下一步，并返回该步的信息（value 属性和 done 属性）。 仔细查看上面的代码，可以发现 Generator 函数的执行过程，其实是将同一个回调函数，反复传入 next 方法的 value 属性。这使得可以用<code>递归</code>来自动完成这个过程</p>
+<p><strong>使用thunkify来自动执行Generator函数从而将执行权交还给Generator</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> gen = fn();</span><br><span class="line">  <span class="comment">//获取到generator内部指针，这里的next就是thunk函数的回调函数</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = gen.next(data);</span><br><span class="line">    <span class="comment">//获取generator内部状态</span></span><br><span class="line">    <span class="keyword">if</span> (result.done) <span class="keyword">return</span>;</span><br><span class="line">    result.value(next);</span><br><span class="line">    <span class="comment">//Gnerator的value必须是thunkify函数，此时才会只接受一个回调函数</span></span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;</span><br><span class="line">run(gen);</span><br></pre></td></tr></table></figure>
+<p>下面是一个读取多个文件的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gen = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> f1 = <span class="keyword">yield</span> readFile(<span class="string">'fileA'</span>);</span><br><span class="line">  <span class="keyword">var</span> f2 = <span class="keyword">yield</span> readFile(<span class="string">'fileB'</span>);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">var</span> fn = <span class="keyword">yield</span> readFile(<span class="string">'fileN'</span>);</span><br><span class="line">&#125;;</span><br><span class="line">run(gen);</span><br></pre></td></tr></table></figure>
+<p>上面代码中，函数 gen 封装了 n 个异步的读取文件操作，只要执行 run 函数，这些操作就会自动完成。这样一来，异步操作不仅可以写得像同步操作，而且一行代码就可以执行</p>
+<p>Thunk 函数并不是 Generator 函数自动执行的唯一方案。因为自动执行的关键是，必须有一种机制，自动控制 Generator 函数的流程，接收和交还程序的执行权。回调函数可以做到这一点，Promise 对象也可以做到这一点</p>
+<h4 id="co函数库"><a href="#co函数库" class="headerlink" title="co函数库"></a>co函数库</h4><p>co 函数库是著名程序员 TJ Holowaychuk 于2013年6月发布的一个小工具，用于 Generator 函数的自动执行</p>
+<p><strong>co函数库自动执行Generator，但是yield后必须是promise或者thunk函数</strong></p>
+<p>比如，有一个 Generator 函数，用于依次读取两个文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gen = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> f1 = <span class="keyword">yield</span> readFile(<span class="string">'/etc/fstab'</span>);</span><br><span class="line">  <span class="keyword">var</span> f2 = <span class="keyword">yield</span> readFile(<span class="string">'/etc/shells'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(f1.toString());</span><br><span class="line">  <span class="built_in">console</span>.log(f2.toString());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>co 函数库可以让你不用编写 Generator 函数的执行器：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> co = <span class="built_in">require</span>(<span class="string">'co'</span>);</span><br><span class="line">co(gen);</span><br></pre></td></tr></table></figure>
+<p>上面代码中，Generator 函数只要传入 co 函数，就会自动执行。co 函数返回一个 <code>Promise 对象</code>，因此可以用 then 方法添加回调函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">co(gen).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Generator 函数执行完成'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面代码中，等到 Generator 函数执行结束，就会输出一行提示。相对于thunkify，co的yeild后可以是promise或者thunk函数，其中后者是通过递归来实现的</p>
+<p><strong>co函数库自动执行Generator的原理</strong></p>
+<p>为什么 co 可以自动执行 Generator 函数？</p>
+<p>Generator 函数就是一个异步操作的容器，它的自动执行需要一种机制，当异步操作有了结果，能够自动交回执行权</p>
+<p>两种方法可以做到这一点：</p>
+<ul>
+<li>回调函数。将异步操作包装成 Thunk 函数，在回调函数里面交回执行权</li>
+<li>Promise 对象。将异步操作包装成 Promise 对象，用 then 方法交回执行权。 co 函数库其实就是将<strong>两种自动执行器（Thunk 函数和 Promise 对象），包装成一个库</strong>。使用 co 的前提条件是，Generator 函数的 yield 命令后面，只能是 Thunk 函数或 Promise 对象</li>
+</ul>
+<p>下面展示如何使用Promise来交还执行权：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> readFile = <span class="function"><span class="keyword">function</span> (<span class="params">fileName</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//这里new Promise导致readFile本身返回的是一个Promise</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">    fs.readFile(fileName, <span class="function"><span class="keyword">function</span>(<span class="params">error, data</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">      resolve(data);</span><br><span class="line">      <span class="comment">//then方法的回调函数中会得到这里的data数据</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gen = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> f1 = <span class="keyword">yield</span> readFile(<span class="string">'/etc/fstab'</span>);</span><br><span class="line">  <span class="comment">//这里返回的是一个Promise对象，所以通过g.next().value获取到的对象可以继续调用then方法</span></span><br><span class="line">  <span class="keyword">var</span> f2 = <span class="keyword">yield</span> readFile(<span class="string">'/etc/shells'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(f1.toString());</span><br><span class="line">  <span class="built_in">console</span>.log(f2.toString());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>手动执行上面这个Generator函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> g = gen();</span><br><span class="line"><span class="comment">//g.next()开始执行第一个readFile方法，g.next().value表示执行第一个readFile返回的promise对象</span></span><br><span class="line">g.next().value.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//g.next(data)表示将上一个yield的执行结果交还给Generator，相当于将结果赋值给变量f1</span></span><br><span class="line">  g.next(data).value.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    g.next(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>注意：如果是下面这样，那么f1最后将会是undefined(toString报错)，因为第一个yield执行结果并没有交还给Generator，所以无法获取到内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> g = gen();</span><br><span class="line">g.next().value.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//下面不是g.next(data)，所以第一个读取文件的结果没有交还给Generator的f1</span></span><br><span class="line">  g.next().value.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    g.next(data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>而下面展示的就是一个通过Promise来自动执行Generator的实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">gen</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> g = gen();</span><br><span class="line">  <span class="comment">//获取指针</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = g.next(data);</span><br><span class="line">    <span class="keyword">if</span> (result.done) <span class="keyword">return</span> result.value;</span><br><span class="line">    <span class="comment">//result.value此处返回的是Promise对象</span></span><br><span class="line">    result.value.then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">      next(data);</span><br><span class="line">      <span class="comment">//将data交给上一个yield执行结果</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  next();</span><br><span class="line">&#125;</span><br><span class="line">run(gen);</span><br></pre></td></tr></table></figure>
+<h3 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h3><h4 id="async和Generator"><a href="#async和Generator" class="headerlink" title="async和Generator"></a>async和Generator</h4><p>一句话，async 函数就是 Generator 函数的语法糖。比如一个 Generator 函数，依次读取两个文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">var</span> readFile = <span class="function"><span class="keyword">function</span> (<span class="params">fileName</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">    fs.readFile(fileName, <span class="function"><span class="keyword">function</span>(<span class="params">error, data</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">      resolve(data);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gen = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> f1 = <span class="keyword">yield</span> readFile(<span class="string">'/etc/fstab'</span>);</span><br><span class="line">  <span class="keyword">var</span> f2 = <span class="keyword">yield</span> readFile(<span class="string">'/etc/shells'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(f1.toString());</span><br><span class="line">  <span class="built_in">console</span>.log(f2.toString());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>写成 async 函数，就是下面这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> asyncReadFile = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> f1 = <span class="keyword">await</span> readFile(<span class="string">'/etc/fstab'</span>);</span><br><span class="line">  <span class="keyword">var</span> f2 = <span class="keyword">await</span> readFile(<span class="string">'/etc/shells'</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(f1.toString());</span><br><span class="line">  <span class="built_in">console</span>.log(f2.toString());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>async 函数就是将 Generator 函数的星号（*）替换成 async，将 yield 替换成 await，仅此而已</p>
+<h4 id="async函数优点"><a href="#async函数优点" class="headerlink" title="async函数优点"></a>async函数优点</h4><p>async 函数对 Generator 函数的改进，体现在以下三点：</p>
+<p>（1）内置执行器。 Generator 函数的执行必须靠执行器，所以才有了 co 函数库，而 async 函数自带执行器。也就是说，async 函数的执行，与普通函数一模一样，只要一行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = asyncReadFile();</span><br></pre></td></tr></table></figure>
+<p>（2）更好的语义。 async 和 await，比起星号和 yield，语义更清楚了。async 表示函数里有异步操作，await 表示紧跟在后面的表达式需要等待结果</p>
+<p>（3）更广的适用性。 co 函数库约定，yield 命令后面只能是 Thunk 函数或 Promise 对象，而 async 函数的 await 命令后面，可以跟 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）</p>
+<h4 id="async的用法"><a href="#async的用法" class="headerlink" title="async的用法"></a>async的用法</h4><p>同 Generator 函数一样，<strong>async 函数返回一个 Promise 对象，可以使用 then 方法添加回调函数</strong>。当函数执行的时候，一旦遇到 await 就会先返回，等到触发的异步操作完成，再接着执行函数体内后面的语句</p>
+<p>下面的例子，指定多少毫秒后输出一个值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timeout</span>(<span class="params">ms</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(resolve, ms);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">asyncPrint</span>(<span class="params">value, ms</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> timeout(ms);</span><br><span class="line">  <span class="comment">//遇到await了，所有先返回，得到异步操作完成，执行后面的代码</span></span><br><span class="line">  <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;</span><br><span class="line">asyncPrint(<span class="string">'hello world'</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p>上面代码指定50毫秒以后，输出”hello world”</p>
+<p><strong>async自动执行器实现</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//genF是Generator函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">spawn</span>(<span class="params">genF</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//返回promise和co一样，但是co只能是promise和thunk函数</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> gen = genF();</span><br><span class="line">    <span class="comment">//得到Generator内部指针</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">step</span>(<span class="params">nextF</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> next = nextF();</span><br><span class="line">       <span class="comment">//next获取到第一个await返回的结果</span></span><br><span class="line">      &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="keyword">return</span> reject(e); </span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(next.done) &#123;</span><br><span class="line">        <span class="keyword">return</span> resolve(next.value);</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="comment">//如果done为true那么直接resolve</span></span><br><span class="line">      <span class="built_in">Promise</span>.resolve(next.value).then(<span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">        <span class="comment">//第一个await返回的对象的value表示结果&#123;value:'',done:false&#125;</span></span><br><span class="line">        step(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> gen.next(v); &#125;);  </span><br><span class="line">        <span class="comment">//调用gen.next()获取到下一个await的结果并传入上一次的await调用后得到的value    </span></span><br><span class="line">      &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        step(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> gen.throw(e); &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    step(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> gen.next(<span class="literal">undefined</span>); &#125;);</span><br><span class="line">    <span class="comment">//首次执行的时候传入第一个await的data为undefined</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="附：Promise函数深入理解"><a href="#附：Promise函数深入理解" class="headerlink" title="附：Promise函数深入理解"></a>附：Promise函数深入理解</h3><p>每一个promise对象都会提供一个then方法或者是catch方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">somePromise().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// I'm inside a then() function!</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>在then方法内部，可以做三件事：</p>
+<ol>
+<li>return 一个promise对象</li>
+<li>return 一个同步的值或者是 undefined</li>
+<li>同步的 throw 一个错误</li>
+</ol>
+<p><strong>返回另一个promise对象</strong></p>
+<p>这种写法很常见，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getUserByName(<span class="string">'nolan'</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">user</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getUserAccountById(user.id);</span><br><span class="line">&#125;).then(funcxtion (userAccount) &#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这段代码里面的return非常关键，没有这个return的话，getUserAccountById只是一个普通的被别的函数调用的函数。下一个回调函数会接收到undefined而不是userAccount</p>
+<p><strong>返回一个同步的值或者是 undefined</strong></p>
+<p>返回一个 undefined 大多数情况下是错误的，但是返回一个同步的值确实是一个将同步代码转化成promise风格代码的好方法。举个例子，现在在内存中有users。可以：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">getUserByName(<span class="string">'nolan'</span>).then(fcuntion (user) &#123;</span><br><span class="line">    <span class="keyword">if</span> (inMemoryCache[user.id]) &#123;</span><br><span class="line">        <span class="keyword">return</span> inMemoryCache[user.id]; </span><br><span class="line">         <span class="comment">// returning a synchronous value!</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> inMemoryCache[user.id]; </span><br><span class="line">    <span class="comment">// returning a promise</span></span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">userAccount</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// I got a user account</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>第二个回调函数并不关心userAccount是通过同步的方式得到的还是异步的方式得到的，而第一个回调函数既可以返回同步的值又可以返回异步的值。不幸的是，如果不显式调用return语句的话，javaScript里的函数会返回 undefined 。这也就意味着在想返回一些值的时候，不显式调用return会产生一些副作用</p>
+<p>因此，最好的习惯就是在<code>then方法内部永远显式的调用return或者throw</code></p>
+<p><strong>抛出一个同步的错误</strong></p>
+<p>说到throw，这又体现了promise的功能强大。在用户退出的情况下，代码中会采用抛出异常的方式进行处理：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">getUserByName(<span class="string">'nolan'</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params">user</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (user.isLoggedOut()) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'user logged out!'</span>); <span class="comment">// throwing a synchronous error!</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (inMemoryCache[user.id]) &#123;</span><br><span class="line">    <span class="keyword">return</span> inMemoryCache[user.id];       <span class="comment">// returning a synchronous value!</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> getUserAccountById(user.id);    <span class="comment">// returning a promise!</span></span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span> (<span class="params">userAccount</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// I got a user account!</span></span><br><span class="line">&#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Boo, I got an error!</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果用户已经登出的话， catch() 会收到一个同步的错误，如果有promise对象的状态变为rejected的话，它也会收到一个异步的错误。 catch() 的回调函数不用关心错误是异步的还是同步的</p>
+<p>在使用promise的时候抛出异常在开发阶段很有用，它能定位代码中的错误。比方说，在then函数内部调用 JSON.parse() ，如果JSON对象不合法的话，可能会抛出异常，在回调函数中，这个异常会被吞噬，但是在使用promise之后，就可以捕获到这个异常了</p>
+<p>有助于深入的理解Promise的例子：</p>
+<p>例子1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> doSomethingElse();</span><br><span class="line">  <span class="comment">//undefined</span></span><br><span class="line">&#125;).then(finalHandler);</span><br><span class="line"><span class="comment">//finalHandler会接受到前面then指定的函数的返回值，因为它明确的return了，注意return不可少</span></span><br></pre></td></tr></table></figure>
+<p>答案如下：then方法中没有形参接受到doSomething返回的值，所以为undefined</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(undefined) </span><br><span class="line">                  |------------------|</span><br><span class="line">                                     finalHandler(resultOfDoSomethingElse)</span><br><span class="line">                                     |------------------|</span><br></pre></td></tr></table></figure>
+<p>例子2</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  doSomethingElse();</span><br><span class="line">&#125;).then(finalHandler);</span><br></pre></td></tr></table></figure>
+<p>答案如下:finalHandler也会接受到undefined，因为前面的then中的函数没有明确的return值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(undefined)</span><br><span class="line">                  |------------------|</span><br><span class="line">                  finalHandler(undefined)</span><br><span class="line">                  |------------------|</span><br></pre></td></tr></table></figure>
+<p>例子3</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(doSomethingElse())</span><br><span class="line"><span class="comment">//doSomethingElse()返回了Promise的情况比较特殊，finalHandler接受到doSomething的值</span></span><br><span class="line">  .then(finalHandler);</span><br></pre></td></tr></table></figure>
+<p>答案如下：因为then方法中的doSomethingElse()返回的是一个Promise对象，即typeof doSomethingElse()为”object”，所以finalHandler会接收到doSomething返回的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">doSomethingElse(undefined)</span><br><span class="line">|---------------------------------|</span><br><span class="line">                  finalHandler(resultOfDoSomething)</span><br><span class="line">                  |------------------|</span><br></pre></td></tr></table></figure>
+<p>比如下面的例子依然输出的为”qinliang”：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f=<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;<span class="built_in">console</span>.log(result);&#125;</span><br><span class="line"><span class="built_in">Promise</span>.resolve(<span class="string">"qinliang"</span>).then(f);</span><br></pre></td></tr></table></figure>
+<p>和下面的代码输出结果完全相同:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve(<span class="string">'qinliang'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;<span class="built_in">console</span>.log(result);&#125;)</span><br></pre></td></tr></table></figure>
+<p>其实它们的then方法传入函数签名完全一致</p>
+<p>例子4</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">doSomething().then(doSomethingElse)</span><br><span class="line"><span class="comment">//doSomethingElse会接受到doSomething()的结果</span></span><br><span class="line">  .then(finalHandler);</span><br><span class="line"><span class="comment">//finalHandler会接受到doSomethingElse的结果</span></span><br></pre></td></tr></table></figure>
+<p>答案如下：doSomethingElse只是一个<code>函数句柄(如const doSomething=function(){})</code>，通过调用这个函数句柄doSomethingElse()会得到Promise对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">doSomething</span><br><span class="line">|-----------------|</span><br><span class="line">                  doSomethingElse(resultOfDoSomething)</span><br><span class="line">                  |------------------|</span><br><span class="line">                                     finalHandler(resultOfDoSomethingElse)</span><br><span class="line">                                     |------------------|</span><br></pre></td></tr></table></figure>
+<p>需要说明的是，在上述的例子中，都假设 doSomething() 和 doSomethingElse() 返回<strong>(注意是返回了，即return的情况下，而不是第一个例子的方式)</strong>一个promise对象，这些promise对象都代表了一个异步操作，这样的操作会在当前event loop之外结束，比如说有关IndexedDB，network的操作，或者是使用 setTimeout</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript String/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript String/">JavaScript String</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -181,361 +407,115 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/08/12/JavaScript Async/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Array/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/08/12/JavaScript BOM/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          JavaScript BOM
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/12/JavaScript String/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript String</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Array/">JavaScript Array</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript BOM/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript BOM/">JavaScript BOM</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Async/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Async/">JavaScript Async</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Math&Date/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Math&Date/">JavaScript Math&amp;Date</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Event/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Event/">JavaScript Event</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript RegExp/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript RegExp/">JavaScript RegExp</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Ajax/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Ajax/">JavaScript Ajax</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript DOM/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript DOM/">JavaScript DOM</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Object/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Object/">JavaScript Object</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -558,9 +538,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
