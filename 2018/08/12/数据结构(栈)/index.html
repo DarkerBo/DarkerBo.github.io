@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>数据结构 —— 栈 | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="栈#概念栈是一个线性结构，在计算机中是一个相当常见的数据结构。 栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则  #实现每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现 1234567891011121314151617181920class Stack &amp;#123;  constructor() &amp;#123;    this.stack =">
+  <meta name="description" content="栈概念栈是一个线性结构，在计算机中是一个相当常见的数据结构。 栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则  实现每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现 1234567891011121314151617181920class Stack &amp;#123;  constructor() &amp;#123;    this.stack = [">
 <meta name="keywords" content="数据结构与算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构 —— 栈">
 <meta property="og:url" content="http://yoursite.com/2018/08/12/数据结构(栈)/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="栈#概念栈是一个线性结构，在计算机中是一个相当常见的数据结构。 栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则  #实现每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现 1234567891011121314151617181920class Stack &amp;#123;  constructor() &amp;#123;    this.stack =">
+<meta property="og:description" content="栈概念栈是一个线性结构，在计算机中是一个相当常见的数据结构。 栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则  实现每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现 1234567891011121314151617181920class Stack &amp;#123;  constructor() &amp;#123;    this.stack = [">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/5/20/1637b785d2d68735?w=640&h=460&f=png&s=6932">
-<meta property="og:updated_time" content="2018-08-12T15:30:04.083Z">
+<meta property="og:updated_time" content="2018-08-13T01:04:09.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构 —— 栈">
-<meta name="twitter:description" content="栈#概念栈是一个线性结构，在计算机中是一个相当常见的数据结构。 栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则  #实现每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现 1234567891011121314151617181920class Stack &amp;#123;  constructor() &amp;#123;    this.stack =">
+<meta name="twitter:description" content="栈概念栈是一个线性结构，在计算机中是一个相当常见的数据结构。 栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则  实现每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现 1234567891011121314151617181920class Stack &amp;#123;  constructor() &amp;#123;    this.stack = [">
 <meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/5/20/1637b785d2d68735?w=640&h=460&f=png&s=6932">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
@@ -163,12 +163,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="概念"><a href="#概念" class="headerlink" title="#概念"></a><a href="https://yuchengkai.cn/docs/zh/cs/dataStruct.html#%E6%A6%82%E5%BF%B5" target="_blank" rel="noopener">#</a>概念</h3><p>栈是一个线性结构，在计算机中是一个相当常见的数据结构。</p>
+        <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>栈是一个线性结构，在计算机中是一个相当常见的数据结构。</p>
 <p>栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则</p>
 <p><img src="https://user-gold-cdn.xitu.io/2018/5/20/1637b785d2d68735?w=640&amp;h=460&amp;f=png&amp;s=6932" alt="img"></p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="#实现"></a><a href="https://yuchengkai.cn/docs/zh/cs/dataStruct.html#%E5%AE%9E%E7%8E%B0" target="_blank" rel="noopener">#</a>实现</h3><p>每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack = []</span><br><span class="line">  &#125;</span><br><span class="line">  push(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.push(item)</span><br><span class="line">  &#125;</span><br><span class="line">  pop() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.pop()</span><br><span class="line">  &#125;</span><br><span class="line">  peek() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack[<span class="keyword">this</span>.getCount() - <span class="number">1</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  getCount() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack.length</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getCount() === <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="应用"><a href="#应用" class="headerlink" title="#应用"></a><a href="https://yuchengkai.cn/docs/zh/cs/dataStruct.html#%E5%BA%94%E7%94%A8" target="_blank" rel="noopener">#</a>应用</h3><p>选取了 <a href="https://leetcode.com/problems/valid-parentheses/submissions/1" target="_blank" rel="noopener">LeetCode 上序号为 20 的题目</a></p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>选取了 <a href="https://leetcode.com/problems/valid-parentheses/submissions/1" target="_blank" rel="noopener">LeetCode 上序号为 20 的题目</a></p>
 <p>题意是匹配括号，可以通过栈的特性来完成这道题目</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isValid = <span class="function"><span class="keyword">function</span> (<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> map = &#123;</span><br><span class="line">    <span class="string">'('</span>: <span class="number">-1</span>,</span><br><span class="line">    <span class="string">')'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'['</span>: <span class="number">-2</span>,</span><br><span class="line">    <span class="string">']'</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">'&#123;'</span>: <span class="number">-3</span>,</span><br><span class="line">    <span class="string">'&#125;'</span>: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> stack = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (map[s[i]] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      stack.push(s[i])</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> last = stack.pop()</span><br><span class="line">      <span class="keyword">if</span> (map[last] + map[s[i]] != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (stack.length &gt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
@@ -274,18 +274,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/08/12/JavaScript String/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/08/12/JavaScript Array/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          JavaScript String
+          JavaScript Array
         
       </div>
     </a>
   
   
-    <a href="/2018/08/12/JavaScript Async/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JavaScript Async</div>
+    <a href="/2018/08/12/JavaScript BOM/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript BOM</div>
       <i class="icon-circle-right"></i>
     </a>
   

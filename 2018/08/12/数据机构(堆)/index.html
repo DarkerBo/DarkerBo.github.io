@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>数据结构 —— 堆 | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="堆#概念堆通常是一个可以被看做一棵树的数组对象。 堆的实现通过构造二叉堆，实为二叉树的一种。这种数据结构具有以下性质。  任意节点小于（或大于）它的所有子节点 堆总是一棵完全树。即除了最底层，其他层的节点都被元素填满，且最底层从左到右填入。  将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 优先队列也完全可以用堆来实现，操作是一模一样的。 #实现大根堆堆的每个节点的左边子节">
+  <meta name="description" content="堆概念堆通常是一个可以被看做一棵树的数组对象。 堆的实现通过构造二叉堆，实为二叉树的一种。这种数据结构具有以下性质。  任意节点小于（或大于）它的所有子节点 堆总是一棵完全树。即除了最底层，其他层的节点都被元素填满，且最底层从左到右填入。  将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 优先队列也完全可以用堆来实现，操作是一模一样的。 实现大根堆堆的每个节点的左边子节点索">
 <meta name="keywords" content="数据结构与算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构 —— 堆">
 <meta property="og:url" content="http://yoursite.com/2018/08/12/数据机构(堆)/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="堆#概念堆通常是一个可以被看做一棵树的数组对象。 堆的实现通过构造二叉堆，实为二叉树的一种。这种数据结构具有以下性质。  任意节点小于（或大于）它的所有子节点 堆总是一棵完全树。即除了最底层，其他层的节点都被元素填满，且最底层从左到右填入。  将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 优先队列也完全可以用堆来实现，操作是一模一样的。 #实现大根堆堆的每个节点的左边子节">
+<meta property="og:description" content="堆概念堆通常是一个可以被看做一棵树的数组对象。 堆的实现通过构造二叉堆，实为二叉树的一种。这种数据结构具有以下性质。  任意节点小于（或大于）它的所有子节点 堆总是一棵完全树。即除了最底层，其他层的节点都被元素填满，且最底层从左到右填入。  将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 优先队列也完全可以用堆来实现，操作是一模一样的。 实现大根堆堆的每个节点的左边子节点索">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/15/164009e58a5a21f8?w=537&h=394&f=png&s=77222">
-<meta property="og:updated_time" content="2018-08-12T15:34:18.822Z">
+<meta property="og:updated_time" content="2018-08-13T01:04:38.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构 —— 堆">
-<meta name="twitter:description" content="堆#概念堆通常是一个可以被看做一棵树的数组对象。 堆的实现通过构造二叉堆，实为二叉树的一种。这种数据结构具有以下性质。  任意节点小于（或大于）它的所有子节点 堆总是一棵完全树。即除了最底层，其他层的节点都被元素填满，且最底层从左到右填入。  将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 优先队列也完全可以用堆来实现，操作是一模一样的。 #实现大根堆堆的每个节点的左边子节">
+<meta name="twitter:description" content="堆概念堆通常是一个可以被看做一棵树的数组对象。 堆的实现通过构造二叉堆，实为二叉树的一种。这种数据结构具有以下性质。  任意节点小于（或大于）它的所有子节点 堆总是一棵完全树。即除了最底层，其他层的节点都被元素填满，且最底层从左到右填入。  将根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。 优先队列也完全可以用堆来实现，操作是一模一样的。 实现大根堆堆的每个节点的左边子节点索">
 <meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/6/15/164009e58a5a21f8?w=537&h=394&f=png&s=77222">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
@@ -163,7 +163,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><h3 id="概念"><a href="#概念" class="headerlink" title="#概念"></a><a href="https://yuchengkai.cn/docs/zh/cs/dataStruct.html#%E6%A6%82%E5%BF%B5-7" target="_blank" rel="noopener">#</a>概念</h3><p>堆通常是一个可以被看做一棵树的数组对象。</p>
+        <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>堆通常是一个可以被看做一棵树的数组对象。</p>
 <p>堆的实现通过构造<strong>二叉堆</strong>，实为二叉树的一种。这种数据结构具有以下性质。</p>
 <ul>
 <li>任意节点小于（或大于）它的所有子节点</li>
@@ -171,7 +171,7 @@
 </ul>
 <p>将根节点最大的堆叫做<strong>最大堆</strong>或<strong>大根堆</strong>，根节点最小的堆叫做<strong>最小堆</strong>或<strong>小根堆</strong>。</p>
 <p>优先队列也完全可以用堆来实现，操作是一模一样的。</p>
-<h3 id="实现大根堆"><a href="#实现大根堆" class="headerlink" title="#实现大根堆"></a><a href="https://yuchengkai.cn/docs/zh/cs/dataStruct.html#%E5%AE%9E%E7%8E%B0%E5%A4%A7%E6%A0%B9%E5%A0%86" target="_blank" rel="noopener">#</a>实现大根堆</h3><p>堆的每个节点的左边子节点索引是 <code>i * 2 + 1</code>，右边是 <code>i * 2 + 2</code>，父节点是 <code>(i - 1) /2</code>。</p>
+<h3 id="实现大根堆"><a href="#实现大根堆" class="headerlink" title="实现大根堆"></a>实现大根堆</h3><p>堆的每个节点的左边子节点索引是 <code>i * 2 + 1</code>，右边是 <code>i * 2 + 2</code>，父节点是 <code>(i - 1) /2</code>。</p>
 <p>堆有两个核心的操作，分别是 <code>shiftUp</code> 和 <code>shiftDown</code> 。前者用于添加元素，后者用于删除根节点。</p>
 <p><code>shiftUp</code> 的核心思路是一路将节点与父节点对比大小，如果比父节点大，就和父节点交换位置。</p>
 <p><code>shiftDown</code> 的核心思路是先将根节点和末尾交换位置，然后移除末尾元素。接下来循环判断父节点和两个子节点的大小，如果子节点大，就把最大的子节点和父节点交换。</p>
@@ -280,18 +280,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/08/12/JavaScript Array/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/08/12/JavaScript String/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          JavaScript Array
+          JavaScript String
         
       </div>
     </a>
   
   
-    <a href="/2018/08/12/数据结构(链表)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构 —— 链表</div>
+    <a href="/2018/08/12/数据结构(队列)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构 —— 队列</div>
       <i class="icon-circle-right"></i>
     </a>
   
