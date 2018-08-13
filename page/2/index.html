@@ -417,19 +417,19 @@
 
 
   
-    <article id="post-JavaScript RegExp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-JavaScript Event" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/JavaScript RegExp/">JavaScript RegExp</a>
+      <a class="article-title" href="/2018/08/12/JavaScript Event/">JavaScript Event</a>
     </h1>
   
 
         
-        <a href="/2018/08/12/JavaScript RegExp/" class="archive-article-date">
+        <a href="/2018/08/12/JavaScript Event/" class="archive-article-date">
   	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
 </a>
         
@@ -437,513 +437,491 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="JavaScript-RegExp"><a href="#JavaScript-RegExp" class="headerlink" title="JavaScript RegExp"></a>JavaScript RegExp</h2><h3 id="RegExp对象"><a href="#RegExp对象" class="headerlink" title="RegExp对象"></a>RegExp对象</h3><p>字面量：<strong>/pattern/attributes</strong>；如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var reg = /\bis\b/g;</span><br></pre></td></tr></table></figure>
-<p>构造函数：<strong>new RegExp(pattern[, flags])</strong>；如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\bis\\b'</span>,<span class="string">'g'</span>);  <span class="comment">// 字符串需要添加反斜杠\来取消转义</span></span><br></pre></td></tr></table></figure>
-<p>参数 <em>pattern</em> 是一个字符串, 指定了正则表达式字符串或其他的正则表达式对象.</p>
-<p>参数 <em>flags</em> 是一个可选的字符串, 包含属性 “g”、”i” 和 “m”，分别用于指定全局匹配、区分大小写的匹配和多行匹配。如果<em>pattern</em> 是正则表达式, 而不是字符串, 则必须省略该参数</p>
-<h4 id="RegExp实例属性"><a href="#RegExp实例属性" class="headerlink" title="RegExp实例属性"></a>RegExp实例属性</h4><table>
-<thead>
-<tr>
-<th style="text-align:center">实例属性</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">global</td>
-<td style="text-align:center">是否包含全局标志(true/false)</td>
-</tr>
-<tr>
-<td style="text-align:center">ignoreCase</td>
-<td style="text-align:center">是否包含区分大小写标志(true/false)</td>
-</tr>
-<tr>
-<td style="text-align:center">multiline</td>
-<td style="text-align:center">是否包含多行标志(true/false)</td>
-</tr>
-<tr>
-<td style="text-align:center">source</td>
-<td style="text-align:center">返回创建RegExp对象实例时指定的表达式文本字符串形式</td>
-</tr>
-<tr>
-<td style="text-align:center">lastIndex</td>
-<td style="text-align:center">表示原字符串中匹配的字符串末尾的后一个位置, 默认为0</td>
-</tr>
-<tr>
-<td style="text-align:center">flags(ES6)</td>
-<td style="text-align:center">返回正则表达式的修饰符</td>
-</tr>
-<tr>
-<td style="text-align:center">sticky(ES6)</td>
-<td style="text-align:center">是否设置了y(粘连)修饰符(true/false)</td>
-</tr>
-</tbody>
-</table>
-<h4 id="RegExp实例方法"><a href="#RegExp实例方法" class="headerlink" title="RegExp实例方法"></a>RegExp实例方法</h4><p><strong>compile</strong></p>
-<p>compile 方法用于在执行过程中改变和重新编译正则表达式</p>
-<p>语法: compile(pattern[, flags])</p>
-<p>参数介绍请参考上述 RegExp 构造器. 用法如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"abc"</span>, <span class="string">"gi"</span>); </span><br><span class="line"><span class="keyword">var</span> reg2 = reg.compile(<span class="string">"new abc"</span>, <span class="string">"g"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(reg);<span class="comment">// /new abc/g</span></span><br><span class="line"><span class="built_in">console</span>.log(reg2);<span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>可见compile方法会改变原正则表达式对象，并重新编译，而且它的返回值为空</p>
-<p><strong>test</strong></p>
-<p>test 方法用于检测一个字符串是否匹配某个正则规则，只要是字符串中含有与正则规则匹配的文本，该方法就返回true, 否则返回 false</p>
-<p>语法: test(string), 用法如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/[0-9]+/</span>.test(<span class="string">"abc123"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/[0-9]+/</span>.test(<span class="string">"abc"</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-<p>以上，字符串”abc123” 包含数字，故 test 方法返回 true；而 字符串”abc” 不包含数字，故返回 false</p>
-<p>如果需要使用 test 方法测试字符串是否完成匹配某个正则规则，那么可以在正则表达式里增加开始(^)和结束($)元字符。如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/^[0-9]+$/</span>.test(<span class="string">"abc123"</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-<p>以上，由于字符串”abc123” 并非以数字开始, 也并非以数字结束, 故 test 方法返回false</p>
-<p>实际上，如果正则表达式带有全局标志(带有参数g)时，test 方法还受正则对象的lastIndex属性影响,如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/[a-z]+/</span>;<span class="comment">//正则不带全局标志</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abc"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"de"</span>));<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/[a-z]+/g</span>;<span class="comment">//正则带有全局标志g</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abc"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//3, 下次运行test时,将从索引为3的位置开始查找</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"de"</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-<p>该影响将在exec 方法讲解中予以分析</p>
-<p><strong>exec</strong></p>
-<p>exec 方法用于检测字符串对正则表达式的匹配，如果找到了匹配的文本，则返回一个结果数组，否则返回null</p>
-<p>语法: exec(string)</p>
-<p>exec 方法返回的数组中包含两个额外的属性, index 和 input。并且该数组具有如下特点：</p>
-<ul>
-<li>第 0 个项表示正则表达式捕获的文本</li>
-<li>第 1~n 项表示第 1~n 个反向引用, 依次指向第 1~n 个分组捕获的文本, 可以使用RegExp.$ + “编号1~n” 依次获取分组中的文本</li>
-<li>index 表示匹配字符串的初始位置</li>
-<li>input 表示正在检索的字符串</li>
-</ul>
-<p>无论正则表达式有无全局标示”g”, exec 的表现都相同。但正则表达式对象的表现却有些不同</p>
-<p>假设正则表达式对象为 reg ，检测的字符为 string ，reg.exec(string) 返回值为 array</p>
-<p>若 reg 包含全局标示”g”，那么 reg.lastIndex 属性表示原字符串中匹配的字符串末尾的后一个位置，即下次匹配开始的位置, 此时 reg.lastIndex == array.index(匹配开始的位置) + array[0].length(匹配字符串的长度)。如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/([a-z]+)/gi</span>,</span><br><span class="line">    string = <span class="string">"World Internet Conference"</span>;</span><br><span class="line"><span class="keyword">var</span> array = reg.exec(string);</span><br><span class="line"><span class="built_in">console</span>.log(array);<span class="comment">//["World", "World", index: 0, input: "World Internet Conference"]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">1</span>);<span class="comment">//World</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//5, 刚好等于 array.index + array[0].length</span></span><br></pre></td></tr></table></figure>
-<p>随着检索继续，array.index 的值将往后递增，也就是说，reg.lastIndex 的值也会同步往后递增。因此，也可以通过反复调用 exec 方法来遍历字符串中所有的匹配文本。直到 exec 方法再也匹配不到文本时，它将返回 null，并把 reg.lastIndex 属性重置为 0</p>
-<p>接着上述例子，继续执行代码，如下所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">array = reg.exec(string);</span><br><span class="line"><span class="built_in">console</span>.log(array);<span class="comment">//["Internet", "Internet", index: 6, input: "World Internet Conference"]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//14</span></span><br><span class="line"></span><br><span class="line">array = reg.exec(string);</span><br><span class="line"><span class="built_in">console</span>.log(array);<span class="comment">//["Conference", "Conference", index: 15, input: "World Internet Conference"]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//25</span></span><br><span class="line"></span><br><span class="line">array = reg.exec(string);</span><br><span class="line"><span class="built_in">console</span>.log(array);<span class="comment">//null</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//0</span></span><br></pre></td></tr></table></figure>
-<p>以上代码中，随着反复调用 exec 方法，reg.lastIndex 属性最终被重置为 0</p>
-<h4 id="字符串对象方法"><a href="#字符串对象方法" class="headerlink" title="字符串对象方法"></a>字符串对象方法</h4><p>字符串对象的方法之中，有4种与正则对象有关：</p>
-<ul>
-<li><code>match()</code>：返回一个数组，成员是所有匹配的子字符串</li>
-<li><code>search()</code>：按照给定的正则表达式进行搜索，返回一个整数，表示匹配开始的位置</li>
-<li><code>replace()</code>：按照给定的正则表达式进行替换，返回替换后的字符串</li>
-<li><code>split()</code>：按照给定规则进行字符串分割，返回一个数组，包含分割后的各个成员</li>
-</ul>
-<p><strong>String.prototype.match()</strong></p>
-<p>字符串对象的<code>match</code>方法对字符串进行正则匹配，返回匹配结果。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'_x_x'</span>;</span><br><span class="line"><span class="keyword">var</span> r1 = <span class="regexp">/x/</span>;</span><br><span class="line"><span class="keyword">var</span> r2 = <span class="regexp">/y/</span>;</span><br><span class="line"></span><br><span class="line">s.match(r1) <span class="comment">// ["x"]</span></span><br><span class="line">s.match(r2) <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
-<p>从上面代码可以看到，字符串的<code>match</code>方法与正则对象的<code>exec</code>方法非常类似：匹配成功返回一个数组，匹配失败返回<code>null</code></p>
-<p>如果正则表达式带有<code>g</code>修饰符，则该方法与正则对象的<code>exec</code>方法行为不同，会一次性返回所有匹配成功的结果</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'abba'</span>;</span><br><span class="line"><span class="keyword">var</span> r = <span class="regexp">/a/g</span>;</span><br><span class="line"></span><br><span class="line">s.match(r) <span class="comment">// ["a", "a"]</span></span><br><span class="line">r.exec(s) <span class="comment">// ["a"]</span></span><br></pre></td></tr></table></figure>
-<p>设置正则表达式的<code>lastIndex</code>属性，对<code>match</code>方法无效，匹配总是从字符串的第一个字符开始</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r = <span class="regexp">/a|b/g</span>;</span><br><span class="line">r.lastIndex = <span class="number">7</span>;</span><br><span class="line"><span class="string">'xaxb'</span>.match(r) <span class="comment">// ['a', 'b']</span></span><br><span class="line">r.lastIndex <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
-<p>上面代码表示，设置<code>lastIndex</code>属性是无效的</p>
-<p><strong>String.prototype.search()</strong></p>
-<p>字符串对象的<code>search</code>方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回<code>-1</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'_x_x'</span>.search(<span class="regexp">/x/</span>)</span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，第一个匹配结果出现在字符串的<code>1</code>号位置</p>
-<p>该方法会忽略<code>g</code>修饰符</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r = <span class="regexp">/x/g</span>;</span><br><span class="line">r.lastIndex = <span class="number">2</span>; <span class="comment">// 无效</span></span><br><span class="line"><span class="string">'_x_x'</span>.search(r) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，正则表达式使用<code>g</code>修饰符之后，使用<code>lastIndex</code>属性指定开始匹配的位置，结果无效，还是从字符串的第一个字符开始匹配</p>
-<p><strong>String.prototype.replace()</strong></p>
-<p>字符串对象的<code>replace</code>方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(search, replacement)</span><br></pre></td></tr></table></figure>
-<p>搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'aaa'</span>.replace(<span class="string">'a'</span>, <span class="string">'b'</span>) <span class="comment">// "baa"</span></span><br><span class="line"><span class="string">'aaa'</span>.replace(<span class="regexp">/a/</span>, <span class="string">'b'</span>) <span class="comment">// "baa"</span></span><br><span class="line"><span class="string">'aaa'</span>.replace(<span class="regexp">/a/g</span>, <span class="string">'b'</span>) <span class="comment">// "bbb"</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，最后一个正则表达式使用了<code>g</code>修饰符，导致所有的<code>b</code>都被替换掉了</p>
-<p><code>replace</code>方法的一个应用，就是消除字符串首尾两端的空格</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'  #id div.class  '</span>;</span><br><span class="line"></span><br><span class="line">str.replace(<span class="regexp">/^\s+|\s+$/g</span>, <span class="string">''</span>)</span><br><span class="line"><span class="comment">// "#id div.class"</span></span><br></pre></td></tr></table></figure>
-<p>replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容：</p>
-<ul>
-<li><code>$&amp;</code> 指代匹配的子字符串</li>
-<li><code>$`</code> 指代匹配结果前面的文本</li>
-<li><code>$&#39;</code> 指代匹配结果后面的文本</li>
-<li><code>$n</code> 指代匹配成功的第<code>n</code>组内容，<code>n</code>是从1开始的自然数</li>
-<li><code>$$</code> 指代美元符号<code>$</code></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.replace(<span class="regexp">/(\w+)\s(\w+)/</span>, <span class="string">'$2 $1'</span>)</span><br><span class="line"><span class="comment">// "world hello"</span></span><br><span class="line"></span><br><span class="line"><span class="string">'abc'</span>.replace(<span class="string">'b'</span>, <span class="string">'[$`-$&amp;-$\']'</span>)</span><br><span class="line"><span class="comment">// "a[a-b-c]c"</span></span><br></pre></td></tr></table></figure>
-<p><code>replace</code>方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'3 and 5'</span>.replace(<span class="regexp">/[0-9]+/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">match</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span> * match;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// "6 and 10"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'The quick brown fox jumped over the lazy dog.'</span>;</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/quick|brown|lazy/ig</span>;</span><br><span class="line"></span><br><span class="line">a.replace(pattern, <span class="function"><span class="keyword">function</span> <span class="title">replacer</span>(<span class="params">match</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> match.toUpperCase();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// The QUICK BROWN fox jumped over the LAZY dog.</span></span><br></pre></td></tr></table></figure>
-<p>作为<code>replace</code>方法第二个参数的替换函数，可以接受多个参数。第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prices = &#123;</span><br><span class="line">  <span class="string">'pr_1'</span>: <span class="string">'$1.99'</span>,</span><br><span class="line">  <span class="string">'pr_2'</span>: <span class="string">'$9.99'</span>,</span><br><span class="line">  <span class="string">'pr_3'</span>: <span class="string">'$5.00'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> template = <span class="string">'/* ... */'</span>; <span class="comment">// 这里可以放网页模块字符串</span></span><br><span class="line"></span><br><span class="line">template.replace(</span><br><span class="line">  /(<span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">")(.*?)("</span>&gt;</span>)(<span class="tag">&lt;<span class="name">\</span>/<span class="attr">span</span>&gt;</span></span>)/g,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">match, $<span class="number">1</span>, $<span class="number">2</span>, $<span class="number">3</span>, $<span class="number">4</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $<span class="number">1</span> + $<span class="number">2</span> + $<span class="number">3</span> + prices[$<span class="number">2</span>] + $<span class="number">4</span>;</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>上面代码的捕捉模式中，有四个括号，所以会产生四个组匹配，在匹配函数中用<code>$1</code>到<code>$4</code>表示。匹配函数的作用是将价格插入模板中。</p>
-<p><strong>String.prototype.split()</strong></p>
-<p>字符串对象的<code>split</code>方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.split(separator, [limit])</span><br></pre></td></tr></table></figure>
-<p>该方法接受两个参数，第一个参数是分隔规则，第二个参数是返回数组的最大成员数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非正则分隔</span></span><br><span class="line"><span class="string">'a,  b,c, d'</span>.split(<span class="string">','</span>)</span><br><span class="line"><span class="comment">// [ 'a', '  b', 'c', ' d' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正则分隔，去除多余的空格</span></span><br><span class="line"><span class="string">'a,  b,c, d'</span>.split(<span class="regexp">/, */</span>)</span><br><span class="line"><span class="comment">// [ 'a', 'b', 'c', 'd' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定返回数组的最大成员</span></span><br><span class="line"><span class="string">'a,  b,c, d'</span>.split(<span class="regexp">/, */</span>, <span class="number">2</span>)</span><br><span class="line">[ <span class="string">'a'</span>, <span class="string">'b'</span> ]</span><br></pre></td></tr></table></figure>
-<p>上面代码使用正则表达式，去除了子字符串的逗号后面的空格</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例一</span></span><br><span class="line"><span class="string">'aaa*a*'</span>.split(<span class="regexp">/a*/</span>)</span><br><span class="line"><span class="comment">// [ '', '*', '*' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例二</span></span><br><span class="line"><span class="string">'aaa**a*'</span>.split(<span class="regexp">/a*/</span>)</span><br><span class="line"><span class="comment">// ["", "*", "*", "*"]</span></span><br></pre></td></tr></table></figure>
-<p>上面代码的分割规则是0次或多次的<code>a</code>，由于正则默认是贪婪匹配，所以例一的第一个分隔符是<code>aaa</code>，第二个分割符是<code>a</code>，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是<code>aaa</code>，第二个分隔符是0个<code>a</code>（即空字符），第三个分隔符是<code>a</code>，所以将字符串分成四个部分</p>
-<p>如果正则表达式带有括号，则括号匹配的部分也会作为数组成员返回</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'aaa*a*'</span>.split(<span class="regexp">/(a*)/</span>)</span><br><span class="line"><span class="comment">// [ '', 'aaa', '*', 'a', '*' ]</span></span><br></pre></td></tr></table></figure>
-<p>上面代码的正则表达式使用了括号，第一个组匹配是“aaa”，第二个组匹配是“a”，它们都作为数组成员返回</p>
-<h4 id="ES6对正则的扩展"><a href="#ES6对正则的扩展" class="headerlink" title="ES6对正则的扩展"></a>ES6对正则的扩展</h4><p>ES6对正则扩展了又两种修饰符(其他语言可能不支持):</p>
-<ul>
-<li>y (粘连sticky修饰符), 与g类似, 也是全局匹配, 并且下一次匹配都是从上一次匹配成功的下一个位置开始, 不同之处在于, g修饰符只要剩余位置中存在匹配即可, 而y修饰符确保匹配必须从剩余的第一个位置开始.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"abc_ab_a"</span>;</span><br><span class="line"><span class="keyword">var</span> r1 = <span class="regexp">/[a-z]+/g</span>;</span><br><span class="line"><span class="keyword">var</span> r2 = <span class="regexp">/[a-z]+/y</span>;</span><br><span class="line"><span class="built_in">console</span>.log(r1.exec(s),r1.lastIndex); <span class="comment">// ["abc", index: 0, input: "abc_ab_a"] 3</span></span><br><span class="line"><span class="built_in">console</span>.log(r2.exec(s),r2.lastIndex); <span class="comment">// ["abc", index: 0, input: "abc_ab_a"] 3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(r1.exec(s),r1.lastIndex); <span class="comment">// ["ab", index: 4, input: "abc_ab_a"] 6</span></span><br><span class="line"><span class="built_in">console</span>.log(r2.exec(s),r2.lastIndex); <span class="comment">// null 0</span></span><br></pre></td></tr></table></figure>
-<p>如上, 由于第二次匹配的开始位置是下标3, 对应的字符串是 “_”, 而使用y修饰符的正则对象r2, 需要从剩余的第一个位置开始, 所以匹配失败, 返回null.</p>
-<p>正则对象的 sticky 属性, 表示是否设置了y修饰符. 这点将会在后面讲到.</p>
-<ul>
-<li>u 修饰符, 提供了对正则表达式添加4字节码点的支持. 比如 “𝌆” 字符是一个4字节字符, 直接使用正则匹配将会失败, 而使用u修饰符后, 将会等到正确的结果.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"𝌆"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/^.$/</span>.test(s));<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/^.$/u</span>.test(s));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<p><strong>UCS-2字节码</strong></p>
-<p>有关字节码点， javaScript 只能处理UCS-2编码(js于1995年5月被Brendan Eich花费10天设计出来，比1996年7月发布的编码规范UTF-16早了一年多, 当时只有UCS-2可选). 由于UCS-2先天不足, 造成了所有字符在js中都是2个字节. 如果是4个字节的字符, 将会默认被当作两个双字节字符处理. 因此 js 的字符处理函数都会受到限制, 无法返回正确结果. 如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"𝌆"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s == <span class="string">"\uD834\uDF06"</span>);<span class="comment">//true 𝌆相当于UTF-16中的0xD834DF06</span></span><br><span class="line"><span class="built_in">console</span>.log(s.length);<span class="comment">//2 长度为2, 表示这是4字节字符</span></span><br></pre></td></tr></table></figure>
-<p>ES6可以自动识别4字节的字符。因此遍历字符串可以直接使用for of循环。同时, js中如果直接使用码点表示Unicode字符, 对于4字节字符, ES5里是没办法识别的。为此ES6修复了这个问题, 只需将码点放在大括号内即可.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(s === <span class="string">"\u1D306"</span>);<span class="comment">//false   ES5无法识别𝌆</span></span><br><span class="line"><span class="built_in">console</span>.log(s === <span class="string">"\u&#123;1D306&#125;"</span>);<span class="comment">//true  ES6可以借助大括号识别𝌆</span></span><br></pre></td></tr></table></figure>
-<p><strong>附: ES6新增的处理4字节码的函数</strong></p>
-<ul>
-<li><strong>String.fromCodePoint()</strong>：从Unicode码点返回对应字符</li>
-<li><strong>String.prototype.codePointAt()</strong>：从字符返回对应的码点</li>
-<li><strong>String.prototype.at()</strong>：返回字符串给定位置的字符</li>
-</ul>
-<h3 id="正则表达式的定义"><a href="#正则表达式的定义" class="headerlink" title="正则表达式的定义"></a>正则表达式的定义</h3><h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><table>
-<thead>
-<tr>
-<th style="text-align:center">元字符</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">.</td>
-<td style="text-align:center">查找单个字符，除了换行和行结束符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\w</td>
-<td style="text-align:center">查找单词字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\W</td>
-<td style="text-align:center">查找非单词字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\d</td>
-<td style="text-align:center">查找数字。</td>
-</tr>
-<tr>
-<td style="text-align:center">\D</td>
-<td style="text-align:center">查找非数字字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\s</td>
-<td style="text-align:center">查找空白字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\S</td>
-<td style="text-align:center">查找非空白字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\b</td>
-<td style="text-align:center">匹配单词边界。</td>
-</tr>
-<tr>
-<td style="text-align:center">\B</td>
-<td style="text-align:center">匹配非单词边界。</td>
-</tr>
-<tr>
-<td style="text-align:center">\0</td>
-<td style="text-align:center">查找 NULL 字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\n</td>
-<td style="text-align:center">查找换行符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\f</td>
-<td style="text-align:center">查找换页符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\r</td>
-<td style="text-align:center">查找回车符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\t</td>
-<td style="text-align:center">查找制表符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\v</td>
-<td style="text-align:center">查找垂直制表符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\xxx</td>
-<td style="text-align:center">查找以八进制数 xxx 规定的字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\xdd</td>
-<td style="text-align:center">查找以十六进制数 dd 规定的字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">\uxxxx</td>
-<td style="text-align:center">查找以十六进制数 xxxx 规定的 Unicode 字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">^</td>
-<td style="text-align:center">匹配行首</td>
-</tr>
-<tr>
-<td style="text-align:center">$</td>
-<td style="text-align:center">匹配行尾</td>
-</tr>
-<tr>
-<td style="text-align:center">[^x]</td>
-<td style="text-align:center">匹配除x以外的任意字符</td>
-</tr>
-</tbody>
-</table>
-<h4 id="方括号"><a href="#方括号" class="headerlink" title="方括号"></a>方括号</h4><table>
-<thead>
-<tr>
-<th style="text-align:center">表达式</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">[abc]</td>
-<td style="text-align:center">查找方括号之间的任何字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">[^abc]</td>
-<td style="text-align:center">查找任何不在方括号之间的字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">[0-9]</td>
-<td style="text-align:center">查找任何从 0 至 9 的数字。</td>
-</tr>
-<tr>
-<td style="text-align:center">[a-z]</td>
-<td style="text-align:center">查找任何从小写 a 到小写 z 的字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">[A-Z]</td>
-<td style="text-align:center">查找任何从大写 A 到大写 Z 的字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">[A-z]</td>
-<td style="text-align:center">查找任何从大写 A 到小写 z 的字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">[adgk]</td>
-<td style="text-align:center">查找给定集合内的任何字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">[^adgk]</td>
-<td style="text-align:center">查找给定集合外的任何字符。</td>
-</tr>
-<tr>
-<td style="text-align:center">(red\</td>
-<td style="text-align:center">blue\</td>
-<td>green)</td>
-<td>查找任何指定的选项。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h4><table>
-<thead>
-<tr>
-<th style="text-align:center">量词</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">n+</td>
-<td style="text-align:center">匹配任何包含至少一个 n 的字符串。例如，/a+/ 匹配 “candy” 中的 “a”，”caaaaaaandy” 中所有的 “a”。</td>
-</tr>
-<tr>
-<td style="text-align:center">n*</td>
-<td style="text-align:center">匹配任何包含零个或多个 n 的字符串。例如，/bo*/ 匹配 “A ghost booooed” 中的 “boooo”，”A bird warbled” 中的 “b”，但是不匹配 “A goat grunted”。</td>
-</tr>
-<tr>
-<td style="text-align:center">n?</td>
-<td style="text-align:center">匹配任何包含零个或一个 n 的字符串。例如，/e?le?/ 匹配 “angel” 中的 “el”，”angle” 中的 “le”。</td>
-</tr>
-<tr>
-<td style="text-align:center">n{X}</td>
-<td style="text-align:center">匹配包含 X 个 n 的序列的字符串。例如，/a{2}/ 不匹配 “candy,” 中的 “a”，但是匹配 “caandy,” 中的两个 “a”，且匹配 “caaandy.” 中的前两个 “a”。</td>
-</tr>
-<tr>
-<td style="text-align:center">n{X,}</td>
-<td style="text-align:center">X 是一个正整数。前面的模式 n 连续出现至少 X 次时匹配。例如，/a{2,}/ 不匹配 “candy” 中的 “a”，但是匹配 “caandy” 和 “caaaaaaandy.” 中所有的 “a”。</td>
-</tr>
-<tr>
-<td style="text-align:center">n{X,Y}</td>
-<td style="text-align:center">X 和 Y 为正整数。前面的模式 n 连续出现至少 X 次，至多 Y 次时匹配。例如，/a{1,3}/ 不匹配 “cndy”，匹配 “candy,” 中的 “a”，”caandy,” 中的两个 “a”，匹配 “caaaaaaandy” 中的前面三个 “a”。注意，当匹配 “caaaaaaandy” 时，即使原始字符串拥有更多的 “a”，匹配项也是 “aaa”。</td>
-</tr>
-<tr>
-<td style="text-align:center">n{X,}</td>
-<td style="text-align:center">匹配包含至少 X 个 n 的序列的字符串。</td>
-</tr>
-<tr>
-<td style="text-align:center">n$</td>
-<td style="text-align:center">匹配任何结尾为 n 的字符串。</td>
-</tr>
-<tr>
-<td style="text-align:center">^n</td>
-<td style="text-align:center">匹配任何开头为 n 的字符串。</td>
-</tr>
-<tr>
-<td style="text-align:center">?=n</td>
-<td style="text-align:center">匹配任何其后紧接指定字符串 n 的字符串。</td>
-</tr>
-<tr>
-<td style="text-align:center">?!n</td>
-<td style="text-align:center">匹配任何其后没有紧接指定字符串 n 的字符串。</td>
-</tr>
-</tbody>
-</table>
-<h4 id="字符组"><a href="#字符组" class="headerlink" title="字符组"></a>字符组</h4><p>[…] 匹配中括号内字符之一。如：[xyz] 匹配字符 x，y 或 z。如果中括号中包含元字符，则元字符降级为普通字符，不再具有元字符的功能，如 [+.?] 匹配 加号，点号或问号</p>
-<h4 id="排除性字符组"><a href="#排除性字符组" class="headerlink" title="排除性字符组"></a>排除性字符组</h4><p>[^…] 匹配任何未列出的字符，如: [ ^x ]匹配除x以外的任意字符</p>
-<h4 id="多选结构"><a href="#多选结构" class="headerlink" title="多选结构"></a>多选结构</h4><p>| 就是或的意思，表示两者中的一个。 如: a|b 匹配a或者b字符</p>
-<h4 id="括号"><a href="#括号" class="headerlink" title="括号"></a>括号</h4><p>括号 常用来界定重复限定符的范围，以及将字符<strong>分组</strong>。 如： (ab)+ 可以匹配abab..等，其中 ab 便是一个分组</p>
-<h4 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h4><p>\ 即转义字符，通常 <strong>\ * + ? | { [ ( ) ] }^ $ . # 和 空白</strong> 这些字符都需要转义</p>
-<h4 id="操作符的运算优先级"><a href="#操作符的运算优先级" class="headerlink" title="操作符的运算优先级"></a>操作符的运算优先级</h4><ol>
-<li>\ 转义符</li>
-<li>(), (?:), (?=), [] 圆括号或方括号</li>
-<li>*, +, ?, {n}, {n,}, {n,m} 限定符</li>
-<li>^, $ 位置</li>
-<li>| “或” 操作</li>
-</ol>
-<h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><p>javaScript中正则表达式默认有如下五种修饰符：</p>
-<ul>
-<li>g (全文查找),</li>
-<li>i (忽略大小写查找)</li>
-<li>m (多行查找)</li>
-<li>y (ES6新增的粘连修饰符)</li>
-<li>u (ES6新增)</li>
-</ul>
-<h3 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h3><ol>
-<li>汉字: ^[\u4e00-\u9fa5]{0,}$</li>
-<li>Email: ^\w+([-+.]\w+)<em>@\w+([-.]\w+)</em>.\w+([-.]\w+)*$</li>
-<li>URL: ^https?://([\w-]+.)+[\w-]+(/[\w-./?%&amp;=]*)?$</li>
-<li>手机号码: ^1\d{10}$</li>
-<li>身份证号: ^(\d{15}|\d{17}(\d|X))$</li>
-<li>中国邮政编码: [1-9]\d{5}(?!\d) (邮政编码为6位数字)</li>
-</ol>
-<p><strong>密码验证</strong></p>
-<p>密码验证是常见的需求，一般来说, 常规密码大致会满足规律： 6-16位, 数字, 字母, 字符至少包含两种, 同时不能包含中文和空格. 如下便是常规密码验证的正则描述：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^[^\s\u4e00-\u9fa5]&#123;6,16&#125;$/</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>正则表达式在H5中的应用</strong></p>
-<p>H5中新增了 pattern 属性, 规定了用于验证输入字段的模式, pattern的模式匹配支持正则表达式的书写方式. 默认 pattern 属性是全部匹配, 即无论正则表达式中有无 “^”, “$” 元字符, 它都是匹配所有文本</p>
-<p>注：pattern 适用于以下 input 类型：text, search, url, telephone, email 以及 password。如果需要取消表单验证，在form标签上增加 novalidate 属性即可</p>
-<h3 id="正则表达式初阶技能"><a href="#正则表达式初阶技能" class="headerlink" title="正则表达式初阶技能"></a>正则表达式初阶技能</h3><h4 id="贪婪与非贪婪模式"><a href="#贪婪与非贪婪模式" class="headerlink" title="贪婪与非贪婪模式"></a>贪婪与非贪婪模式</h4><p>默认情况下，所有的限定词都是贪婪模式，表示尽可能多的去捕获字符：而在限定词后增加？则是非贪婪模式，表示尽可能少的去捕获字符。如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"aaab"</span>,</span><br><span class="line">    reg1 = <span class="regexp">/a+/</span>, <span class="comment">//贪婪模式</span></span><br><span class="line">    reg2 = <span class="regexp">/a+?/</span>;<span class="comment">//非贪婪模式</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg1)); <span class="comment">//["aaa"], 由于是贪婪模式, 捕获了所有的a</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg2)); <span class="comment">//["a"], 由于是非贪婪模式, 只捕获到第一个a</span></span><br></pre></td></tr></table></figure>
-<p>实际上，非贪婪模式非常有效，特别是当匹配html标签时。比如匹配一个配对出现的div，方案一可能会匹配到很多的div标签对，而方案二则只会匹配一个div标签对</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"&lt;div class='v1'&gt;&lt;div class='v2'&gt;test&lt;/div&gt;&lt;input type='text'/&gt;&lt;/div&gt;"</span>;</span><br><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/&lt;div.*&lt;\/div&gt;/</span>; <span class="comment">//方案一,贪婪匹配</span></span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/&lt;div.*?&lt;\/div&gt;/</span>;<span class="comment">//方案二,非贪婪匹配</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg1));<span class="comment">//"&lt;div class='v1'&gt;&lt;div class='v2'&gt;test&lt;/div&gt;&lt;input type='text'/&gt;&lt;/div&gt;"</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg2));<span class="comment">//"&lt;div class='v1'&gt;&lt;div class='v2'&gt;test&lt;/div&gt;"</span></span><br></pre></td></tr></table></figure>
-<p><strong>区间量词的非贪婪模式</strong></p>
-<p>一般情况下，非贪婪模式，使用的是”*?”，或 “+?” 这种形式，还有一种是 “{n,m}?”</p>
-<p>区间量词”{n,m}” 也是匹配优先，虽有匹配次数上限，但是在到达上限之前，它依然是尽可能多的匹配，而”{n,m}?” 则表示在区间范围内，尽可能少的匹配</p>
-<p><strong>需要注意的是</strong>：</p>
-<ul>
-<li>能达到同样匹配结果的贪婪与非贪婪模式，通常是贪婪模式的匹配效率较高</li>
-<li>所有的非贪婪模式，都可以通过修改量词修饰的子表达式，转换为贪婪模式</li>
-<li>贪婪模式可以与<code>固化分组</code>(后面会讲到)结合，提升匹配效率，而非贪婪模式却不可以</li>
-</ul>
-<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><p>正则的分组主要通过小括号来实现，括号包裹的子表达式作为一个分组，括号后可以紧跟限定词表示重复次数。如下, 小括号内包裹的abc便是一个分组：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/(abc)+<span class="regexp">/.test("abc123") == true</span></span><br></pre></td></tr></table></figure>
-<p>那么分组有什么用呢？一般来说，分组是为了方便的表示重复次数，除此之外，还有一个作用就是用于捕获</p>
-<h4 id="捕获性分组"><a href="#捕获性分组" class="headerlink" title="捕获性分组"></a>捕获性分组</h4><p>捕获性分组，通常由一对小括号加上子表达式组成。 捕获性分组会创建反向引用，每个反向引用都由一个编号或名称来标识。js中主要是通过 <code>$+编号</code> 或者 <code>\+编号</code> 表示法进行引用。如下便是一个捕获性分组的例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">"#808080"</span>;</span><br><span class="line"><span class="keyword">var</span> output = color.replace(<span class="regexp">/#(\d+)/</span>,<span class="string">"$1"</span>+<span class="string">"~~"</span>);<span class="comment">//自然也可以写成 "$1~~"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">1</span>);<span class="comment">//808080</span></span><br><span class="line"><span class="built_in">console</span>.log(output);<span class="comment">//808080~~</span></span><br></pre></td></tr></table></figure>
-<p>以上， (\d+) 表示一个捕获性分组， <code>RegExp.$1</code> 指向该分组捕获的内容。 <code>$+编号</code> 只能在正则表达式之外使用</p>
-<p>实际上，捕获性分组捕获到的内容不仅可以在正则表达式外部引用，还可以在正则表达式内部引用</p>
-<h4 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h4><p>能在正则表达式内部使用的引用只有『反向引用』，其格式为<code>\+数字</code> ，通常用于匹配不同位置相同部分的子串。如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">"www.google.google.com"</span>;</span><br><span class="line"><span class="keyword">var</span> re = <span class="regexp">/([a-z]+)\.\1/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(url.replace(re,<span class="string">"$1"</span>));<span class="comment">//"www.google.com"</span></span><br></pre></td></tr></table></figure>
-<p>以上，相同部分的”google”字符串只被替换一次</p>
-<p>实例之后，来看看反向引用的原理</p>
+        <h2 id="JavaScript-Event"><a href="#JavaScript-Event" class="headerlink" title="JavaScript Event"></a>JavaScript Event</h2><h3 id="Event-Type"><a href="#Event-Type" class="headerlink" title="Event Type"></a>Event Type</h3><h4 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h4><p><strong>click 事件，dblclick 事件</strong></p>
+<p>当用户在Element节点、<code>document</code>节点、<code>window</code>对象上单击鼠标（或者按下回车键）时，<code>click</code>事件触发</p>
+<p>当用户在Element节点、<code>document</code>节点、<code>window</code>对象上双击击鼠标时，<code>dblclick</code>事件触发</p>
+<p><strong>mouseup 事件，mousedown 事件，mousemove 事件</strong></p>
+<p><code>mouseup</code>事件在释放按下的鼠标键时触发。</p>
+<p><code>mousedown</code>事件在按下鼠标键时触发。</p>
+<p><code>mousemove</code>事件当鼠标在一个节点内部移动时触发。当鼠标持续移动时，该事件会连续触发</p>
+<p><strong>mouseover 事件，mouseenter 事件</strong></p>
+<p><code>mouseover</code>事件和<code>mouseenter</code>事件，都是鼠标进入一个节点时触发</p>
+<p>两者的区别是，<code>mouseenter</code>事件只触发一次，而只要鼠标在节点内部移动，<code>mouseover</code>事件会在子节点上触发多次</p>
+<p><strong>mouseout 事件，mouseleave 事件</strong></p>
+<p><code>mouseout</code>事件和<code>mouseleave</code>事件，都是鼠标离开一个节点时触发</p>
+<p>两者的区别是，<code>mouseout</code>事件会冒泡，<code>mouseleave</code>事件不会</p>
+<p><strong>contextmenu 事件</strong></p>
+<p><code>contextmenu</code>事件在一个节点上点击鼠标右键时触发，或者按下“上下文菜单”键时触发</p>
+<p><strong>MouseEvent对象</strong></p>
+<p>鼠标事件使用<code>MouseEvent</code>对象表示，它继承<code>UIEvent</code>对象和<code>Event</code>对象。浏览器提供一个<code>MouseEvent</code>构造函数<code>new MouseEvent()</code>，用于新建一个<code>MouseEvent</code>实例</p>
+<p><code>MouseEvent</code>构造函数的第一个参数是事件名称（可能的值包括<code>click</code>、<code>mousedown</code>、<code>mouseup</code>、<code>mouseover</code>、<code>mousemove</code>、<code>mouseout</code>），第二个参数是一个事件初始化对象。该对象可以配置以下属性：</p>
 <blockquote>
-<p>正则表达式匹配时，各个捕获性分组匹配到的内容，会依次保存在内存中一个特定的组里，通过<code>\+数字</code>的方式可以在正则中引用组里的内容，这种引用称作<strong>反向引用</strong>。捕获性分组匹配成功之前，它的内容的是不确定的，一旦匹配成功，组里的内容也就确定了。</p>
-</blockquote>
-<p>打个比方就是，假如有字符串<code>abcaabcabbcabcc</code>，对于正则表达式<code>/([abc])\1/</code>，捕获性分组中的子表达式<code>[abc]</code>，虽然可以匹配”a”、”b” 或 “c”，但是一旦匹配成功了，反向引用的内容也就是确定了，那么相对的，反向引用的子表达式<code>\1</code>将依次匹配”a”、”b” 或 “c”。因此实际上，捕获性分组<code>[abc]</code>和反向引用<code>\1</code>将同时捕获”a”、”b” 或 “c”中的同一个字符，即有三种可能捕获的结果：”aa”，”bb” 或 “cc”。如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"abcaabcabbcabcc"</span>.match(<span class="regexp">/([abc])\1/g</span>); <span class="comment">// ["aa", "bb", "cc"]</span></span><br></pre></td></tr></table></figure>
-<p>反向引用中<code>\n</code>指向正则表达式前面第n个捕获性分组匹配到的内容，这里面有一个问题，对于子表达式<code>\12</code>，有下面两种可能：</p>
 <ul>
-<li>指向第1个捕获性分组匹配到的内容，同时匹配普通字符2，目前IE浏览器按照这种方式解析正则</li>
-<li>指向第12个捕获性分组匹配到的内容，目前非IE等现代浏览器都是这样解析正则的</li>
+<li>screenX，设置鼠标相对于屏幕的水平坐标（但不会移动鼠标），默认为0，等同于MouseEvent.screenX属性</li>
+<li>screenY，设置鼠标相对于屏幕的垂直坐标，默认为0，等同于MouseEvent.screenY属性</li>
+<li>clientX，设置鼠标相对于窗口的水平坐标，默认为0，等同于MouseEvent.clientX属性</li>
+<li>clientY，设置鼠标相对于窗口的垂直坐标，默认为0，等同于MouseEvent.clientY属性</li>
+<li>pageX，设置鼠标相对于文档的水平坐标，默认为0，非标准</li>
+<li>pageY，设置鼠标相对于文档的垂直坐标，默认为0，非标准</li>
+<li>offsetX，设置鼠标相对于源元素的水平坐标，默认为0，非标准</li>
+<li>offsetY，设置鼠标相对于源元素的垂直坐标，默认为0，非标准</li>
+<li>ctrlKey，设置是否按下ctrl键，默认为false，等同于MouseEvent.ctrlKey属性</li>
+<li>shiftKey，设置是否按下shift键，默认为false，等同于MouseEvent.shiftKey属性</li>
+<li>altKey，设置是否按下alt键，默认为false，等同于MouseEvent.altKey属性</li>
+<li>metaKey，设置是否按下meta键，默认为false，等同于MouseEvent.metaKey属性</li>
+<li>button，设置按下了哪一个鼠标按键，默认为0。-1表示没有按键，0表示按下主键（通常是左键），1表示按下辅助键（通常是中间的键），2表示按下次要键（通常是右键）</li>
+<li>buttons，设置按下了鼠标哪些键，是一个3个比特位的二进制值，默认为0。1表示按下主键（通常是左键），2表示按下次要键（通常是右键），4表示按下辅助键（通常是中间的键）</li>
+<li>relatedTarget，设置一个Element节点，在mouseenter和mouseover事件时，表示鼠标刚刚离开的那个Element节点，在mouseout和mouseleave事件时，表示鼠标正在进入的那个Element节点。默认为null，等同于MouseEvent.relatedTarget属性</li>
+<li>bubbles，布尔值，设置事件是否冒泡，默认为false，等同于Event.bubbles属性</li>
+<li>cancelable，布尔值，设置事件是否可取消，默认为false，等同于Event.cancelable属性</li>
+<li>view，设置事件的视图，一般是window或document.defaultView，等同于Event.view属性</li>
+<li>detail，设置鼠标点击的次数，等同于Event.detail属性</li>
 </ul>
-<p>为避免各语言或者浏览器解析不一致，因此建议<strong>反向引用不要索引大于9的捕获性分组</strong>。不仅如此，反向引用如果不存在，正则将会匹配失败。如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"abcaabcabbcabcc"</span>.match(<span class="regexp">/([abc])\2/g</span>); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
-<p>由于不存在第二个捕获性分组，因此反向引用子表达式<code>\2</code>匹配失败，进而整个表达式匹配失败</p>
-<p><strong>反向引用常用来匹配重复出现的字符串，而不是重复出现的子表达式，这点要尤为注意。</strong>因此如果想要匹配4个或2个数字的话，使用如下正则表达式是万万不行的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"1234567890"</span>.match(<span class="regexp">/(\d)&#123;4&#125;|\1&#123;2&#125;/g</span>); <span class="comment">// ["1234", "5678", "", "", ""]</span></span><br></pre></td></tr></table></figure>
-<p>以上正则表达式，想用反向引用<code>\1</code>代替前面的捕获性分组<code>\d</code>，这是不可行的。修饰符g表示全文查找，因此前两次匹配到了 “1234” 和 “5678”，此时正则引擎的指针处于数字8的后面，再往后匹配显然子表达式<code>(\d){4}</code>无法匹配了，此时第一个捕获组匹配到空字符串，那么反向引用<code>\1</code>将指向空字符串，也就是一个位置（有些类似后面将要讲到的零宽断言），对于”890”子字符串，8、9或0后面共有3个位置可供反向引用匹配，故最终又匹配到三个空字符串。正确的正则表达式如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"1234567890"</span>.match(<span class="regexp">/\d&#123;4&#125;|\d&#123;2&#125;/g</span>); <span class="comment">// ["1234", "5678", "90"]</span></span><br></pre></td></tr></table></figure>
-<p>只能重复写一次子表达式<code>\d</code></p>
-<h4 id="非捕获性分组"><a href="#非捕获性分组" class="headerlink" title="非捕获性分组"></a>非捕获性分组</h4><p>非捕获性分组，通常由一对括号加上”?:”加上子表达式组成，非捕获性分组不会创建反向引用，就好像没有括号一样。如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">"#808080"</span>;</span><br><span class="line"><span class="keyword">var</span> output = color.replace(<span class="regexp">/#(?:\d+)/</span>,<span class="string">"$1"</span>+<span class="string">"~~"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">1</span>);<span class="comment">//""</span></span><br><span class="line"><span class="built_in">console</span>.log(output);<span class="comment">//$1~~</span></span><br></pre></td></tr></table></figure>
-<p>以上，(?:\d+) 表示一个非捕获性分组，由于分组不捕获任何内容，所以， <code>RegExp.$1</code> 就指向了空字符串</p>
-<p>同时，由于<code>$1</code> 的反向引用不存在，因此最终它被当成了普通字符串进行替换</p>
-<p>实际上，捕获性分组和无捕获性分组在搜索效率方面也没什么不同，没有哪一个比另一个更快</p>
-<h3 id="正则表达式高阶技能"><a href="#正则表达式高阶技能" class="headerlink" title="正则表达式高阶技能"></a>正则表达式高阶技能</h3><p>合理地使用零宽断言，能够能分组之不能，极大地增强正则匹配能力，它甚至可以帮助你在匹配条件非常模糊的情况下快速地定位文本</p>
-<p>零宽断言，又叫环视。环视只进行子表达式的匹配，匹配到的内容不保存到最终的匹配结果，由于匹配是零宽度的，故最终匹配到的只是一个位置</p>
-<p>环视按照方向划分，有顺序和逆序两种(也叫前瞻和后瞻)，按照是否匹配有肯定和否定两种，组合之，便有4种环视。4种环视并不复杂，如下便是它们的描述：</p>
+</blockquote>
+<p><strong>altKey，ctrlKey，metaKey，shiftKey</strong></p>
+<p>以下属性返回一个布尔值，表示鼠标事件发生时，是否按下某个键：</p>
+<blockquote>
+<ul>
+<li><code>altKey</code>属性：Alt 键</li>
+<li><code>ctrlKey</code>属性：Ctrl 键</li>
+<li><code>metaKey</code>属性：Meta 键</li>
+<li><code>shiftKey</code>属性：Shift 键</li>
+</ul>
+</blockquote>
+<p><strong>button</strong></p>
+<p>button属性返回一个数值，表示按下了鼠标哪个键：</p>
+<blockquote>
+<ul>
+<li>-1：没有按下键</li>
+<li>0：按下主键（通常是左键）</li>
+<li>1：按下辅助键（通常是中键或者滚轮键）</li>
+<li>2：按下次键（通常是右键）</li>
+</ul>
+</blockquote>
+<p><strong>buttons</strong></p>
+<p>buttons属性返回一个3个比特位的值，表示同时按下了哪些键。它用来处理同时按下多个鼠标键的情况：</p>
+<blockquote>
+<ul>
+<li>1：二进制为001，表示按下左键</li>
+<li>2：二进制为010，表示按下右键</li>
+<li>4：二进制为100，表示按下中键或滚轮键</li>
+</ul>
+</blockquote>
+<p>同时按下多个键的时候，每个按下的键对应的比特位都会有值。比如，同时按下左键和右键，会返回3（二进制为011）</p>
+<p><strong>clientX，clientY</strong></p>
+<p>clientX属性返回鼠标位置相对于浏览器窗口左上角的水平坐标，单位为像素，与页面是否横向滚动无关</p>
+<p>clientY属性返回鼠标位置相对于浏览器窗口左上角的垂直坐标，单位为像素，与页面是否纵向滚动无关</p>
+<p><strong>movementX，movementY</strong></p>
+<p>movementX属性返回一个水平位移，单位为像素，表示当前位置与上一个mousemove事件之间的水平距离</p>
+<p>movementY属性返回一个垂直位移，单位为像素，表示当前位置与上一个mousemove事件之间的垂直距离</p>
+<p><strong>screenX，screenY</strong></p>
+<p>screenX属性返回鼠标位置相对于屏幕左上角的水平坐标，单位为像素</p>
+<p>screenY属性返回鼠标位置相对于屏幕左上角的垂直坐标，单位为像素</p>
+<p><strong>relatedTarget</strong></p>
+<p>relatedTarget属性返回事件的次要相关节点。对于那些没有次要相关节点的事件，该属性返回null</p>
+<h4 id="滚轮事件"><a href="#滚轮事件" class="headerlink" title="滚轮事件"></a>滚轮事件</h4><p><code>wheel</code>事件是与鼠标滚轮相关的事件，目前只有一个<code>wheel</code>事件。用户滚动鼠标的滚轮，就触发这个事件</p>
+<p>该事件除了继承了MouseEvent、UIEvent、Event的属性，还有几个自己的属性：</p>
+<blockquote>
+<ul>
+<li>deltaX：返回一个数值，表示滚轮的水平滚动量</li>
+<li>deltaY：返回一个数值，表示滚轮的垂直滚动量</li>
+<li>deltaZ：返回一个数值，表示滚轮的Z轴滚动量</li>
+<li>deltaMode：返回一个数值，表示滚动的单位，适用于上面三个属性。0表示像素，1表示行，2表示页</li>
+</ul>
+</blockquote>
+<p>浏览器提供一个WheelEvent构造函数<code>new WheelEvent()</code>，可以用来生成滚轮事件的实例。它接受两个参数，第一个是事件名称，第二个是配置对象</p>
+<h4 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h4><p>键盘事件用来描述键盘行为，主要有keydown、keypress、keyup三个事件：</p>
+<blockquote>
+<ul>
+<li><code>keydown</code>：按下键盘时触发该事件</li>
+<li><code>keypress</code>：只要按下的键并非Ctrl、Alt、Shift和Meta，就接着触发keypress事件</li>
+<li><code>keyup</code>：松开键盘时触发该事件</li>
+</ul>
+</blockquote>
+<p>如果用户一直按键不松开，就会连续触发键盘事件</p>
+<p>键盘事件使用KeyboardEvent对象表示，该对象继承了UIEvent和MouseEvent对象。浏览器提供KeyboardEvent构造函数<code>new KeyboardEvent()</code>，用来新建键盘事件的实例</p>
+<p><code>KeyboardEvent</code>构造函数的第一个参数是一个字符串，表示事件类型，第二个参数是一个事件配置对象，可配置以下字段：</p>
+<blockquote>
+<ul>
+<li>key，对应KeyboardEvent.key属性，默认为空字符串</li>
+<li>ctrlKey，对应KeyboardEvent.ctrlKey属性，默认为false</li>
+<li>shiftKey，对应KeyboardEvent.shiftKey属性，默认为false</li>
+<li>altKey，对应KeyboardEvent.altKey属性，默认为false</li>
+<li>metaKey，对应KeyboardEvent.metaKey属性，默认为false</li>
+</ul>
+</blockquote>
+<p><strong>key</strong></p>
+<p>key属性返回一个字符串，表示按下的键名。如果同时按下一个控制键和一个符号键，则返回符号键的键名。比如，按下Ctrl+a，则返回a。如果无法识别键名，则返回字符串Unidentified</p>
+<p><strong>charCode</strong></p>
+<p>charCode属性返回一个数值，表示keypress事件按键的Unicode值，keydown和keyup事件不提供这个属性。注意，该属性已经从标准移除，虽然浏览器还支持，但应该尽量不使用</p>
+<h4 id="进度事件"><a href="#进度事件" class="headerlink" title="进度事件"></a>进度事件</h4><p>进度事件用来描述一个事件进展的过程，比如XMLHttpRequest对象发出的HTTP请求的过程、<img>、<audio>、<video>、<style>、<link>加载外部资源的过程。下载和上传都会发生进度事件：</p>
+<blockquote>
+<ul>
+<li><code>abort</code>事件：当进度事件被中止时触发。如果发生错误，导致进程中止，不会触发该事件</li>
+<li><code>error</code>事件：由于错误导致资源无法加载时触发</li>
+<li><code>load</code>事件：进度成功结束时触发</li>
+<li><code>loadstart</code>事件：进度开始时触发</li>
+<li><code>loadend</code>事件：进度停止时触发，发生顺序排在error事件\abort事件\load事件后面</li>
+<li><code>progress</code>事件：当操作处于进度之中，由传输的数据块不断触发</li>
+<li><code>timeout</code>事件：进度超过限时触发</li>
+</ul>
+</blockquote>
+<p>进度事件使用ProgressEvent对象表示，浏览器提供一个ProgressEvent构造函数<code>new ProgressEvent()</code>，用来生成进度事件的实例</p>
+<p>ProgressEvent构造函数的第一个参数是事件类型（字符串），第二个参数是配置对象，可配置以下字段：</p>
+<blockquote>
+<ul>
+<li>lengthComputable：返回一个布尔值，表示当前进度是否具有可计算的长度。如果为false，就表示当前进度无法测量</li>
+<li>total：返回一个数值，表示当前进度的总长度。如果是通过HTTP下载某个资源，表示内容本身的长度，不含HTTP头部的长度。如果lengthComputable属性为false，则total属性就无法取得正确的值</li>
+<li>loaded：返回一个数值，表示当前进度已经完成的数量。该属性除以total属性，就可以得到目前进度的百分比</li>
+</ul>
+</blockquote>
+<h4 id="拖拉事件"><a href="#拖拉事件" class="headerlink" title="拖拉事件"></a>拖拉事件</h4><blockquote>
+<ul>
+<li><strong>drag事件</strong>：拖拉过程中，在被拖拉的节点上持续触发</li>
+<li><strong>dragstart事件</strong>：拖拉开始时在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。通常应该在这个事件的监听函数中，指定拖拉的数据</li>
+<li><strong>dragend事件</strong>：拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。它与dragstart事件，在同一个节点上触发。不管拖拉是否跨窗口，或者中途被取消，dragend事件总是会触发的</li>
+<li><strong>dragenter事件</strong>：拖拉进入当前节点时，在当前节点上触发，该事件的target属性是当前节点。通常应该在这个事件的监听函数中，指定是否允许在当前节点放下（drop）拖拉的数据。如果当前节点没有该事件的监听函数，或者监听函数不执行任何操作，就意味着不允许在当前节点放下数据。在视觉上显示拖拉进入当前节点，也是在这个事件的监听函数中设置</li>
+<li><strong>dragover事件</strong>：拖拉到当前节点上方时，在当前节点上持续触发，该事件的target属性是当前节点。该事件与dragenter事件基本类似，默认会重置当前的拖拉事件的效果（DataTransfer对象的dropEffect属性）为none，即不允许放下被拖拉的节点，所以如果允许在当前节点drop数据，通常会使用preventDefault方法，取消重置拖拉效果为none</li>
+<li><strong>dragleave事件</strong>：拖拉离开当前节点范围时，在当前节点上触发，该事件的target属性是当前节点。在视觉上显示拖拉离开当前节点，就在这个事件的监听函数中设置</li>
+<li><strong>drop事件</strong>：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发。注意，如果当前节点不允许drop，即使在该节点上方松开鼠标键，也不会触发该事件。如果用户按下Escape键，取消这个操作，也不会触发该事件。该事件的监听函数负责取出拖拉数据，并进行相关处理</li>
+</ul>
+</blockquote>
+<h4 id="触摸事件"><a href="#触摸事件" class="headerlink" title="触摸事件"></a>触摸事件</h4><p>触摸引发的事件，有以下几类。可以通过TouchEvent.type属性，查看到底发生的是哪一种事件：</p>
+<blockquote>
+<ul>
+<li><code>touchstart</code>：用户接触触摸屏时触发，它的target属性返回发生触摸的Element节点</li>
+<li><code>touchend</code>：用户不再接触触摸屏时（或者移出屏幕边缘时）触发，它的target属性与touchstart事件的target属性是一致的，它的changedTouches属性返回一个TouchList对象，包含所有不再触摸的触摸点（Touch对象）</li>
+<li><code>touchmove</code>：用户移动触摸点时触发，它的target属性与touchstart事件的target属性一致。如果触摸的半径、角度、力度发生变化，也会触发该事件</li>
+<li><code>touchcancel</code>：触摸点取消时触发，比如在触摸区域跳出一个情态窗口（modal window）、触摸点离开了文档区域（进入浏览器菜单栏区域）、用户放置更多的触摸点（自动取消早先的触摸点）</li>
+</ul>
+</blockquote>
+<p><strong>触摸API由三个对象组成：</strong></p>
+<blockquote>
+<ul>
+<li>Touch</li>
+<li>TouchList</li>
+<li>TouchEvent</li>
+</ul>
+</blockquote>
+<p><code>Touch</code>对象表示触摸点（一根手指或者一根触摸笔），用来描述触摸动作，包括位置、大小、形状、压力、目标元素等属性。有时，触摸动作由多个触摸点（多根手指或者多根触摸笔）组成，多个触摸点的集合由<code>TouchList</code>对象表示。<code>TouchEvent</code>对象代表由触摸引发的事件，只有触摸屏才会引发这一类事件</p>
+<p><strong>Touch对象</strong></p>
+<p>Touch对象代表一个触摸点。触摸点可能是一根手指，也可能是一根触摸笔。它有以下属性：</p>
+<blockquote>
+<ul>
+<li><strong>identifier</strong>：表示Touch实例的独一无二的识别符。它在整个触摸过程中保持不变</li>
+<li><strong>screenX，screenY</strong>：分别表示触摸点相对于屏幕左上角的横坐标和纵坐标，与页面是否滚动无关</li>
+<li><strong>clientX，clientY</strong>：分别表示触摸点相对于浏览器视口左上角的横坐标和纵坐标，与页面是否滚动无关</li>
+<li><strong>pageX，pageY</strong>：分别表示触摸点相对于当前页面左上角的横坐标和纵坐标，包含了页面滚动带来的位移</li>
+<li><strong>radiusX，radiusY</strong>：分别返回触摸点周围受到影响的椭圆范围的X轴和Y轴，单位为像素</li>
+<li><strong>rotationAngle</strong>：表示触摸区域的椭圆的旋转角度，单位为度数，在0到90度之间</li>
+<li><strong>force</strong>：返回一个0到1之间的数值，表示触摸压力。0代表没有压力，1代表硬件所能识别的最大压力</li>
+<li><strong>target</strong>：返回一个Element节点，代表触摸发生的那个节点</li>
+</ul>
+</blockquote>
+<p><strong>TouchList对象</strong></p>
+<p>TouchList对象是一个类似数组的对象，成员是与某个触摸事件相关的所有触摸点。比如，用户用三根手指触摸，产生的TouchList对象就有三个成员，每根手指对应一个Touch对象</p>
+<p>TouchList实例的length属性，返回TouchList对象的成员数量</p>
+<p>TouchList实例的identifiedTouch方法和item方法，分别使用id属性和索引值（从0开始）作为参数，取出指定的Touch对象</p>
+<p><strong>TouchEvent对象</strong></p>
+<p>TouchEvent对象继承Event对象和UIEvent对象，表示触摸引发的事件。除了被继承的属性以外，它还有一些自己的属性：</p>
+<blockquote>
+<ul>
+<li><strong>键盘相关属性</strong>：以下属性（altKey 是否按下alt键、ctrlKey 是否按下ctrl键、metaKey 是否按下meta键、shiftKey 是否按下shift键）都为只读属性，返回一个布尔值，表示触摸的同时，是否按下某个键</li>
+<li><strong>changedTouches</strong>：changedTouches属性返回一个TouchList对象，包含了由当前触摸事件引发的所有Touch对象（即相关的触摸点）。对于touchstart事件，它代表被激活的触摸点；对于touchmove事件，代表发生变化的触摸点；对于touchend事件，代表消失的触摸点（即不再被触碰的点）</li>
+<li><strong>targetTouches</strong>：targetTouches属性返回一个TouchList对象，包含了触摸的目标Element节点内部，所有仍然处于活动状态的触摸点</li>
+<li><strong>touches</strong>：touches属性返回一个TouchList对象，包含了所有仍然处于活动状态的触摸点</li>
+</ul>
+</blockquote>
+<h4 id="表单事件"><a href="#表单事件" class="headerlink" title="表单事件"></a>表单事件</h4><p><strong>input事件</strong></p>
+<p><code>input</code>事件当<input>、<textarea>的值发生变化时触发。此外，打开contenteditable属性的元素，只要值发生变化，也会触发input事件。input事件的一个特点，就是会连续触发，比如用户每次按下一次按键，就会触发一次input事件</p>
+<p><strong>select事件</strong></p>
+<p><code>select</code>事件当在<input>、<textarea>中选中文本时触发</p>
+<p><strong>search事件</strong></p>
+<p><code>search</code>事件在用户向搜索域按下”ENTER（回车）” 按键或点击 type=”search” 的 <input> 元素的 “x(搜索)” 按钮时触发</p>
+<p><strong>change事件</strong></p>
+<p><code>change</code>事件当<input>、<select>、<textarea>的值发生变化时触发。它与input事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，而且input事件必然会引发change事件</p>
+<p><strong>reset事件</strong></p>
+<p><code>reset</code>事件当表单重置（所有表单成员变回默认值）时触发</p>
+<p><strong>submit事件</strong></p>
+<p><code>submi</code>t事件当表单数据向服务器提交时触发。注意，submit事件的发生对象是form元素，而不是button元素（即使它的类型是submit），因为提交的是表单，而不是按钮</p>
+<h4 id="文档事件"><a href="#文档事件" class="headerlink" title="文档事件"></a>文档事件</h4><p><strong>beforeunload事件</strong></p>
+<p><code>beforeunload</code>事件在窗口将要关闭，或者网页（即<code>document</code>对象）将要卸载时触发</p>
+<p><strong>unload事件</strong></p>
+<p><code>unload</code>事件在窗口关闭或者document对象将要卸载时触发，发生在window、body、frameset等对象上面。它的触发顺序排在beforeunload、pagehide事件后面。unload事件只在页面没有被浏览器缓存时才会触发，换言之，如果通过按下“前进/后退”导致页面卸载，并不会触发unload事件</p>
+<p><strong>load事件，error事件</strong></p>
+<p><code>load</code>事件在页面加载成功时触发</p>
+<p><code>error</code>事件在页面加载失败时触发</p>
+<p>注意，页面从浏览器缓存加载，并不会触发<code>load</code>事件</p>
+<p><strong>pageshow事件</strong></p>
+<p><code>pageshow</code>事件在页面加载时触发，包括第一次加载和从缓存加载两种情况</p>
+<p>pageshow事件有一个persisted属性，返回一个布尔值。页面第一次加载时，这个属性是false；当页面从缓存加载时，这个属性是true</p>
+<p><strong>pagehide事件</strong></p>
+<p><code>pagehide</code>事件与pageshow事件类似，当用户通过“前进/后退”按钮，离开当前页面时触发。它与unload事件的区别在于，如果在window对象上定义unload事件的监听函数之后，页面不会保存在缓存中，而使用pagehide事件，页面会保存在缓存中</p>
+<p>pagehide事件的event对象有一个persisted属性，将这个属性设为true，就表示页面要保存在缓存中；设为false，表示网页不保存在缓存中，这时如果设置了unload事件的监听函数，该函数将在pagehide事件后立即运行</p>
+<p><strong>DOMContentLoaded事件</strong></p>
+<p>当HTML文档下载并解析完成以后，就会在document对象上触发<code>DOMContentLoaded</code>事件</p>
+<p><strong>readystatechange事件</strong></p>
+<p><code>readystatechange</code>事件发生在Document对象和XMLHttpRequest对象，当它们的readyState属性发生变化时触发</p>
+<p><strong>scroll事件</strong></p>
+<p><code>scroll</code>事件在文档或文档元素滚动时触发，主要出现在用户拖动滚动条</p>
+<p><strong>resize事件</strong></p>
+<p><code>resize</code>事件在改变浏览器窗口大小时触发，发生在window、body、frameset对象上面</p>
+<p><strong>hashchange事件</strong></p>
+<p><code>hashchange</code>事件在URL的hash部分（即#号后面的部分，包括#号）发生变化时触发</p>
+<p><strong>popstate事件</strong></p>
+<p><code>popstate</code>事件在浏览器的history对象的当前记录发生显式切换时触发。注意，调用history.pushState()或history.replaceState()，并不会触发popstate事件。该事件只在用户在history记录之间显式切换时触发，比如鼠标点击“后退/前进”按钮，或者在脚本中调用history.back()、history.forward()、history.go()时触发</p>
+<p>该事件对象有一个state属性，保存history.pushState方法和history.replaceState方法为当前记录添加的state对象</p>
+<p><strong>cut事件，copy事件，paste事件</strong></p>
+<blockquote>
+<ul>
+<li>cut事件：在将选中的内容从文档中移除，加入剪贴板后触发</li>
+<li>copy事件：在选中的内容加入剪贴板后触发</li>
+<li>paste事件：在剪贴板内容被粘贴到文档后触发</li>
+</ul>
+</blockquote>
+<p><strong>focus事件，blur事件，focusin事件，focusout事件</strong></p>
+<blockquote>
+<ul>
+<li>focus事件：Element节点获得焦点后触发，该事件不会冒泡</li>
+<li>blur事件：Element节点失去焦点后触发，该事件不会冒泡</li>
+<li>focusin事件：Element节点将要获得焦点时触发，发生在focus事件之前。该事件会冒泡。Firefox不支持该事件</li>
+<li>focusout事件：Element节点将要失去焦点时触发，发生在blur事件之前。该事件会冒泡。Firefox不支持该事件</li>
+</ul>
+</blockquote>
+<p>这四个事件的事件对象，带有target属性（返回事件的目标节点）和relatedTarget属性（返回一个Element节点）。对于focusin事件，relatedTarget属性表示失去焦点的节点；对于focusout事件，表示将要接受焦点的节点；对于focus和blur事件，该属性返回null</p>
+<h4 id="储存事件"><a href="#储存事件" class="headerlink" title="储存事件"></a>储存事件</h4><p><strong>storage事件</strong></p>
+<p>当储存的数据发生变化时，会触发storage事件</p>
+<p><strong>storage事件对象属性：</strong></p>
+<blockquote>
+<ul>
+<li>key：值的键名</li>
+<li>oldValue：更新前的值。如果该键为新增加，则这个属性为null</li>
+<li>newValue：更新后的值。如果该键被删除，则这个属性为null</li>
+<li>url：原始触发storage事件的那个网页的网址</li>
+</ul>
+</blockquote>
+<p>注意：该事件不在导致数据变化的当前页面触发。如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变sessionStorage或localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件。可以通过这种机制，实现多个窗口之间的通信</p>
+<h4 id="其他事件"><a href="#其他事件" class="headerlink" title="其他事件"></a>其他事件</h4><p><strong>toggle事件，show事件</strong></p>
+<p><code>toggle</code>事件在用户打开或关闭 <details> 元素时触发</p>
+<p><code>show</code>事件当 <menu> 元素在上下文菜单显示时触发</p>
+<p><strong>beforeprint事件，afterprint事件</strong></p>
+<p><code>beforeprint</code>事件在页面即将开始打印时触发</p>
+<p><code>afterprint</code>事件在页面已经开始打印，或者打印窗口已经关闭时触发</p>
+<p><strong>message事件</strong></p>
+<p><code>message</code>事件通过或者从对象(WebSocket, Web Worker, Event Source 或子 frame 或父窗口)接收到消息时触发</p>
+<h4 id="CSSOM事件"><a href="#CSSOM事件" class="headerlink" title="CSSOM事件"></a>CSSOM事件</h4><p><strong>animationstart</strong></p>
+<p><code>animationstart</code>事件在 CSS 动画开始播放时触发</p>
+<p><strong>animationiteration</strong></p>
+<p><code>animationiteration</code>事件在 CSS 动画重新播放时触发</p>
+<p><strong>animationend</strong></p>
+<p><code>animationend</code>事件在CSS动画完成后触发</p>
+<p><strong>transitionend</strong></p>
+<p><code>transitionend</code>事件在CSS完成过渡后触发</p>
+<p>以上事件只支持事件绑定</p>
+<h4 id="MEDIA事件"><a href="#MEDIA事件" class="headerlink" title="MEDIA事件"></a>MEDIA事件</h4><p><strong>abort事件，emptied事件，error事件，stalled事件，suspend事件</strong></p>
+<p><code>abort</code>事件在视频/音频终止加载时触发</p>
+<p><code>emptied</code>事件当期播放列表为空时触发</p>
+<p><code>error</code>事件在视频/音频数据加载期间发生错误时触发</p>
+<p><code>stalled</code>事件在浏览器获取媒体数据，但媒体数据不可用时触发</p>
+<p><code>suspend</code>事件在浏览器读取媒体数据中止时触发</p>
+<p><strong>loadstart事件，durationchange事件，loadedmetadata事件，loadeddata事件，progress事件，canplay事件，canplaythrough事件</strong></p>
+<p><code>loadstart</code>事件在浏览器开始寻找指定视频/音频触发</p>
+<p><code>durationchange</code>事件在视频/音频的时长发生变化时触发</p>
+<p><code>loadedmetadata</code>事件在指定视频/音频的元数据加载后触发</p>
+<p><code>loadeddata</code>事件在浏览器加载视频/音频当前帧时触发触发</p>
+<p><code>progress</code>事件在浏览器下载指定的视频/音频时触发</p>
+<p><code>canplay</code>事件在用户可以开始播放视频/音频时触发</p>
+<p><code>canplaythrough</code>事件在视频/音频可以正常播放且无需停顿和缓冲时触发</p>
+<p><strong>play事件，pause事件，playing事件，waiting事件，ended事件</strong></p>
+<p><code>play</code>事件在视频/音频开始播放时触发</p>
+<p><code>pause</code>事件在视频/音频暂停时触发</p>
+<p><code>playing</code>事件在视频/音频暂停或者在缓冲后准备重新开始播放时触发</p>
+<p><code>waiting</code>事件在视频由于要播放下一帧而需要缓冲时触发</p>
+<p><code>ended</code>事件在视频/音频播放结束时触发</p>
+<p><strong>ratechange事件，timeupdate事件，volumechange事件</strong></p>
+<p><code>ratechange</code>事件在视频/音频的播放速度发生改变时触发</p>
+<p><code>timeupdate</code>事件在当前的播放位置发送改变时触发</p>
+<p><code>volumechange</code>事件在视频/音频的音量发生改变时触发</p>
+<p><strong>seeking事件，seeked事件</strong></p>
+<p><code>seeking</code>事件在用户开始重新定位视频/音频时触发</p>
+<p><code>seeked</code>事件在用户重新定位视频/音频的播放位置后触发</p>
+<h3 id="Event-Model"><a href="#Event-Model" class="headerlink" title="Event Model"></a>Event Model</h3><h4 id="EventTarget接口"><a href="#EventTarget接口" class="headerlink" title="EventTarget接口"></a>EventTarget接口</h4><p>DOM的事件操作（监听和触发），都定义在<code>EventTarget</code>接口。<code>Element</code>节点、<code>document</code>节点和<code>window</code>对象，都部署了这个接口。此外，<code>XMLHttpRequest</code>、<code>AudioNode</code>、<code>AudioContext</code>等浏览器内置对象，也部署了这个接口。该接口就是三个方法：</p>
+<blockquote>
+<ul>
+<li><code>addEventListener</code>：绑定事件的监听函数</li>
+<li><code>removeEventListener</code>：移除事件的监听函数</li>
+<li><code>dispatchEvent</code>：触发事件</li>
+</ul>
+</blockquote>
+<p><strong>addEventListener()</strong></p>
+<p><code>addEventListener</code>方法用于在当前节点或对象上，定义一个特定事件的监听函数：</p>
+<p><code>target.addEventListener(type, listener[, useCapture])</code></p>
+<p><code>addEventListener</code>方法接受三个参数：</p>
+<blockquote>
+<ul>
+<li><code>type</code>：事件名称，大小写敏感</li>
+<li><code>listener</code>：监听函数。事件发生时，会调用该监听函数</li>
+<li><code>useCapture</code>：布尔值，表示监听函数是否在捕获阶段（capture）触发，默认为<code>false</code>（监听函数只在冒泡阶段被触发）。老式浏览器规定该参数必写，较新版本的浏览器允许该参数可选</li>
+</ul>
+</blockquote>
+<p><strong>removeEventListener()</strong></p>
+<p><code>removeEventListener</code>方法用来移除<code>addEventListener</code>方法添加的事件监听函数</p>
+<p><code>removeEventListener</code>方法的参数，与<code>addEventListener</code>方法完全一致</p>
+<p>注意，<code>removeEventListener</code>方法移除的监听函数，必须与对应的<code>addEventListener</code>方法的参数完全一致，而且必须在同一个元素节点，否则无效</p>
+<p><strong>dispatchEvent()</strong></p>
+<p><code>dispatchEvent</code>方法在当前节点上触发指定事件，从而触发监听函数的执行。该方法返回一个布尔值。<code>dispatchEvent</code>方法的参数是一个<code>Event</code>对象的实例</p>
+<p>如果<code>dispatchEvent</code>方法的参数为空，或者不是一个有效的事件对象，将报错</p>
+<h4 id="监听函数"><a href="#监听函数" class="headerlink" title="监听函数"></a>监听函数</h4><p><strong>HTML标签的on-属性</strong></p>
+<p>使用这个方法指定的监听函数，只会在冒泡阶段触发</p>
+<p>注意，使用这种方法时，<code>on-</code>属性的值是将会执行的代码，而不是一个函数。一旦指定的事件发生，<code>on-</code>属性的值是原样传入JavaScript引擎执行。因此如果要执行函数，不要忘记加上一对圆括号</p>
+<p><strong>Element节点的事件属性</strong></p>
+<p>Element节点对象有事件属性，同样可以指定监听函数。使用这个方法指定的监听函数，只会在冒泡阶段触发</p>
+<p><strong>addEventListener方法</strong></p>
+<p>通过<code>Element</code>节点、<code>document</code>节点、<code>window</code>对象的<code>addEventListener</code>方法，也可以定义事件的监听函数</p>
+<blockquote>
+<p>第一种“HTML标签的on-属性”，违反了HTML与JavaScript代码相分离的原则；第二种“Element节点的事件属性”的缺点是，同一个事件只能定义一个监听函数，也就是说，如果定义两次onclick属性，后一次定义会覆盖前一次。因此，这两种方法都不推荐使用，除非是为了程序的兼容问题，因为所有浏览器都支持这两种方法</p>
+</blockquote>
+<p><strong>this的指向</strong></p>
+<p><code>addEventListener</code>方法指定的监听函数，内部的<code>this</code>对象总是指向触发事件的那个节点</p>
+<p>监听函数部署在Element节点的<code>on-</code>属性上面，<code>this</code>不会指向触发事件的元素节点</p>
+<h4 id="事件的传播"><a href="#事件的传播" class="headerlink" title="事件的传播"></a>事件的传播</h4><p><strong>传播的三分阶段：</strong></p>
+<blockquote>
+<ul>
+<li><strong>第一阶段</strong>：从window对象传导到目标节点，称为“捕获阶段”（capture phase）</li>
+<li><strong>第二阶段</strong>：在目标节点上触发，称为“目标阶段”（target phase）</li>
+<li><strong>第三阶段</strong>：从目标节点传导回window对象，称为“冒泡阶段”（bubbling phase）</li>
+</ul>
+</blockquote>
+<p><strong>事件代理/委托</strong></p>
+<blockquote>
+<p>由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件</p>
+</blockquote>
+<h4 id="Event对象"><a href="#Event对象" class="headerlink" title="Event对象"></a>Event对象</h4><p>事件发生以后，会生成一个事件对象，作为参数传给监听函数。浏览器原生提供一个<code>Event</code>对象，所有的事件都是这个对象的实例，或者说继承了<code>Event.prototype</code>对象</p>
+<p><code>Event</code>对象本身就是一个构造函数，可以用来生成新的实例<code>event = new Event(typeArg, eventInit);</code></p>
+<p>Event构造函数接受两个参数。第一个参数是字符串，表示事件的名称；第二个参数是一个对象，表示事件对象的配置。该参数可以有以下两个属性：</p>
+<blockquote>
+<ul>
+<li><code>bubbles</code>：布尔值，可选，默认为<code>false</code>，表示事件对象是否冒泡</li>
+<li><code>cancelable</code>：布尔值，可选，默认为<code>false</code>，表示事件是否可以被取消</li>
+</ul>
+</blockquote>
+<p>Event构造函数创建的对象可以使用<code>dispatchEvent</code>方法触发该事件</p>
+<p>IE8及以下版本，事件对象不作为参数传递，而是通过<code>window</code>对象的<code>event</code>属性读取，并且事件对象的<code>target</code>属性叫做<code>srcElement</code>属性</p>
+<p><strong>Event对象的属性：</strong></p>
+<blockquote>
+<p>以下属性与事件的阶段有关：</p>
+</blockquote>
+<p><strong>event.bubbles</strong></p>
+<p><code>bubbles</code>属性返回一个布尔值，表示当前事件是否会冒泡。该属性为只读属性，只能在新建事件时改变。除非显式声明，Event构造函数生成的事件，默认是不冒泡的</p>
+<p><strong>event.eventPhase</strong></p>
+<p><code>eventPhase</code>属性返回一个整数值，表示事件目前所处的节点</p>
+<blockquote>
+<p>以下属性与事件的默认行为有关：</p>
+</blockquote>
+<p><strong>event.cancelable</strong></p>
+<p><code>cancelable</code>属性返回一个布尔值，表示事件是否可以取消。该属性为只读属性，只能在新建事件时改变。除非显式声明，Event构造函数生成的事件，默认是不可以取消的</p>
+<p><strong>event.defaultPrevented</strong></p>
+<p><code>defaultPrevented</code>属性返回一个布尔值，表示该事件是否调用过preventDefault方法</p>
+<blockquote>
+<p>以下属性与阻止事件行为有关：</p>
+</blockquote>
+<p><strong>event.preventDefault()</strong></p>
+<p><code>preventDefault</code>方法取消浏览器对当前事件的默认行为，比如点击链接后，浏览器跳转到指定页面，或者按一下空格键，页面向下滚动一段距离。该方法生效的前提是，事件的cancelable属性为true，如果为false，则调用该方法没有任何效果</p>
+<p>如果监听函数最后返回布尔值false（即return false），浏览器也不会触发默认行为，但是与<code>event.preventDefault()</code>有区别，调用<code>return false</code>时会执行以下行为：</p>
+<blockquote>
+<ul>
+<li>event.preventDefault()</li>
+<li>event.stopPropagation()</li>
+<li>停止回调函数执行并立即返回</li>
+</ul>
+</blockquote>
+<p><strong>event.stopPropagation()</strong></p>
+<p><code>stopPropagation</code>方法阻止事件在DOM中继续传播，防止再触发定义在别的节点上的监听函数（即阻止事件冒泡），但是不包括在当前节点上新定义的事件监听函数</p>
+<p><strong>event.stopImmediatePropagation()</strong></p>
+<p><code>stopImmediatePropagation</code>方法阻止同一个事件的其他监听函数被调用</p>
+<p>如果同一个节点对于同一个事件指定了多个监听函数，这些函数会根据添加的顺序依次调用。只要其中有一个监听函数调用了stopImmediatePropagation方法，其他的监听函数就不会再执行了</p>
+<blockquote>
+<p>以下属性与事件的目标节点有关：</p>
+</blockquote>
+<p><strong>event.currentTarget</strong></p>
+<p><code>currentTarget</code>属性返回事件当前所在的节点，即正在执行的监听函数所绑定的那个节点</p>
+<p>在监听函数中，currentTarget属性实际上等同于this对象</p>
+<p><strong>event.target</strong></p>
+<p><code>target</code>属性返回触发事件的那个节点，即事件最初发生的节点</p>
+<p>在IE6—IE8之中，该属性的名字不是target，而是<code>srcElement</code></p>
+<blockquote>
+<p>以下属性与事件对象的其他信息相关：</p>
+</blockquote>
+<p><strong>event.type</strong></p>
+<p><code>type</code>属性返回一个字符串，表示事件类型，大小写敏感</p>
+<p><strong>event.detail</strong></p>
+<p><code>detail</code>属性返回一个数值，表示事件的某种信息。具体含义与事件类型有关，对于鼠标事件，表示鼠标按键在某个位置按下的次数，比如对于dblclick事件，detail属性的值总是2</p>
+<p><strong>event.timeStamp</strong></p>
+<p><code>timeStamp</code>属性返回一个毫秒时间戳，表示事件发生的时间</p>
+<p><strong>event.isTrusted</strong></p>
+<p><code>isTrusted</code>属性返回一个布尔值，表示该事件是否为真实用户触发</p>
+<h4 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h4><blockquote>
+<p>除了浏览器预定义的那些事件，用户还可以自定义事件，然后手动触发</p>
+</blockquote>
+<p><strong>CustomEvent()</strong></p>
+<p>Event构造函数只能指定事件名，不能在事件上绑定数据。如果需要在触发事件的同时，传入指定的数据，需要使用CustomEvent构造函数生成自定义的事件对象：</p>
+<p><code>var event = new CustomEvent(&#39;build&#39;, { &#39;detail&#39;: &#39;hello&#39; });</code></p>
+<p>CustomEvent构造函数的第一个参数是事件名称，第二个参数是一个对象，该对象的detail属性会绑定在事件对象之上</p>
+<p><strong>自定义事件的老式写法</strong></p>
+<p>老式浏览器不一定支持各种类型事件的构造函数。因此，有时为了兼容，会用到一些非标准的方法。这些方法未来会被逐步淘汰，但是目前浏览器还广泛支持。除非是为了兼容老式浏览器，尽量不要使用</p>
+<p><strong>document.createEvent()</strong></p>
+<p>document.createEvent方法用来新建指定类型的事件。它所生成的Event实例，可以传入dispatchEvent方法</p>
+<p>createEvent方法接受一个字符串作为参数，可能的值参见下表“数据类型”一栏。使用了某一种“事件类型”，就必须使用对应的事件初始化方法：</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center"><strong>字符</strong></th>
-<th style="text-align:center"><strong>描述</strong></th>
-<th style="text-align:center"><strong>示例</strong></th>
+<th style="text-align:center">事件类型</th>
+<th style="text-align:center">事件初始化方法</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">(?:<em>pattern</em>)</td>
-<td style="text-align:center">非捕获性分组, 匹配pattern的位置, 但不捕获匹配结果.也就是说不创建反向引用, 就好像没有括号一样.</td>
-<td style="text-align:center">‘abcd(?:e)匹配’abcde</td>
+<td style="text-align:center">UIEvents</td>
+<td style="text-align:center">event.initUIEvent</td>
 </tr>
 <tr>
-<td style="text-align:center">(?=<em>pattern</em>)</td>
-<td style="text-align:center"><strong>顺序肯定环视</strong>, 匹配后面是pattern 的位置, 不捕获匹配结果.</td>
-<td style="text-align:center">‘Windows (?=2000)’匹配 “Windows2000” 中的 “Windows”; 不匹配 “Windows3.1” 中的 “Windows”</td>
+<td style="text-align:center">MouseEvents</td>
+<td style="text-align:center">event.initMouseEvent</td>
 </tr>
 <tr>
-<td style="text-align:center">(?!<em>pattern</em>)</td>
-<td style="text-align:center"><strong>顺序否定环视</strong>, 匹配后面不是 pattern 的位置, 不捕获匹配结果.</td>
-<td style="text-align:center">‘Windows (?!2000)’匹配 “Windows3.1” 中的 “Windows”; 不匹配 “Windows2000” 中的 “Windows”</td>
+<td style="text-align:center">MutationEvents</td>
+<td style="text-align:center">event.initMutationEvent</td>
 </tr>
 <tr>
-<td style="text-align:center">(?&lt;=<em>pattern</em>)</td>
-<td style="text-align:center"><strong>逆序肯定环视</strong>, 匹配前面是 pattern 的位置, 不捕获匹配结果.</td>
-<td style="text-align:center">‘(?&lt;=Office)2000’匹配 “ Office2000” 中的 “2000”; 不匹配 “Windows2000” 中的 “2000”</td>
+<td style="text-align:center">HTMLEvents</td>
+<td style="text-align:center">event.initEvent</td>
 </tr>
 <tr>
-<td style="text-align:center">(?&lt;!<em>pattern</em>)</td>
-<td style="text-align:center"><strong>逆序否定环视</strong>, 匹配前面不是 pattern 的位置, 不捕获匹配结果.</td>
-<td style="text-align:center">‘(?&lt;!Office)2000’匹配 “ Windows2000” 中的 “2000”; 不匹配 “ Office2000” 中的 “2000”</td>
+<td style="text-align:center">Event</td>
+<td style="text-align:center">event.initEvent</td>
+</tr>
+<tr>
+<td style="text-align:center">CustomEvent</td>
+<td style="text-align:center">event.initCustomEvent</td>
+</tr>
+<tr>
+<td style="text-align:center">KeyboardEvent</td>
+<td style="text-align:center">event.initKeyEvent</td>
 </tr>
 </tbody>
 </table>
-<p>非捕获性分组由于结构与环视相似，故列在表中，以做对比。以上4种环视中，目前 javaScript 中只支持前两种，也就是只支持 <strong>顺序肯定环视</strong> 和 <strong>顺序否定环视</strong>。通过实例来帮助理解：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"123abc789"</span>,s;</span><br><span class="line"><span class="comment">//没有使用环视,abc直接被替换</span></span><br><span class="line">s = str.replace(<span class="regexp">/abc/</span>,<span class="number">456</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">//123456789</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用了顺序肯定环视,捕获到了a前面的位置,所以abc没有被替换,只是将3替换成了3456</span></span><br><span class="line">s = str.replace(<span class="regexp">/3(?=abc)/</span>,<span class="number">3456</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">//123456abc789</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用了顺序否定环视,由于3后面跟着abc,不满意条件,故捕获失败,所以原字符串没有被替换</span></span><br><span class="line">s = str.replace(<span class="regexp">/3(?!abc)/</span>,<span class="number">3456</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">//123abc789</span></span><br></pre></td></tr></table></figure>
-<h4 id="获取html片段"><a href="#获取html片段" class="headerlink" title="获取html片段"></a>获取html片段</h4><p>假如现在，js 通过 ajax 获取到一段 html 代码如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> responseText = <span class="string">"&lt;div data='dev.xxx.txt'&gt;&lt;/div&gt;&lt;img src='dev.xxx.png' /&gt;"</span>;</span><br></pre></td></tr></table></figure>
-<p>现需要替换img标签的src 属性中的 “dev”字符串 为 “test” 字符串</p>
-<p>① 由于上述 responseText 字符串中包含至少两个子字符串 “dev”，显然不能直接 replace 字符串 “dev”为 “test”</p>
-<p>② 同时由于 js 中不支持逆序环视，也不能在正则中判断前缀为 “src=“，然后再替换”dev”</p>
-<p>③ 注意到 img 标签的 src 属性以 “.png” 结尾，基于此，就可以使用顺序肯定环视。如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/dev(?=[^']*png)/</span>; <span class="comment">//为了防止匹配到第一个dev, 通配符前面需要排除单引号或者是尖括号</span></span><br><span class="line"><span class="keyword">var</span> str = responseText.replace(reg,<span class="string">"test"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(str);<span class="comment">//&lt;div data='dev.xxx'&gt;&lt;/div&gt;&lt;img src='test.xxx.png' /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>当然，以上不止顺序肯定环视一种解法，捕获性分组同样可以做到。那么环视高级在哪里呢? 环视高级的地方就在于它通过一次捕获就可以定位到一个位置，对于复杂的文本替换场景， 常有奇效, 而分组则需要更多的操作</p>
-<h4 id="千位分割符"><a href="#千位分割符" class="headerlink" title="千位分割符"></a>千位分割符</h4><blockquote>
-<p>千位分隔符，顾名思义，就是数字中的逗号。 参考西方的习惯，数字之中加入一个符号， 避免因数字太长难以直观的看出它的值。故而数字之中，每隔三位添加一个逗号，即千位分隔符</p>
-</blockquote>
-<p>那么怎么将一串数字转化为千位分隔符形式呢？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"1234567890"</span>;</span><br><span class="line">(+str).toLocaleString();<span class="comment">//"1,234,567,890"</span></span><br></pre></td></tr></table></figure>
-<p>如上， <code>toLocaleString()</code> 返回当前对象的”本地化”字符串形式</p>
+<p><strong>event.initEvent()</strong></p>
+<p>事件对象的initEvent方法，用来初始化事件对象，还能向事件对象添加属性。该方法的参数必须是一个使用<code>Document.createEvent()</code>生成的Event实例，而且必须在dispatchEvent方法之前调用</p>
+<p>initEvent方法可以接受四个参数：</p>
+<blockquote>
 <ul>
-<li>如果该对象是Number类型, 那么将返回该数值的按照特定符号分割的字符串形式</li>
-<li>如果该对象是Array类型, 那么先将数组中的每项转化为字符串, 然后将这些字符串以指定分隔符连接起来并返回</li>
+<li>type：事件名称，格式为字符串</li>
+<li>bubbles：事件是否应该冒泡，格式为布尔值。可以使用event.bubbles属性读取它的值</li>
+<li>cancelable：事件是否能被取消，格式为布尔值。可以使用event.cancelable属性读取它的值</li>
+<li>option：为事件对象指定额外的属性</li>
 </ul>
-<p><code>toLocaleString</code> 方法特殊, 有本地化特性, 对于天朝, 默认的分隔符是英文逗号. 因此使用它恰好可以将数值转化为千位分隔符形式的字符串. 如果考虑到国际化, 以上方法就有可能会失效了</p>
-<p>尝试使用环视来处理下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">thousand</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.replace(<span class="regexp">/(?!^)(?=([0-9]&#123;3&#125;)+$)/g</span>,<span class="string">','</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(thousand(str));<span class="comment">//"1,234,567,890"</span></span><br><span class="line"><span class="built_in">console</span>.log(thousand(<span class="string">"123456"</span>));<span class="comment">//"123,456"</span></span><br><span class="line"><span class="built_in">console</span>.log(thousand(<span class="string">"1234567879876543210"</span>));<span class="comment">//"1,234,567,879,876,543,210"</span></span><br></pre></td></tr></table></figure>
-<p>上述使用到的正则分为两块。 <code>(?!^)</code> 和 <code>(?=([0-9]{3})+$)</code>。分析：</p>
-<ol>
-<li>“[0-9]{3}” 表示连续3位数字</li>
-<li>“([0-9]{3})+” 表示连续3位数字至少出现一次或更多次</li>
-<li>“([0-9]{3})+$” 表示连续3的正整数倍的数字, 直到字符串末尾</li>
-<li>那么 <code>(?=([0-9]{3})+$)</code> 就表示匹配一个零宽度的位置,，并且从这个位置到字符串末尾，中间拥有3的正整数倍的数字</li>
-<li>正则表达式使用全局匹配g，表示匹配到一个位置后，它会继续匹配，直至匹配不到</li>
-<li>将这个位置替换为逗号，实际上就是每3位数字添加一个逗号</li>
-<li>当然对于字符串”123456”这种刚好拥有3的正整数倍的数字的，当然不能在1前面添加逗号。那么使用 <code>(?!^)</code> 就指定了这个替换的位置不能为起始位置</li>
-</ol>
-
+</blockquote>
+</style></video></audio></p>
       
 
       
@@ -1756,19 +1734,19 @@
 
 
   
-    <article id="post-JavaScript Event" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-JavaScript RegExp" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/JavaScript Event/">JavaScript Event</a>
+      <a class="article-title" href="/2018/08/12/JavaScript RegExp/">JavaScript RegExp</a>
     </h1>
   
 
         
-        <a href="/2018/08/12/JavaScript Event/" class="archive-article-date">
+        <a href="/2018/08/12/JavaScript RegExp/" class="archive-article-date">
   	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
 </a>
         
@@ -1776,491 +1754,513 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="JavaScript-Event"><a href="#JavaScript-Event" class="headerlink" title="JavaScript Event"></a>JavaScript Event</h2><h3 id="Event-Type"><a href="#Event-Type" class="headerlink" title="Event Type"></a>Event Type</h3><h4 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h4><p><strong>click 事件，dblclick 事件</strong></p>
-<p>当用户在Element节点、<code>document</code>节点、<code>window</code>对象上单击鼠标（或者按下回车键）时，<code>click</code>事件触发</p>
-<p>当用户在Element节点、<code>document</code>节点、<code>window</code>对象上双击击鼠标时，<code>dblclick</code>事件触发</p>
-<p><strong>mouseup 事件，mousedown 事件，mousemove 事件</strong></p>
-<p><code>mouseup</code>事件在释放按下的鼠标键时触发。</p>
-<p><code>mousedown</code>事件在按下鼠标键时触发。</p>
-<p><code>mousemove</code>事件当鼠标在一个节点内部移动时触发。当鼠标持续移动时，该事件会连续触发</p>
-<p><strong>mouseover 事件，mouseenter 事件</strong></p>
-<p><code>mouseover</code>事件和<code>mouseenter</code>事件，都是鼠标进入一个节点时触发</p>
-<p>两者的区别是，<code>mouseenter</code>事件只触发一次，而只要鼠标在节点内部移动，<code>mouseover</code>事件会在子节点上触发多次</p>
-<p><strong>mouseout 事件，mouseleave 事件</strong></p>
-<p><code>mouseout</code>事件和<code>mouseleave</code>事件，都是鼠标离开一个节点时触发</p>
-<p>两者的区别是，<code>mouseout</code>事件会冒泡，<code>mouseleave</code>事件不会</p>
-<p><strong>contextmenu 事件</strong></p>
-<p><code>contextmenu</code>事件在一个节点上点击鼠标右键时触发，或者按下“上下文菜单”键时触发</p>
-<p><strong>MouseEvent对象</strong></p>
-<p>鼠标事件使用<code>MouseEvent</code>对象表示，它继承<code>UIEvent</code>对象和<code>Event</code>对象。浏览器提供一个<code>MouseEvent</code>构造函数<code>new MouseEvent()</code>，用于新建一个<code>MouseEvent</code>实例</p>
-<p><code>MouseEvent</code>构造函数的第一个参数是事件名称（可能的值包括<code>click</code>、<code>mousedown</code>、<code>mouseup</code>、<code>mouseover</code>、<code>mousemove</code>、<code>mouseout</code>），第二个参数是一个事件初始化对象。该对象可以配置以下属性：</p>
-<blockquote>
-<ul>
-<li>screenX，设置鼠标相对于屏幕的水平坐标（但不会移动鼠标），默认为0，等同于MouseEvent.screenX属性</li>
-<li>screenY，设置鼠标相对于屏幕的垂直坐标，默认为0，等同于MouseEvent.screenY属性</li>
-<li>clientX，设置鼠标相对于窗口的水平坐标，默认为0，等同于MouseEvent.clientX属性</li>
-<li>clientY，设置鼠标相对于窗口的垂直坐标，默认为0，等同于MouseEvent.clientY属性</li>
-<li>pageX，设置鼠标相对于文档的水平坐标，默认为0，非标准</li>
-<li>pageY，设置鼠标相对于文档的垂直坐标，默认为0，非标准</li>
-<li>offsetX，设置鼠标相对于源元素的水平坐标，默认为0，非标准</li>
-<li>offsetY，设置鼠标相对于源元素的垂直坐标，默认为0，非标准</li>
-<li>ctrlKey，设置是否按下ctrl键，默认为false，等同于MouseEvent.ctrlKey属性</li>
-<li>shiftKey，设置是否按下shift键，默认为false，等同于MouseEvent.shiftKey属性</li>
-<li>altKey，设置是否按下alt键，默认为false，等同于MouseEvent.altKey属性</li>
-<li>metaKey，设置是否按下meta键，默认为false，等同于MouseEvent.metaKey属性</li>
-<li>button，设置按下了哪一个鼠标按键，默认为0。-1表示没有按键，0表示按下主键（通常是左键），1表示按下辅助键（通常是中间的键），2表示按下次要键（通常是右键）</li>
-<li>buttons，设置按下了鼠标哪些键，是一个3个比特位的二进制值，默认为0。1表示按下主键（通常是左键），2表示按下次要键（通常是右键），4表示按下辅助键（通常是中间的键）</li>
-<li>relatedTarget，设置一个Element节点，在mouseenter和mouseover事件时，表示鼠标刚刚离开的那个Element节点，在mouseout和mouseleave事件时，表示鼠标正在进入的那个Element节点。默认为null，等同于MouseEvent.relatedTarget属性</li>
-<li>bubbles，布尔值，设置事件是否冒泡，默认为false，等同于Event.bubbles属性</li>
-<li>cancelable，布尔值，设置事件是否可取消，默认为false，等同于Event.cancelable属性</li>
-<li>view，设置事件的视图，一般是window或document.defaultView，等同于Event.view属性</li>
-<li>detail，设置鼠标点击的次数，等同于Event.detail属性</li>
-</ul>
-</blockquote>
-<p><strong>altKey，ctrlKey，metaKey，shiftKey</strong></p>
-<p>以下属性返回一个布尔值，表示鼠标事件发生时，是否按下某个键：</p>
-<blockquote>
-<ul>
-<li><code>altKey</code>属性：Alt 键</li>
-<li><code>ctrlKey</code>属性：Ctrl 键</li>
-<li><code>metaKey</code>属性：Meta 键</li>
-<li><code>shiftKey</code>属性：Shift 键</li>
-</ul>
-</blockquote>
-<p><strong>button</strong></p>
-<p>button属性返回一个数值，表示按下了鼠标哪个键：</p>
-<blockquote>
-<ul>
-<li>-1：没有按下键</li>
-<li>0：按下主键（通常是左键）</li>
-<li>1：按下辅助键（通常是中键或者滚轮键）</li>
-<li>2：按下次键（通常是右键）</li>
-</ul>
-</blockquote>
-<p><strong>buttons</strong></p>
-<p>buttons属性返回一个3个比特位的值，表示同时按下了哪些键。它用来处理同时按下多个鼠标键的情况：</p>
-<blockquote>
-<ul>
-<li>1：二进制为001，表示按下左键</li>
-<li>2：二进制为010，表示按下右键</li>
-<li>4：二进制为100，表示按下中键或滚轮键</li>
-</ul>
-</blockquote>
-<p>同时按下多个键的时候，每个按下的键对应的比特位都会有值。比如，同时按下左键和右键，会返回3（二进制为011）</p>
-<p><strong>clientX，clientY</strong></p>
-<p>clientX属性返回鼠标位置相对于浏览器窗口左上角的水平坐标，单位为像素，与页面是否横向滚动无关</p>
-<p>clientY属性返回鼠标位置相对于浏览器窗口左上角的垂直坐标，单位为像素，与页面是否纵向滚动无关</p>
-<p><strong>movementX，movementY</strong></p>
-<p>movementX属性返回一个水平位移，单位为像素，表示当前位置与上一个mousemove事件之间的水平距离</p>
-<p>movementY属性返回一个垂直位移，单位为像素，表示当前位置与上一个mousemove事件之间的垂直距离</p>
-<p><strong>screenX，screenY</strong></p>
-<p>screenX属性返回鼠标位置相对于屏幕左上角的水平坐标，单位为像素</p>
-<p>screenY属性返回鼠标位置相对于屏幕左上角的垂直坐标，单位为像素</p>
-<p><strong>relatedTarget</strong></p>
-<p>relatedTarget属性返回事件的次要相关节点。对于那些没有次要相关节点的事件，该属性返回null</p>
-<h4 id="滚轮事件"><a href="#滚轮事件" class="headerlink" title="滚轮事件"></a>滚轮事件</h4><p><code>wheel</code>事件是与鼠标滚轮相关的事件，目前只有一个<code>wheel</code>事件。用户滚动鼠标的滚轮，就触发这个事件</p>
-<p>该事件除了继承了MouseEvent、UIEvent、Event的属性，还有几个自己的属性：</p>
-<blockquote>
-<ul>
-<li>deltaX：返回一个数值，表示滚轮的水平滚动量</li>
-<li>deltaY：返回一个数值，表示滚轮的垂直滚动量</li>
-<li>deltaZ：返回一个数值，表示滚轮的Z轴滚动量</li>
-<li>deltaMode：返回一个数值，表示滚动的单位，适用于上面三个属性。0表示像素，1表示行，2表示页</li>
-</ul>
-</blockquote>
-<p>浏览器提供一个WheelEvent构造函数<code>new WheelEvent()</code>，可以用来生成滚轮事件的实例。它接受两个参数，第一个是事件名称，第二个是配置对象</p>
-<h4 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h4><p>键盘事件用来描述键盘行为，主要有keydown、keypress、keyup三个事件：</p>
-<blockquote>
-<ul>
-<li><code>keydown</code>：按下键盘时触发该事件</li>
-<li><code>keypress</code>：只要按下的键并非Ctrl、Alt、Shift和Meta，就接着触发keypress事件</li>
-<li><code>keyup</code>：松开键盘时触发该事件</li>
-</ul>
-</blockquote>
-<p>如果用户一直按键不松开，就会连续触发键盘事件</p>
-<p>键盘事件使用KeyboardEvent对象表示，该对象继承了UIEvent和MouseEvent对象。浏览器提供KeyboardEvent构造函数<code>new KeyboardEvent()</code>，用来新建键盘事件的实例</p>
-<p><code>KeyboardEvent</code>构造函数的第一个参数是一个字符串，表示事件类型，第二个参数是一个事件配置对象，可配置以下字段：</p>
-<blockquote>
-<ul>
-<li>key，对应KeyboardEvent.key属性，默认为空字符串</li>
-<li>ctrlKey，对应KeyboardEvent.ctrlKey属性，默认为false</li>
-<li>shiftKey，对应KeyboardEvent.shiftKey属性，默认为false</li>
-<li>altKey，对应KeyboardEvent.altKey属性，默认为false</li>
-<li>metaKey，对应KeyboardEvent.metaKey属性，默认为false</li>
-</ul>
-</blockquote>
-<p><strong>key</strong></p>
-<p>key属性返回一个字符串，表示按下的键名。如果同时按下一个控制键和一个符号键，则返回符号键的键名。比如，按下Ctrl+a，则返回a。如果无法识别键名，则返回字符串Unidentified</p>
-<p><strong>charCode</strong></p>
-<p>charCode属性返回一个数值，表示keypress事件按键的Unicode值，keydown和keyup事件不提供这个属性。注意，该属性已经从标准移除，虽然浏览器还支持，但应该尽量不使用</p>
-<h4 id="进度事件"><a href="#进度事件" class="headerlink" title="进度事件"></a>进度事件</h4><p>进度事件用来描述一个事件进展的过程，比如XMLHttpRequest对象发出的HTTP请求的过程、<img>、<audio>、<video>、<style>、<link>加载外部资源的过程。下载和上传都会发生进度事件：</p>
-<blockquote>
-<ul>
-<li><code>abort</code>事件：当进度事件被中止时触发。如果发生错误，导致进程中止，不会触发该事件</li>
-<li><code>error</code>事件：由于错误导致资源无法加载时触发</li>
-<li><code>load</code>事件：进度成功结束时触发</li>
-<li><code>loadstart</code>事件：进度开始时触发</li>
-<li><code>loadend</code>事件：进度停止时触发，发生顺序排在error事件\abort事件\load事件后面</li>
-<li><code>progress</code>事件：当操作处于进度之中，由传输的数据块不断触发</li>
-<li><code>timeout</code>事件：进度超过限时触发</li>
-</ul>
-</blockquote>
-<p>进度事件使用ProgressEvent对象表示，浏览器提供一个ProgressEvent构造函数<code>new ProgressEvent()</code>，用来生成进度事件的实例</p>
-<p>ProgressEvent构造函数的第一个参数是事件类型（字符串），第二个参数是配置对象，可配置以下字段：</p>
-<blockquote>
-<ul>
-<li>lengthComputable：返回一个布尔值，表示当前进度是否具有可计算的长度。如果为false，就表示当前进度无法测量</li>
-<li>total：返回一个数值，表示当前进度的总长度。如果是通过HTTP下载某个资源，表示内容本身的长度，不含HTTP头部的长度。如果lengthComputable属性为false，则total属性就无法取得正确的值</li>
-<li>loaded：返回一个数值，表示当前进度已经完成的数量。该属性除以total属性，就可以得到目前进度的百分比</li>
-</ul>
-</blockquote>
-<h4 id="拖拉事件"><a href="#拖拉事件" class="headerlink" title="拖拉事件"></a>拖拉事件</h4><blockquote>
-<ul>
-<li><strong>drag事件</strong>：拖拉过程中，在被拖拉的节点上持续触发</li>
-<li><strong>dragstart事件</strong>：拖拉开始时在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。通常应该在这个事件的监听函数中，指定拖拉的数据</li>
-<li><strong>dragend事件</strong>：拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。它与dragstart事件，在同一个节点上触发。不管拖拉是否跨窗口，或者中途被取消，dragend事件总是会触发的</li>
-<li><strong>dragenter事件</strong>：拖拉进入当前节点时，在当前节点上触发，该事件的target属性是当前节点。通常应该在这个事件的监听函数中，指定是否允许在当前节点放下（drop）拖拉的数据。如果当前节点没有该事件的监听函数，或者监听函数不执行任何操作，就意味着不允许在当前节点放下数据。在视觉上显示拖拉进入当前节点，也是在这个事件的监听函数中设置</li>
-<li><strong>dragover事件</strong>：拖拉到当前节点上方时，在当前节点上持续触发，该事件的target属性是当前节点。该事件与dragenter事件基本类似，默认会重置当前的拖拉事件的效果（DataTransfer对象的dropEffect属性）为none，即不允许放下被拖拉的节点，所以如果允许在当前节点drop数据，通常会使用preventDefault方法，取消重置拖拉效果为none</li>
-<li><strong>dragleave事件</strong>：拖拉离开当前节点范围时，在当前节点上触发，该事件的target属性是当前节点。在视觉上显示拖拉离开当前节点，就在这个事件的监听函数中设置</li>
-<li><strong>drop事件</strong>：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发。注意，如果当前节点不允许drop，即使在该节点上方松开鼠标键，也不会触发该事件。如果用户按下Escape键，取消这个操作，也不会触发该事件。该事件的监听函数负责取出拖拉数据，并进行相关处理</li>
-</ul>
-</blockquote>
-<h4 id="触摸事件"><a href="#触摸事件" class="headerlink" title="触摸事件"></a>触摸事件</h4><p>触摸引发的事件，有以下几类。可以通过TouchEvent.type属性，查看到底发生的是哪一种事件：</p>
-<blockquote>
-<ul>
-<li><code>touchstart</code>：用户接触触摸屏时触发，它的target属性返回发生触摸的Element节点</li>
-<li><code>touchend</code>：用户不再接触触摸屏时（或者移出屏幕边缘时）触发，它的target属性与touchstart事件的target属性是一致的，它的changedTouches属性返回一个TouchList对象，包含所有不再触摸的触摸点（Touch对象）</li>
-<li><code>touchmove</code>：用户移动触摸点时触发，它的target属性与touchstart事件的target属性一致。如果触摸的半径、角度、力度发生变化，也会触发该事件</li>
-<li><code>touchcancel</code>：触摸点取消时触发，比如在触摸区域跳出一个情态窗口（modal window）、触摸点离开了文档区域（进入浏览器菜单栏区域）、用户放置更多的触摸点（自动取消早先的触摸点）</li>
-</ul>
-</blockquote>
-<p><strong>触摸API由三个对象组成：</strong></p>
-<blockquote>
-<ul>
-<li>Touch</li>
-<li>TouchList</li>
-<li>TouchEvent</li>
-</ul>
-</blockquote>
-<p><code>Touch</code>对象表示触摸点（一根手指或者一根触摸笔），用来描述触摸动作，包括位置、大小、形状、压力、目标元素等属性。有时，触摸动作由多个触摸点（多根手指或者多根触摸笔）组成，多个触摸点的集合由<code>TouchList</code>对象表示。<code>TouchEvent</code>对象代表由触摸引发的事件，只有触摸屏才会引发这一类事件</p>
-<p><strong>Touch对象</strong></p>
-<p>Touch对象代表一个触摸点。触摸点可能是一根手指，也可能是一根触摸笔。它有以下属性：</p>
-<blockquote>
-<ul>
-<li><strong>identifier</strong>：表示Touch实例的独一无二的识别符。它在整个触摸过程中保持不变</li>
-<li><strong>screenX，screenY</strong>：分别表示触摸点相对于屏幕左上角的横坐标和纵坐标，与页面是否滚动无关</li>
-<li><strong>clientX，clientY</strong>：分别表示触摸点相对于浏览器视口左上角的横坐标和纵坐标，与页面是否滚动无关</li>
-<li><strong>pageX，pageY</strong>：分别表示触摸点相对于当前页面左上角的横坐标和纵坐标，包含了页面滚动带来的位移</li>
-<li><strong>radiusX，radiusY</strong>：分别返回触摸点周围受到影响的椭圆范围的X轴和Y轴，单位为像素</li>
-<li><strong>rotationAngle</strong>：表示触摸区域的椭圆的旋转角度，单位为度数，在0到90度之间</li>
-<li><strong>force</strong>：返回一个0到1之间的数值，表示触摸压力。0代表没有压力，1代表硬件所能识别的最大压力</li>
-<li><strong>target</strong>：返回一个Element节点，代表触摸发生的那个节点</li>
-</ul>
-</blockquote>
-<p><strong>TouchList对象</strong></p>
-<p>TouchList对象是一个类似数组的对象，成员是与某个触摸事件相关的所有触摸点。比如，用户用三根手指触摸，产生的TouchList对象就有三个成员，每根手指对应一个Touch对象</p>
-<p>TouchList实例的length属性，返回TouchList对象的成员数量</p>
-<p>TouchList实例的identifiedTouch方法和item方法，分别使用id属性和索引值（从0开始）作为参数，取出指定的Touch对象</p>
-<p><strong>TouchEvent对象</strong></p>
-<p>TouchEvent对象继承Event对象和UIEvent对象，表示触摸引发的事件。除了被继承的属性以外，它还有一些自己的属性：</p>
-<blockquote>
-<ul>
-<li><strong>键盘相关属性</strong>：以下属性（altKey 是否按下alt键、ctrlKey 是否按下ctrl键、metaKey 是否按下meta键、shiftKey 是否按下shift键）都为只读属性，返回一个布尔值，表示触摸的同时，是否按下某个键</li>
-<li><strong>changedTouches</strong>：changedTouches属性返回一个TouchList对象，包含了由当前触摸事件引发的所有Touch对象（即相关的触摸点）。对于touchstart事件，它代表被激活的触摸点；对于touchmove事件，代表发生变化的触摸点；对于touchend事件，代表消失的触摸点（即不再被触碰的点）</li>
-<li><strong>targetTouches</strong>：targetTouches属性返回一个TouchList对象，包含了触摸的目标Element节点内部，所有仍然处于活动状态的触摸点</li>
-<li><strong>touches</strong>：touches属性返回一个TouchList对象，包含了所有仍然处于活动状态的触摸点</li>
-</ul>
-</blockquote>
-<h4 id="表单事件"><a href="#表单事件" class="headerlink" title="表单事件"></a>表单事件</h4><p><strong>input事件</strong></p>
-<p><code>input</code>事件当<input>、<textarea>的值发生变化时触发。此外，打开contenteditable属性的元素，只要值发生变化，也会触发input事件。input事件的一个特点，就是会连续触发，比如用户每次按下一次按键，就会触发一次input事件</p>
-<p><strong>select事件</strong></p>
-<p><code>select</code>事件当在<input>、<textarea>中选中文本时触发</p>
-<p><strong>search事件</strong></p>
-<p><code>search</code>事件在用户向搜索域按下”ENTER（回车）” 按键或点击 type=”search” 的 <input> 元素的 “x(搜索)” 按钮时触发</p>
-<p><strong>change事件</strong></p>
-<p><code>change</code>事件当<input>、<select>、<textarea>的值发生变化时触发。它与input事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，而且input事件必然会引发change事件</p>
-<p><strong>reset事件</strong></p>
-<p><code>reset</code>事件当表单重置（所有表单成员变回默认值）时触发</p>
-<p><strong>submit事件</strong></p>
-<p><code>submi</code>t事件当表单数据向服务器提交时触发。注意，submit事件的发生对象是form元素，而不是button元素（即使它的类型是submit），因为提交的是表单，而不是按钮</p>
-<h4 id="文档事件"><a href="#文档事件" class="headerlink" title="文档事件"></a>文档事件</h4><p><strong>beforeunload事件</strong></p>
-<p><code>beforeunload</code>事件在窗口将要关闭，或者网页（即<code>document</code>对象）将要卸载时触发</p>
-<p><strong>unload事件</strong></p>
-<p><code>unload</code>事件在窗口关闭或者document对象将要卸载时触发，发生在window、body、frameset等对象上面。它的触发顺序排在beforeunload、pagehide事件后面。unload事件只在页面没有被浏览器缓存时才会触发，换言之，如果通过按下“前进/后退”导致页面卸载，并不会触发unload事件</p>
-<p><strong>load事件，error事件</strong></p>
-<p><code>load</code>事件在页面加载成功时触发</p>
-<p><code>error</code>事件在页面加载失败时触发</p>
-<p>注意，页面从浏览器缓存加载，并不会触发<code>load</code>事件</p>
-<p><strong>pageshow事件</strong></p>
-<p><code>pageshow</code>事件在页面加载时触发，包括第一次加载和从缓存加载两种情况</p>
-<p>pageshow事件有一个persisted属性，返回一个布尔值。页面第一次加载时，这个属性是false；当页面从缓存加载时，这个属性是true</p>
-<p><strong>pagehide事件</strong></p>
-<p><code>pagehide</code>事件与pageshow事件类似，当用户通过“前进/后退”按钮，离开当前页面时触发。它与unload事件的区别在于，如果在window对象上定义unload事件的监听函数之后，页面不会保存在缓存中，而使用pagehide事件，页面会保存在缓存中</p>
-<p>pagehide事件的event对象有一个persisted属性，将这个属性设为true，就表示页面要保存在缓存中；设为false，表示网页不保存在缓存中，这时如果设置了unload事件的监听函数，该函数将在pagehide事件后立即运行</p>
-<p><strong>DOMContentLoaded事件</strong></p>
-<p>当HTML文档下载并解析完成以后，就会在document对象上触发<code>DOMContentLoaded</code>事件</p>
-<p><strong>readystatechange事件</strong></p>
-<p><code>readystatechange</code>事件发生在Document对象和XMLHttpRequest对象，当它们的readyState属性发生变化时触发</p>
-<p><strong>scroll事件</strong></p>
-<p><code>scroll</code>事件在文档或文档元素滚动时触发，主要出现在用户拖动滚动条</p>
-<p><strong>resize事件</strong></p>
-<p><code>resize</code>事件在改变浏览器窗口大小时触发，发生在window、body、frameset对象上面</p>
-<p><strong>hashchange事件</strong></p>
-<p><code>hashchange</code>事件在URL的hash部分（即#号后面的部分，包括#号）发生变化时触发</p>
-<p><strong>popstate事件</strong></p>
-<p><code>popstate</code>事件在浏览器的history对象的当前记录发生显式切换时触发。注意，调用history.pushState()或history.replaceState()，并不会触发popstate事件。该事件只在用户在history记录之间显式切换时触发，比如鼠标点击“后退/前进”按钮，或者在脚本中调用history.back()、history.forward()、history.go()时触发</p>
-<p>该事件对象有一个state属性，保存history.pushState方法和history.replaceState方法为当前记录添加的state对象</p>
-<p><strong>cut事件，copy事件，paste事件</strong></p>
-<blockquote>
-<ul>
-<li>cut事件：在将选中的内容从文档中移除，加入剪贴板后触发</li>
-<li>copy事件：在选中的内容加入剪贴板后触发</li>
-<li>paste事件：在剪贴板内容被粘贴到文档后触发</li>
-</ul>
-</blockquote>
-<p><strong>focus事件，blur事件，focusin事件，focusout事件</strong></p>
-<blockquote>
-<ul>
-<li>focus事件：Element节点获得焦点后触发，该事件不会冒泡</li>
-<li>blur事件：Element节点失去焦点后触发，该事件不会冒泡</li>
-<li>focusin事件：Element节点将要获得焦点时触发，发生在focus事件之前。该事件会冒泡。Firefox不支持该事件</li>
-<li>focusout事件：Element节点将要失去焦点时触发，发生在blur事件之前。该事件会冒泡。Firefox不支持该事件</li>
-</ul>
-</blockquote>
-<p>这四个事件的事件对象，带有target属性（返回事件的目标节点）和relatedTarget属性（返回一个Element节点）。对于focusin事件，relatedTarget属性表示失去焦点的节点；对于focusout事件，表示将要接受焦点的节点；对于focus和blur事件，该属性返回null</p>
-<h4 id="储存事件"><a href="#储存事件" class="headerlink" title="储存事件"></a>储存事件</h4><p><strong>storage事件</strong></p>
-<p>当储存的数据发生变化时，会触发storage事件</p>
-<p><strong>storage事件对象属性：</strong></p>
-<blockquote>
-<ul>
-<li>key：值的键名</li>
-<li>oldValue：更新前的值。如果该键为新增加，则这个属性为null</li>
-<li>newValue：更新后的值。如果该键被删除，则这个属性为null</li>
-<li>url：原始触发storage事件的那个网页的网址</li>
-</ul>
-</blockquote>
-<p>注意：该事件不在导致数据变化的当前页面触发。如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变sessionStorage或localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件。可以通过这种机制，实现多个窗口之间的通信</p>
-<h4 id="其他事件"><a href="#其他事件" class="headerlink" title="其他事件"></a>其他事件</h4><p><strong>toggle事件，show事件</strong></p>
-<p><code>toggle</code>事件在用户打开或关闭 <details> 元素时触发</p>
-<p><code>show</code>事件当 <menu> 元素在上下文菜单显示时触发</p>
-<p><strong>beforeprint事件，afterprint事件</strong></p>
-<p><code>beforeprint</code>事件在页面即将开始打印时触发</p>
-<p><code>afterprint</code>事件在页面已经开始打印，或者打印窗口已经关闭时触发</p>
-<p><strong>message事件</strong></p>
-<p><code>message</code>事件通过或者从对象(WebSocket, Web Worker, Event Source 或子 frame 或父窗口)接收到消息时触发</p>
-<h4 id="CSSOM事件"><a href="#CSSOM事件" class="headerlink" title="CSSOM事件"></a>CSSOM事件</h4><p><strong>animationstart</strong></p>
-<p><code>animationstart</code>事件在 CSS 动画开始播放时触发</p>
-<p><strong>animationiteration</strong></p>
-<p><code>animationiteration</code>事件在 CSS 动画重新播放时触发</p>
-<p><strong>animationend</strong></p>
-<p><code>animationend</code>事件在CSS动画完成后触发</p>
-<p><strong>transitionend</strong></p>
-<p><code>transitionend</code>事件在CSS完成过渡后触发</p>
-<p>以上事件只支持事件绑定</p>
-<h4 id="MEDIA事件"><a href="#MEDIA事件" class="headerlink" title="MEDIA事件"></a>MEDIA事件</h4><p><strong>abort事件，emptied事件，error事件，stalled事件，suspend事件</strong></p>
-<p><code>abort</code>事件在视频/音频终止加载时触发</p>
-<p><code>emptied</code>事件当期播放列表为空时触发</p>
-<p><code>error</code>事件在视频/音频数据加载期间发生错误时触发</p>
-<p><code>stalled</code>事件在浏览器获取媒体数据，但媒体数据不可用时触发</p>
-<p><code>suspend</code>事件在浏览器读取媒体数据中止时触发</p>
-<p><strong>loadstart事件，durationchange事件，loadedmetadata事件，loadeddata事件，progress事件，canplay事件，canplaythrough事件</strong></p>
-<p><code>loadstart</code>事件在浏览器开始寻找指定视频/音频触发</p>
-<p><code>durationchange</code>事件在视频/音频的时长发生变化时触发</p>
-<p><code>loadedmetadata</code>事件在指定视频/音频的元数据加载后触发</p>
-<p><code>loadeddata</code>事件在浏览器加载视频/音频当前帧时触发触发</p>
-<p><code>progress</code>事件在浏览器下载指定的视频/音频时触发</p>
-<p><code>canplay</code>事件在用户可以开始播放视频/音频时触发</p>
-<p><code>canplaythrough</code>事件在视频/音频可以正常播放且无需停顿和缓冲时触发</p>
-<p><strong>play事件，pause事件，playing事件，waiting事件，ended事件</strong></p>
-<p><code>play</code>事件在视频/音频开始播放时触发</p>
-<p><code>pause</code>事件在视频/音频暂停时触发</p>
-<p><code>playing</code>事件在视频/音频暂停或者在缓冲后准备重新开始播放时触发</p>
-<p><code>waiting</code>事件在视频由于要播放下一帧而需要缓冲时触发</p>
-<p><code>ended</code>事件在视频/音频播放结束时触发</p>
-<p><strong>ratechange事件，timeupdate事件，volumechange事件</strong></p>
-<p><code>ratechange</code>事件在视频/音频的播放速度发生改变时触发</p>
-<p><code>timeupdate</code>事件在当前的播放位置发送改变时触发</p>
-<p><code>volumechange</code>事件在视频/音频的音量发生改变时触发</p>
-<p><strong>seeking事件，seeked事件</strong></p>
-<p><code>seeking</code>事件在用户开始重新定位视频/音频时触发</p>
-<p><code>seeked</code>事件在用户重新定位视频/音频的播放位置后触发</p>
-<h3 id="Event-Model"><a href="#Event-Model" class="headerlink" title="Event Model"></a>Event Model</h3><h4 id="EventTarget接口"><a href="#EventTarget接口" class="headerlink" title="EventTarget接口"></a>EventTarget接口</h4><p>DOM的事件操作（监听和触发），都定义在<code>EventTarget</code>接口。<code>Element</code>节点、<code>document</code>节点和<code>window</code>对象，都部署了这个接口。此外，<code>XMLHttpRequest</code>、<code>AudioNode</code>、<code>AudioContext</code>等浏览器内置对象，也部署了这个接口。该接口就是三个方法：</p>
-<blockquote>
-<ul>
-<li><code>addEventListener</code>：绑定事件的监听函数</li>
-<li><code>removeEventListener</code>：移除事件的监听函数</li>
-<li><code>dispatchEvent</code>：触发事件</li>
-</ul>
-</blockquote>
-<p><strong>addEventListener()</strong></p>
-<p><code>addEventListener</code>方法用于在当前节点或对象上，定义一个特定事件的监听函数：</p>
-<p><code>target.addEventListener(type, listener[, useCapture])</code></p>
-<p><code>addEventListener</code>方法接受三个参数：</p>
-<blockquote>
-<ul>
-<li><code>type</code>：事件名称，大小写敏感</li>
-<li><code>listener</code>：监听函数。事件发生时，会调用该监听函数</li>
-<li><code>useCapture</code>：布尔值，表示监听函数是否在捕获阶段（capture）触发，默认为<code>false</code>（监听函数只在冒泡阶段被触发）。老式浏览器规定该参数必写，较新版本的浏览器允许该参数可选</li>
-</ul>
-</blockquote>
-<p><strong>removeEventListener()</strong></p>
-<p><code>removeEventListener</code>方法用来移除<code>addEventListener</code>方法添加的事件监听函数</p>
-<p><code>removeEventListener</code>方法的参数，与<code>addEventListener</code>方法完全一致</p>
-<p>注意，<code>removeEventListener</code>方法移除的监听函数，必须与对应的<code>addEventListener</code>方法的参数完全一致，而且必须在同一个元素节点，否则无效</p>
-<p><strong>dispatchEvent()</strong></p>
-<p><code>dispatchEvent</code>方法在当前节点上触发指定事件，从而触发监听函数的执行。该方法返回一个布尔值。<code>dispatchEvent</code>方法的参数是一个<code>Event</code>对象的实例</p>
-<p>如果<code>dispatchEvent</code>方法的参数为空，或者不是一个有效的事件对象，将报错</p>
-<h4 id="监听函数"><a href="#监听函数" class="headerlink" title="监听函数"></a>监听函数</h4><p><strong>HTML标签的on-属性</strong></p>
-<p>使用这个方法指定的监听函数，只会在冒泡阶段触发</p>
-<p>注意，使用这种方法时，<code>on-</code>属性的值是将会执行的代码，而不是一个函数。一旦指定的事件发生，<code>on-</code>属性的值是原样传入JavaScript引擎执行。因此如果要执行函数，不要忘记加上一对圆括号</p>
-<p><strong>Element节点的事件属性</strong></p>
-<p>Element节点对象有事件属性，同样可以指定监听函数。使用这个方法指定的监听函数，只会在冒泡阶段触发</p>
-<p><strong>addEventListener方法</strong></p>
-<p>通过<code>Element</code>节点、<code>document</code>节点、<code>window</code>对象的<code>addEventListener</code>方法，也可以定义事件的监听函数</p>
-<blockquote>
-<p>第一种“HTML标签的on-属性”，违反了HTML与JavaScript代码相分离的原则；第二种“Element节点的事件属性”的缺点是，同一个事件只能定义一个监听函数，也就是说，如果定义两次onclick属性，后一次定义会覆盖前一次。因此，这两种方法都不推荐使用，除非是为了程序的兼容问题，因为所有浏览器都支持这两种方法</p>
-</blockquote>
-<p><strong>this的指向</strong></p>
-<p><code>addEventListener</code>方法指定的监听函数，内部的<code>this</code>对象总是指向触发事件的那个节点</p>
-<p>监听函数部署在Element节点的<code>on-</code>属性上面，<code>this</code>不会指向触发事件的元素节点</p>
-<h4 id="事件的传播"><a href="#事件的传播" class="headerlink" title="事件的传播"></a>事件的传播</h4><p><strong>传播的三分阶段：</strong></p>
-<blockquote>
-<ul>
-<li><strong>第一阶段</strong>：从window对象传导到目标节点，称为“捕获阶段”（capture phase）</li>
-<li><strong>第二阶段</strong>：在目标节点上触发，称为“目标阶段”（target phase）</li>
-<li><strong>第三阶段</strong>：从目标节点传导回window对象，称为“冒泡阶段”（bubbling phase）</li>
-</ul>
-</blockquote>
-<p><strong>事件代理/委托</strong></p>
-<blockquote>
-<p>由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件</p>
-</blockquote>
-<h4 id="Event对象"><a href="#Event对象" class="headerlink" title="Event对象"></a>Event对象</h4><p>事件发生以后，会生成一个事件对象，作为参数传给监听函数。浏览器原生提供一个<code>Event</code>对象，所有的事件都是这个对象的实例，或者说继承了<code>Event.prototype</code>对象</p>
-<p><code>Event</code>对象本身就是一个构造函数，可以用来生成新的实例<code>event = new Event(typeArg, eventInit);</code></p>
-<p>Event构造函数接受两个参数。第一个参数是字符串，表示事件的名称；第二个参数是一个对象，表示事件对象的配置。该参数可以有以下两个属性：</p>
-<blockquote>
-<ul>
-<li><code>bubbles</code>：布尔值，可选，默认为<code>false</code>，表示事件对象是否冒泡</li>
-<li><code>cancelable</code>：布尔值，可选，默认为<code>false</code>，表示事件是否可以被取消</li>
-</ul>
-</blockquote>
-<p>Event构造函数创建的对象可以使用<code>dispatchEvent</code>方法触发该事件</p>
-<p>IE8及以下版本，事件对象不作为参数传递，而是通过<code>window</code>对象的<code>event</code>属性读取，并且事件对象的<code>target</code>属性叫做<code>srcElement</code>属性</p>
-<p><strong>Event对象的属性：</strong></p>
-<blockquote>
-<p>以下属性与事件的阶段有关：</p>
-</blockquote>
-<p><strong>event.bubbles</strong></p>
-<p><code>bubbles</code>属性返回一个布尔值，表示当前事件是否会冒泡。该属性为只读属性，只能在新建事件时改变。除非显式声明，Event构造函数生成的事件，默认是不冒泡的</p>
-<p><strong>event.eventPhase</strong></p>
-<p><code>eventPhase</code>属性返回一个整数值，表示事件目前所处的节点</p>
-<blockquote>
-<p>以下属性与事件的默认行为有关：</p>
-</blockquote>
-<p><strong>event.cancelable</strong></p>
-<p><code>cancelable</code>属性返回一个布尔值，表示事件是否可以取消。该属性为只读属性，只能在新建事件时改变。除非显式声明，Event构造函数生成的事件，默认是不可以取消的</p>
-<p><strong>event.defaultPrevented</strong></p>
-<p><code>defaultPrevented</code>属性返回一个布尔值，表示该事件是否调用过preventDefault方法</p>
-<blockquote>
-<p>以下属性与阻止事件行为有关：</p>
-</blockquote>
-<p><strong>event.preventDefault()</strong></p>
-<p><code>preventDefault</code>方法取消浏览器对当前事件的默认行为，比如点击链接后，浏览器跳转到指定页面，或者按一下空格键，页面向下滚动一段距离。该方法生效的前提是，事件的cancelable属性为true，如果为false，则调用该方法没有任何效果</p>
-<p>如果监听函数最后返回布尔值false（即return false），浏览器也不会触发默认行为，但是与<code>event.preventDefault()</code>有区别，调用<code>return false</code>时会执行以下行为：</p>
-<blockquote>
-<ul>
-<li>event.preventDefault()</li>
-<li>event.stopPropagation()</li>
-<li>停止回调函数执行并立即返回</li>
-</ul>
-</blockquote>
-<p><strong>event.stopPropagation()</strong></p>
-<p><code>stopPropagation</code>方法阻止事件在DOM中继续传播，防止再触发定义在别的节点上的监听函数（即阻止事件冒泡），但是不包括在当前节点上新定义的事件监听函数</p>
-<p><strong>event.stopImmediatePropagation()</strong></p>
-<p><code>stopImmediatePropagation</code>方法阻止同一个事件的其他监听函数被调用</p>
-<p>如果同一个节点对于同一个事件指定了多个监听函数，这些函数会根据添加的顺序依次调用。只要其中有一个监听函数调用了stopImmediatePropagation方法，其他的监听函数就不会再执行了</p>
-<blockquote>
-<p>以下属性与事件的目标节点有关：</p>
-</blockquote>
-<p><strong>event.currentTarget</strong></p>
-<p><code>currentTarget</code>属性返回事件当前所在的节点，即正在执行的监听函数所绑定的那个节点</p>
-<p>在监听函数中，currentTarget属性实际上等同于this对象</p>
-<p><strong>event.target</strong></p>
-<p><code>target</code>属性返回触发事件的那个节点，即事件最初发生的节点</p>
-<p>在IE6—IE8之中，该属性的名字不是target，而是<code>srcElement</code></p>
-<blockquote>
-<p>以下属性与事件对象的其他信息相关：</p>
-</blockquote>
-<p><strong>event.type</strong></p>
-<p><code>type</code>属性返回一个字符串，表示事件类型，大小写敏感</p>
-<p><strong>event.detail</strong></p>
-<p><code>detail</code>属性返回一个数值，表示事件的某种信息。具体含义与事件类型有关，对于鼠标事件，表示鼠标按键在某个位置按下的次数，比如对于dblclick事件，detail属性的值总是2</p>
-<p><strong>event.timeStamp</strong></p>
-<p><code>timeStamp</code>属性返回一个毫秒时间戳，表示事件发生的时间</p>
-<p><strong>event.isTrusted</strong></p>
-<p><code>isTrusted</code>属性返回一个布尔值，表示该事件是否为真实用户触发</p>
-<h4 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h4><blockquote>
-<p>除了浏览器预定义的那些事件，用户还可以自定义事件，然后手动触发</p>
-</blockquote>
-<p><strong>CustomEvent()</strong></p>
-<p>Event构造函数只能指定事件名，不能在事件上绑定数据。如果需要在触发事件的同时，传入指定的数据，需要使用CustomEvent构造函数生成自定义的事件对象：</p>
-<p><code>var event = new CustomEvent(&#39;build&#39;, { &#39;detail&#39;: &#39;hello&#39; });</code></p>
-<p>CustomEvent构造函数的第一个参数是事件名称，第二个参数是一个对象，该对象的detail属性会绑定在事件对象之上</p>
-<p><strong>自定义事件的老式写法</strong></p>
-<p>老式浏览器不一定支持各种类型事件的构造函数。因此，有时为了兼容，会用到一些非标准的方法。这些方法未来会被逐步淘汰，但是目前浏览器还广泛支持。除非是为了兼容老式浏览器，尽量不要使用</p>
-<p><strong>document.createEvent()</strong></p>
-<p>document.createEvent方法用来新建指定类型的事件。它所生成的Event实例，可以传入dispatchEvent方法</p>
-<p>createEvent方法接受一个字符串作为参数，可能的值参见下表“数据类型”一栏。使用了某一种“事件类型”，就必须使用对应的事件初始化方法：</p>
-<table>
+        <h2 id="JavaScript-RegExp"><a href="#JavaScript-RegExp" class="headerlink" title="JavaScript RegExp"></a>JavaScript RegExp</h2><h3 id="RegExp对象"><a href="#RegExp对象" class="headerlink" title="RegExp对象"></a>RegExp对象</h3><p>字面量：<strong>/pattern/attributes</strong>；如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var reg = /\bis\b/g;</span><br></pre></td></tr></table></figure>
+<p>构造函数：<strong>new RegExp(pattern[, flags])</strong>；如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\bis\\b'</span>,<span class="string">'g'</span>);  <span class="comment">// 字符串需要添加反斜杠\来取消转义</span></span><br></pre></td></tr></table></figure>
+<p>参数 <em>pattern</em> 是一个字符串, 指定了正则表达式字符串或其他的正则表达式对象.</p>
+<p>参数 <em>flags</em> 是一个可选的字符串, 包含属性 “g”、”i” 和 “m”，分别用于指定全局匹配、区分大小写的匹配和多行匹配。如果<em>pattern</em> 是正则表达式, 而不是字符串, 则必须省略该参数</p>
+<h4 id="RegExp实例属性"><a href="#RegExp实例属性" class="headerlink" title="RegExp实例属性"></a>RegExp实例属性</h4><table>
 <thead>
 <tr>
-<th style="text-align:center">事件类型</th>
-<th style="text-align:center">事件初始化方法</th>
+<th style="text-align:center">实例属性</th>
+<th style="text-align:center">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center">UIEvents</td>
-<td style="text-align:center">event.initUIEvent</td>
+<td style="text-align:center">global</td>
+<td style="text-align:center">是否包含全局标志(true/false)</td>
 </tr>
 <tr>
-<td style="text-align:center">MouseEvents</td>
-<td style="text-align:center">event.initMouseEvent</td>
+<td style="text-align:center">ignoreCase</td>
+<td style="text-align:center">是否包含区分大小写标志(true/false)</td>
 </tr>
 <tr>
-<td style="text-align:center">MutationEvents</td>
-<td style="text-align:center">event.initMutationEvent</td>
+<td style="text-align:center">multiline</td>
+<td style="text-align:center">是否包含多行标志(true/false)</td>
 </tr>
 <tr>
-<td style="text-align:center">HTMLEvents</td>
-<td style="text-align:center">event.initEvent</td>
+<td style="text-align:center">source</td>
+<td style="text-align:center">返回创建RegExp对象实例时指定的表达式文本字符串形式</td>
 </tr>
 <tr>
-<td style="text-align:center">Event</td>
-<td style="text-align:center">event.initEvent</td>
+<td style="text-align:center">lastIndex</td>
+<td style="text-align:center">表示原字符串中匹配的字符串末尾的后一个位置, 默认为0</td>
 </tr>
 <tr>
-<td style="text-align:center">CustomEvent</td>
-<td style="text-align:center">event.initCustomEvent</td>
+<td style="text-align:center">flags(ES6)</td>
+<td style="text-align:center">返回正则表达式的修饰符</td>
 </tr>
 <tr>
-<td style="text-align:center">KeyboardEvent</td>
-<td style="text-align:center">event.initKeyEvent</td>
+<td style="text-align:center">sticky(ES6)</td>
+<td style="text-align:center">是否设置了y(粘连)修饰符(true/false)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>event.initEvent()</strong></p>
-<p>事件对象的initEvent方法，用来初始化事件对象，还能向事件对象添加属性。该方法的参数必须是一个使用<code>Document.createEvent()</code>生成的Event实例，而且必须在dispatchEvent方法之前调用</p>
-<p>initEvent方法可以接受四个参数：</p>
-<blockquote>
+<h4 id="RegExp实例方法"><a href="#RegExp实例方法" class="headerlink" title="RegExp实例方法"></a>RegExp实例方法</h4><p><strong>compile</strong></p>
+<p>compile 方法用于在执行过程中改变和重新编译正则表达式</p>
+<p>语法: compile(pattern[, flags])</p>
+<p>参数介绍请参考上述 RegExp 构造器. 用法如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"abc"</span>, <span class="string">"gi"</span>); </span><br><span class="line"><span class="keyword">var</span> reg2 = reg.compile(<span class="string">"new abc"</span>, <span class="string">"g"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(reg);<span class="comment">// /new abc/g</span></span><br><span class="line"><span class="built_in">console</span>.log(reg2);<span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>可见compile方法会改变原正则表达式对象，并重新编译，而且它的返回值为空</p>
+<p><strong>test</strong></p>
+<p>test 方法用于检测一个字符串是否匹配某个正则规则，只要是字符串中含有与正则规则匹配的文本，该方法就返回true, 否则返回 false</p>
+<p>语法: test(string), 用法如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/[0-9]+/</span>.test(<span class="string">"abc123"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/[0-9]+/</span>.test(<span class="string">"abc"</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<p>以上，字符串”abc123” 包含数字，故 test 方法返回 true；而 字符串”abc” 不包含数字，故返回 false</p>
+<p>如果需要使用 test 方法测试字符串是否完成匹配某个正则规则，那么可以在正则表达式里增加开始(^)和结束($)元字符。如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/^[0-9]+$/</span>.test(<span class="string">"abc123"</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<p>以上，由于字符串”abc123” 并非以数字开始, 也并非以数字结束, 故 test 方法返回false</p>
+<p>实际上，如果正则表达式带有全局标志(带有参数g)时，test 方法还受正则对象的lastIndex属性影响,如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/[a-z]+/</span>;<span class="comment">//正则不带全局标志</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abc"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"de"</span>));<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/[a-z]+/g</span>;<span class="comment">//正则带有全局标志g</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abc"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//3, 下次运行test时,将从索引为3的位置开始查找</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"de"</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<p>该影响将在exec 方法讲解中予以分析</p>
+<p><strong>exec</strong></p>
+<p>exec 方法用于检测字符串对正则表达式的匹配，如果找到了匹配的文本，则返回一个结果数组，否则返回null</p>
+<p>语法: exec(string)</p>
+<p>exec 方法返回的数组中包含两个额外的属性, index 和 input。并且该数组具有如下特点：</p>
 <ul>
-<li>type：事件名称，格式为字符串</li>
-<li>bubbles：事件是否应该冒泡，格式为布尔值。可以使用event.bubbles属性读取它的值</li>
-<li>cancelable：事件是否能被取消，格式为布尔值。可以使用event.cancelable属性读取它的值</li>
-<li>option：为事件对象指定额外的属性</li>
+<li>第 0 个项表示正则表达式捕获的文本</li>
+<li>第 1~n 项表示第 1~n 个反向引用, 依次指向第 1~n 个分组捕获的文本, 可以使用RegExp.$ + “编号1~n” 依次获取分组中的文本</li>
+<li>index 表示匹配字符串的初始位置</li>
+<li>input 表示正在检索的字符串</li>
 </ul>
+<p>无论正则表达式有无全局标示”g”, exec 的表现都相同。但正则表达式对象的表现却有些不同</p>
+<p>假设正则表达式对象为 reg ，检测的字符为 string ，reg.exec(string) 返回值为 array</p>
+<p>若 reg 包含全局标示”g”，那么 reg.lastIndex 属性表示原字符串中匹配的字符串末尾的后一个位置，即下次匹配开始的位置, 此时 reg.lastIndex == array.index(匹配开始的位置) + array[0].length(匹配字符串的长度)。如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/([a-z]+)/gi</span>,</span><br><span class="line">    string = <span class="string">"World Internet Conference"</span>;</span><br><span class="line"><span class="keyword">var</span> array = reg.exec(string);</span><br><span class="line"><span class="built_in">console</span>.log(array);<span class="comment">//["World", "World", index: 0, input: "World Internet Conference"]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">1</span>);<span class="comment">//World</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//5, 刚好等于 array.index + array[0].length</span></span><br></pre></td></tr></table></figure>
+<p>随着检索继续，array.index 的值将往后递增，也就是说，reg.lastIndex 的值也会同步往后递增。因此，也可以通过反复调用 exec 方法来遍历字符串中所有的匹配文本。直到 exec 方法再也匹配不到文本时，它将返回 null，并把 reg.lastIndex 属性重置为 0</p>
+<p>接着上述例子，继续执行代码，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">array = reg.exec(string);</span><br><span class="line"><span class="built_in">console</span>.log(array);<span class="comment">//["Internet", "Internet", index: 6, input: "World Internet Conference"]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//14</span></span><br><span class="line"></span><br><span class="line">array = reg.exec(string);</span><br><span class="line"><span class="built_in">console</span>.log(array);<span class="comment">//["Conference", "Conference", index: 15, input: "World Internet Conference"]</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//25</span></span><br><span class="line"></span><br><span class="line">array = reg.exec(string);</span><br><span class="line"><span class="built_in">console</span>.log(array);<span class="comment">//null</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.lastIndex);<span class="comment">//0</span></span><br></pre></td></tr></table></figure>
+<p>以上代码中，随着反复调用 exec 方法，reg.lastIndex 属性最终被重置为 0</p>
+<h4 id="字符串对象方法"><a href="#字符串对象方法" class="headerlink" title="字符串对象方法"></a>字符串对象方法</h4><p>字符串对象的方法之中，有4种与正则对象有关：</p>
+<ul>
+<li><code>match()</code>：返回一个数组，成员是所有匹配的子字符串</li>
+<li><code>search()</code>：按照给定的正则表达式进行搜索，返回一个整数，表示匹配开始的位置</li>
+<li><code>replace()</code>：按照给定的正则表达式进行替换，返回替换后的字符串</li>
+<li><code>split()</code>：按照给定规则进行字符串分割，返回一个数组，包含分割后的各个成员</li>
+</ul>
+<p><strong>String.prototype.match()</strong></p>
+<p>字符串对象的<code>match</code>方法对字符串进行正则匹配，返回匹配结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'_x_x'</span>;</span><br><span class="line"><span class="keyword">var</span> r1 = <span class="regexp">/x/</span>;</span><br><span class="line"><span class="keyword">var</span> r2 = <span class="regexp">/y/</span>;</span><br><span class="line"></span><br><span class="line">s.match(r1) <span class="comment">// ["x"]</span></span><br><span class="line">s.match(r2) <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>从上面代码可以看到，字符串的<code>match</code>方法与正则对象的<code>exec</code>方法非常类似：匹配成功返回一个数组，匹配失败返回<code>null</code></p>
+<p>如果正则表达式带有<code>g</code>修饰符，则该方法与正则对象的<code>exec</code>方法行为不同，会一次性返回所有匹配成功的结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'abba'</span>;</span><br><span class="line"><span class="keyword">var</span> r = <span class="regexp">/a/g</span>;</span><br><span class="line"></span><br><span class="line">s.match(r) <span class="comment">// ["a", "a"]</span></span><br><span class="line">r.exec(s) <span class="comment">// ["a"]</span></span><br></pre></td></tr></table></figure>
+<p>设置正则表达式的<code>lastIndex</code>属性，对<code>match</code>方法无效，匹配总是从字符串的第一个字符开始</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r = <span class="regexp">/a|b/g</span>;</span><br><span class="line">r.lastIndex = <span class="number">7</span>;</span><br><span class="line"><span class="string">'xaxb'</span>.match(r) <span class="comment">// ['a', 'b']</span></span><br><span class="line">r.lastIndex <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<p>上面代码表示，设置<code>lastIndex</code>属性是无效的</p>
+<p><strong>String.prototype.search()</strong></p>
+<p>字符串对象的<code>search</code>方法，返回第一个满足条件的匹配结果在整个字符串中的位置。如果没有任何匹配，则返回<code>-1</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'_x_x'</span>.search(<span class="regexp">/x/</span>)</span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，第一个匹配结果出现在字符串的<code>1</code>号位置</p>
+<p>该方法会忽略<code>g</code>修饰符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> r = <span class="regexp">/x/g</span>;</span><br><span class="line">r.lastIndex = <span class="number">2</span>; <span class="comment">// 无效</span></span><br><span class="line"><span class="string">'_x_x'</span>.search(r) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，正则表达式使用<code>g</code>修饰符之后，使用<code>lastIndex</code>属性指定开始匹配的位置，结果无效，还是从字符串的第一个字符开始匹配</p>
+<p><strong>String.prototype.replace()</strong></p>
+<p>字符串对象的<code>replace</code>方法可以替换匹配的值。它接受两个参数，第一个是搜索模式，第二个是替换的内容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(search, replacement)</span><br></pre></td></tr></table></figure>
+<p>搜索模式如果不加g修饰符，就替换第一个匹配成功的值，否则替换所有匹配成功的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'aaa'</span>.replace(<span class="string">'a'</span>, <span class="string">'b'</span>) <span class="comment">// "baa"</span></span><br><span class="line"><span class="string">'aaa'</span>.replace(<span class="regexp">/a/</span>, <span class="string">'b'</span>) <span class="comment">// "baa"</span></span><br><span class="line"><span class="string">'aaa'</span>.replace(<span class="regexp">/a/g</span>, <span class="string">'b'</span>) <span class="comment">// "bbb"</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，最后一个正则表达式使用了<code>g</code>修饰符，导致所有的<code>b</code>都被替换掉了</p>
+<p><code>replace</code>方法的一个应用，就是消除字符串首尾两端的空格</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'  #id div.class  '</span>;</span><br><span class="line"></span><br><span class="line">str.replace(<span class="regexp">/^\s+|\s+$/g</span>, <span class="string">''</span>)</span><br><span class="line"><span class="comment">// "#id div.class"</span></span><br></pre></td></tr></table></figure>
+<p>replace方法的第二个参数可以使用美元符号$，用来指代所替换的内容：</p>
+<ul>
+<li><code>$&amp;</code> 指代匹配的子字符串</li>
+<li><code>$`</code> 指代匹配结果前面的文本</li>
+<li><code>$&#39;</code> 指代匹配结果后面的文本</li>
+<li><code>$n</code> 指代匹配成功的第<code>n</code>组内容，<code>n</code>是从1开始的自然数</li>
+<li><code>$$</code> 指代美元符号<code>$</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'hello world'</span>.replace(<span class="regexp">/(\w+)\s(\w+)/</span>, <span class="string">'$2 $1'</span>)</span><br><span class="line"><span class="comment">// "world hello"</span></span><br><span class="line"></span><br><span class="line"><span class="string">'abc'</span>.replace(<span class="string">'b'</span>, <span class="string">'[$`-$&amp;-$\']'</span>)</span><br><span class="line"><span class="comment">// "a[a-b-c]c"</span></span><br></pre></td></tr></table></figure>
+<p><code>replace</code>方法的第二个参数还可以是一个函数，将每一个匹配内容替换为函数返回值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'3 and 5'</span>.replace(<span class="regexp">/[0-9]+/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">match</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">2</span> * match;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// "6 and 10"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'The quick brown fox jumped over the lazy dog.'</span>;</span><br><span class="line"><span class="keyword">var</span> pattern = <span class="regexp">/quick|brown|lazy/ig</span>;</span><br><span class="line"></span><br><span class="line">a.replace(pattern, <span class="function"><span class="keyword">function</span> <span class="title">replacer</span>(<span class="params">match</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> match.toUpperCase();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// The QUICK BROWN fox jumped over the LAZY dog.</span></span><br></pre></td></tr></table></figure>
+<p>作为<code>replace</code>方法第二个参数的替换函数，可以接受多个参数。第一个参数是捕捉到的内容，第二个参数是捕捉到的组匹配（有多少个组匹配，就有多少个对应的参数）。此外，最后还可以添加两个参数，倒数第二个参数是捕捉到的内容在整个字符串中的位置（比如从第五个位置开始），最后一个参数是原字符串。下面是一个网页模板替换的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> prices = &#123;</span><br><span class="line">  <span class="string">'pr_1'</span>: <span class="string">'$1.99'</span>,</span><br><span class="line">  <span class="string">'pr_2'</span>: <span class="string">'$9.99'</span>,</span><br><span class="line">  <span class="string">'pr_3'</span>: <span class="string">'$5.00'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> template = <span class="string">'/* ... */'</span>; <span class="comment">// 这里可以放网页模块字符串</span></span><br><span class="line"></span><br><span class="line">template.replace(</span><br><span class="line">  /(<span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">")(.*?)("</span>&gt;</span>)(<span class="tag">&lt;<span class="name">\</span>/<span class="attr">span</span>&gt;</span></span>)/g,</span><br><span class="line">  <span class="function"><span class="keyword">function</span>(<span class="params">match, $<span class="number">1</span>, $<span class="number">2</span>, $<span class="number">3</span>, $<span class="number">4</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $<span class="number">1</span> + $<span class="number">2</span> + $<span class="number">3</span> + prices[$<span class="number">2</span>] + $<span class="number">4</span>;</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>上面代码的捕捉模式中，有四个括号，所以会产生四个组匹配，在匹配函数中用<code>$1</code>到<code>$4</code>表示。匹配函数的作用是将价格插入模板中。</p>
+<p><strong>String.prototype.split()</strong></p>
+<p>字符串对象的<code>split</code>方法按照正则规则分割字符串，返回一个由分割后的各个部分组成的数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.split(separator, [limit])</span><br></pre></td></tr></table></figure>
+<p>该方法接受两个参数，第一个参数是分隔规则，第二个参数是返回数组的最大成员数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 非正则分隔</span></span><br><span class="line"><span class="string">'a,  b,c, d'</span>.split(<span class="string">','</span>)</span><br><span class="line"><span class="comment">// [ 'a', '  b', 'c', ' d' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正则分隔，去除多余的空格</span></span><br><span class="line"><span class="string">'a,  b,c, d'</span>.split(<span class="regexp">/, */</span>)</span><br><span class="line"><span class="comment">// [ 'a', 'b', 'c', 'd' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定返回数组的最大成员</span></span><br><span class="line"><span class="string">'a,  b,c, d'</span>.split(<span class="regexp">/, */</span>, <span class="number">2</span>)</span><br><span class="line">[ <span class="string">'a'</span>, <span class="string">'b'</span> ]</span><br></pre></td></tr></table></figure>
+<p>上面代码使用正则表达式，去除了子字符串的逗号后面的空格</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 例一</span></span><br><span class="line"><span class="string">'aaa*a*'</span>.split(<span class="regexp">/a*/</span>)</span><br><span class="line"><span class="comment">// [ '', '*', '*' ]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例二</span></span><br><span class="line"><span class="string">'aaa**a*'</span>.split(<span class="regexp">/a*/</span>)</span><br><span class="line"><span class="comment">// ["", "*", "*", "*"]</span></span><br></pre></td></tr></table></figure>
+<p>上面代码的分割规则是0次或多次的<code>a</code>，由于正则默认是贪婪匹配，所以例一的第一个分隔符是<code>aaa</code>，第二个分割符是<code>a</code>，将字符串分成三个部分，包含开始处的空字符串。例二的第一个分隔符是<code>aaa</code>，第二个分隔符是0个<code>a</code>（即空字符），第三个分隔符是<code>a</code>，所以将字符串分成四个部分</p>
+<p>如果正则表达式带有括号，则括号匹配的部分也会作为数组成员返回</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'aaa*a*'</span>.split(<span class="regexp">/(a*)/</span>)</span><br><span class="line"><span class="comment">// [ '', 'aaa', '*', 'a', '*' ]</span></span><br></pre></td></tr></table></figure>
+<p>上面代码的正则表达式使用了括号，第一个组匹配是“aaa”，第二个组匹配是“a”，它们都作为数组成员返回</p>
+<h4 id="ES6对正则的扩展"><a href="#ES6对正则的扩展" class="headerlink" title="ES6对正则的扩展"></a>ES6对正则的扩展</h4><p>ES6对正则扩展了又两种修饰符(其他语言可能不支持):</p>
+<ul>
+<li>y (粘连sticky修饰符), 与g类似, 也是全局匹配, 并且下一次匹配都是从上一次匹配成功的下一个位置开始, 不同之处在于, g修饰符只要剩余位置中存在匹配即可, 而y修饰符确保匹配必须从剩余的第一个位置开始.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"abc_ab_a"</span>;</span><br><span class="line"><span class="keyword">var</span> r1 = <span class="regexp">/[a-z]+/g</span>;</span><br><span class="line"><span class="keyword">var</span> r2 = <span class="regexp">/[a-z]+/y</span>;</span><br><span class="line"><span class="built_in">console</span>.log(r1.exec(s),r1.lastIndex); <span class="comment">// ["abc", index: 0, input: "abc_ab_a"] 3</span></span><br><span class="line"><span class="built_in">console</span>.log(r2.exec(s),r2.lastIndex); <span class="comment">// ["abc", index: 0, input: "abc_ab_a"] 3</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(r1.exec(s),r1.lastIndex); <span class="comment">// ["ab", index: 4, input: "abc_ab_a"] 6</span></span><br><span class="line"><span class="built_in">console</span>.log(r2.exec(s),r2.lastIndex); <span class="comment">// null 0</span></span><br></pre></td></tr></table></figure>
+<p>如上, 由于第二次匹配的开始位置是下标3, 对应的字符串是 “_”, 而使用y修饰符的正则对象r2, 需要从剩余的第一个位置开始, 所以匹配失败, 返回null.</p>
+<p>正则对象的 sticky 属性, 表示是否设置了y修饰符. 这点将会在后面讲到.</p>
+<ul>
+<li>u 修饰符, 提供了对正则表达式添加4字节码点的支持. 比如 “𝌆” 字符是一个4字节字符, 直接使用正则匹配将会失败, 而使用u修饰符后, 将会等到正确的结果.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"𝌆"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/^.$/</span>.test(s));<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/^.$/u</span>.test(s));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p><strong>UCS-2字节码</strong></p>
+<p>有关字节码点， javaScript 只能处理UCS-2编码(js于1995年5月被Brendan Eich花费10天设计出来，比1996年7月发布的编码规范UTF-16早了一年多, 当时只有UCS-2可选). 由于UCS-2先天不足, 造成了所有字符在js中都是2个字节. 如果是4个字节的字符, 将会默认被当作两个双字节字符处理. 因此 js 的字符处理函数都会受到限制, 无法返回正确结果. 如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"𝌆"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(s == <span class="string">"\uD834\uDF06"</span>);<span class="comment">//true 𝌆相当于UTF-16中的0xD834DF06</span></span><br><span class="line"><span class="built_in">console</span>.log(s.length);<span class="comment">//2 长度为2, 表示这是4字节字符</span></span><br></pre></td></tr></table></figure>
+<p>ES6可以自动识别4字节的字符。因此遍历字符串可以直接使用for of循环。同时, js中如果直接使用码点表示Unicode字符, 对于4字节字符, ES5里是没办法识别的。为此ES6修复了这个问题, 只需将码点放在大括号内即可.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(s === <span class="string">"\u1D306"</span>);<span class="comment">//false   ES5无法识别𝌆</span></span><br><span class="line"><span class="built_in">console</span>.log(s === <span class="string">"\u&#123;1D306&#125;"</span>);<span class="comment">//true  ES6可以借助大括号识别𝌆</span></span><br></pre></td></tr></table></figure>
+<p><strong>附: ES6新增的处理4字节码的函数</strong></p>
+<ul>
+<li><strong>String.fromCodePoint()</strong>：从Unicode码点返回对应字符</li>
+<li><strong>String.prototype.codePointAt()</strong>：从字符返回对应的码点</li>
+<li><strong>String.prototype.at()</strong>：返回字符串给定位置的字符</li>
+</ul>
+<h3 id="正则表达式的定义"><a href="#正则表达式的定义" class="headerlink" title="正则表达式的定义"></a>正则表达式的定义</h3><h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">元字符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">查找单个字符，除了换行和行结束符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:center">查找单词字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\W</td>
+<td style="text-align:center">查找非单词字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:center">查找数字。</td>
+</tr>
+<tr>
+<td style="text-align:center">\D</td>
+<td style="text-align:center">查找非数字字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\s</td>
+<td style="text-align:center">查找空白字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td style="text-align:center">查找非空白字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">匹配单词边界。</td>
+</tr>
+<tr>
+<td style="text-align:center">\B</td>
+<td style="text-align:center">匹配非单词边界。</td>
+</tr>
+<tr>
+<td style="text-align:center">\0</td>
+<td style="text-align:center">查找 NULL 字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">查找换行符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">查找换页符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">查找回车符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">查找制表符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td style="text-align:center">查找垂直制表符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\xxx</td>
+<td style="text-align:center">查找以八进制数 xxx 规定的字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\xdd</td>
+<td style="text-align:center">查找以十六进制数 dd 规定的字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">\uxxxx</td>
+<td style="text-align:center">查找以十六进制数 xxxx 规定的 Unicode 字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">匹配行首</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">匹配行尾</td>
+</tr>
+<tr>
+<td style="text-align:center">[^x]</td>
+<td style="text-align:center">匹配除x以外的任意字符</td>
+</tr>
+</tbody>
+</table>
+<h4 id="方括号"><a href="#方括号" class="headerlink" title="方括号"></a>方括号</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">表达式</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">[abc]</td>
+<td style="text-align:center">查找方括号之间的任何字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">[^abc]</td>
+<td style="text-align:center">查找任何不在方括号之间的字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">[0-9]</td>
+<td style="text-align:center">查找任何从 0 至 9 的数字。</td>
+</tr>
+<tr>
+<td style="text-align:center">[a-z]</td>
+<td style="text-align:center">查找任何从小写 a 到小写 z 的字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">[A-Z]</td>
+<td style="text-align:center">查找任何从大写 A 到大写 Z 的字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">[A-z]</td>
+<td style="text-align:center">查找任何从大写 A 到小写 z 的字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">[adgk]</td>
+<td style="text-align:center">查找给定集合内的任何字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">[^adgk]</td>
+<td style="text-align:center">查找给定集合外的任何字符。</td>
+</tr>
+<tr>
+<td style="text-align:center">(red\</td>
+<td style="text-align:center">blue\</td>
+<td>green)</td>
+<td>查找任何指定的选项。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">量词</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">n+</td>
+<td style="text-align:center">匹配任何包含至少一个 n 的字符串。例如，/a+/ 匹配 “candy” 中的 “a”，”caaaaaaandy” 中所有的 “a”。</td>
+</tr>
+<tr>
+<td style="text-align:center">n*</td>
+<td style="text-align:center">匹配任何包含零个或多个 n 的字符串。例如，/bo*/ 匹配 “A ghost booooed” 中的 “boooo”，”A bird warbled” 中的 “b”，但是不匹配 “A goat grunted”。</td>
+</tr>
+<tr>
+<td style="text-align:center">n?</td>
+<td style="text-align:center">匹配任何包含零个或一个 n 的字符串。例如，/e?le?/ 匹配 “angel” 中的 “el”，”angle” 中的 “le”。</td>
+</tr>
+<tr>
+<td style="text-align:center">n{X}</td>
+<td style="text-align:center">匹配包含 X 个 n 的序列的字符串。例如，/a{2}/ 不匹配 “candy,” 中的 “a”，但是匹配 “caandy,” 中的两个 “a”，且匹配 “caaandy.” 中的前两个 “a”。</td>
+</tr>
+<tr>
+<td style="text-align:center">n{X,}</td>
+<td style="text-align:center">X 是一个正整数。前面的模式 n 连续出现至少 X 次时匹配。例如，/a{2,}/ 不匹配 “candy” 中的 “a”，但是匹配 “caandy” 和 “caaaaaaandy.” 中所有的 “a”。</td>
+</tr>
+<tr>
+<td style="text-align:center">n{X,Y}</td>
+<td style="text-align:center">X 和 Y 为正整数。前面的模式 n 连续出现至少 X 次，至多 Y 次时匹配。例如，/a{1,3}/ 不匹配 “cndy”，匹配 “candy,” 中的 “a”，”caandy,” 中的两个 “a”，匹配 “caaaaaaandy” 中的前面三个 “a”。注意，当匹配 “caaaaaaandy” 时，即使原始字符串拥有更多的 “a”，匹配项也是 “aaa”。</td>
+</tr>
+<tr>
+<td style="text-align:center">n{X,}</td>
+<td style="text-align:center">匹配包含至少 X 个 n 的序列的字符串。</td>
+</tr>
+<tr>
+<td style="text-align:center">n$</td>
+<td style="text-align:center">匹配任何结尾为 n 的字符串。</td>
+</tr>
+<tr>
+<td style="text-align:center">^n</td>
+<td style="text-align:center">匹配任何开头为 n 的字符串。</td>
+</tr>
+<tr>
+<td style="text-align:center">?=n</td>
+<td style="text-align:center">匹配任何其后紧接指定字符串 n 的字符串。</td>
+</tr>
+<tr>
+<td style="text-align:center">?!n</td>
+<td style="text-align:center">匹配任何其后没有紧接指定字符串 n 的字符串。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="字符组"><a href="#字符组" class="headerlink" title="字符组"></a>字符组</h4><p>[…] 匹配中括号内字符之一。如：[xyz] 匹配字符 x，y 或 z。如果中括号中包含元字符，则元字符降级为普通字符，不再具有元字符的功能，如 [+.?] 匹配 加号，点号或问号</p>
+<h4 id="排除性字符组"><a href="#排除性字符组" class="headerlink" title="排除性字符组"></a>排除性字符组</h4><p>[^…] 匹配任何未列出的字符，如: [ ^x ]匹配除x以外的任意字符</p>
+<h4 id="多选结构"><a href="#多选结构" class="headerlink" title="多选结构"></a>多选结构</h4><p>| 就是或的意思，表示两者中的一个。 如: a|b 匹配a或者b字符</p>
+<h4 id="括号"><a href="#括号" class="headerlink" title="括号"></a>括号</h4><p>括号 常用来界定重复限定符的范围，以及将字符<strong>分组</strong>。 如： (ab)+ 可以匹配abab..等，其中 ab 便是一个分组</p>
+<h4 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h4><p>\ 即转义字符，通常 <strong>\ * + ? | { [ ( ) ] }^ $ . # 和 空白</strong> 这些字符都需要转义</p>
+<h4 id="操作符的运算优先级"><a href="#操作符的运算优先级" class="headerlink" title="操作符的运算优先级"></a>操作符的运算优先级</h4><ol>
+<li>\ 转义符</li>
+<li>(), (?:), (?=), [] 圆括号或方括号</li>
+<li>*, +, ?, {n}, {n,}, {n,m} 限定符</li>
+<li>^, $ 位置</li>
+<li>| “或” 操作</li>
+</ol>
+<h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><p>javaScript中正则表达式默认有如下五种修饰符：</p>
+<ul>
+<li>g (全文查找),</li>
+<li>i (忽略大小写查找)</li>
+<li>m (多行查找)</li>
+<li>y (ES6新增的粘连修饰符)</li>
+<li>u (ES6新增)</li>
+</ul>
+<h3 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h3><ol>
+<li>汉字: ^[\u4e00-\u9fa5]{0,}$</li>
+<li>Email: ^\w+([-+.]\w+)<em>@\w+([-.]\w+)</em>.\w+([-.]\w+)*$</li>
+<li>URL: ^https?://([\w-]+.)+[\w-]+(/[\w-./?%&amp;=]*)?$</li>
+<li>手机号码: ^1\d{10}$</li>
+<li>身份证号: ^(\d{15}|\d{17}(\d|X))$</li>
+<li>中国邮政编码: [1-9]\d{5}(?!\d) (邮政编码为6位数字)</li>
+</ol>
+<p><strong>密码验证</strong></p>
+<p>密码验证是常见的需求，一般来说, 常规密码大致会满足规律： 6-16位, 数字, 字母, 字符至少包含两种, 同时不能包含中文和空格. 如下便是常规密码验证的正则描述：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^[^\s\u4e00-\u9fa5]&#123;6,16&#125;$/</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>正则表达式在H5中的应用</strong></p>
+<p>H5中新增了 pattern 属性, 规定了用于验证输入字段的模式, pattern的模式匹配支持正则表达式的书写方式. 默认 pattern 属性是全部匹配, 即无论正则表达式中有无 “^”, “$” 元字符, 它都是匹配所有文本</p>
+<p>注：pattern 适用于以下 input 类型：text, search, url, telephone, email 以及 password。如果需要取消表单验证，在form标签上增加 novalidate 属性即可</p>
+<h3 id="正则表达式初阶技能"><a href="#正则表达式初阶技能" class="headerlink" title="正则表达式初阶技能"></a>正则表达式初阶技能</h3><h4 id="贪婪与非贪婪模式"><a href="#贪婪与非贪婪模式" class="headerlink" title="贪婪与非贪婪模式"></a>贪婪与非贪婪模式</h4><p>默认情况下，所有的限定词都是贪婪模式，表示尽可能多的去捕获字符：而在限定词后增加？则是非贪婪模式，表示尽可能少的去捕获字符。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"aaab"</span>,</span><br><span class="line">    reg1 = <span class="regexp">/a+/</span>, <span class="comment">//贪婪模式</span></span><br><span class="line">    reg2 = <span class="regexp">/a+?/</span>;<span class="comment">//非贪婪模式</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg1)); <span class="comment">//["aaa"], 由于是贪婪模式, 捕获了所有的a</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg2)); <span class="comment">//["a"], 由于是非贪婪模式, 只捕获到第一个a</span></span><br></pre></td></tr></table></figure>
+<p>实际上，非贪婪模式非常有效，特别是当匹配html标签时。比如匹配一个配对出现的div，方案一可能会匹配到很多的div标签对，而方案二则只会匹配一个div标签对</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"&lt;div class='v1'&gt;&lt;div class='v2'&gt;test&lt;/div&gt;&lt;input type='text'/&gt;&lt;/div&gt;"</span>;</span><br><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/&lt;div.*&lt;\/div&gt;/</span>; <span class="comment">//方案一,贪婪匹配</span></span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/&lt;div.*?&lt;\/div&gt;/</span>;<span class="comment">//方案二,非贪婪匹配</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg1));<span class="comment">//"&lt;div class='v1'&gt;&lt;div class='v2'&gt;test&lt;/div&gt;&lt;input type='text'/&gt;&lt;/div&gt;"</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg2));<span class="comment">//"&lt;div class='v1'&gt;&lt;div class='v2'&gt;test&lt;/div&gt;"</span></span><br></pre></td></tr></table></figure>
+<p><strong>区间量词的非贪婪模式</strong></p>
+<p>一般情况下，非贪婪模式，使用的是”*?”，或 “+?” 这种形式，还有一种是 “{n,m}?”</p>
+<p>区间量词”{n,m}” 也是匹配优先，虽有匹配次数上限，但是在到达上限之前，它依然是尽可能多的匹配，而”{n,m}?” 则表示在区间范围内，尽可能少的匹配</p>
+<p><strong>需要注意的是</strong>：</p>
+<ul>
+<li>能达到同样匹配结果的贪婪与非贪婪模式，通常是贪婪模式的匹配效率较高</li>
+<li>所有的非贪婪模式，都可以通过修改量词修饰的子表达式，转换为贪婪模式</li>
+<li>贪婪模式可以与<code>固化分组</code>(后面会讲到)结合，提升匹配效率，而非贪婪模式却不可以</li>
+</ul>
+<h4 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h4><p>正则的分组主要通过小括号来实现，括号包裹的子表达式作为一个分组，括号后可以紧跟限定词表示重复次数。如下, 小括号内包裹的abc便是一个分组：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/(abc)+<span class="regexp">/.test("abc123") == true</span></span><br></pre></td></tr></table></figure>
+<p>那么分组有什么用呢？一般来说，分组是为了方便的表示重复次数，除此之外，还有一个作用就是用于捕获</p>
+<h4 id="捕获性分组"><a href="#捕获性分组" class="headerlink" title="捕获性分组"></a>捕获性分组</h4><p>捕获性分组，通常由一对小括号加上子表达式组成。 捕获性分组会创建反向引用，每个反向引用都由一个编号或名称来标识。js中主要是通过 <code>$+编号</code> 或者 <code>\+编号</code> 表示法进行引用。如下便是一个捕获性分组的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">"#808080"</span>;</span><br><span class="line"><span class="keyword">var</span> output = color.replace(<span class="regexp">/#(\d+)/</span>,<span class="string">"$1"</span>+<span class="string">"~~"</span>);<span class="comment">//自然也可以写成 "$1~~"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">1</span>);<span class="comment">//808080</span></span><br><span class="line"><span class="built_in">console</span>.log(output);<span class="comment">//808080~~</span></span><br></pre></td></tr></table></figure>
+<p>以上， (\d+) 表示一个捕获性分组， <code>RegExp.$1</code> 指向该分组捕获的内容。 <code>$+编号</code> 只能在正则表达式之外使用</p>
+<p>实际上，捕获性分组捕获到的内容不仅可以在正则表达式外部引用，还可以在正则表达式内部引用</p>
+<h4 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h4><p>能在正则表达式内部使用的引用只有『反向引用』，其格式为<code>\+数字</code> ，通常用于匹配不同位置相同部分的子串。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="string">"www.google.google.com"</span>;</span><br><span class="line"><span class="keyword">var</span> re = <span class="regexp">/([a-z]+)\.\1/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(url.replace(re,<span class="string">"$1"</span>));<span class="comment">//"www.google.com"</span></span><br></pre></td></tr></table></figure>
+<p>以上，相同部分的”google”字符串只被替换一次</p>
+<p>实例之后，来看看反向引用的原理</p>
+<blockquote>
+<p>正则表达式匹配时，各个捕获性分组匹配到的内容，会依次保存在内存中一个特定的组里，通过<code>\+数字</code>的方式可以在正则中引用组里的内容，这种引用称作<strong>反向引用</strong>。捕获性分组匹配成功之前，它的内容的是不确定的，一旦匹配成功，组里的内容也就确定了。</p>
 </blockquote>
-</style></video></audio></p>
+<p>打个比方就是，假如有字符串<code>abcaabcabbcabcc</code>，对于正则表达式<code>/([abc])\1/</code>，捕获性分组中的子表达式<code>[abc]</code>，虽然可以匹配”a”、”b” 或 “c”，但是一旦匹配成功了，反向引用的内容也就是确定了，那么相对的，反向引用的子表达式<code>\1</code>将依次匹配”a”、”b” 或 “c”。因此实际上，捕获性分组<code>[abc]</code>和反向引用<code>\1</code>将同时捕获”a”、”b” 或 “c”中的同一个字符，即有三种可能捕获的结果：”aa”，”bb” 或 “cc”。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"abcaabcabbcabcc"</span>.match(<span class="regexp">/([abc])\1/g</span>); <span class="comment">// ["aa", "bb", "cc"]</span></span><br></pre></td></tr></table></figure>
+<p>反向引用中<code>\n</code>指向正则表达式前面第n个捕获性分组匹配到的内容，这里面有一个问题，对于子表达式<code>\12</code>，有下面两种可能：</p>
+<ul>
+<li>指向第1个捕获性分组匹配到的内容，同时匹配普通字符2，目前IE浏览器按照这种方式解析正则</li>
+<li>指向第12个捕获性分组匹配到的内容，目前非IE等现代浏览器都是这样解析正则的</li>
+</ul>
+<p>为避免各语言或者浏览器解析不一致，因此建议<strong>反向引用不要索引大于9的捕获性分组</strong>。不仅如此，反向引用如果不存在，正则将会匹配失败。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"abcaabcabbcabcc"</span>.match(<span class="regexp">/([abc])\2/g</span>); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<p>由于不存在第二个捕获性分组，因此反向引用子表达式<code>\2</code>匹配失败，进而整个表达式匹配失败</p>
+<p><strong>反向引用常用来匹配重复出现的字符串，而不是重复出现的子表达式，这点要尤为注意。</strong>因此如果想要匹配4个或2个数字的话，使用如下正则表达式是万万不行的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"1234567890"</span>.match(<span class="regexp">/(\d)&#123;4&#125;|\1&#123;2&#125;/g</span>); <span class="comment">// ["1234", "5678", "", "", ""]</span></span><br></pre></td></tr></table></figure>
+<p>以上正则表达式，想用反向引用<code>\1</code>代替前面的捕获性分组<code>\d</code>，这是不可行的。修饰符g表示全文查找，因此前两次匹配到了 “1234” 和 “5678”，此时正则引擎的指针处于数字8的后面，再往后匹配显然子表达式<code>(\d){4}</code>无法匹配了，此时第一个捕获组匹配到空字符串，那么反向引用<code>\1</code>将指向空字符串，也就是一个位置（有些类似后面将要讲到的零宽断言），对于”890”子字符串，8、9或0后面共有3个位置可供反向引用匹配，故最终又匹配到三个空字符串。正确的正则表达式如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"1234567890"</span>.match(<span class="regexp">/\d&#123;4&#125;|\d&#123;2&#125;/g</span>); <span class="comment">// ["1234", "5678", "90"]</span></span><br></pre></td></tr></table></figure>
+<p>只能重复写一次子表达式<code>\d</code></p>
+<h4 id="非捕获性分组"><a href="#非捕获性分组" class="headerlink" title="非捕获性分组"></a>非捕获性分组</h4><p>非捕获性分组，通常由一对括号加上”?:”加上子表达式组成，非捕获性分组不会创建反向引用，就好像没有括号一样。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">"#808080"</span>;</span><br><span class="line"><span class="keyword">var</span> output = color.replace(<span class="regexp">/#(?:\d+)/</span>,<span class="string">"$1"</span>+<span class="string">"~~"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">RegExp</span>.$<span class="number">1</span>);<span class="comment">//""</span></span><br><span class="line"><span class="built_in">console</span>.log(output);<span class="comment">//$1~~</span></span><br></pre></td></tr></table></figure>
+<p>以上，(?:\d+) 表示一个非捕获性分组，由于分组不捕获任何内容，所以， <code>RegExp.$1</code> 就指向了空字符串</p>
+<p>同时，由于<code>$1</code> 的反向引用不存在，因此最终它被当成了普通字符串进行替换</p>
+<p>实际上，捕获性分组和无捕获性分组在搜索效率方面也没什么不同，没有哪一个比另一个更快</p>
+<h3 id="正则表达式高阶技能"><a href="#正则表达式高阶技能" class="headerlink" title="正则表达式高阶技能"></a>正则表达式高阶技能</h3><p>合理地使用零宽断言，能够能分组之不能，极大地增强正则匹配能力，它甚至可以帮助你在匹配条件非常模糊的情况下快速地定位文本</p>
+<p>零宽断言，又叫环视。环视只进行子表达式的匹配，匹配到的内容不保存到最终的匹配结果，由于匹配是零宽度的，故最终匹配到的只是一个位置</p>
+<p>环视按照方向划分，有顺序和逆序两种(也叫前瞻和后瞻)，按照是否匹配有肯定和否定两种，组合之，便有4种环视。4种环视并不复杂，如下便是它们的描述：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"><strong>字符</strong></th>
+<th style="text-align:center"><strong>描述</strong></th>
+<th style="text-align:center"><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(?:<em>pattern</em>)</td>
+<td style="text-align:center">非捕获性分组, 匹配pattern的位置, 但不捕获匹配结果.也就是说不创建反向引用, 就好像没有括号一样.</td>
+<td style="text-align:center">‘abcd(?:e)匹配’abcde</td>
+</tr>
+<tr>
+<td style="text-align:center">(?=<em>pattern</em>)</td>
+<td style="text-align:center"><strong>顺序肯定环视</strong>, 匹配后面是pattern 的位置, 不捕获匹配结果.</td>
+<td style="text-align:center">‘Windows (?=2000)’匹配 “Windows2000” 中的 “Windows”; 不匹配 “Windows3.1” 中的 “Windows”</td>
+</tr>
+<tr>
+<td style="text-align:center">(?!<em>pattern</em>)</td>
+<td style="text-align:center"><strong>顺序否定环视</strong>, 匹配后面不是 pattern 的位置, 不捕获匹配结果.</td>
+<td style="text-align:center">‘Windows (?!2000)’匹配 “Windows3.1” 中的 “Windows”; 不匹配 “Windows2000” 中的 “Windows”</td>
+</tr>
+<tr>
+<td style="text-align:center">(?&lt;=<em>pattern</em>)</td>
+<td style="text-align:center"><strong>逆序肯定环视</strong>, 匹配前面是 pattern 的位置, 不捕获匹配结果.</td>
+<td style="text-align:center">‘(?&lt;=Office)2000’匹配 “ Office2000” 中的 “2000”; 不匹配 “Windows2000” 中的 “2000”</td>
+</tr>
+<tr>
+<td style="text-align:center">(?&lt;!<em>pattern</em>)</td>
+<td style="text-align:center"><strong>逆序否定环视</strong>, 匹配前面不是 pattern 的位置, 不捕获匹配结果.</td>
+<td style="text-align:center">‘(?&lt;!Office)2000’匹配 “ Windows2000” 中的 “2000”; 不匹配 “ Office2000” 中的 “2000”</td>
+</tr>
+</tbody>
+</table>
+<p>非捕获性分组由于结构与环视相似，故列在表中，以做对比。以上4种环视中，目前 javaScript 中只支持前两种，也就是只支持 <strong>顺序肯定环视</strong> 和 <strong>顺序否定环视</strong>。通过实例来帮助理解：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"123abc789"</span>,s;</span><br><span class="line"><span class="comment">//没有使用环视,abc直接被替换</span></span><br><span class="line">s = str.replace(<span class="regexp">/abc/</span>,<span class="number">456</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">//123456789</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用了顺序肯定环视,捕获到了a前面的位置,所以abc没有被替换,只是将3替换成了3456</span></span><br><span class="line">s = str.replace(<span class="regexp">/3(?=abc)/</span>,<span class="number">3456</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">//123456abc789</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用了顺序否定环视,由于3后面跟着abc,不满意条件,故捕获失败,所以原字符串没有被替换</span></span><br><span class="line">s = str.replace(<span class="regexp">/3(?!abc)/</span>,<span class="number">3456</span>);</span><br><span class="line"><span class="built_in">console</span>.log(s); <span class="comment">//123abc789</span></span><br></pre></td></tr></table></figure>
+<h4 id="获取html片段"><a href="#获取html片段" class="headerlink" title="获取html片段"></a>获取html片段</h4><p>假如现在，js 通过 ajax 获取到一段 html 代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> responseText = <span class="string">"&lt;div data='dev.xxx.txt'&gt;&lt;/div&gt;&lt;img src='dev.xxx.png' /&gt;"</span>;</span><br></pre></td></tr></table></figure>
+<p>现需要替换img标签的src 属性中的 “dev”字符串 为 “test” 字符串</p>
+<p>① 由于上述 responseText 字符串中包含至少两个子字符串 “dev”，显然不能直接 replace 字符串 “dev”为 “test”</p>
+<p>② 同时由于 js 中不支持逆序环视，也不能在正则中判断前缀为 “src=“，然后再替换”dev”</p>
+<p>③ 注意到 img 标签的 src 属性以 “.png” 结尾，基于此，就可以使用顺序肯定环视。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/dev(?=[^']*png)/</span>; <span class="comment">//为了防止匹配到第一个dev, 通配符前面需要排除单引号或者是尖括号</span></span><br><span class="line"><span class="keyword">var</span> str = responseText.replace(reg,<span class="string">"test"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(str);<span class="comment">//&lt;div data='dev.xxx'&gt;&lt;/div&gt;&lt;img src='test.xxx.png' /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>当然，以上不止顺序肯定环视一种解法，捕获性分组同样可以做到。那么环视高级在哪里呢? 环视高级的地方就在于它通过一次捕获就可以定位到一个位置，对于复杂的文本替换场景， 常有奇效, 而分组则需要更多的操作</p>
+<h4 id="千位分割符"><a href="#千位分割符" class="headerlink" title="千位分割符"></a>千位分割符</h4><blockquote>
+<p>千位分隔符，顾名思义，就是数字中的逗号。 参考西方的习惯，数字之中加入一个符号， 避免因数字太长难以直观的看出它的值。故而数字之中，每隔三位添加一个逗号，即千位分隔符</p>
+</blockquote>
+<p>那么怎么将一串数字转化为千位分隔符形式呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"1234567890"</span>;</span><br><span class="line">(+str).toLocaleString();<span class="comment">//"1,234,567,890"</span></span><br></pre></td></tr></table></figure>
+<p>如上， <code>toLocaleString()</code> 返回当前对象的”本地化”字符串形式</p>
+<ul>
+<li>如果该对象是Number类型, 那么将返回该数值的按照特定符号分割的字符串形式</li>
+<li>如果该对象是Array类型, 那么先将数组中的每项转化为字符串, 然后将这些字符串以指定分隔符连接起来并返回</li>
+</ul>
+<p><code>toLocaleString</code> 方法特殊, 有本地化特性, 对于天朝, 默认的分隔符是英文逗号. 因此使用它恰好可以将数值转化为千位分隔符形式的字符串. 如果考虑到国际化, 以上方法就有可能会失效了</p>
+<p>尝试使用环视来处理下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">thousand</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.replace(<span class="regexp">/(?!^)(?=([0-9]&#123;3&#125;)+$)/g</span>,<span class="string">','</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(thousand(str));<span class="comment">//"1,234,567,890"</span></span><br><span class="line"><span class="built_in">console</span>.log(thousand(<span class="string">"123456"</span>));<span class="comment">//"123,456"</span></span><br><span class="line"><span class="built_in">console</span>.log(thousand(<span class="string">"1234567879876543210"</span>));<span class="comment">//"1,234,567,879,876,543,210"</span></span><br></pre></td></tr></table></figure>
+<p>上述使用到的正则分为两块。 <code>(?!^)</code> 和 <code>(?=([0-9]{3})+$)</code>。分析：</p>
+<ol>
+<li>“[0-9]{3}” 表示连续3位数字</li>
+<li>“([0-9]{3})+” 表示连续3位数字至少出现一次或更多次</li>
+<li>“([0-9]{3})+$” 表示连续3的正整数倍的数字, 直到字符串末尾</li>
+<li>那么 <code>(?=([0-9]{3})+$)</code> 就表示匹配一个零宽度的位置,，并且从这个位置到字符串末尾，中间拥有3的正整数倍的数字</li>
+<li>正则表达式使用全局匹配g，表示匹配到一个位置后，它会继续匹配，直至匹配不到</li>
+<li>将这个位置替换为逗号，实际上就是每3位数字添加一个逗号</li>
+<li>当然对于字符串”123456”这种刚好拥有3的正整数倍的数字的，当然不能在1前面添加逗号。那么使用 <code>(?!^)</code> 就指定了这个替换的位置不能为起始位置</li>
+</ol>
+
       
 
       
