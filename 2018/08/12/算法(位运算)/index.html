@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Bowen_blog">
 <meta property="og:description" content="位运算位运算在算法中很有用，速度可以比四则运算快很多。 在学习位运算之前应该知道十进制如何转二进制，二进制如何转十进制。这里说明下简单的计算方式  十进制 33 可以看成是 32 + 1 ，并且 33 应该是六位二进制的（因为 33 近似 32，而 32 是 2 的五次方，所以是六位），那么 十进制 33 就是 100001 ，只要是 2 的次方，那么就是 1否则都为 0  那么二进制 10000">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-12T15:01:15.876Z">
+<meta property="og:updated_time" content="2018-09-06T07:30:47.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法 —— 位运算">
 <meta name="twitter:description" content="位运算位运算在算法中很有用，速度可以比四则运算快很多。 在学习位运算之前应该知道十进制如何转二进制，二进制如何转十进制。这里说明下简单的计算方式  十进制 33 可以看成是 32 + 1 ，并且 33 应该是六位二进制的（因为 33 近似 32，而 32 是 2 的五次方，所以是六位），那么 十进制 33 就是 100001 ，只要是 2 的次方，那么就是 1否则都为 0  那么二进制 10000">
@@ -169,25 +169,25 @@
 <li><p>那么二进制 <code>100001</code> 同理，首位是 <code>2^5</code> ，末位是 <code>2^0</code> ，相加得出 33</p>
 </li>
 </ul>
-<h3 id="左移-lt-lt"><a href="#左移-lt-lt" class="headerlink" title="左移 &lt;&lt;"></a>左移 &lt;&lt;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 &lt;&lt; 1 // -&gt; 20</span><br></pre></td></tr></table></figure>
+<h3 id="左移-lt-lt"><a href="#左移-lt-lt" class="headerlink" title="左移 &lt;&lt;"></a>左移 &lt;&lt;</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> &lt;&lt; <span class="number">1</span> <span class="comment">// -&gt; 20</span></span><br></pre></td></tr></table></figure>
 <p>左移就是将二进制全部往左移动，<code>10</code> 在二进制中表示为 <code>1010</code> ，左移一位后变成 <code>10100</code> ，转换为十进制也就是 20，所以基本可以把左移看成以下公式 <code>a * (2 ^ b)</code></p>
-<h3 id="算数右移-gt-gt"><a href="#算数右移-gt-gt" class="headerlink" title="算数右移 &gt;&gt;"></a>算数右移 &gt;&gt;</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10 &gt;&gt; 1 // -&gt; 5</span><br></pre></td></tr></table></figure>
+<h3 id="算数右移-gt-gt"><a href="#算数右移-gt-gt" class="headerlink" title="算数右移 &gt;&gt;"></a>算数右移 &gt;&gt;</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> &gt;&gt; <span class="number">1</span> <span class="comment">// -&gt; 5</span></span><br></pre></td></tr></table></figure>
 <p>算数右移就是将二进制全部往右移动并去除多余的右边，<code>10</code> 在二进制中表示为 <code>1010</code> ，右移一位后变成 <code>101</code> ，转换为十进制也就是 5，所以基本可以把右移看成以下公式 <code>int v = a / (2 ^ b)</code></p>
 <p>右移很好用，比如可以用在二分算法中取中间值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13 &gt;&gt; 1 // -&gt; 6</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">13</span> &gt;&gt; <span class="number">1</span> <span class="comment">// -&gt; 6</span></span><br></pre></td></tr></table></figure>
 <h3 id="按位操作"><a href="#按位操作" class="headerlink" title="按位操作"></a>按位操作</h3><p><strong>按位与</strong></p>
 <p>每一位都为 1，结果才为 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8 &amp; 7 // -&gt; 0</span><br><span class="line">// 1000 &amp; 0111 -&gt; 0000 -&gt; 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> &amp; <span class="number">7</span> <span class="comment">// -&gt; 0j</span></span><br><span class="line"><span class="comment">// 1000 &amp; 0111 -&gt; 0000 -&gt; 0</span></span><br></pre></td></tr></table></figure>
 <p><strong>按位或</strong></p>
 <p>其中一位为 1，结果就是 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8 | 7 // -&gt; 15</span><br><span class="line">// 1000 | 0111 -&gt; 1111 -&gt; 15</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> | <span class="number">7</span> <span class="comment">// -&gt; 15</span></span><br><span class="line"><span class="comment">// 1000 | 0111 -&gt; 1111 -&gt; 15</span></span><br></pre></td></tr></table></figure>
 <p><strong>按位异或</strong></p>
 <p>每一位都不同，结果才为 1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">8 ^ 7 // -&gt; 15</span><br><span class="line">8 ^ 8 // -&gt; 0</span><br><span class="line">// 1000 &amp; 0111 -&gt; 1111 -&gt; 15</span><br><span class="line">// 1000 &amp; 1000 -&gt; 0000 -&gt; 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> ^ <span class="number">7</span> <span class="comment">// -&gt; 15</span></span><br><span class="line"><span class="number">8</span> ^ <span class="number">8</span> <span class="comment">// -&gt; 0</span></span><br><span class="line"><span class="comment">// 1000 &amp; 0111 -&gt; 1111 -&gt; 15j</span></span><br><span class="line"><span class="comment">// 1000 &amp; 1000 -&gt; 0000 -&gt; 0</span></span><br></pre></td></tr></table></figure>
 <p>从以上代码中可以发现按位异或就是不进位加法</p>
 <p><strong>面试题</strong>：两个数不使用四则运算得出和</p>
 <p>这道题中可以按位异或，因为按位异或就是不进位加法，<code>8 ^ 8 = 0</code> 如果进位了，就是 16 了，所以我们只需要将两个数进行异或操作，然后进位。那么也就是说两个二进制都是 1 的位置，左边应该有一个进位 1，所以可以得出以下公式 <code>a + b = (a ^ b) + ((a &amp; b) &lt;&lt; 1)</code> ，然后通过迭代的方式模拟加法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function sum(a, b) &#123;</span><br><span class="line">    if (a == 0) return b</span><br><span class="line">    if (b == 0) return a</span><br><span class="line">    let newA = a ^ b</span><br><span class="line">    let newB = (a &amp; b) &lt;&lt; 1</span><br><span class="line">    return sum(newA, newB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>) <span class="keyword">return</span> b</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">let</span> newA = a ^ b</span><br><span class="line">    <span class="keyword">let</span> newB = (a &amp; b) &lt;&lt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> sum(newA, newB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -291,18 +291,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/08/12/数据机构(堆)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/08/12/算法(排序)/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          数据结构 —— 堆
+          算法 —— 排序
         
       </div>
     </a>
   
   
-    <a href="/2018/08/12/算法(排序)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">算法 —— 排序</div>
+    <a href="/2018/08/12/数据结构(树)/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据结构 —— 树</div>
       <i class="icon-circle-right"></i>
     </a>
   
