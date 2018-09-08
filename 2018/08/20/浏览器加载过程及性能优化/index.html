@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>浏览器加载过程及性能优化 | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="浅析浏览器加载、解析、渲染过程 最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？ 了解浏览器的工作过程，有利于前端工作者写出一个最佳实践">
+  <meta name="description" content="浅析浏览器加载、解析、渲染过程最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？了解浏览器的工作过程，有利于前端工作者写出一个最佳实践的界">
 <meta name="keywords" content="性能优化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器加载过程及性能优化">
 <meta property="og:url" content="http://yoursite.com/2018/08/20/浏览器加载过程及性能优化/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="浅析浏览器加载、解析、渲染过程 最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？ 了解浏览器的工作过程，有利于前端工作者写出一个最佳实践">
+<meta property="og:description" content="浅析浏览器加载、解析、渲染过程最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？了解浏览器的工作过程，有利于前端工作者写出一个最佳实践的界">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B8%B2%E6%9F%93.png">
-<meta property="og:updated_time" content="2018-09-08T13:22:15.860Z">
+<meta property="og:updated_time" content="2018-09-08T13:23:39.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器加载过程及性能优化">
-<meta name="twitter:description" content="浅析浏览器加载、解析、渲染过程 最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？ 了解浏览器的工作过程，有利于前端工作者写出一个最佳实践">
+<meta name="twitter:description" content="浅析浏览器加载、解析、渲染过程最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？了解浏览器的工作过程，有利于前端工作者写出一个最佳实践的界">
 <meta name="twitter:image" content="http://myblog.coderhsw.top/assets/pic/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B8%B2%E6%9F%93.png">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
@@ -163,10 +163,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="浅析浏览器加载、解析、渲染过程"><a href="#浅析浏览器加载、解析、渲染过程" class="headerlink" title="浅析浏览器加载、解析、渲染过程"></a>浅析浏览器加载、解析、渲染过程</h3><hr>
-<p>最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴<how browsers="" work=""> ，现在自己来试着总结一下。</how></p>
-<h4 id="为什么要了解浏览器加载、解析、渲染这个过程？"><a href="#为什么要了解浏览器加载、解析、渲染这个过程？" class="headerlink" title="为什么要了解浏览器加载、解析、渲染这个过程？"></a>为什么要了解浏览器加载、解析、渲染这个过程？</h4><hr>
-<p>了解浏览器的工作过程，有利于前端工作者写出一个最佳实践的界面。</p>
+        <h3 id="浅析浏览器加载、解析、渲染过程"><a href="#浅析浏览器加载、解析、渲染过程" class="headerlink" title="浅析浏览器加载、解析、渲染过程"></a>浅析浏览器加载、解析、渲染过程</h3><p>最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴<how browsers="" work=""> ，现在自己来试着总结一下。</how></p>
+<h4 id="为什么要了解浏览器加载、解析、渲染这个过程？"><a href="#为什么要了解浏览器加载、解析、渲染这个过程？" class="headerlink" title="为什么要了解浏览器加载、解析、渲染这个过程？"></a>为什么要了解浏览器加载、解析、渲染这个过程？</h4><p>了解浏览器的工作过程，有利于前端工作者写出一个最佳实践的界面。</p>
 <ul>
 <li><p>把 css 、js 文件的外链引入到合适的位置，让浏览器以最快的速度将其加载</p>
 </li>
@@ -175,8 +173,7 @@
 <li><p>终极目的是要加快浏览器渲染，减少回流、重画，优化用户体验</p>
 </li>
 </ul>
-<h4 id="浏览器页面加载"><a href="#浏览器页面加载" class="headerlink" title="浏览器页面加载"></a>浏览器页面加载</h4><hr>
-<ul>
+<h4 id="浏览器页面加载"><a href="#浏览器页面加载" class="headerlink" title="浏览器页面加载"></a>浏览器页面加载</h4><ul>
 <li>加载资源的形式<ul>
 <li>输入 url（或者跳转页面）加载 html</li>
 <li>加载 html 的静态资源，JS、CSS</li>
@@ -195,8 +192,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="浏览器的解析和渲染"><a href="#浏览器的解析和渲染" class="headerlink" title="浏览器的解析和渲染"></a>浏览器的解析和渲染</h4><hr>
-<p>资源加载得到了，那浏览器是如何把请求得到的资源完整地呈现在我们面前的呢?</p>
+<h4 id="浏览器的解析和渲染"><a href="#浏览器的解析和渲染" class="headerlink" title="浏览器的解析和渲染"></a>浏览器的解析和渲染</h4><p>资源加载得到了，那浏览器是如何把请求得到的资源完整地呈现在我们面前的呢?</p>
 <p>下面是渲染引擎在去的内容之后的基本流程：</p>
 <p><img src="http://myblog.coderhsw.top/assets/pic/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B8%B2%E6%9F%93.png" alt="img"> </p>
 <p>如上图，浏览器会这样解析：</p>
@@ -230,8 +226,7 @@
 <li>浏览器召集了在座的各位＜div＞＜span＞＜ul＞＜li＞们，“大伙儿收拾收拾行李，咱得重新来过……”，浏览器向服务器请求了新的CSS文件，重新渲染页面。</li>
 </ol>
 </blockquote>
-<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><hr>
-<p>上文提及到了回流和重绘，可想而知，回流和重绘都会是页面渲染速度变慢，延长用户看到页面效果的时间。那么如何才能优化浏览器渲染的性能呢？</p>
+<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><p>上文提及到了回流和重绘，可想而知，回流和重绘都会是页面渲染速度变慢，延长用户看到页面效果的时间。那么如何才能优化浏览器渲染的性能呢？</p>
 <p><strong>关于CSS</strong></p>
 <p>CSS 选择器的规则是从右到左匹配的，因此，写 css 的时候需要注意：</p>
 <ol>
@@ -494,11 +489,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
               </li>
              
               <li class="article-tag-list-item">
