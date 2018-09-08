@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/8 | Bowen_blog</title>
+  <title>浏览器加载过程及性能优化 | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Bowen">
-<meta name="keywords" content="前端,Html,css,JavaScript,Vue">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bowen_blog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/08/index.html">
+  <meta name="description" content="浅析浏览器加载、解析、渲染过程 最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？ 了解浏览器的工作过程，有利于前端工作者写出一个最佳实践">
+<meta name="keywords" content="性能优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器加载过程及性能优化">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/浏览器加载过程及性能优化/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="Bowen">
+<meta property="og:description" content="浅析浏览器加载、解析、渲染过程 最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？ 了解浏览器的工作过程，有利于前端工作者写出一个最佳实践">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B8%B2%E6%9F%93.png">
+<meta property="og:updated_time" content="2018-09-08T13:06:30.997Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bowen_blog">
-<meta name="twitter:description" content="Bowen">
+<meta name="twitter:title" content="浏览器加载过程及性能优化">
+<meta name="twitter:description" content="浅析浏览器加载、解析、渲染过程 最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴 ，现在自己来试着总结一下。 为什么要了解浏览器加载、解析、渲染这个过程？ 了解浏览器的工作过程，有利于前端工作者写出一个最佳实践">
+<meta name="twitter:image" content="http://myblog.coderhsw.top/assets/pic/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B8%B2%E6%9F%93.png">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
   
@@ -140,36 +143,153 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-浏览器加载过程及性能优化" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/24/Web性能优化/" class="archive-article-date">
-  	<time datetime="2018-08-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/24/Web性能优化/">Web性能优化</a>
+    <h1 class="article-title" itemprop="name">
+      浏览器加载过程及性能优化
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/08/20/浏览器加载过程及性能优化/" class="archive-article-date">
+  	<time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="浅析浏览器加载、解析、渲染过程"><a href="#浅析浏览器加载、解析、渲染过程" class="headerlink" title="浅析浏览器加载、解析、渲染过程"></a>浅析浏览器加载、解析、渲染过程</h3><hr>
+<p>最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴<how browsers="" work=""> ，现在自己来试着总结一下。</how></p>
+<h4 id="为什么要了解浏览器加载、解析、渲染这个过程？"><a href="#为什么要了解浏览器加载、解析、渲染这个过程？" class="headerlink" title="为什么要了解浏览器加载、解析、渲染这个过程？"></a>为什么要了解浏览器加载、解析、渲染这个过程？</h4><hr>
+<p>了解浏览器的工作过程，有利于前端工作者写出一个最佳实践的界面。</p>
+<ul>
+<li><p>把 css 、js 文件的外链引入到合适的位置，让浏览器以最快的速度将其加载</p>
+</li>
+<li><p>以最优的写法构建 DOM 结构和解析 CSS，提高浏览器的解析速率</p>
+</li>
+<li><p>终极目的是要加快浏览器渲染，减少回流、重画，优化用户体验</p>
+</li>
+</ul>
+<h4 id="浏览器页面加载"><a href="#浏览器页面加载" class="headerlink" title="浏览器页面加载"></a>浏览器页面加载</h4><hr>
+<ul>
+<li>加载资源的形式<ul>
+<li>输入 url（或者跳转页面）加载 html</li>
+<li>加载 html 的静态资源，JS、CSS</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>加载资源的过程<ul>
+<li>输入网址</li>
+<li>浏览器根据 DNS 服务器解析得到域名的 IP 地址</li>
+<li>浏览器给 web 服务器发送一个 HTTP 请求</li>
+<li>服务器收到、处理请求，并返回一个响应</li>
+<li>服务器返回 HTML 响应</li>
+<li>浏览器开始显示 HTML</li>
+<li>浏览器加载 HTML 时，发现嵌在其中的其他连接，会再次发送请求，来重新获取这些文件，这些文件包括 CSS/JS/图片视频等资源，这些资源的地址都要经历一个和 HTML 读取类似的过程</li>
+</ul>
+</li>
+</ul>
+<h4 id="浏览器的解析和渲染"><a href="#浏览器的解析和渲染" class="headerlink" title="浏览器的解析和渲染"></a>浏览器的解析和渲染</h4><hr>
+<p>资源加载得到了，那浏览器是如何把请求得到的资源完整地呈现在我们面前的呢?</p>
+<p>下面是渲染引擎在去的内容之后的基本流程：</p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B8%B2%E6%9F%93.png" alt="img"> </p>
+<p>如上图，浏览器会这样解析：</p>
+<ol>
+<li>浏览器会将HTML解析成一个DOM树，DOM 树的构建过程是一个深度遍历过程：当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点。</li>
+<li>CSSOM，CSS 规则树</li>
+<li>根据DOM树和CSSOM来构造 Rendering Tree。注意：Rendering Tree 渲染树并不等同于 DOM 树，因为一些像 Header 或 display:none 的东西就没必要放在渲染树中了。</li>
+<li>有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系。下一步操作称之为Layout，顾名思义就是计算出每个节点在屏幕中的位置。</li>
+<li>再下一步就是绘制，即遍历render树，并使用UI后端层绘制每个节点。</li>
+</ol>
+<p>上述这个过程是逐步完成的，为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等到所有的html都解析完成之后再去构建和布局render树 。</p>
+<p><strong>几个概念</strong></p>
+<p>1、reflow/layout</p>
+<p>当渲染对象被创建并添加到树中，它们并没有位置和大小，计算这些值的过程称为layout或reflow。 浏览器得到渲染对象后，要花时间去渲染，当它发现了某个部分发生了变化影响了布局，那就需要倒回去重新渲染。</p>
+<p>2、repaint</p>
+<p>如果只是改变了某个元素的背景颜色，文字颜色等，不影响元素周围或内部布局的属性，将只会引起浏览器的repaint，重画某一部分。</p>
+<p>Reflow要比Repaint更花费时间，也就更影响性能。所以在写代码的时候，要尽量避免过多的Reflow。</p>
+<p>在网上的文章中，这是一个比较有趣也写得比较好的 HTML 页面加载和解析流程：</p>
+<blockquote>
+<ol>
+<li>用户输入网址（假设是个html页面，并且是第一次访问），浏览器向服务器发出请求，服务器返回html文件； </li>
+<li>浏览器开始载入html代码，发现＜head＞标签内有一个＜link＞标签引用外部CSS文件； </li>
+<li>浏览器又发出CSS文件的请求，服务器返回这个CSS文件； </li>
+<li>浏览器继续载入html中＜body＞部分的代码，并且CSS文件已经拿到手了，可以开始渲染页面了； </li>
+<li>浏览器在代码中发现一个＜img＞标签引用了一张图片，向服务器发出请求。此时浏览器不会等到图片下载完，而是继续渲染后面的代码； </li>
+<li>服务器返回图片文件，由于图片占用了一定面积，影响了后面段落的排布，因此浏览器需要回过头来重新渲染这部分代码； </li>
+<li>浏览器发现了一个包含一行Javascript代码的＜script＞标签，赶快运行它； </li>
+<li>Javascript脚本执行了这条语句，它命令浏览器隐藏掉代码中的某个＜div＞ （style.display=”none”）。突然少了这么一个元素，浏览器不得不重新渲染这部分代码； </li>
+<li>终于等到了＜/html＞的到来，浏览器泪流满面…… </li>
+<li>等等，还没完，用户点了一下界面中的“换肤”按钮，Javascript让浏览器换了一下＜link＞标签的CSS路径； </li>
+<li>浏览器召集了在座的各位＜div＞＜span＞＜ul＞＜li＞们，“大伙儿收拾收拾行李，咱得重新来过……”，浏览器向服务器请求了新的CSS文件，重新渲染页面。</li>
+</ol>
+</blockquote>
+<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><hr>
+<p>上文提及到了回流和重绘，可想而知，回流和重绘都会是页面渲染速度变慢，延长用户看到页面效果的时间。那么如何才能优化浏览器渲染的性能呢？</p>
+<p><strong>关于CSS</strong></p>
+<p>CSS 选择器的规则是从右到左匹配的，因此，写 css 的时候需要注意：</p>
+<ol>
+<li>CSS 的 link 放在 head 标签内，先得到样式再加载 html，减少重绘</li>
+<li>dom 深度尽量前，减少多重嵌套</li>
+<li>避免后代选择符，尽量使用子选择符。原因：子元素匹配符的概率要大于后代元素匹配符。后代选择符;#tp p{} 子选择符：#tp&gt;p{}</li>
+<li>避免使用通配符，举一个例子，.mod .hd *{font-size:14px;} 根据匹配顺序,将首先匹配通配符,也就是说先匹配出通配符,然后匹配.hd（就是要对dom树上的所有节点进行遍历他的父级元素）,然后匹配.mod,这样的性能耗费可想而知</li>
+</ol>
+<p><strong>关于 script</strong></p>
+<p>浏览器加载 html 文档时，遇到 script 标签会停下来，等到 script 标签里的 js 代码完全下载好并执行完毕之后再继续加载剩下的 html，因此，引入 script 标签时需要注意：</p>
+<ol>
+<li>尽量把 script 标签放到 body 的最后面，这样一来不会阻塞 html 的加载，二来不会导致 script 标签里的某些 dom 结构无法正常操作</li>
+<li>在 script 标签中添加属性，async/defer</li>
+</ol>
+<p><strong>加载优化</strong></p>
+<ol>
+<li>静态资源合并压缩（webpack）</li>
+<li>静态资源缓存，文件名字不变，浏览器不会重新向服务器请求，而是从缓存加载</li>
+<li>使用 CDN 加快资源加载</li>
+<li>SSR 服务端渲染，数据直接渲染到 HTML 中，而不需通过 Ajax（使用vue、react）</li>
+</ol>
+<p><strong>其他渲染优化</strong></p>
+<ol>
+<li>懒加载</li>
+<li>减少 DOM 查询，使用缓存</li>
+<li>减少 DOM 操作，合并操作（使用 document.createDocumentFrament()）</li>
+<li>事件节流</li>
+<li>尽早执行（使用 DOMContentLoaded）</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -181,364 +301,114 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/08/20/浏览器加载过程及性能优化/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/20/浏览器加载过程及性能优化/" class="archive-article-date">
-  	<time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/08/24/Web性能优化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Web性能优化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/20/计算机网络总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">计算机网络总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/20/浏览器加载过程及性能优化/">浏览器加载过程及性能优化</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能优化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/20/计算机网络总结/" class="archive-article-date">
-  	<time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/20/计算机网络总结/">计算机网络总结</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机通识</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/算法(位运算)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/算法(位运算)/">算法 —— 位运算</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/数据结构(队列)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/数据结构(队列)/">数据结构 —— 队列</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript DOM/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript DOM/">JavaScript DOM</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/数据结构(链表)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/数据结构(链表)/">数据结构 —— 链表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/算法(排序)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/算法(排序)/">算法 —— 排序</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/数据结构(树)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/数据结构(树)/">数据结构 —— 树</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/数据结构(栈)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/数据结构(栈)/">数据结构 —— 栈</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2018/08/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/08/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -562,8 +432,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

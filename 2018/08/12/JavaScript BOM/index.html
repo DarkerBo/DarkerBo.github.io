@@ -408,7 +408,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params">arg1</span>)</span>&#123;&#125;.bind(<span class="literal">undefined</span>, <span class="number">10</span>), <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 <p>上面代码中，<code>bind</code>方法第一个参数是<code>undefined</code>，表示将原函数的<code>this</code>绑定全局作用域，第二个参数是要传入原函数的参数。它运行后会返回一个新函数，该函数不带参数</p>
 <p>第三种解决方法是自定义<code>setTimeout</code>，使用<code>apply</code>方法将参数输入回调函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--[<span class="keyword">if</span> lte IE <span class="number">9</span>]&gt;&lt;script&gt;</span><br><span class="line">(function(f)&#123;</span><br><span class="line">window.setTimeout =f(window.setTimeout);</span><br><span class="line">window.setInterval =f(window.setInterval);</span><br><span class="line">&#125;)(function(f)&#123;return function(c,t)&#123;</span><br><span class="line">var a=[].slice.call(arguments,2);return f(function()&#123;c.apply(this,a)&#125;,t)&#125;</span><br><span class="line">&#125;);</span><br><span class="line">&lt;/script&gt;&lt;![endif]--&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--[<span class="keyword">if</span> lte IE <span class="number">9</span>]&gt;<span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span></span><br><span class="line"><span class="xml">(function(f)&#123;</span></span><br><span class="line"><span class="xml">window.setTimeout =f(window.setTimeout);</span></span><br><span class="line"><span class="xml">window.setInterval =f(window.setInterval);</span></span><br><span class="line"><span class="xml">&#125;)(function(f)&#123;return function(c,t)&#123;</span></span><br><span class="line"><span class="xml">var a=[].slice.call(arguments,2);return f(function()&#123;c.apply(this,a)&#125;,t)&#125;</span></span><br><span class="line"><span class="xml">&#125;);</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><span class="xml"><span class="tag">&lt;<span class="name">![endif]--</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 <p>除了参数问题，<code>setTimeout</code>还有一个需要注意的地方：如果被<code>setTimeout</code>推迟执行的回调函数是某个对象的方法，那么该方法中的<code>this</code>关键字将指向全局环境，而不是定义时所在的那个对象</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  x: <span class="number">2</span>,</span><br><span class="line">  y: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">setTimeout(o.y,<span class="number">1000</span>);</span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
 <p>上面代码输出的是1，而不是2，这表示<code>o.y</code>的this所指向的已经不是o，而是全局环境了</p>
@@ -639,18 +639,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/08/12/数据结构(队列)/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/08/12/JavaScript Event/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          数据结构 —— 队列
+          JavaScript Event
         
       </div>
     </a>
   
   
-    <a href="/2018/08/12/JavaScript Math&Date/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">JavaScript Math&amp;Date</div>
+    <a href="/2018/08/12/JavaScript Async/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript Async</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -766,6 +766,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
