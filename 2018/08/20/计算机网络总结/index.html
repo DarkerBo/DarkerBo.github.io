@@ -6,20 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>算法 —— 位运算 | Bowen_blog</title>
+  <title>计算机网络总结 | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="位运算位运算在算法中很有用，速度可以比四则运算快很多。 在学习位运算之前应该知道十进制如何转二进制，二进制如何转十进制。这里说明下简单的计算方式  十进制 33 可以看成是 32 + 1 ，并且 33 应该是六位二进制的（因为 33 近似 32，而 32 是 2 的五次方，所以是六位），那么 十进制 33 就是 100001 ，只要是 2 的次方，那么就是 1否则都为 0  那么二进制 10000">
-<meta name="keywords" content="数据结构与算法">
+  <meta name="description" content="计算机网络总结一、五层协议的体系结构 由于OSI的七层体系结构复杂，标准制定周期长，使得产品需要很长时间才能投入使用，因此在目前的市场中并不是很实用。 五层协议的体系结构是OSI与TCP/IP协议体系结构的一种折中方案，也就是既涉及了OSI也设计了TCP/IP，这样既简洁又能将概念阐述清楚。   应用层  应用层的任务是通过应用进程间的交互来完成特定网络应用。应用层协议定义的是应用进程（进程：主机">
+<meta name="keywords" content="计算机通识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法 —— 位运算">
-<meta property="og:url" content="http://yoursite.com/2018/08/12/算法(位运算)/index.html">
+<meta property="og:title" content="计算机网络总结">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/计算机网络总结/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="位运算位运算在算法中很有用，速度可以比四则运算快很多。 在学习位运算之前应该知道十进制如何转二进制，二进制如何转十进制。这里说明下简单的计算方式  十进制 33 可以看成是 32 + 1 ，并且 33 应该是六位二进制的（因为 33 近似 32，而 32 是 2 的五次方，所以是六位），那么 十进制 33 就是 100001 ，只要是 2 的次方，那么就是 1否则都为 0  那么二进制 10000">
+<meta property="og:description" content="计算机网络总结一、五层协议的体系结构 由于OSI的七层体系结构复杂，标准制定周期长，使得产品需要很长时间才能投入使用，因此在目前的市场中并不是很实用。 五层协议的体系结构是OSI与TCP/IP协议体系结构的一种折中方案，也就是既涉及了OSI也设计了TCP/IP，这样既简洁又能将概念阐述清楚。   应用层  应用层的任务是通过应用进程间的交互来完成特定网络应用。应用层协议定义的是应用进程（进程：主机">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-06T07:30:47.586Z">
+<meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%9B%BE%E8%A7%A3.jpg">
+<meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A7%A3.jpg">
+<meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A7%A32.png">
+<meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
+<meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B.png">
+<meta property="og:image" content="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/url%E8%AF%B7%E6%B1%82.png">
+<meta property="og:updated_time" content="2018-09-08T12:09:42.667Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法 —— 位运算">
-<meta name="twitter:description" content="位运算位运算在算法中很有用，速度可以比四则运算快很多。 在学习位运算之前应该知道十进制如何转二进制，二进制如何转十进制。这里说明下简单的计算方式  十进制 33 可以看成是 32 + 1 ，并且 33 应该是六位二进制的（因为 33 近似 32，而 32 是 2 的五次方，所以是六位），那么 十进制 33 就是 100001 ，只要是 2 的次方，那么就是 1否则都为 0  那么二进制 10000">
+<meta name="twitter:title" content="计算机网络总结">
+<meta name="twitter:description" content="计算机网络总结一、五层协议的体系结构 由于OSI的七层体系结构复杂，标准制定周期长，使得产品需要很长时间才能投入使用，因此在目前的市场中并不是很实用。 五层协议的体系结构是OSI与TCP/IP协议体系结构的一种折中方案，也就是既涉及了OSI也设计了TCP/IP，这样既简洁又能将概念阐述清楚。   应用层  应用层的任务是通过应用进程间的交互来完成特定网络应用。应用层协议定义的是应用进程（进程：主机">
+<meta name="twitter:image" content="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
   
@@ -141,53 +149,167 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-算法(位运算)" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-计算机网络总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      算法 —— 位运算
+      计算机网络总结
     </h1>
   
 
         
-        <a href="/2018/08/12/算法(位运算)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
+        <a href="/2018/08/20/计算机网络总结/" class="archive-article-date">
+  	<time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>位运算在算法中很有用，速度可以比四则运算快很多。</p>
-<p>在学习位运算之前应该知道十进制如何转二进制，二进制如何转十进制。这里说明下简单的计算方式</p>
+        <h3 id="计算机网络总结"><a href="#计算机网络总结" class="headerlink" title="计算机网络总结"></a>计算机网络总结</h3><h4 id="一、五层协议的体系结构"><a href="#一、五层协议的体系结构" class="headerlink" title="一、五层协议的体系结构"></a>一、五层协议的体系结构</h4><hr>
+<p>由于OSI的七层体系结构复杂，标准制定周期长，使得产品需要很长时间才能投入使用，因此在目前的市场中并不是很实用。</p>
+<p>五层协议的体系结构是OSI与TCP/IP协议体系结构的一种折中方案，也就是既涉及了OSI也设计了TCP/IP，这样既简洁又能将概念阐述清楚。</p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="img"> </p>
+<p><strong>应用层</strong></p>
+<hr>
+<p><strong>应用层的任务是通过应用进程间的交互来完成特定网络应用。</strong>应用层协议定义的是应用进程（进程：主机中正在运行的程序）间的通信和交互的规则。对于不同的网络应用需要不同的应用层协议。在互联网中应用层协议很多，如<strong>域名系统DNS</strong>，支持万维网应用的HTTP协议，支持电子邮件的SMTP协议等等。我们把应用层交互的数据单元称为报文。</p>
 <ul>
-<li><p>十进制 <code>33</code> 可以看成是 <code>32 + 1</code> ，并且 <code>33</code> 应该是六位二进制的（因为 <code>33</code> 近似 <code>32</code>，而 <code>32</code> 是 2 的五次方，所以是六位），那么 十进制 <code>33</code> 就是 <code>100001</code> ，只要是 2 的次方，那么就是 1否则都为 0</p>
-</li>
-<li><p>那么二进制 <code>100001</code> 同理，首位是 <code>2^5</code> ，末位是 <code>2^0</code> ，相加得出 33</p>
+<li><p>DNS</p>
+<ul>
+<li>操作系统会从DNS缓存中查找</li>
+<li>若没有则会去本地配置的DNS服务器中查找（host文件）</li>
+<li>若没有则会去DNS根服务器查找，先找到一级域名的服务器，在查找二级域名的服务器，以此迭代。</li>
+</ul>
 </li>
 </ul>
-<h3 id="左移-lt-lt"><a href="#左移-lt-lt" class="headerlink" title="左移 &lt;&lt;"></a>左移 &lt;&lt;</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> &lt;&lt; <span class="number">1</span> <span class="comment">// -&gt; 20</span></span><br></pre></td></tr></table></figure>
-<p>左移就是将二进制全部往左移动，<code>10</code> 在二进制中表示为 <code>1010</code> ，左移一位后变成 <code>10100</code> ，转换为十进制也就是 20，所以基本可以把左移看成以下公式 <code>a * (2 ^ b)</code></p>
-<h3 id="算数右移-gt-gt"><a href="#算数右移-gt-gt" class="headerlink" title="算数右移 &gt;&gt;"></a>算数右移 &gt;&gt;</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">10</span> &gt;&gt; <span class="number">1</span> <span class="comment">// -&gt; 5</span></span><br></pre></td></tr></table></figure>
-<p>算数右移就是将二进制全部往右移动并去除多余的右边，<code>10</code> 在二进制中表示为 <code>1010</code> ，右移一位后变成 <code>101</code> ，转换为十进制也就是 5，所以基本可以把右移看成以下公式 <code>int v = a / (2 ^ b)</code></p>
-<p>右移很好用，比如可以用在二分算法中取中间值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">13</span> &gt;&gt; <span class="number">1</span> <span class="comment">// -&gt; 6</span></span><br></pre></td></tr></table></figure>
-<h3 id="按位操作"><a href="#按位操作" class="headerlink" title="按位操作"></a>按位操作</h3><p><strong>按位与</strong></p>
-<p>每一位都为 1，结果才为 1</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> &amp; <span class="number">7</span> <span class="comment">// -&gt; 0j</span></span><br><span class="line"><span class="comment">// 1000 &amp; 0111 -&gt; 0000 -&gt; 0</span></span><br></pre></td></tr></table></figure>
-<p><strong>按位或</strong></p>
-<p>其中一位为 1，结果就是 1</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> | <span class="number">7</span> <span class="comment">// -&gt; 15</span></span><br><span class="line"><span class="comment">// 1000 | 0111 -&gt; 1111 -&gt; 15</span></span><br></pre></td></tr></table></figure>
-<p><strong>按位异或</strong></p>
-<p>每一位都不同，结果才为 1</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">8</span> ^ <span class="number">7</span> <span class="comment">// -&gt; 15</span></span><br><span class="line"><span class="number">8</span> ^ <span class="number">8</span> <span class="comment">// -&gt; 0</span></span><br><span class="line"><span class="comment">// 1000 &amp; 0111 -&gt; 1111 -&gt; 15j</span></span><br><span class="line"><span class="comment">// 1000 &amp; 1000 -&gt; 0000 -&gt; 0</span></span><br></pre></td></tr></table></figure>
-<p>从以上代码中可以发现按位异或就是不进位加法</p>
-<p><strong>面试题</strong>：两个数不使用四则运算得出和</p>
-<p>这道题中可以按位异或，因为按位异或就是不进位加法，<code>8 ^ 8 = 0</code> 如果进位了，就是 16 了，所以我们只需要将两个数进行异或操作，然后进位。那么也就是说两个二进制都是 1 的位置，左边应该有一个进位 1，所以可以得出以下公式 <code>a + b = (a ^ b) + ((a &amp; b) &lt;&lt; 1)</code> ，然后通过迭代的方式模拟加法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>) <span class="keyword">return</span> b</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">let</span> newA = a ^ b</span><br><span class="line">    <span class="keyword">let</span> newB = (a &amp; b) &lt;&lt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> sum(newA, newB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>TSL握手（HTTPS）</p>
+<p>TSL协议位于应用层之下，传输层之上，主要是使用两种技术：对称加密和非对称加密</p>
+<ul>
+<li><p>客户端发送一个随机值，请求需要的协议和加密方式；</p>
+</li>
+<li><p>服务端收到随机值，自己也产生一个随机值，并根据需要的协议和加密方式加密证书（证书有权威的数字认证机构发放）发送给客户端（如需验证客户端的证书需说明）；</p>
+</li>
+<li><p>客户端收到证书并验证是否有效，验证通过后生成一个随机值，通过证书上的公钥加密这个随机值并发回给服务端，如客户端需验证证书则会附带证书；</p>
+</li>
+<li><p>服务端接收到加密的随机值后通过私钥加密获得第三个随机值，此时双方都有三个随机值，接下来的通信就可以按照之前约定的来生成密钥，通过密钥来加密解密。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%9B%BE%E8%A7%A3.jpg" alt="img"> </p>
+<p><strong>传输层</strong></p>
+<hr>
+<p><strong>传输层的主要任务就是负责向两台主机进程之间的通信提供通用的数据传输服务。</strong>应用进程利用该服务传送应用层报文。 “通用的”是指并不针对某一个特定的网络应用，而是多种应用可以使用同一个传输层服务。由于一台主机可同时运行多个线程，因此传输层有复用和分用的功能。所谓复用就是指多个应用层进程可同时使用下面传输层的服务，分用和复用相反，是传输层把收到的信息分别交付上面应用层中的相应进程。</p>
+<p><strong>传输层主要使用两种协议：TCP协议和UDP协议</strong></p>
+<ul>
+<li>TCP的主要特点：<ul>
+<li>面向连接（就好像打电话一样，通话前需要先拨号建立连接，通话结束后要挂机释放连接）；</li>
+<li>面向字节流，即TCP把应用程序交下来的数据仅仅看成是一连串的无结构的字节流；</li>
+<li>一对一的，每一条TCP连接只能有两个端点；</li>
+<li>TCP提供可靠交付的服务，有超时重传和阻塞机制，无差错、不丢失、不重复、并且按序到达；</li>
+<li>TCP提供全双工通信。TCP允许通信双方的应用进程在任何时候都能发送数据。TCP连接的两端都设有发送缓存和接收缓存，用来临时存放双方通信的数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>UDP的主要特点：</p>
+<ul>
+<li>无连接；</li>
+<li>面向报文的</li>
+<li>不保证可靠交付，但尽最大努力交付，因此主机不需要维持复杂的连接状态 ；</li>
+<li>没有阻塞机制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如IP电话，实时视频会议等）；</li>
+<li>UDP支持一对一、一对多、多对一和多对多的交互通信；</li>
+<li>UDP的首部开销小，只有8个字节，比TCP的20个字节的首部要短。</li>
+</ul>
+</li>
+</ul>
+<p><strong>网络层</strong></p>
+<hr>
+<p><strong>网络层负责为分组交换网上的不同主机提供通信服务。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组和包进行传送，确保传送到目的主机，而这当中两个重要的条件是IP地址和MAC地址</strong></p>
+<p>IP地址指明了节点被分配到的地址，MAC地址指的是网卡所属的固定地址。IP地址可以凭借ARP协议和MAC地址配对，IP地址可变换，而MAC地址基本上是不会更改的。</p>
+<ul>
+<li>ARP协议</li>
+</ul>
+<p>ARP协议是一种用以解析地址的协议，根据通信方的IP地址可以反查出对应的MAC地址。IP间的通信依赖MAC地址，在网络上，通信双方在同一局域网内的状况很少，通常需要多台计算机和网络设备中转才能连接到对方。而在中转时，会利用下一设备的MAC地址来搜索下一中转目标。而这时就需要使用ARP协议。</p>
+<p>这种MAC中转机制成为路由选择。类似快递公司收到寄件人的货物后，快递公司就会在集散中心检查目的地址，判断是否能送到目的地或者明确送往下一个集散中心，下一个集散中心自会再做同样的判断。</p>
+<p>在TCP/IP体系结构中，由于网络层使用IP协议，因此分组也叫IP数据报，简称数据报。</p>
+<p><strong>数据链路层</strong></p>
+<hr>
+<p><strong>数据链路层通常简称为链路层。两台主机之间的数据传输，总是在一段一段的链路上传送的，这就需要使用专门的链路层的协议。</strong>  在两个相邻节点之间传送数据时，<strong>数据链路层将网络层交下来的IP数据报组装程帧，</strong>在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）。</p>
+<p>再接收数据的时候，控制信息使接收端能够知道一个帧是从哪个比特开始，哪个比特结束的。数据链路层在接收到一个帧之后，可以从中提取出数据，再上交给网络层。链路层还可以根据控制信息中的差错控制来查错和纠错，丢弃这个出了差错的帧，以避免继续在网络中传送下去白白浪费网络资源。</p>
+<p><strong>物理层</strong></p>
+<hr>
+<p>在物理层上所传送的数据单位是比特。 物理层的作用是实现相邻计算机节点之间<strong>比特流的透明传送</strong>，尽可能屏蔽掉具体传输介质和物理设备的差异。<strong>使其上面的数据链路层不必考虑网络的具体传输介质是什么。</strong></p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A7%A3.jpg" alt="img"> </p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A7%A32.png" alt="img"> </p>
+<h4 id="二、TCP三次握手和四次握手"><a href="#二、TCP三次握手和四次握手" class="headerlink" title="二、TCP三次握手和四次握手"></a>二、TCP三次握手和四次握手</h4><hr>
+<p>TCP报文首部字段（部分）</p>
+<p>1  序号，占4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号。例如，一段报文的序号字段值是 301 ，而携带的数据共有100字段，显然下一个报文段（如果还有的话）的数据序号应该从401开始；</p>
+<p>2  确认ACK，仅当ACK=1时，确认号字段才有效。TCP规定，在连接建立后所有报文的传输都必须把ACK置1；</p>
+<p>3  同步SYN，在连接建立时用来同步序号。当SYN=1，ACK=0，表明是连接请求报文，若同意连接，则响应报文中应该使SYN=1，ACK=1；</p>
+<p>4  终止FIN，用来释放连接。当FIN=1，表明此报文的发送方的数据已经发送完毕，并且要求释放；</p>
+<p>5  窗口，占2字节，指的是通知接收方，发送本报文你需要有多大的空间来接受。</p>
+<p><strong>TCP连接建立（三次握手）</strong></p>
+<hr>
+<p>1、服务器进入监听状态 ；</p>
+<p>2、客户端主动请求连接，发送请求连接的报文，报文首部的同步位 SYN =1，同时选择一个初始序列号 seq=x ，此时，TCP客户端进程进入了 SYN-SENT（同步已发送状态）状态；</p>
+<p>3、服务端接收到请求报文，发回确认保温，确认报文中应该 ACK=1，SYN=1，确认号是ack=x+1，同时也要为自己初始化一个序列号 seq=y，此时，TCP服务器进程进入了SYN-RCVD（同步收到）状态；</p>
+<p>4、客户端接收到确认报文， 还需要给服务端确认，给服务端发回一个确认报文，确认报文的ACK=1，ack=y+1，自己的序列号seq=x+1，此时，TCP连接建立，客户端进入ESTABLISHED（已建立连接）状态 ；</p>
+<p>5、当服务端收到确认报文，也进入ESTABLISHED（已建立连接）状态，双方正式开始数据传输。</p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="img"> </p>
+<p>为什么需要第三次握手</p>
+<blockquote>
+<p>主要使为了防止已经失效的请求报文突然传到服务器，从而产生错误。</p>
+</blockquote>
+<blockquote>
+<p>如果使用两次握手，假设第一次客户端请求服务器的请求报文由于网络问题，在网络节点中滞留的时间太长，由于TCP客户端长时间没有收到服务端发来的确认报文，以为服务端没有收到，此时客户端会重新再发一次请求报文，服务端收到这条请求报文并发挥确认报文，两次握手之后，建立连接，传输数据，关闭连接。后来，网络恢复畅通，第一次发送的请求报文送到了服务器，服务器收到之后发回确认报文，这条报文本该是失效的，但两次握手使得客户端和服务器建立了连接，造成了资源的浪费。</p>
+</blockquote>
+<blockquote>
+<p>如果是三次握手，网络恢复畅通，第一次发送的请求报文发送到服务端，服务端发回确认报文，但客户端不会再发出确认，由于服务器没有收到再次确认的报文，则不会建立连接</p>
+</blockquote>
+<p><strong>TCP连接释放（四次握手）</strong></p>
+<hr>
+<p>1  客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。</p>
+<p>2  服务器收到连接释放的报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。 这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。</p>
+<p>3  客户端收到确认报文后，进入FIN-WAIT-2（终止等待2）状态，等待服务器发来释放连接的报文。</p>
+<p>4  服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</p>
+<p>5  客户端收到连接释放的报文后，发回确认报文，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时， 此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。</p>
+<p>6  当服务器收到了客户端传来的确认报文后，立即进入了CLOSE状态，结束这一次TCP连接，可见服务器结束连接的时间比客户端要早一点。</p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="img"> </p>
+<p><strong>为什么需要等待2MSL</strong></p>
+<blockquote>
+<p>MSL(Maximum Segment Lifetime)：最长报文段寿命</p>
+</blockquote>
+<blockquote>
+<p>1、确保客户端最后一次发出去的确认报文能被服务器接收到，当服务器发送 FIN + ACK 释放连接报文时，如果服务端没有收到客户端发回的确认报文，服务器则认为客户端没有收到，就会重发一遍释放连接的报文，而客户端就可以在这2MSL的时间段内接收这个重传的报文，并返回确认报文，接着重启这个2MSL的定时器。</p>
+</blockquote>
+<blockquote>
+<p>2、防止失效连接出现在新的连接中。当客户端发送最后的确认报文后，在2MSL时间段了，可以使出现在本次持续连接中的所有连接都消失。</p>
+</blockquote>
+<p><strong>若建立连接后客户端故障怎么办</strong></p>
+<blockquote>
+<p> TCP有一个保活计时器，时间为两个小时，当服务器两个小时后没有收到客户端的回应，则会发送一个探测报文，每个75分钟发送一次，总共会发送10次，若一连发送10个探测报文后都没有反应，则服务器认为客户端故障，关闭连接。服务器每次收到客户端的反应，都会复位各个计时器。</p>
+</blockquote>
+<p>关于TCP连接更详细的介绍请参考这篇文章：<a href="https://blog.csdn.net/qzcsu/article/details/72861891" target="_blank" rel="noopener">https://blog.csdn.net/qzcsu/article/details/72861891</a></p>
+<h4 id="三、浏览器输入url到显示页面的过程"><a href="#三、浏览器输入url到显示页面的过程" class="headerlink" title="三、浏览器输入url到显示页面的过程"></a>三、浏览器输入url到显示页面的过程</h4><hr>
+<p><strong>简介版：</strong></p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/url%E8%AF%B7%E6%B1%82.png" alt="img"> </p>
+<p><strong>详细版：</strong></p>
+<ol>
+<li>浏览器通过DNS协议解析url，找到对应的IP地址；</li>
+<li>开启一个线程，发起HTTP请求；</li>
+<li>与服务器建立TCP连接（三次握手），应用层的数据下发到传输层，这里TCP协议会指明两端的端口号，然后下发到网络层，通过IP协议确定IP地址，然后凭借ARP协议明确路由跳转的方式，然后数据会被封装到链路层的数据帧中，最后就是物理层的传输；</li>
+<li>TCP握手之后会进行TSL（HTTPS）握手，正式开始传数据；</li>
+<li>数据进入服务器之前，可能还会先经过负责负载均衡的服务器，把请求合理分发到多台服务器上，最后服务器返回一个HTML响应；</li>
+<li>浏览器接收到响应后开始解析HTML，如果是压缩文件还需要解压，根据响应实体的首部字段规定的编码方式来解码文件；</li>
+<li>文件解码成功之后开始渲染页面。先根据HTML构建DOM树，如有CSS再构建CSSOM，如有script标签，则判断是否有async和defer属性，若没有，则会阻塞渲染流程，先下载好 JS 文件，再继续HTML的加载；</li>
+<li>CSSOM和DOM树构建完成会生成Render树，浏览器会根据Render树来绘制，将内容显示页面上。</li>
+</ol>
+
       
 
       
@@ -221,7 +343,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机通识</a>
         		</li>
       		
 		</ul>
@@ -277,7 +399,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/08/12/算法(位运算)/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/08/20/计算机网络总结/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -291,18 +413,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/08/12/数据结构(链表)/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          数据结构 —— 链表
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/12/数据结构(栈)/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">数据结构 —— 栈</div>
+    <a href="/2018/08/12/JavaScript Array/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript Array</div>
       <i class="icon-circle-right"></i>
     </a>
   

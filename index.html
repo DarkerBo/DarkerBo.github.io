@@ -142,6 +142,215 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-计算机网络总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/20/计算机网络总结/">计算机网络总结</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/20/计算机网络总结/" class="archive-article-date">
+  	<time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="计算机网络总结"><a href="#计算机网络总结" class="headerlink" title="计算机网络总结"></a>计算机网络总结</h3><h4 id="一、五层协议的体系结构"><a href="#一、五层协议的体系结构" class="headerlink" title="一、五层协议的体系结构"></a>一、五层协议的体系结构</h4><hr>
+<p>由于OSI的七层体系结构复杂，标准制定周期长，使得产品需要很长时间才能投入使用，因此在目前的市场中并不是很实用。</p>
+<p>五层协议的体系结构是OSI与TCP/IP协议体系结构的一种折中方案，也就是既涉及了OSI也设计了TCP/IP，这样既简洁又能将概念阐述清楚。</p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="img"> </p>
+<p><strong>应用层</strong></p>
+<hr>
+<p><strong>应用层的任务是通过应用进程间的交互来完成特定网络应用。</strong>应用层协议定义的是应用进程（进程：主机中正在运行的程序）间的通信和交互的规则。对于不同的网络应用需要不同的应用层协议。在互联网中应用层协议很多，如<strong>域名系统DNS</strong>，支持万维网应用的HTTP协议，支持电子邮件的SMTP协议等等。我们把应用层交互的数据单元称为报文。</p>
+<ul>
+<li><p>DNS</p>
+<ul>
+<li>操作系统会从DNS缓存中查找</li>
+<li>若没有则会去本地配置的DNS服务器中查找（host文件）</li>
+<li>若没有则会去DNS根服务器查找，先找到一级域名的服务器，在查找二级域名的服务器，以此迭代。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>TSL握手（HTTPS）</p>
+<p>TSL协议位于应用层之下，传输层之上，主要是使用两种技术：对称加密和非对称加密</p>
+<ul>
+<li><p>客户端发送一个随机值，请求需要的协议和加密方式；</p>
+</li>
+<li><p>服务端收到随机值，自己也产生一个随机值，并根据需要的协议和加密方式加密证书（证书有权威的数字认证机构发放）发送给客户端（如需验证客户端的证书需说明）；</p>
+</li>
+<li><p>客户端收到证书并验证是否有效，验证通过后生成一个随机值，通过证书上的公钥加密这个随机值并发回给服务端，如客户端需验证证书则会附带证书；</p>
+</li>
+<li><p>服务端接收到加密的随机值后通过私钥加密获得第三个随机值，此时双方都有三个随机值，接下来的通信就可以按照之前约定的来生成密钥，通过密钥来加密解密。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%9B%BE%E8%A7%A3.jpg" alt="img"> </p>
+<p><strong>传输层</strong></p>
+<hr>
+<p><strong>传输层的主要任务就是负责向两台主机进程之间的通信提供通用的数据传输服务。</strong>应用进程利用该服务传送应用层报文。 “通用的”是指并不针对某一个特定的网络应用，而是多种应用可以使用同一个传输层服务。由于一台主机可同时运行多个线程，因此传输层有复用和分用的功能。所谓复用就是指多个应用层进程可同时使用下面传输层的服务，分用和复用相反，是传输层把收到的信息分别交付上面应用层中的相应进程。</p>
+<p><strong>传输层主要使用两种协议：TCP协议和UDP协议</strong></p>
+<ul>
+<li>TCP的主要特点：<ul>
+<li>面向连接（就好像打电话一样，通话前需要先拨号建立连接，通话结束后要挂机释放连接）；</li>
+<li>面向字节流，即TCP把应用程序交下来的数据仅仅看成是一连串的无结构的字节流；</li>
+<li>一对一的，每一条TCP连接只能有两个端点；</li>
+<li>TCP提供可靠交付的服务，有超时重传和阻塞机制，无差错、不丢失、不重复、并且按序到达；</li>
+<li>TCP提供全双工通信。TCP允许通信双方的应用进程在任何时候都能发送数据。TCP连接的两端都设有发送缓存和接收缓存，用来临时存放双方通信的数据；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>UDP的主要特点：</p>
+<ul>
+<li>无连接；</li>
+<li>面向报文的</li>
+<li>不保证可靠交付，但尽最大努力交付，因此主机不需要维持复杂的连接状态 ；</li>
+<li>没有阻塞机制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如IP电话，实时视频会议等）；</li>
+<li>UDP支持一对一、一对多、多对一和多对多的交互通信；</li>
+<li>UDP的首部开销小，只有8个字节，比TCP的20个字节的首部要短。</li>
+</ul>
+</li>
+</ul>
+<p><strong>网络层</strong></p>
+<hr>
+<p><strong>网络层负责为分组交换网上的不同主机提供通信服务。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组和包进行传送，确保传送到目的主机，而这当中两个重要的条件是IP地址和MAC地址</strong></p>
+<p>IP地址指明了节点被分配到的地址，MAC地址指的是网卡所属的固定地址。IP地址可以凭借ARP协议和MAC地址配对，IP地址可变换，而MAC地址基本上是不会更改的。</p>
+<ul>
+<li>ARP协议</li>
+</ul>
+<p>ARP协议是一种用以解析地址的协议，根据通信方的IP地址可以反查出对应的MAC地址。IP间的通信依赖MAC地址，在网络上，通信双方在同一局域网内的状况很少，通常需要多台计算机和网络设备中转才能连接到对方。而在中转时，会利用下一设备的MAC地址来搜索下一中转目标。而这时就需要使用ARP协议。</p>
+<p>这种MAC中转机制成为路由选择。类似快递公司收到寄件人的货物后，快递公司就会在集散中心检查目的地址，判断是否能送到目的地或者明确送往下一个集散中心，下一个集散中心自会再做同样的判断。</p>
+<p>在TCP/IP体系结构中，由于网络层使用IP协议，因此分组也叫IP数据报，简称数据报。</p>
+<p><strong>数据链路层</strong></p>
+<hr>
+<p><strong>数据链路层通常简称为链路层。两台主机之间的数据传输，总是在一段一段的链路上传送的，这就需要使用专门的链路层的协议。</strong>  在两个相邻节点之间传送数据时，<strong>数据链路层将网络层交下来的IP数据报组装程帧，</strong>在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）。</p>
+<p>再接收数据的时候，控制信息使接收端能够知道一个帧是从哪个比特开始，哪个比特结束的。数据链路层在接收到一个帧之后，可以从中提取出数据，再上交给网络层。链路层还可以根据控制信息中的差错控制来查错和纠错，丢弃这个出了差错的帧，以避免继续在网络中传送下去白白浪费网络资源。</p>
+<p><strong>物理层</strong></p>
+<hr>
+<p>在物理层上所传送的数据单位是比特。 物理层的作用是实现相邻计算机节点之间<strong>比特流的透明传送</strong>，尽可能屏蔽掉具体传输介质和物理设备的差异。<strong>使其上面的数据链路层不必考虑网络的具体传输介质是什么。</strong></p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A7%A3.jpg" alt="img"> </p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A7%A32.png" alt="img"> </p>
+<h4 id="二、TCP三次握手和四次握手"><a href="#二、TCP三次握手和四次握手" class="headerlink" title="二、TCP三次握手和四次握手"></a>二、TCP三次握手和四次握手</h4><hr>
+<p>TCP报文首部字段（部分）</p>
+<p>1  序号，占4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号。例如，一段报文的序号字段值是 301 ，而携带的数据共有100字段，显然下一个报文段（如果还有的话）的数据序号应该从401开始；</p>
+<p>2  确认ACK，仅当ACK=1时，确认号字段才有效。TCP规定，在连接建立后所有报文的传输都必须把ACK置1；</p>
+<p>3  同步SYN，在连接建立时用来同步序号。当SYN=1，ACK=0，表明是连接请求报文，若同意连接，则响应报文中应该使SYN=1，ACK=1；</p>
+<p>4  终止FIN，用来释放连接。当FIN=1，表明此报文的发送方的数据已经发送完毕，并且要求释放；</p>
+<p>5  窗口，占2字节，指的是通知接收方，发送本报文你需要有多大的空间来接受。</p>
+<p><strong>TCP连接建立（三次握手）</strong></p>
+<hr>
+<p>1、服务器进入监听状态 ；</p>
+<p>2、客户端主动请求连接，发送请求连接的报文，报文首部的同步位 SYN =1，同时选择一个初始序列号 seq=x ，此时，TCP客户端进程进入了 SYN-SENT（同步已发送状态）状态；</p>
+<p>3、服务端接收到请求报文，发回确认保温，确认报文中应该 ACK=1，SYN=1，确认号是ack=x+1，同时也要为自己初始化一个序列号 seq=y，此时，TCP服务器进程进入了SYN-RCVD（同步收到）状态；</p>
+<p>4、客户端接收到确认报文， 还需要给服务端确认，给服务端发回一个确认报文，确认报文的ACK=1，ack=y+1，自己的序列号seq=x+1，此时，TCP连接建立，客户端进入ESTABLISHED（已建立连接）状态 ；</p>
+<p>5、当服务端收到确认报文，也进入ESTABLISHED（已建立连接）状态，双方正式开始数据传输。</p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="img"> </p>
+<p>为什么需要第三次握手</p>
+<blockquote>
+<p>主要使为了防止已经失效的请求报文突然传到服务器，从而产生错误。</p>
+</blockquote>
+<blockquote>
+<p>如果使用两次握手，假设第一次客户端请求服务器的请求报文由于网络问题，在网络节点中滞留的时间太长，由于TCP客户端长时间没有收到服务端发来的确认报文，以为服务端没有收到，此时客户端会重新再发一次请求报文，服务端收到这条请求报文并发挥确认报文，两次握手之后，建立连接，传输数据，关闭连接。后来，网络恢复畅通，第一次发送的请求报文送到了服务器，服务器收到之后发回确认报文，这条报文本该是失效的，但两次握手使得客户端和服务器建立了连接，造成了资源的浪费。</p>
+</blockquote>
+<blockquote>
+<p>如果是三次握手，网络恢复畅通，第一次发送的请求报文发送到服务端，服务端发回确认报文，但客户端不会再发出确认，由于服务器没有收到再次确认的报文，则不会建立连接</p>
+</blockquote>
+<p><strong>TCP连接释放（四次握手）</strong></p>
+<hr>
+<p>1  客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。</p>
+<p>2  服务器收到连接释放的报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。 这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。</p>
+<p>3  客户端收到确认报文后，进入FIN-WAIT-2（终止等待2）状态，等待服务器发来释放连接的报文。</p>
+<p>4  服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</p>
+<p>5  客户端收到连接释放的报文后，发回确认报文，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时， 此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。</p>
+<p>6  当服务器收到了客户端传来的确认报文后，立即进入了CLOSE状态，结束这一次TCP连接，可见服务器结束连接的时间比客户端要早一点。</p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="img"> </p>
+<p><strong>为什么需要等待2MSL</strong></p>
+<blockquote>
+<p>MSL(Maximum Segment Lifetime)：最长报文段寿命</p>
+</blockquote>
+<blockquote>
+<p>1、确保客户端最后一次发出去的确认报文能被服务器接收到，当服务器发送 FIN + ACK 释放连接报文时，如果服务端没有收到客户端发回的确认报文，服务器则认为客户端没有收到，就会重发一遍释放连接的报文，而客户端就可以在这2MSL的时间段内接收这个重传的报文，并返回确认报文，接着重启这个2MSL的定时器。</p>
+</blockquote>
+<blockquote>
+<p>2、防止失效连接出现在新的连接中。当客户端发送最后的确认报文后，在2MSL时间段了，可以使出现在本次持续连接中的所有连接都消失。</p>
+</blockquote>
+<p><strong>若建立连接后客户端故障怎么办</strong></p>
+<blockquote>
+<p> TCP有一个保活计时器，时间为两个小时，当服务器两个小时后没有收到客户端的回应，则会发送一个探测报文，每个75分钟发送一次，总共会发送10次，若一连发送10个探测报文后都没有反应，则服务器认为客户端故障，关闭连接。服务器每次收到客户端的反应，都会复位各个计时器。</p>
+</blockquote>
+<p>关于TCP连接更详细的介绍请参考这篇文章：<a href="https://blog.csdn.net/qzcsu/article/details/72861891" target="_blank" rel="noopener">https://blog.csdn.net/qzcsu/article/details/72861891</a></p>
+<h4 id="三、浏览器输入url到显示页面的过程"><a href="#三、浏览器输入url到显示页面的过程" class="headerlink" title="三、浏览器输入url到显示页面的过程"></a>三、浏览器输入url到显示页面的过程</h4><hr>
+<p><strong>简介版：</strong></p>
+<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/url%E8%AF%B7%E6%B1%82.png" alt="img"> </p>
+<p><strong>详细版：</strong></p>
+<ol>
+<li>浏览器通过DNS协议解析url，找到对应的IP地址；</li>
+<li>开启一个线程，发起HTTP请求；</li>
+<li>与服务器建立TCP连接（三次握手），应用层的数据下发到传输层，这里TCP协议会指明两端的端口号，然后下发到网络层，通过IP协议确定IP地址，然后凭借ARP协议明确路由跳转的方式，然后数据会被封装到链路层的数据帧中，最后就是物理层的传输；</li>
+<li>TCP握手之后会进行TSL（HTTPS）握手，正式开始传数据；</li>
+<li>数据进入服务器之前，可能还会先经过负责负载均衡的服务器，把请求合理分发到多台服务器上，最后服务器返回一个HTML响应；</li>
+<li>浏览器接收到响应后开始解析HTML，如果是压缩文件还需要解压，根据响应实体的首部字段规定的编码方式来解码文件；</li>
+<li>文件解码成功之后开始渲染页面。先根据HTML构建DOM树，如有CSS再构建CSSOM，如有script标签，则判断是否有async和defer属性，若没有，则会阻塞渲染流程，先下载好 JS 文件，再继续HTML的加载；</li>
+<li>CSSOM和DOM树构建完成会生成Render树，浏览器会根据Render树来绘制，将内容显示页面上。</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机通识</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JavaScript Array" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -425,19 +634,19 @@
 
 
   
-    <article id="post-数据结构(栈)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-数据机构(堆)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/数据结构(栈)/">数据结构 —— 栈</a>
+      <a class="article-title" href="/2018/08/12/数据机构(堆)/">数据结构 —— 堆</a>
     </h1>
   
 
         
-        <a href="/2018/08/12/数据结构(栈)/" class="archive-article-date">
+        <a href="/2018/08/12/数据机构(堆)/" class="archive-article-date">
   	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
 </a>
         
@@ -445,14 +654,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>栈是一个线性结构，在计算机中是一个相当常见的数据结构。</p>
-<p>栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/5/20/1637b785d2d68735?w=640&amp;h=460&amp;f=png&amp;s=6932" alt="img"></p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack = []</span><br><span class="line">  &#125;</span><br><span class="line">  push(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.push(item)</span><br><span class="line">  &#125;</span><br><span class="line">  pop() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.pop()</span><br><span class="line">  &#125;</span><br><span class="line">  peek() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack[<span class="keyword">this</span>.getCount() - <span class="number">1</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  getCount() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack.length</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getCount() === <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>选取了 <a href="https://leetcode.com/problems/valid-parentheses/submissions/1" target="_blank" rel="noopener">LeetCode 上序号为 20 的题目</a></p>
-<p>题意是匹配括号，可以通过栈的特性来完成这道题目</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isValid = <span class="function"><span class="keyword">function</span> (<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> map = &#123;</span><br><span class="line">    <span class="string">'('</span>: <span class="number">-1</span>,</span><br><span class="line">    <span class="string">')'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'['</span>: <span class="number">-2</span>,</span><br><span class="line">    <span class="string">']'</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">'&#123;'</span>: <span class="number">-3</span>,</span><br><span class="line">    <span class="string">'&#125;'</span>: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> stack = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (map[s[i]] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      stack.push(s[i])</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> last = stack.pop()</span><br><span class="line">      <span class="keyword">if</span> (map[last] + map[s[i]] != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (stack.length &gt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>堆通常是一个可以被看做一棵树的数组对象。</p>
+<p>堆的实现通过构造<strong>二叉堆</strong>，实为二叉树的一种。这种数据结构具有以下性质。</p>
+<ul>
+<li>任意节点小于（或大于）它的所有子节点</li>
+<li>堆总是一棵完全树。即除了最底层，其他层的节点都被元素填满，且最底层从左到右填入。</li>
+</ul>
+<p>将根节点最大的堆叫做<strong>最大堆</strong>或<strong>大根堆</strong>，根节点最小的堆叫做<strong>最小堆</strong>或<strong>小根堆</strong>。</p>
+<p>优先队列也完全可以用堆来实现，操作是一模一样的。</p>
+<h3 id="实现大根堆"><a href="#实现大根堆" class="headerlink" title="实现大根堆"></a>实现大根堆</h3><p>堆的每个节点的左边子节点索引是 <code>i * 2 + 1</code>，右边是 <code>i * 2 + 2</code>，父节点是 <code>(i - 1) /2</code>。</p>
+<p>堆有两个核心的操作，分别是 <code>shiftUp</code> 和 <code>shiftDown</code> 。前者用于添加元素，后者用于删除根节点。</p>
+<p><code>shiftUp</code> 的核心思路是一路将节点与父节点对比大小，如果比父节点大，就和父节点交换位置。</p>
+<p><code>shiftDown</code> 的核心思路是先将根节点和末尾交换位置，然后移除末尾元素。接下来循环判断父节点和两个子节点的大小，如果子节点大，就把最大的子节点和父节点交换。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/15/164009e58a5a21f8?w=537&amp;h=394&amp;f=png&amp;s=77222" alt="img"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MaxHeap</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.heap = []</span><br><span class="line">  &#125;</span><br><span class="line">  size() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.heap.length</span><br><span class="line">  &#125;</span><br><span class="line">  empty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.size() == <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  add(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.heap.push(item)</span><br><span class="line">    <span class="keyword">this</span>._shiftUp(<span class="keyword">this</span>.size() - <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  removeMax() &#123;</span><br><span class="line">    <span class="keyword">this</span>._shiftDown(<span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  getParentIndex(k) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">parseInt</span>((k - <span class="number">1</span>) / <span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  getLeftIndex(k) &#123;</span><br><span class="line">    <span class="keyword">return</span> k * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  _shiftUp(k) &#123;</span><br><span class="line">    <span class="comment">// 如果当前节点比父节点大，就交换</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">this</span>.heap[k] &gt; <span class="keyword">this</span>.heap[<span class="keyword">this</span>.getParentIndex(k)]) &#123;</span><br><span class="line">      <span class="keyword">this</span>._swap(k, <span class="keyword">this</span>.getParentIndex(k))</span><br><span class="line">      <span class="comment">// 将索引变成父节点</span></span><br><span class="line">      k = <span class="keyword">this</span>.getParentIndex(k)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  _shiftDown(k) &#123;</span><br><span class="line">    <span class="comment">// 交换首位并删除末尾</span></span><br><span class="line">    <span class="keyword">this</span>._swap(k, <span class="keyword">this</span>.size() - <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">this</span>.heap.splice(<span class="keyword">this</span>.size() - <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="comment">// 判断节点是否有左孩子，因为二叉堆的特性，有右必有左</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">this</span>.getLeftIndex(k) &lt; <span class="keyword">this</span>.size()) &#123;</span><br><span class="line">      <span class="keyword">let</span> j = <span class="keyword">this</span>.getLeftIndex(k)</span><br><span class="line">      <span class="comment">// 判断是否有右孩子，并且右孩子是否大于左孩子</span></span><br><span class="line">      <span class="keyword">if</span> (j + <span class="number">1</span> &lt; <span class="keyword">this</span>.size() &amp;&amp; <span class="keyword">this</span>.heap[j + <span class="number">1</span>] &gt; <span class="keyword">this</span>.heap[j]) j++</span><br><span class="line">      <span class="comment">// 判断父节点是否已经比子节点都大</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.heap[k] &gt;= <span class="keyword">this</span>.heap[j]) <span class="keyword">break</span></span><br><span class="line">      <span class="keyword">this</span>._swap(k, j)</span><br><span class="line">      k = j</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  _swap(left, right) &#123;</span><br><span class="line">    <span class="keyword">let</span> rightValue = <span class="keyword">this</span>.heap[right]</span><br><span class="line">    <span class="keyword">this</span>.heap[right] = <span class="keyword">this</span>.heap[left]</span><br><span class="line">    <span class="keyword">this</span>.heap[left] = rightValue</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -501,19 +716,19 @@
 
 
   
-    <article id="post-数据机构(堆)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-算法(排序)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/数据机构(堆)/">数据结构 —— 堆</a>
+      <a class="article-title" href="/2018/08/12/算法(排序)/">算法 —— 排序</a>
     </h1>
   
 
         
-        <a href="/2018/08/12/数据机构(堆)/" class="archive-article-date">
+        <a href="/2018/08/12/算法(排序)/" class="archive-article-date">
   	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
 </a>
         
@@ -521,20 +736,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>堆通常是一个可以被看做一棵树的数组对象。</p>
-<p>堆的实现通过构造<strong>二叉堆</strong>，实为二叉树的一种。这种数据结构具有以下性质。</p>
-<ul>
-<li>任意节点小于（或大于）它的所有子节点</li>
-<li>堆总是一棵完全树。即除了最底层，其他层的节点都被元素填满，且最底层从左到右填入。</li>
-</ul>
-<p>将根节点最大的堆叫做<strong>最大堆</strong>或<strong>大根堆</strong>，根节点最小的堆叫做<strong>最小堆</strong>或<strong>小根堆</strong>。</p>
-<p>优先队列也完全可以用堆来实现，操作是一模一样的。</p>
-<h3 id="实现大根堆"><a href="#实现大根堆" class="headerlink" title="实现大根堆"></a>实现大根堆</h3><p>堆的每个节点的左边子节点索引是 <code>i * 2 + 1</code>，右边是 <code>i * 2 + 2</code>，父节点是 <code>(i - 1) /2</code>。</p>
-<p>堆有两个核心的操作，分别是 <code>shiftUp</code> 和 <code>shiftDown</code> 。前者用于添加元素，后者用于删除根节点。</p>
-<p><code>shiftUp</code> 的核心思路是一路将节点与父节点对比大小，如果比父节点大，就和父节点交换位置。</p>
-<p><code>shiftDown</code> 的核心思路是先将根节点和末尾交换位置，然后移除末尾元素。接下来循环判断父节点和两个子节点的大小，如果子节点大，就把最大的子节点和父节点交换。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/6/15/164009e58a5a21f8?w=537&amp;h=394&amp;f=png&amp;s=77222" alt="img"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MaxHeap</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.heap = []</span><br><span class="line">  &#125;</span><br><span class="line">  size() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.heap.length</span><br><span class="line">  &#125;</span><br><span class="line">  empty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.size() == <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  add(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.heap.push(item)</span><br><span class="line">    <span class="keyword">this</span>._shiftUp(<span class="keyword">this</span>.size() - <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  removeMax() &#123;</span><br><span class="line">    <span class="keyword">this</span>._shiftDown(<span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  getParentIndex(k) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">parseInt</span>((k - <span class="number">1</span>) / <span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  getLeftIndex(k) &#123;</span><br><span class="line">    <span class="keyword">return</span> k * <span class="number">2</span> + <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  _shiftUp(k) &#123;</span><br><span class="line">    <span class="comment">// 如果当前节点比父节点大，就交换</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">this</span>.heap[k] &gt; <span class="keyword">this</span>.heap[<span class="keyword">this</span>.getParentIndex(k)]) &#123;</span><br><span class="line">      <span class="keyword">this</span>._swap(k, <span class="keyword">this</span>.getParentIndex(k))</span><br><span class="line">      <span class="comment">// 将索引变成父节点</span></span><br><span class="line">      k = <span class="keyword">this</span>.getParentIndex(k)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  _shiftDown(k) &#123;</span><br><span class="line">    <span class="comment">// 交换首位并删除末尾</span></span><br><span class="line">    <span class="keyword">this</span>._swap(k, <span class="keyword">this</span>.size() - <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">this</span>.heap.splice(<span class="keyword">this</span>.size() - <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="comment">// 判断节点是否有左孩子，因为二叉堆的特性，有右必有左</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">this</span>.getLeftIndex(k) &lt; <span class="keyword">this</span>.size()) &#123;</span><br><span class="line">      <span class="keyword">let</span> j = <span class="keyword">this</span>.getLeftIndex(k)</span><br><span class="line">      <span class="comment">// 判断是否有右孩子，并且右孩子是否大于左孩子</span></span><br><span class="line">      <span class="keyword">if</span> (j + <span class="number">1</span> &lt; <span class="keyword">this</span>.size() &amp;&amp; <span class="keyword">this</span>.heap[j + <span class="number">1</span>] &gt; <span class="keyword">this</span>.heap[j]) j++</span><br><span class="line">      <span class="comment">// 判断父节点是否已经比子节点都大</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">this</span>.heap[k] &gt;= <span class="keyword">this</span>.heap[j]) <span class="keyword">break</span></span><br><span class="line">      <span class="keyword">this</span>._swap(k, j)</span><br><span class="line">      k = j</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  _swap(left, right) &#123;</span><br><span class="line">    <span class="keyword">let</span> rightValue = <span class="keyword">this</span>.heap[right]</span><br><span class="line">    <span class="keyword">this</span>.heap[right] = <span class="keyword">this</span>.heap[left]</span><br><span class="line">    <span class="keyword">this</span>.heap[left] = rightValue</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h4><p>原理：从第一个元素开始，把当前元素和它的下一个索引元素对比，若当前元素比较大，则与下一索引元素交换位置，重复操作直到最后一个元素，那么此时最后一个元素的位置是已经排序正确的。下一轮重复以上操作，但因为最后一个元素已经是正确的，所以只需对比到倒数第二个元素（length - 1），重复操作至对比到第一个元素为止。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubble</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        [arr[j], arr[j + <span class="number">1</span>]] = [arr[j + <span class="number">1</span>], arr[j]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bubble(arr)</span><br></pre></td></tr></table></figure>
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a><strong>快速排序</strong></h4><p>原理：随机找一个基准值，以基准值为界线分为左侧和右侧，遍历除基准值以外的元素，把比基准值小的元素放在左侧，比基准值大的元素放在右侧，一轮之后，基准值的位置就已经排序正确了，下一轮再找另一个基准值执行相同操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>] </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line">  <span class="comment">//找基准</span></span><br><span class="line">  <span class="keyword">let</span> pivotIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">let</span> pivot = arr.splice(pivotIndex, <span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> left = []</span><br><span class="line">  <span class="keyword">let</span> right = []</span><br><span class="line"></span><br><span class="line">  <span class="comment">//排序</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] &lt; pivot) &#123;</span><br><span class="line">      left.push(arr[i])</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[i] &gt; pivot) &#123;</span><br><span class="line">      right.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> quickSort(left).concat([pivot], quickSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = quickSort(arr)</span><br></pre></td></tr></table></figure>
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>原理：把数组拆分成最多包含两个元素，先把最小单位的数组排序后，再逐渐合并起来排序。例如有一个数组<code>[3,2,4,1,5]</code>，先拆分成<code>[3,2]</code>、<code>[4,1,5]</code>，再拆分成<code>[4]</code>、<code>[1,5]</code>，然后排序<code>[2,3]</code>、<code>[1,4,5]</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//排序&amp;合并</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> temp = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (left.length &amp;&amp; right.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left[<span class="number">0</span>] &lt; right[<span class="number">0</span>]) &#123;</span><br><span class="line">      temp.push(left.shift(<span class="number">0</span>))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      temp.push(right.shift(<span class="number">0</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> temp.concat(left, right)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//拆分</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> index = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> left, right</span><br><span class="line"></span><br><span class="line">  left = arr.slice(<span class="number">0</span>, index)</span><br><span class="line">  right = arr.slice(index)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = mergeSort(arr)</span><br></pre></td></tr></table></figure>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>原理：默认第一个元素是已排的元素，从第二个元素开始与前面的元素比较，若第二个元素较小，则交换位置，后面的元素重复这个操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertion</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">        ;[arr[j - <span class="number">1</span>], arr[j]] = [arr[j], arr[j - <span class="number">1</span>]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = insertion(arr)</span><br></pre></td></tr></table></figure>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>原理：遍历数组，把其中最小的元素索引设置成0，并且把该元素与第一个元素互换，此时第一个元素就是最小元素，下一轮从索引为1的元素开始重复上述操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selection</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> minIndex = i</span><br><span class="line">    <span class="comment">//找最小值索引</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &lt; arr.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>] &amp;&amp; arr[minIndex] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        minIndex = j + <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//替换</span></span><br><span class="line">    ;[arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">selection(arr)</span><br></pre></td></tr></table></figure>
       
 
       
@@ -702,6 +913,82 @@
 <p><strong>面试题</strong>：两个数不使用四则运算得出和</p>
 <p>这道题中可以按位异或，因为按位异或就是不进位加法，<code>8 ^ 8 = 0</code> 如果进位了，就是 16 了，所以我们只需要将两个数进行异或操作，然后进位。那么也就是说两个二进制都是 1 的位置，左边应该有一个进位 1，所以可以得出以下公式 <code>a + b = (a ^ b) + ((a &amp; b) &lt;&lt; 1)</code> ，然后通过迭代的方式模拟加法</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>) <span class="keyword">return</span> b</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">let</span> newA = a ^ b</span><br><span class="line">    <span class="keyword">let</span> newB = (a &amp; b) &lt;&lt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> sum(newA, newB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数据结构(栈)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/12/数据结构(栈)/">数据结构 —— 栈</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/12/数据结构(栈)/" class="archive-article-date">
+  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>栈是一个线性结构，在计算机中是一个相当常见的数据结构。</p>
+<p>栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/20/1637b785d2d68735?w=640&amp;h=460&amp;f=png&amp;s=6932" alt="img"></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack = []</span><br><span class="line">  &#125;</span><br><span class="line">  push(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.push(item)</span><br><span class="line">  &#125;</span><br><span class="line">  pop() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.pop()</span><br><span class="line">  &#125;</span><br><span class="line">  peek() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack[<span class="keyword">this</span>.getCount() - <span class="number">1</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  getCount() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack.length</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getCount() === <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>选取了 <a href="https://leetcode.com/problems/valid-parentheses/submissions/1" target="_blank" rel="noopener">LeetCode 上序号为 20 的题目</a></p>
+<p>题意是匹配括号，可以通过栈的特性来完成这道题目</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isValid = <span class="function"><span class="keyword">function</span> (<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> map = &#123;</span><br><span class="line">    <span class="string">'('</span>: <span class="number">-1</span>,</span><br><span class="line">    <span class="string">')'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'['</span>: <span class="number">-2</span>,</span><br><span class="line">    <span class="string">']'</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">'&#123;'</span>: <span class="number">-3</span>,</span><br><span class="line">    <span class="string">'&#125;'</span>: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> stack = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (map[s[i]] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      stack.push(s[i])</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> last = stack.pop()</span><br><span class="line">      <span class="keyword">if</span> (map[last] + map[s[i]] != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (stack.length &gt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -1224,637 +1511,6 @@
 
 
   
-    <article id="post-算法(排序)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/算法(排序)/">算法 —— 排序</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/12/算法(排序)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h4><p>原理：从第一个元素开始，把当前元素和它的下一个索引元素对比，若当前元素比较大，则与下一索引元素交换位置，重复操作直到最后一个元素，那么此时最后一个元素的位置是已经排序正确的。下一轮重复以上操作，但因为最后一个元素已经是正确的，所以只需对比到倒数第二个元素（length - 1），重复操作至对比到第一个元素为止。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubble</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        [arr[j], arr[j + <span class="number">1</span>]] = [arr[j + <span class="number">1</span>], arr[j]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bubble(arr)</span><br></pre></td></tr></table></figure>
-<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a><strong>快速排序</strong></h4><p>原理：随机找一个基准值，以基准值为界线分为左侧和右侧，遍历除基准值以外的元素，把比基准值小的元素放在左侧，比基准值大的元素放在右侧，一轮之后，基准值的位置就已经排序正确了，下一轮再找另一个基准值执行相同操作。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>] </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line">  <span class="comment">//找基准</span></span><br><span class="line">  <span class="keyword">let</span> pivotIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">let</span> pivot = arr.splice(pivotIndex, <span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> left = []</span><br><span class="line">  <span class="keyword">let</span> right = []</span><br><span class="line"></span><br><span class="line">  <span class="comment">//排序</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] &lt; pivot) &#123;</span><br><span class="line">      left.push(arr[i])</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[i] &gt; pivot) &#123;</span><br><span class="line">      right.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> quickSort(left).concat([pivot], quickSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = quickSort(arr)</span><br></pre></td></tr></table></figure>
-<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>原理：把数组拆分成最多包含两个元素，先把最小单位的数组排序后，再逐渐合并起来排序。例如有一个数组<code>[3,2,4,1,5]</code>，先拆分成<code>[3,2]</code>、<code>[4,1,5]</code>，再拆分成<code>[4]</code>、<code>[1,5]</code>，然后排序<code>[2,3]</code>、<code>[1,4,5]</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//排序&amp;合并</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> temp = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (left.length &amp;&amp; right.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left[<span class="number">0</span>] &lt; right[<span class="number">0</span>]) &#123;</span><br><span class="line">      temp.push(left.shift(<span class="number">0</span>))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      temp.push(right.shift(<span class="number">0</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> temp.concat(left, right)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//拆分</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> index = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> left, right</span><br><span class="line"></span><br><span class="line">  left = arr.slice(<span class="number">0</span>, index)</span><br><span class="line">  right = arr.slice(index)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = mergeSort(arr)</span><br></pre></td></tr></table></figure>
-<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>原理：默认第一个元素是已排的元素，从第二个元素开始与前面的元素比较，若第二个元素较小，则交换位置，后面的元素重复这个操作。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertion</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">        ;[arr[j - <span class="number">1</span>], arr[j]] = [arr[j], arr[j - <span class="number">1</span>]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = insertion(arr)</span><br></pre></td></tr></table></figure>
-<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>原理：遍历数组，把其中最小的元素索引设置成0，并且把该元素与第一个元素互换，此时第一个元素就是最小元素，下一轮从索引为1的元素开始重复上述操作。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selection</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> minIndex = i</span><br><span class="line">    <span class="comment">//找最小值索引</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &lt; arr.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>] &amp;&amp; arr[minIndex] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        minIndex = j + <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//替换</span></span><br><span class="line">    ;[arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">selection(arr)</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JavaScript Event" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/JavaScript Event/">JavaScript Event</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/12/JavaScript Event/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="JavaScript-Event"><a href="#JavaScript-Event" class="headerlink" title="JavaScript Event"></a>JavaScript Event</h2><h3 id="Event-Type"><a href="#Event-Type" class="headerlink" title="Event Type"></a>Event Type</h3><h4 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h4><p><strong>click 事件，dblclick 事件</strong></p>
-<p>当用户在Element节点、<code>document</code>节点、<code>window</code>对象上单击鼠标（或者按下回车键）时，<code>click</code>事件触发</p>
-<p>当用户在Element节点、<code>document</code>节点、<code>window</code>对象上双击击鼠标时，<code>dblclick</code>事件触发</p>
-<p><strong>mouseup 事件，mousedown 事件，mousemove 事件</strong></p>
-<p><code>mouseup</code>事件在释放按下的鼠标键时触发。</p>
-<p><code>mousedown</code>事件在按下鼠标键时触发。</p>
-<p><code>mousemove</code>事件当鼠标在一个节点内部移动时触发。当鼠标持续移动时，该事件会连续触发</p>
-<p><strong>mouseover 事件，mouseenter 事件</strong></p>
-<p><code>mouseover</code>事件和<code>mouseenter</code>事件，都是鼠标进入一个节点时触发</p>
-<p>两者的区别是，<code>mouseenter</code>事件只触发一次，而只要鼠标在节点内部移动，<code>mouseover</code>事件会在子节点上触发多次</p>
-<p><strong>mouseout 事件，mouseleave 事件</strong></p>
-<p><code>mouseout</code>事件和<code>mouseleave</code>事件，都是鼠标离开一个节点时触发</p>
-<p>两者的区别是，<code>mouseout</code>事件会冒泡，<code>mouseleave</code>事件不会</p>
-<p><strong>contextmenu 事件</strong></p>
-<p><code>contextmenu</code>事件在一个节点上点击鼠标右键时触发，或者按下“上下文菜单”键时触发</p>
-<p><strong>MouseEvent对象</strong></p>
-<p>鼠标事件使用<code>MouseEvent</code>对象表示，它继承<code>UIEvent</code>对象和<code>Event</code>对象。浏览器提供一个<code>MouseEvent</code>构造函数<code>new MouseEvent()</code>，用于新建一个<code>MouseEvent</code>实例</p>
-<p><code>MouseEvent</code>构造函数的第一个参数是事件名称（可能的值包括<code>click</code>、<code>mousedown</code>、<code>mouseup</code>、<code>mouseover</code>、<code>mousemove</code>、<code>mouseout</code>），第二个参数是一个事件初始化对象。该对象可以配置以下属性：</p>
-<blockquote>
-<ul>
-<li>screenX，设置鼠标相对于屏幕的水平坐标（但不会移动鼠标），默认为0，等同于MouseEvent.screenX属性</li>
-<li>screenY，设置鼠标相对于屏幕的垂直坐标，默认为0，等同于MouseEvent.screenY属性</li>
-<li>clientX，设置鼠标相对于窗口的水平坐标，默认为0，等同于MouseEvent.clientX属性</li>
-<li>clientY，设置鼠标相对于窗口的垂直坐标，默认为0，等同于MouseEvent.clientY属性</li>
-<li>pageX，设置鼠标相对于文档的水平坐标，默认为0，非标准</li>
-<li>pageY，设置鼠标相对于文档的垂直坐标，默认为0，非标准</li>
-<li>offsetX，设置鼠标相对于源元素的水平坐标，默认为0，非标准</li>
-<li>offsetY，设置鼠标相对于源元素的垂直坐标，默认为0，非标准</li>
-<li>ctrlKey，设置是否按下ctrl键，默认为false，等同于MouseEvent.ctrlKey属性</li>
-<li>shiftKey，设置是否按下shift键，默认为false，等同于MouseEvent.shiftKey属性</li>
-<li>altKey，设置是否按下alt键，默认为false，等同于MouseEvent.altKey属性</li>
-<li>metaKey，设置是否按下meta键，默认为false，等同于MouseEvent.metaKey属性</li>
-<li>button，设置按下了哪一个鼠标按键，默认为0。-1表示没有按键，0表示按下主键（通常是左键），1表示按下辅助键（通常是中间的键），2表示按下次要键（通常是右键）</li>
-<li>buttons，设置按下了鼠标哪些键，是一个3个比特位的二进制值，默认为0。1表示按下主键（通常是左键），2表示按下次要键（通常是右键），4表示按下辅助键（通常是中间的键）</li>
-<li>relatedTarget，设置一个Element节点，在mouseenter和mouseover事件时，表示鼠标刚刚离开的那个Element节点，在mouseout和mouseleave事件时，表示鼠标正在进入的那个Element节点。默认为null，等同于MouseEvent.relatedTarget属性</li>
-<li>bubbles，布尔值，设置事件是否冒泡，默认为false，等同于Event.bubbles属性</li>
-<li>cancelable，布尔值，设置事件是否可取消，默认为false，等同于Event.cancelable属性</li>
-<li>view，设置事件的视图，一般是window或document.defaultView，等同于Event.view属性</li>
-<li>detail，设置鼠标点击的次数，等同于Event.detail属性</li>
-</ul>
-</blockquote>
-<p><strong>altKey，ctrlKey，metaKey，shiftKey</strong></p>
-<p>以下属性返回一个布尔值，表示鼠标事件发生时，是否按下某个键：</p>
-<blockquote>
-<ul>
-<li><code>altKey</code>属性：Alt 键</li>
-<li><code>ctrlKey</code>属性：Ctrl 键</li>
-<li><code>metaKey</code>属性：Meta 键</li>
-<li><code>shiftKey</code>属性：Shift 键</li>
-</ul>
-</blockquote>
-<p><strong>button</strong></p>
-<p>button属性返回一个数值，表示按下了鼠标哪个键：</p>
-<blockquote>
-<ul>
-<li>-1：没有按下键</li>
-<li>0：按下主键（通常是左键）</li>
-<li>1：按下辅助键（通常是中键或者滚轮键）</li>
-<li>2：按下次键（通常是右键）</li>
-</ul>
-</blockquote>
-<p><strong>buttons</strong></p>
-<p>buttons属性返回一个3个比特位的值，表示同时按下了哪些键。它用来处理同时按下多个鼠标键的情况：</p>
-<blockquote>
-<ul>
-<li>1：二进制为001，表示按下左键</li>
-<li>2：二进制为010，表示按下右键</li>
-<li>4：二进制为100，表示按下中键或滚轮键</li>
-</ul>
-</blockquote>
-<p>同时按下多个键的时候，每个按下的键对应的比特位都会有值。比如，同时按下左键和右键，会返回3（二进制为011）</p>
-<p><strong>clientX，clientY</strong></p>
-<p>clientX属性返回鼠标位置相对于浏览器窗口左上角的水平坐标，单位为像素，与页面是否横向滚动无关</p>
-<p>clientY属性返回鼠标位置相对于浏览器窗口左上角的垂直坐标，单位为像素，与页面是否纵向滚动无关</p>
-<p><strong>movementX，movementY</strong></p>
-<p>movementX属性返回一个水平位移，单位为像素，表示当前位置与上一个mousemove事件之间的水平距离</p>
-<p>movementY属性返回一个垂直位移，单位为像素，表示当前位置与上一个mousemove事件之间的垂直距离</p>
-<p><strong>screenX，screenY</strong></p>
-<p>screenX属性返回鼠标位置相对于屏幕左上角的水平坐标，单位为像素</p>
-<p>screenY属性返回鼠标位置相对于屏幕左上角的垂直坐标，单位为像素</p>
-<p><strong>relatedTarget</strong></p>
-<p>relatedTarget属性返回事件的次要相关节点。对于那些没有次要相关节点的事件，该属性返回null</p>
-<h4 id="滚轮事件"><a href="#滚轮事件" class="headerlink" title="滚轮事件"></a>滚轮事件</h4><p><code>wheel</code>事件是与鼠标滚轮相关的事件，目前只有一个<code>wheel</code>事件。用户滚动鼠标的滚轮，就触发这个事件</p>
-<p>该事件除了继承了MouseEvent、UIEvent、Event的属性，还有几个自己的属性：</p>
-<blockquote>
-<ul>
-<li>deltaX：返回一个数值，表示滚轮的水平滚动量</li>
-<li>deltaY：返回一个数值，表示滚轮的垂直滚动量</li>
-<li>deltaZ：返回一个数值，表示滚轮的Z轴滚动量</li>
-<li>deltaMode：返回一个数值，表示滚动的单位，适用于上面三个属性。0表示像素，1表示行，2表示页</li>
-</ul>
-</blockquote>
-<p>浏览器提供一个WheelEvent构造函数<code>new WheelEvent()</code>，可以用来生成滚轮事件的实例。它接受两个参数，第一个是事件名称，第二个是配置对象</p>
-<h4 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h4><p>键盘事件用来描述键盘行为，主要有keydown、keypress、keyup三个事件：</p>
-<blockquote>
-<ul>
-<li><code>keydown</code>：按下键盘时触发该事件</li>
-<li><code>keypress</code>：只要按下的键并非Ctrl、Alt、Shift和Meta，就接着触发keypress事件</li>
-<li><code>keyup</code>：松开键盘时触发该事件</li>
-</ul>
-</blockquote>
-<p>如果用户一直按键不松开，就会连续触发键盘事件</p>
-<p>键盘事件使用KeyboardEvent对象表示，该对象继承了UIEvent和MouseEvent对象。浏览器提供KeyboardEvent构造函数<code>new KeyboardEvent()</code>，用来新建键盘事件的实例</p>
-<p><code>KeyboardEvent</code>构造函数的第一个参数是一个字符串，表示事件类型，第二个参数是一个事件配置对象，可配置以下字段：</p>
-<blockquote>
-<ul>
-<li>key，对应KeyboardEvent.key属性，默认为空字符串</li>
-<li>ctrlKey，对应KeyboardEvent.ctrlKey属性，默认为false</li>
-<li>shiftKey，对应KeyboardEvent.shiftKey属性，默认为false</li>
-<li>altKey，对应KeyboardEvent.altKey属性，默认为false</li>
-<li>metaKey，对应KeyboardEvent.metaKey属性，默认为false</li>
-</ul>
-</blockquote>
-<p><strong>key</strong></p>
-<p>key属性返回一个字符串，表示按下的键名。如果同时按下一个控制键和一个符号键，则返回符号键的键名。比如，按下Ctrl+a，则返回a。如果无法识别键名，则返回字符串Unidentified</p>
-<p><strong>charCode</strong></p>
-<p>charCode属性返回一个数值，表示keypress事件按键的Unicode值，keydown和keyup事件不提供这个属性。注意，该属性已经从标准移除，虽然浏览器还支持，但应该尽量不使用</p>
-<h4 id="进度事件"><a href="#进度事件" class="headerlink" title="进度事件"></a>进度事件</h4><p>进度事件用来描述一个事件进展的过程，比如XMLHttpRequest对象发出的HTTP请求的过程、<img>、<audio>、<video>、<style>、<link>加载外部资源的过程。下载和上传都会发生进度事件：</p>
-<blockquote>
-<ul>
-<li><code>abort</code>事件：当进度事件被中止时触发。如果发生错误，导致进程中止，不会触发该事件</li>
-<li><code>error</code>事件：由于错误导致资源无法加载时触发</li>
-<li><code>load</code>事件：进度成功结束时触发</li>
-<li><code>loadstart</code>事件：进度开始时触发</li>
-<li><code>loadend</code>事件：进度停止时触发，发生顺序排在error事件\abort事件\load事件后面</li>
-<li><code>progress</code>事件：当操作处于进度之中，由传输的数据块不断触发</li>
-<li><code>timeout</code>事件：进度超过限时触发</li>
-</ul>
-</blockquote>
-<p>进度事件使用ProgressEvent对象表示，浏览器提供一个ProgressEvent构造函数<code>new ProgressEvent()</code>，用来生成进度事件的实例</p>
-<p>ProgressEvent构造函数的第一个参数是事件类型（字符串），第二个参数是配置对象，可配置以下字段：</p>
-<blockquote>
-<ul>
-<li>lengthComputable：返回一个布尔值，表示当前进度是否具有可计算的长度。如果为false，就表示当前进度无法测量</li>
-<li>total：返回一个数值，表示当前进度的总长度。如果是通过HTTP下载某个资源，表示内容本身的长度，不含HTTP头部的长度。如果lengthComputable属性为false，则total属性就无法取得正确的值</li>
-<li>loaded：返回一个数值，表示当前进度已经完成的数量。该属性除以total属性，就可以得到目前进度的百分比</li>
-</ul>
-</blockquote>
-<h4 id="拖拉事件"><a href="#拖拉事件" class="headerlink" title="拖拉事件"></a>拖拉事件</h4><blockquote>
-<ul>
-<li><strong>drag事件</strong>：拖拉过程中，在被拖拉的节点上持续触发</li>
-<li><strong>dragstart事件</strong>：拖拉开始时在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。通常应该在这个事件的监听函数中，指定拖拉的数据</li>
-<li><strong>dragend事件</strong>：拖拉结束时（释放鼠标键或按下escape键）在被拖拉的节点上触发，该事件的target属性是被拖拉的节点。它与dragstart事件，在同一个节点上触发。不管拖拉是否跨窗口，或者中途被取消，dragend事件总是会触发的</li>
-<li><strong>dragenter事件</strong>：拖拉进入当前节点时，在当前节点上触发，该事件的target属性是当前节点。通常应该在这个事件的监听函数中，指定是否允许在当前节点放下（drop）拖拉的数据。如果当前节点没有该事件的监听函数，或者监听函数不执行任何操作，就意味着不允许在当前节点放下数据。在视觉上显示拖拉进入当前节点，也是在这个事件的监听函数中设置</li>
-<li><strong>dragover事件</strong>：拖拉到当前节点上方时，在当前节点上持续触发，该事件的target属性是当前节点。该事件与dragenter事件基本类似，默认会重置当前的拖拉事件的效果（DataTransfer对象的dropEffect属性）为none，即不允许放下被拖拉的节点，所以如果允许在当前节点drop数据，通常会使用preventDefault方法，取消重置拖拉效果为none</li>
-<li><strong>dragleave事件</strong>：拖拉离开当前节点范围时，在当前节点上触发，该事件的target属性是当前节点。在视觉上显示拖拉离开当前节点，就在这个事件的监听函数中设置</li>
-<li><strong>drop事件</strong>：被拖拉的节点或选中的文本，释放到目标节点时，在目标节点上触发。注意，如果当前节点不允许drop，即使在该节点上方松开鼠标键，也不会触发该事件。如果用户按下Escape键，取消这个操作，也不会触发该事件。该事件的监听函数负责取出拖拉数据，并进行相关处理</li>
-</ul>
-</blockquote>
-<h4 id="触摸事件"><a href="#触摸事件" class="headerlink" title="触摸事件"></a>触摸事件</h4><p>触摸引发的事件，有以下几类。可以通过TouchEvent.type属性，查看到底发生的是哪一种事件：</p>
-<blockquote>
-<ul>
-<li><code>touchstart</code>：用户接触触摸屏时触发，它的target属性返回发生触摸的Element节点</li>
-<li><code>touchend</code>：用户不再接触触摸屏时（或者移出屏幕边缘时）触发，它的target属性与touchstart事件的target属性是一致的，它的changedTouches属性返回一个TouchList对象，包含所有不再触摸的触摸点（Touch对象）</li>
-<li><code>touchmove</code>：用户移动触摸点时触发，它的target属性与touchstart事件的target属性一致。如果触摸的半径、角度、力度发生变化，也会触发该事件</li>
-<li><code>touchcancel</code>：触摸点取消时触发，比如在触摸区域跳出一个情态窗口（modal window）、触摸点离开了文档区域（进入浏览器菜单栏区域）、用户放置更多的触摸点（自动取消早先的触摸点）</li>
-</ul>
-</blockquote>
-<p><strong>触摸API由三个对象组成：</strong></p>
-<blockquote>
-<ul>
-<li>Touch</li>
-<li>TouchList</li>
-<li>TouchEvent</li>
-</ul>
-</blockquote>
-<p><code>Touch</code>对象表示触摸点（一根手指或者一根触摸笔），用来描述触摸动作，包括位置、大小、形状、压力、目标元素等属性。有时，触摸动作由多个触摸点（多根手指或者多根触摸笔）组成，多个触摸点的集合由<code>TouchList</code>对象表示。<code>TouchEvent</code>对象代表由触摸引发的事件，只有触摸屏才会引发这一类事件</p>
-<p><strong>Touch对象</strong></p>
-<p>Touch对象代表一个触摸点。触摸点可能是一根手指，也可能是一根触摸笔。它有以下属性：</p>
-<blockquote>
-<ul>
-<li><strong>identifier</strong>：表示Touch实例的独一无二的识别符。它在整个触摸过程中保持不变</li>
-<li><strong>screenX，screenY</strong>：分别表示触摸点相对于屏幕左上角的横坐标和纵坐标，与页面是否滚动无关</li>
-<li><strong>clientX，clientY</strong>：分别表示触摸点相对于浏览器视口左上角的横坐标和纵坐标，与页面是否滚动无关</li>
-<li><strong>pageX，pageY</strong>：分别表示触摸点相对于当前页面左上角的横坐标和纵坐标，包含了页面滚动带来的位移</li>
-<li><strong>radiusX，radiusY</strong>：分别返回触摸点周围受到影响的椭圆范围的X轴和Y轴，单位为像素</li>
-<li><strong>rotationAngle</strong>：表示触摸区域的椭圆的旋转角度，单位为度数，在0到90度之间</li>
-<li><strong>force</strong>：返回一个0到1之间的数值，表示触摸压力。0代表没有压力，1代表硬件所能识别的最大压力</li>
-<li><strong>target</strong>：返回一个Element节点，代表触摸发生的那个节点</li>
-</ul>
-</blockquote>
-<p><strong>TouchList对象</strong></p>
-<p>TouchList对象是一个类似数组的对象，成员是与某个触摸事件相关的所有触摸点。比如，用户用三根手指触摸，产生的TouchList对象就有三个成员，每根手指对应一个Touch对象</p>
-<p>TouchList实例的length属性，返回TouchList对象的成员数量</p>
-<p>TouchList实例的identifiedTouch方法和item方法，分别使用id属性和索引值（从0开始）作为参数，取出指定的Touch对象</p>
-<p><strong>TouchEvent对象</strong></p>
-<p>TouchEvent对象继承Event对象和UIEvent对象，表示触摸引发的事件。除了被继承的属性以外，它还有一些自己的属性：</p>
-<blockquote>
-<ul>
-<li><strong>键盘相关属性</strong>：以下属性（altKey 是否按下alt键、ctrlKey 是否按下ctrl键、metaKey 是否按下meta键、shiftKey 是否按下shift键）都为只读属性，返回一个布尔值，表示触摸的同时，是否按下某个键</li>
-<li><strong>changedTouches</strong>：changedTouches属性返回一个TouchList对象，包含了由当前触摸事件引发的所有Touch对象（即相关的触摸点）。对于touchstart事件，它代表被激活的触摸点；对于touchmove事件，代表发生变化的触摸点；对于touchend事件，代表消失的触摸点（即不再被触碰的点）</li>
-<li><strong>targetTouches</strong>：targetTouches属性返回一个TouchList对象，包含了触摸的目标Element节点内部，所有仍然处于活动状态的触摸点</li>
-<li><strong>touches</strong>：touches属性返回一个TouchList对象，包含了所有仍然处于活动状态的触摸点</li>
-</ul>
-</blockquote>
-<h4 id="表单事件"><a href="#表单事件" class="headerlink" title="表单事件"></a>表单事件</h4><p><strong>input事件</strong></p>
-<p><code>input</code>事件当<input>、<textarea>的值发生变化时触发。此外，打开contenteditable属性的元素，只要值发生变化，也会触发input事件。input事件的一个特点，就是会连续触发，比如用户每次按下一次按键，就会触发一次input事件</p>
-<p><strong>select事件</strong></p>
-<p><code>select</code>事件当在<input>、<textarea>中选中文本时触发</p>
-<p><strong>search事件</strong></p>
-<p><code>search</code>事件在用户向搜索域按下”ENTER（回车）” 按键或点击 type=”search” 的 <input> 元素的 “x(搜索)” 按钮时触发</p>
-<p><strong>change事件</strong></p>
-<p><code>change</code>事件当<input>、<select>、<textarea>的值发生变化时触发。它与input事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，而且input事件必然会引发change事件</p>
-<p><strong>reset事件</strong></p>
-<p><code>reset</code>事件当表单重置（所有表单成员变回默认值）时触发</p>
-<p><strong>submit事件</strong></p>
-<p><code>submi</code>t事件当表单数据向服务器提交时触发。注意，submit事件的发生对象是form元素，而不是button元素（即使它的类型是submit），因为提交的是表单，而不是按钮</p>
-<h4 id="文档事件"><a href="#文档事件" class="headerlink" title="文档事件"></a>文档事件</h4><p><strong>beforeunload事件</strong></p>
-<p><code>beforeunload</code>事件在窗口将要关闭，或者网页（即<code>document</code>对象）将要卸载时触发</p>
-<p><strong>unload事件</strong></p>
-<p><code>unload</code>事件在窗口关闭或者document对象将要卸载时触发，发生在window、body、frameset等对象上面。它的触发顺序排在beforeunload、pagehide事件后面。unload事件只在页面没有被浏览器缓存时才会触发，换言之，如果通过按下“前进/后退”导致页面卸载，并不会触发unload事件</p>
-<p><strong>load事件，error事件</strong></p>
-<p><code>load</code>事件在页面加载成功时触发</p>
-<p><code>error</code>事件在页面加载失败时触发</p>
-<p>注意，页面从浏览器缓存加载，并不会触发<code>load</code>事件</p>
-<p><strong>pageshow事件</strong></p>
-<p><code>pageshow</code>事件在页面加载时触发，包括第一次加载和从缓存加载两种情况</p>
-<p>pageshow事件有一个persisted属性，返回一个布尔值。页面第一次加载时，这个属性是false；当页面从缓存加载时，这个属性是true</p>
-<p><strong>pagehide事件</strong></p>
-<p><code>pagehide</code>事件与pageshow事件类似，当用户通过“前进/后退”按钮，离开当前页面时触发。它与unload事件的区别在于，如果在window对象上定义unload事件的监听函数之后，页面不会保存在缓存中，而使用pagehide事件，页面会保存在缓存中</p>
-<p>pagehide事件的event对象有一个persisted属性，将这个属性设为true，就表示页面要保存在缓存中；设为false，表示网页不保存在缓存中，这时如果设置了unload事件的监听函数，该函数将在pagehide事件后立即运行</p>
-<p><strong>DOMContentLoaded事件</strong></p>
-<p>当HTML文档下载并解析完成以后，就会在document对象上触发<code>DOMContentLoaded</code>事件</p>
-<p><strong>readystatechange事件</strong></p>
-<p><code>readystatechange</code>事件发生在Document对象和XMLHttpRequest对象，当它们的readyState属性发生变化时触发</p>
-<p><strong>scroll事件</strong></p>
-<p><code>scroll</code>事件在文档或文档元素滚动时触发，主要出现在用户拖动滚动条</p>
-<p><strong>resize事件</strong></p>
-<p><code>resize</code>事件在改变浏览器窗口大小时触发，发生在window、body、frameset对象上面</p>
-<p><strong>hashchange事件</strong></p>
-<p><code>hashchange</code>事件在URL的hash部分（即#号后面的部分，包括#号）发生变化时触发</p>
-<p><strong>popstate事件</strong></p>
-<p><code>popstate</code>事件在浏览器的history对象的当前记录发生显式切换时触发。注意，调用history.pushState()或history.replaceState()，并不会触发popstate事件。该事件只在用户在history记录之间显式切换时触发，比如鼠标点击“后退/前进”按钮，或者在脚本中调用history.back()、history.forward()、history.go()时触发</p>
-<p>该事件对象有一个state属性，保存history.pushState方法和history.replaceState方法为当前记录添加的state对象</p>
-<p><strong>cut事件，copy事件，paste事件</strong></p>
-<blockquote>
-<ul>
-<li>cut事件：在将选中的内容从文档中移除，加入剪贴板后触发</li>
-<li>copy事件：在选中的内容加入剪贴板后触发</li>
-<li>paste事件：在剪贴板内容被粘贴到文档后触发</li>
-</ul>
-</blockquote>
-<p><strong>focus事件，blur事件，focusin事件，focusout事件</strong></p>
-<blockquote>
-<ul>
-<li>focus事件：Element节点获得焦点后触发，该事件不会冒泡</li>
-<li>blur事件：Element节点失去焦点后触发，该事件不会冒泡</li>
-<li>focusin事件：Element节点将要获得焦点时触发，发生在focus事件之前。该事件会冒泡。Firefox不支持该事件</li>
-<li>focusout事件：Element节点将要失去焦点时触发，发生在blur事件之前。该事件会冒泡。Firefox不支持该事件</li>
-</ul>
-</blockquote>
-<p>这四个事件的事件对象，带有target属性（返回事件的目标节点）和relatedTarget属性（返回一个Element节点）。对于focusin事件，relatedTarget属性表示失去焦点的节点；对于focusout事件，表示将要接受焦点的节点；对于focus和blur事件，该属性返回null</p>
-<h4 id="储存事件"><a href="#储存事件" class="headerlink" title="储存事件"></a>储存事件</h4><p><strong>storage事件</strong></p>
-<p>当储存的数据发生变化时，会触发storage事件</p>
-<p><strong>storage事件对象属性：</strong></p>
-<blockquote>
-<ul>
-<li>key：值的键名</li>
-<li>oldValue：更新前的值。如果该键为新增加，则这个属性为null</li>
-<li>newValue：更新后的值。如果该键被删除，则这个属性为null</li>
-<li>url：原始触发storage事件的那个网页的网址</li>
-</ul>
-</blockquote>
-<p>注意：该事件不在导致数据变化的当前页面触发。如果浏览器同时打开一个域名下面的多个页面，当其中的一个页面改变sessionStorage或localStorage的数据时，其他所有页面的storage事件会被触发，而原始页面并不触发storage事件。可以通过这种机制，实现多个窗口之间的通信</p>
-<h4 id="其他事件"><a href="#其他事件" class="headerlink" title="其他事件"></a>其他事件</h4><p><strong>toggle事件，show事件</strong></p>
-<p><code>toggle</code>事件在用户打开或关闭 <details> 元素时触发</p>
-<p><code>show</code>事件当 <menu> 元素在上下文菜单显示时触发</p>
-<p><strong>beforeprint事件，afterprint事件</strong></p>
-<p><code>beforeprint</code>事件在页面即将开始打印时触发</p>
-<p><code>afterprint</code>事件在页面已经开始打印，或者打印窗口已经关闭时触发</p>
-<p><strong>message事件</strong></p>
-<p><code>message</code>事件通过或者从对象(WebSocket, Web Worker, Event Source 或子 frame 或父窗口)接收到消息时触发</p>
-<h4 id="CSSOM事件"><a href="#CSSOM事件" class="headerlink" title="CSSOM事件"></a>CSSOM事件</h4><p><strong>animationstart</strong></p>
-<p><code>animationstart</code>事件在 CSS 动画开始播放时触发</p>
-<p><strong>animationiteration</strong></p>
-<p><code>animationiteration</code>事件在 CSS 动画重新播放时触发</p>
-<p><strong>animationend</strong></p>
-<p><code>animationend</code>事件在CSS动画完成后触发</p>
-<p><strong>transitionend</strong></p>
-<p><code>transitionend</code>事件在CSS完成过渡后触发</p>
-<p>以上事件只支持事件绑定</p>
-<h4 id="MEDIA事件"><a href="#MEDIA事件" class="headerlink" title="MEDIA事件"></a>MEDIA事件</h4><p><strong>abort事件，emptied事件，error事件，stalled事件，suspend事件</strong></p>
-<p><code>abort</code>事件在视频/音频终止加载时触发</p>
-<p><code>emptied</code>事件当期播放列表为空时触发</p>
-<p><code>error</code>事件在视频/音频数据加载期间发生错误时触发</p>
-<p><code>stalled</code>事件在浏览器获取媒体数据，但媒体数据不可用时触发</p>
-<p><code>suspend</code>事件在浏览器读取媒体数据中止时触发</p>
-<p><strong>loadstart事件，durationchange事件，loadedmetadata事件，loadeddata事件，progress事件，canplay事件，canplaythrough事件</strong></p>
-<p><code>loadstart</code>事件在浏览器开始寻找指定视频/音频触发</p>
-<p><code>durationchange</code>事件在视频/音频的时长发生变化时触发</p>
-<p><code>loadedmetadata</code>事件在指定视频/音频的元数据加载后触发</p>
-<p><code>loadeddata</code>事件在浏览器加载视频/音频当前帧时触发触发</p>
-<p><code>progress</code>事件在浏览器下载指定的视频/音频时触发</p>
-<p><code>canplay</code>事件在用户可以开始播放视频/音频时触发</p>
-<p><code>canplaythrough</code>事件在视频/音频可以正常播放且无需停顿和缓冲时触发</p>
-<p><strong>play事件，pause事件，playing事件，waiting事件，ended事件</strong></p>
-<p><code>play</code>事件在视频/音频开始播放时触发</p>
-<p><code>pause</code>事件在视频/音频暂停时触发</p>
-<p><code>playing</code>事件在视频/音频暂停或者在缓冲后准备重新开始播放时触发</p>
-<p><code>waiting</code>事件在视频由于要播放下一帧而需要缓冲时触发</p>
-<p><code>ended</code>事件在视频/音频播放结束时触发</p>
-<p><strong>ratechange事件，timeupdate事件，volumechange事件</strong></p>
-<p><code>ratechange</code>事件在视频/音频的播放速度发生改变时触发</p>
-<p><code>timeupdate</code>事件在当前的播放位置发送改变时触发</p>
-<p><code>volumechange</code>事件在视频/音频的音量发生改变时触发</p>
-<p><strong>seeking事件，seeked事件</strong></p>
-<p><code>seeking</code>事件在用户开始重新定位视频/音频时触发</p>
-<p><code>seeked</code>事件在用户重新定位视频/音频的播放位置后触发</p>
-<h3 id="Event-Model"><a href="#Event-Model" class="headerlink" title="Event Model"></a>Event Model</h3><h4 id="EventTarget接口"><a href="#EventTarget接口" class="headerlink" title="EventTarget接口"></a>EventTarget接口</h4><p>DOM的事件操作（监听和触发），都定义在<code>EventTarget</code>接口。<code>Element</code>节点、<code>document</code>节点和<code>window</code>对象，都部署了这个接口。此外，<code>XMLHttpRequest</code>、<code>AudioNode</code>、<code>AudioContext</code>等浏览器内置对象，也部署了这个接口。该接口就是三个方法：</p>
-<blockquote>
-<ul>
-<li><code>addEventListener</code>：绑定事件的监听函数</li>
-<li><code>removeEventListener</code>：移除事件的监听函数</li>
-<li><code>dispatchEvent</code>：触发事件</li>
-</ul>
-</blockquote>
-<p><strong>addEventListener()</strong></p>
-<p><code>addEventListener</code>方法用于在当前节点或对象上，定义一个特定事件的监听函数：</p>
-<p><code>target.addEventListener(type, listener[, useCapture])</code></p>
-<p><code>addEventListener</code>方法接受三个参数：</p>
-<blockquote>
-<ul>
-<li><code>type</code>：事件名称，大小写敏感</li>
-<li><code>listener</code>：监听函数。事件发生时，会调用该监听函数</li>
-<li><code>useCapture</code>：布尔值，表示监听函数是否在捕获阶段（capture）触发，默认为<code>false</code>（监听函数只在冒泡阶段被触发）。老式浏览器规定该参数必写，较新版本的浏览器允许该参数可选</li>
-</ul>
-</blockquote>
-<p><strong>removeEventListener()</strong></p>
-<p><code>removeEventListener</code>方法用来移除<code>addEventListener</code>方法添加的事件监听函数</p>
-<p><code>removeEventListener</code>方法的参数，与<code>addEventListener</code>方法完全一致</p>
-<p>注意，<code>removeEventListener</code>方法移除的监听函数，必须与对应的<code>addEventListener</code>方法的参数完全一致，而且必须在同一个元素节点，否则无效</p>
-<p><strong>dispatchEvent()</strong></p>
-<p><code>dispatchEvent</code>方法在当前节点上触发指定事件，从而触发监听函数的执行。该方法返回一个布尔值。<code>dispatchEvent</code>方法的参数是一个<code>Event</code>对象的实例</p>
-<p>如果<code>dispatchEvent</code>方法的参数为空，或者不是一个有效的事件对象，将报错</p>
-<h4 id="监听函数"><a href="#监听函数" class="headerlink" title="监听函数"></a>监听函数</h4><p><strong>HTML标签的on-属性</strong></p>
-<p>使用这个方法指定的监听函数，只会在冒泡阶段触发</p>
-<p>注意，使用这种方法时，<code>on-</code>属性的值是将会执行的代码，而不是一个函数。一旦指定的事件发生，<code>on-</code>属性的值是原样传入JavaScript引擎执行。因此如果要执行函数，不要忘记加上一对圆括号</p>
-<p><strong>Element节点的事件属性</strong></p>
-<p>Element节点对象有事件属性，同样可以指定监听函数。使用这个方法指定的监听函数，只会在冒泡阶段触发</p>
-<p><strong>addEventListener方法</strong></p>
-<p>通过<code>Element</code>节点、<code>document</code>节点、<code>window</code>对象的<code>addEventListener</code>方法，也可以定义事件的监听函数</p>
-<blockquote>
-<p>第一种“HTML标签的on-属性”，违反了HTML与JavaScript代码相分离的原则；第二种“Element节点的事件属性”的缺点是，同一个事件只能定义一个监听函数，也就是说，如果定义两次onclick属性，后一次定义会覆盖前一次。因此，这两种方法都不推荐使用，除非是为了程序的兼容问题，因为所有浏览器都支持这两种方法</p>
-</blockquote>
-<p><strong>this的指向</strong></p>
-<p><code>addEventListener</code>方法指定的监听函数，内部的<code>this</code>对象总是指向触发事件的那个节点</p>
-<p>监听函数部署在Element节点的<code>on-</code>属性上面，<code>this</code>不会指向触发事件的元素节点</p>
-<h4 id="事件的传播"><a href="#事件的传播" class="headerlink" title="事件的传播"></a>事件的传播</h4><p><strong>传播的三分阶段：</strong></p>
-<blockquote>
-<ul>
-<li><strong>第一阶段</strong>：从window对象传导到目标节点，称为“捕获阶段”（capture phase）</li>
-<li><strong>第二阶段</strong>：在目标节点上触发，称为“目标阶段”（target phase）</li>
-<li><strong>第三阶段</strong>：从目标节点传导回window对象，称为“冒泡阶段”（bubbling phase）</li>
-</ul>
-</blockquote>
-<p><strong>事件代理/委托</strong></p>
-<blockquote>
-<p>由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件</p>
-</blockquote>
-<h4 id="Event对象"><a href="#Event对象" class="headerlink" title="Event对象"></a>Event对象</h4><p>事件发生以后，会生成一个事件对象，作为参数传给监听函数。浏览器原生提供一个<code>Event</code>对象，所有的事件都是这个对象的实例，或者说继承了<code>Event.prototype</code>对象</p>
-<p><code>Event</code>对象本身就是一个构造函数，可以用来生成新的实例<code>event = new Event(typeArg, eventInit);</code></p>
-<p>Event构造函数接受两个参数。第一个参数是字符串，表示事件的名称；第二个参数是一个对象，表示事件对象的配置。该参数可以有以下两个属性：</p>
-<blockquote>
-<ul>
-<li><code>bubbles</code>：布尔值，可选，默认为<code>false</code>，表示事件对象是否冒泡</li>
-<li><code>cancelable</code>：布尔值，可选，默认为<code>false</code>，表示事件是否可以被取消</li>
-</ul>
-</blockquote>
-<p>Event构造函数创建的对象可以使用<code>dispatchEvent</code>方法触发该事件</p>
-<p>IE8及以下版本，事件对象不作为参数传递，而是通过<code>window</code>对象的<code>event</code>属性读取，并且事件对象的<code>target</code>属性叫做<code>srcElement</code>属性</p>
-<p><strong>Event对象的属性：</strong></p>
-<blockquote>
-<p>以下属性与事件的阶段有关：</p>
-</blockquote>
-<p><strong>event.bubbles</strong></p>
-<p><code>bubbles</code>属性返回一个布尔值，表示当前事件是否会冒泡。该属性为只读属性，只能在新建事件时改变。除非显式声明，Event构造函数生成的事件，默认是不冒泡的</p>
-<p><strong>event.eventPhase</strong></p>
-<p><code>eventPhase</code>属性返回一个整数值，表示事件目前所处的节点</p>
-<blockquote>
-<p>以下属性与事件的默认行为有关：</p>
-</blockquote>
-<p><strong>event.cancelable</strong></p>
-<p><code>cancelable</code>属性返回一个布尔值，表示事件是否可以取消。该属性为只读属性，只能在新建事件时改变。除非显式声明，Event构造函数生成的事件，默认是不可以取消的</p>
-<p><strong>event.defaultPrevented</strong></p>
-<p><code>defaultPrevented</code>属性返回一个布尔值，表示该事件是否调用过preventDefault方法</p>
-<blockquote>
-<p>以下属性与阻止事件行为有关：</p>
-</blockquote>
-<p><strong>event.preventDefault()</strong></p>
-<p><code>preventDefault</code>方法取消浏览器对当前事件的默认行为，比如点击链接后，浏览器跳转到指定页面，或者按一下空格键，页面向下滚动一段距离。该方法生效的前提是，事件的cancelable属性为true，如果为false，则调用该方法没有任何效果</p>
-<p>如果监听函数最后返回布尔值false（即return false），浏览器也不会触发默认行为，但是与<code>event.preventDefault()</code>有区别，调用<code>return false</code>时会执行以下行为：</p>
-<blockquote>
-<ul>
-<li>event.preventDefault()</li>
-<li>event.stopPropagation()</li>
-<li>停止回调函数执行并立即返回</li>
-</ul>
-</blockquote>
-<p><strong>event.stopPropagation()</strong></p>
-<p><code>stopPropagation</code>方法阻止事件在DOM中继续传播，防止再触发定义在别的节点上的监听函数（即阻止事件冒泡），但是不包括在当前节点上新定义的事件监听函数</p>
-<p><strong>event.stopImmediatePropagation()</strong></p>
-<p><code>stopImmediatePropagation</code>方法阻止同一个事件的其他监听函数被调用</p>
-<p>如果同一个节点对于同一个事件指定了多个监听函数，这些函数会根据添加的顺序依次调用。只要其中有一个监听函数调用了stopImmediatePropagation方法，其他的监听函数就不会再执行了</p>
-<blockquote>
-<p>以下属性与事件的目标节点有关：</p>
-</blockquote>
-<p><strong>event.currentTarget</strong></p>
-<p><code>currentTarget</code>属性返回事件当前所在的节点，即正在执行的监听函数所绑定的那个节点</p>
-<p>在监听函数中，currentTarget属性实际上等同于this对象</p>
-<p><strong>event.target</strong></p>
-<p><code>target</code>属性返回触发事件的那个节点，即事件最初发生的节点</p>
-<p>在IE6—IE8之中，该属性的名字不是target，而是<code>srcElement</code></p>
-<blockquote>
-<p>以下属性与事件对象的其他信息相关：</p>
-</blockquote>
-<p><strong>event.type</strong></p>
-<p><code>type</code>属性返回一个字符串，表示事件类型，大小写敏感</p>
-<p><strong>event.detail</strong></p>
-<p><code>detail</code>属性返回一个数值，表示事件的某种信息。具体含义与事件类型有关，对于鼠标事件，表示鼠标按键在某个位置按下的次数，比如对于dblclick事件，detail属性的值总是2</p>
-<p><strong>event.timeStamp</strong></p>
-<p><code>timeStamp</code>属性返回一个毫秒时间戳，表示事件发生的时间</p>
-<p><strong>event.isTrusted</strong></p>
-<p><code>isTrusted</code>属性返回一个布尔值，表示该事件是否为真实用户触发</p>
-<h4 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h4><blockquote>
-<p>除了浏览器预定义的那些事件，用户还可以自定义事件，然后手动触发</p>
-</blockquote>
-<p><strong>CustomEvent()</strong></p>
-<p>Event构造函数只能指定事件名，不能在事件上绑定数据。如果需要在触发事件的同时，传入指定的数据，需要使用CustomEvent构造函数生成自定义的事件对象：</p>
-<p><code>var event = new CustomEvent(&#39;build&#39;, { &#39;detail&#39;: &#39;hello&#39; });</code></p>
-<p>CustomEvent构造函数的第一个参数是事件名称，第二个参数是一个对象，该对象的detail属性会绑定在事件对象之上</p>
-<p><strong>自定义事件的老式写法</strong></p>
-<p>老式浏览器不一定支持各种类型事件的构造函数。因此，有时为了兼容，会用到一些非标准的方法。这些方法未来会被逐步淘汰，但是目前浏览器还广泛支持。除非是为了兼容老式浏览器，尽量不要使用</p>
-<p><strong>document.createEvent()</strong></p>
-<p>document.createEvent方法用来新建指定类型的事件。它所生成的Event实例，可以传入dispatchEvent方法</p>
-<p>createEvent方法接受一个字符串作为参数，可能的值参见下表“数据类型”一栏。使用了某一种“事件类型”，就必须使用对应的事件初始化方法：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">事件类型</th>
-<th style="text-align:center">事件初始化方法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">UIEvents</td>
-<td style="text-align:center">event.initUIEvent</td>
-</tr>
-<tr>
-<td style="text-align:center">MouseEvents</td>
-<td style="text-align:center">event.initMouseEvent</td>
-</tr>
-<tr>
-<td style="text-align:center">MutationEvents</td>
-<td style="text-align:center">event.initMutationEvent</td>
-</tr>
-<tr>
-<td style="text-align:center">HTMLEvents</td>
-<td style="text-align:center">event.initEvent</td>
-</tr>
-<tr>
-<td style="text-align:center">Event</td>
-<td style="text-align:center">event.initEvent</td>
-</tr>
-<tr>
-<td style="text-align:center">CustomEvent</td>
-<td style="text-align:center">event.initCustomEvent</td>
-</tr>
-<tr>
-<td style="text-align:center">KeyboardEvent</td>
-<td style="text-align:center">event.initKeyEvent</td>
-</tr>
-</tbody>
-</table>
-<p><strong>event.initEvent()</strong></p>
-<p>事件对象的initEvent方法，用来初始化事件对象，还能向事件对象添加属性。该方法的参数必须是一个使用<code>Document.createEvent()</code>生成的Event实例，而且必须在dispatchEvent方法之前调用</p>
-<p>initEvent方法可以接受四个参数：</p>
-<blockquote>
-<ul>
-<li>type：事件名称，格式为字符串</li>
-<li>bubbles：事件是否应该冒泡，格式为布尔值。可以使用event.bubbles属性读取它的值</li>
-<li>cancelable：事件是否能被取消，格式为布尔值。可以使用event.cancelable属性读取它的值</li>
-<li>option：为事件对象指定额外的属性</li>
-</ul>
-</blockquote>
-</style></video></audio></p>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1945,6 +1601,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">数据结构与算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">计算机通识</a>
               </li>
              
               <li class="article-tag-list-item">
