@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 性能优化 | Bowen_blog</title>
+  <title>锚点跳转 | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Bowen">
-<meta name="keywords" content="前端,Html,css,JavaScript,Vue">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bowen_blog">
-<meta property="og:url" content="http://yoursite.com/tags/性能优化/index.html">
+  <meta name="description" content="无限播报（类似广告无限滚动播放）锚点跳转零、代码地址实现锚点的代码放在了这个github地址中：锚点跳转 一、实现思路 a标签跳转  123&amp;lt;a href=&quot;#id1&quot;&amp;gt;跳转到id为id1的元素中&amp;lt;/a&amp;gt;&amp;lt;div id=&quot;id1&quot;&amp;gt;我是id1&amp;lt;/div&amp;gt;  使用scrollIntoView直接跳转到对应元素的位置  MDN对scrollIntoVie">
+<meta name="keywords" content="组件开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="锚点跳转">
+<meta property="og:url" content="http://yoursite.com/2020/10/05/锚点跳转/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="Bowen">
+<meta property="og:description" content="无限播报（类似广告无限滚动播放）锚点跳转零、代码地址实现锚点的代码放在了这个github地址中：锚点跳转 一、实现思路 a标签跳转  123&amp;lt;a href=&quot;#id1&quot;&amp;gt;跳转到id为id1的元素中&amp;lt;/a&amp;gt;&amp;lt;div id=&quot;id1&quot;&amp;gt;我是id1&amp;lt;/div&amp;gt;  使用scrollIntoView直接跳转到对应元素的位置  MDN对scrollIntoVie">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-12-06T06:07:40.934Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bowen_blog">
-<meta name="twitter:description" content="Bowen">
+<meta name="twitter:title" content="锚点跳转">
+<meta name="twitter:description" content="无限播报（类似广告无限滚动播放）锚点跳转零、代码地址实现锚点的代码放在了这个github地址中：锚点跳转 一、实现思路 a标签跳转  123&amp;lt;a href=&quot;#id1&quot;&amp;gt;跳转到id为id1的元素中&amp;lt;/a&amp;gt;&amp;lt;div id=&quot;id1&quot;&amp;gt;我是id1&amp;lt;/div&amp;gt;  使用scrollIntoView直接跳转到对应元素的位置  MDN对scrollIntoVie">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
   
@@ -140,98 +141,196 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-锚点跳转" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/24/Web性能优化/" class="archive-article-date">
-  	<time datetime="2018-08-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-24</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/24/Web性能优化/">Web性能优化</a>
+    <h1 class="article-title" itemprop="name">
+      锚点跳转
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/10/05/锚点跳转/" class="archive-article-date">
+  	<time datetime="2020-10-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="无限播报（类似广告无限滚动播放）"><a href="#无限播报（类似广告无限滚动播放）" class="headerlink" title="无限播报（类似广告无限滚动播放）"></a>无限播报（类似广告无限滚动播放）</h1><h1 id="锚点跳转"><a href="#锚点跳转" class="headerlink" title="锚点跳转"></a>锚点跳转</h1><h3 id="零、代码地址"><a href="#零、代码地址" class="headerlink" title="零、代码地址"></a>零、代码地址</h3><p>实现锚点的代码放在了这个github地址中：<a href="https://github.com/DarkerBo/various-components-react/tree/master/src/AnchorPoint" target="_blank" rel="noopener">锚点跳转</a></p>
+<h3 id="一、实现思路"><a href="#一、实现思路" class="headerlink" title="一、实现思路"></a>一、实现思路</h3><ul>
+<li><strong>a标签跳转</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#id1"</span>&gt;</span>跳转到id为id1的元素中<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"id1"</span>&gt;</span>我是id1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>使用<code>scrollIntoView</code>直接跳转到对应元素的位置</strong></li>
+</ul>
+<p>MDN对<code>scrollIntoView</code>的定义是：</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element" target="_blank" rel="noopener"><code>Element</code></a> 接口的scrollIntoView()方法会滚动元素的父容器，使被调用scrollIntoView()的元素对用户可见。</p>
+</blockquote>
+<p>优点：方便，一行代码就完事</p>
+<p>缺点：没有滚动的动画，而且<code>scrollIntoView</code>是实验性的，以后有可能会改动，用户体验一般，嗖一下就到了</p>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element.scrollIntoView(); // 等同于element.scrollIntoView(true) </span><br><span class="line">element.scrollIntoView(alignToTop); // Boolean型参数 </span><br><span class="line">element.scrollIntoView(scrollIntoViewOptions); // Object型参数</span><br></pre></td></tr></table></figure>
+<p>tips：可以在需要滚动的div的样式里面加一句：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scroll-behavior: smooth; // 滚动条缓慢滚动</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>通过修改滚动元素的<code>scrollTop</code>并自己写动画</strong></li>
+</ul>
+<p>要注意的问题有：</p>
+<ol>
+<li>如何设置控制离目标元素越近，滚动的速度越缓慢？</li>
+<li>在点击按钮后，滚动元素自动滚动到目标元素的过程中，要注意防止再点击按钮再次触发事件，这时候应该return掉。</li>
+<li>定时器的时间？如何选择合适的定时器？</li>
+</ol>
+<h3 id="二、核心代码"><a href="#二、核心代码" class="headerlink" title="二、核心代码"></a>二、核心代码</h3><p>有了上面思路的铺垫，组件的核心代码就呼之欲出了~这里举例的是修改<code>scrollTop</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">const slideTo = (element: HTMLDivElement, scrollElement: HTMLDivElement) =&gt; &#123;</span><br><span class="line">  // 如果正在滚动，不能触发滚动事件，否则开多个定时器会滚动得越来越快</span><br><span class="line">  if (isSlide) return;</span><br><span class="line">  setIsSlide(true);</span><br><span class="line"></span><br><span class="line">  const step = () =&gt; &#123;</span><br><span class="line">    const speed = element.offsetTop / 15;</span><br><span class="line">    scrollElement.scrollTop += speed;</span><br><span class="line">    // 判断是否已经滚动到元素起始处</span><br><span class="line">    if (scrollElement.scrollTop &gt;= element.offsetTop) &#123;</span><br><span class="line"></span><br><span class="line">      // 如果滚动超过了，回到原位</span><br><span class="line">      scrollElement.scrollTop = element.offsetTop;</span><br><span class="line">      setIsSlide(false);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 是否滚动到页面底部（一些元素高度不够，滚到页面底部也停止）</span><br><span class="line">    if (scrollElement.scrollTop &gt;= scrollElement.scrollHeight - scrollElement.clientHeight) &#123;</span><br><span class="line">      scrollElement.scrollTop = scrollElement.scrollHeight - scrollElement.clientHeight;</span><br><span class="line">      setIsSlide(false);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    window.requestAnimationFrame(step);</span><br><span class="line">  &#125;</span><br><span class="line">  window.requestAnimationFrame(step);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、效果演示图"><a href="#三、效果演示图" class="headerlink" title="三、效果演示图"></a>三、效果演示图</h3><p>实现锚点跳转的图片可以在这个github地址中浏览：<a href="https://github.com/DarkerBo/various-components-react" target="_blank" rel="noopener">锚点跳转</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能优化</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组件开发</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/10/05/锚点跳转/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/20/浏览器加载过程及性能优化/" class="archive-article-date">
-  	<time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/15/无限播报/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">无限播报</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/20/浏览器加载过程及性能优化/">浏览器加载过程及性能优化</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能优化</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -241,7 +340,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Bowen
+    		&copy; 2020 Bowen
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -254,9 +353,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -320,11 +419,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+                <a href="javascript:void(0)" class="js-tag color5">组件开发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机通识</a>
+                <a href="javascript:void(0)" class="js-tag color5">常见需求</a>
               </li>
              
               <li class="article-tag-list-item">

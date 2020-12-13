@@ -142,108 +142,56 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Web性能优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-锚点跳转" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/24/Web性能优化/">Web性能优化</a>
+      <a class="article-title" href="/2020/10/05/锚点跳转/">锚点跳转</a>
     </h1>
   
 
         
-        <a href="/2018/08/24/Web性能优化/" class="archive-article-date">
-  	<time datetime="2018-08-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-24</time>
+        <a href="/2020/10/05/锚点跳转/" class="archive-article-date">
+  	<time datetime="2020-10-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="web性能优化补充"><a href="#web性能优化补充" class="headerlink" title="web性能优化补充"></a>web性能优化补充</h1><p>优化网站性能有手段有很多种，这里主要整理并总结一下网上见到的以及自己用过的一下方法。主要从浏览器加载解析渲染的角度出发。</p>
-<h2 id="加载解析相关"><a href="#加载解析相关" class="headerlink" title="加载解析相关"></a>加载解析相关</h2><p><strong>使用HTTP 2.0</strong></p>
+        <h1 id="无限播报（类似广告无限滚动播放）"><a href="#无限播报（类似广告无限滚动播放）" class="headerlink" title="无限播报（类似广告无限滚动播放）"></a>无限播报（类似广告无限滚动播放）</h1><h1 id="锚点跳转"><a href="#锚点跳转" class="headerlink" title="锚点跳转"></a>锚点跳转</h1><h3 id="零、代码地址"><a href="#零、代码地址" class="headerlink" title="零、代码地址"></a>零、代码地址</h3><p>实现锚点的代码放在了这个github地址中：<a href="https://github.com/DarkerBo/various-components-react/tree/master/src/AnchorPoint" target="_blank" rel="noopener">锚点跳转</a></p>
+<h3 id="一、实现思路"><a href="#一、实现思路" class="headerlink" title="一、实现思路"></a>一、实现思路</h3><ul>
+<li><strong>a标签跳转</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#id1"</span>&gt;</span>跳转到id为id1的元素中<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"id1"</span>&gt;</span>我是id1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>使用<code>scrollIntoView</code>直接跳转到对应元素的位置</strong></li>
+</ul>
+<p>MDN对<code>scrollIntoView</code>的定义是：</p>
+<blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element" target="_blank" rel="noopener"><code>Element</code></a> 接口的scrollIntoView()方法会滚动元素的父容器，使被调用scrollIntoView()的元素对用户可见。</p>
+</blockquote>
+<p>优点：方便，一行代码就完事</p>
+<p>缺点：没有滚动的动画，而且<code>scrollIntoView</code>是实验性的，以后有可能会改动，用户体验一般，嗖一下就到了</p>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element.scrollIntoView(); // 等同于element.scrollIntoView(true) </span><br><span class="line">element.scrollIntoView(alignToTop); // Boolean型参数 </span><br><span class="line">element.scrollIntoView(scrollIntoViewOptions); // Object型参数</span><br></pre></td></tr></table></figure>
+<p>tips：可以在需要滚动的div的样式里面加一句：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scroll-behavior: smooth; // 滚动条缓慢滚动</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>通过修改滚动元素的<code>scrollTop</code>并自己写动画</strong></li>
+</ul>
+<p>要注意的问题有：</p>
 <ol>
-<li>二进制分帧：HTTP2.0 将所有传输的信息分割为更小的消息和帧，并对它们采用二进制格式的编码。</li>
-<li>多路复用：HTTP 2.0 把HTTP协议通信的基本单位缩小为一个一个的帧，这些帧对应着逻辑流中的消息。相应地，很多流可以并行地在同一个TCP 连接上交换消息，而无需建立多个 TCP 连接。</li>
-<li>首部压缩，节约资源</li>
-<li>服务端推送：服务器可以对客户端的一个请求发送多个响应。 服务器推送还有一个很大的优势：可以缓存！</li>
+<li>如何设置控制离目标元素越近，滚动的速度越缓慢？</li>
+<li>在点击按钮后，滚动元素自动滚动到目标元素的过程中，要注意防止再点击按钮再次触发事件，这时候应该return掉。</li>
+<li>定时器的时间？如何选择合适的定时器？</li>
 </ol>
-<p><strong>DNS预解析</strong></p>
-<p>使用 link 标签中的 rel 属性，实现通过预先解析的方式，提前知道域名对应的 ip 地址，提高跳转到该链接页面的速度。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"https://bowen_blog.com"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>缓存加载</strong></p>
-<p>缓存对于前端性能优化来说是个很重要的点，良好的缓存策略可以降低资源的重复加载提高网页的整体加载速度。</p>
-<p>通常浏览器缓存策略分为两种：强缓存和协商缓存。</p>
-<ul>
-<li><p>强缓存</p>
-<p>通过 http 两个响应头字段实现：<code>Expires</code>和<code>Cache-Control</code>。强缓存状态下不需要请求，状态码为 200</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Expires: Wed, <span class="number">22</span> Oct <span class="number">2018</span> <span class="number">08</span>:<span class="number">41</span>:<span class="number">00</span> GMT</span><br></pre></td></tr></table></figure>
-<p><code>Expires</code> 是 HTTP / 1.0 的产物，表示资源会在 <code>Wed, 22 Oct 2018 08:41:00 GMT</code> 后过期，需要再次请求。并且 <code>Expires</code> 受限于本地时间，如果修改了本地时间，可能会造成缓存失效。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cache-control: max-age=<span class="number">30</span></span><br></pre></td></tr></table></figure>
-<p><code>Cache-Control</code> 出现于 HTTP / 1.1，优先级高于 <code>Expires</code> 。该属性表示资源会在 30 秒后过期，需要再次请求。</p>
-</li>
-<li><p>协商缓存</p>
-</li>
-</ul>
-<p>如果缓存过期了，我们就可以使用协商缓存来解决问题。协商缓存需要请求，如果缓存有效会返回 304。</p>
-<p>协商缓存需要客户端和服务端共同实现。</p>
-<p>实现方式：</p>
-<p>1、<code>Last-Modified</code> 和 <code>If-Modified-Since</code></p>
-<p>Last-Modified 属于实体首部字段，If-Modified-Since 属于请求首部字段，在发送请求的时候，If-Modified-Since 会把 Last-Modified 的值发送到服务器，询问服务器在这个时间节点后资源是否有更新，有的话就把资源发过来。</p>
-<p>但是如果在本地打开缓存文件，就会造成 <code>Last-Modified</code> 被修改，所以在 HTTP / 1.1 出现了 <code>ETag</code> 。</p>
-<p>2、<code>ETag</code> 和 <code>If-None-Match</code></p>
-<p><code>ETag</code> 类似于文件指纹 ，<code>If-None-Match</code>会把当前的<code>ETag</code>发送给服务器，询问服务器该资源的<code>ETag</code>是否有变化，如果不一样的话把新的资源发回来。并且 <code>ETag</code> 优先级比 <code>Last-Modified</code> 高。</p>
-<ul>
-<li><p>其他缓存策略</p>
-<p>大部分场景都可以用协商缓存解决，但对于一些特殊情况，需要按需选择合适的缓存策略处理。</p>
-<ul>
-<li>对于某些不需要缓存的资源，可以使用 <code>Cache-control: no-store</code> ，表示该资源不需要缓存</li>
-<li>对于某些需要频繁更新的资源，可以使用<code>Cache-control: no-cache</code>表示已经缓存，并且配合<code>ETag</code>使用，每次请求都会询问是否有更新。</li>
-<li>对于代码文件来说，通常使用 <code>Cache-Control: max-age=31536000</code> 并配合策略缓存使用，然后对文件进行指纹处理，一旦文件名变动就会立刻下载新的文件。</li>
-</ul>
-</li>
-</ul>
-<p><strong>预加载</strong></p>
-<p>预加载就是在还没使用到某些资源时，提前加载好。</p>
-<ul>
-<li>预加载可以一定程度上减少首屏的加载时间，因为可以将不重要的资源延后加载。</li>
-<li>预加载强制浏览器请求资源，但不会阻塞<code>onload</code>事件。</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"preload"</span> <span class="attr">href</span>=<span class="string">"https://bowen_blog.com"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>使用CDN</strong></p>
-<p>CDN是构建在网络之上的内容分发网络，通常在进行网页开发的时候，需要引入外部的css/js文件，则可以使用 CDN 引入，更加安全和快速。</p>
-<h2 id="渲染相关"><a href="#渲染相关" class="headerlink" title="渲染相关"></a>渲染相关</h2><p><strong>预渲染</strong></p>
-<p>可以通过预渲染把下载好的资源提前在后台渲染好，提高在打开时的速度。不过要保证预渲染的页面会被用户打开，否则会浪费资源</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"prerender"</span> <span class="attr">href</span>=<span class="string">"https://bowen_blog.com"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>CSS相关</strong></p>
-<ul>
-<li>把 link 标签放在 head 标签内，先得到样式在载入 html 的 body 部分</li>
-<li>尽量减少选择器的嵌套，避免使用通配选择符 *</li>
-</ul>
-<p><strong>js相关</strong></p>
-<ul>
-<li>把 script 标签放到 body 最后面</li>
-<li>使用 async/defer 属性</li>
-</ul>
-<h2 id="其他优化"><a href="#其他优化" class="headerlink" title="其他优化"></a>其他优化</h2><ul>
-<li><p>懒加载</p>
-</li>
-<li><p>webpack 打包压缩资源</p>
-</li>
-<li><p>SSR 服务端渲染</p>
-</li>
-<li><p>减少 DOM 操作，使用 domcument.createDocumentFragment()</p>
-</li>
-<li><p>尽在呈现，使用 DOMContentLoaded</p>
-</li>
-<li><p>防抖</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> button = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>)</span><br><span class="line"><span class="keyword">var</span> timer</span><br><span class="line"></span><br><span class="line">button.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(timer)&#123;</span><br><span class="line">        clearTimeout(timer)</span><br><span class="line">    &#125;</span><br><span class="line">    timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">//具体逻辑</span></span><br><span class="line">    &#125;,<span class="number">100</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>节流</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> throttle = <span class="function"><span class="keyword">function</span>(<span class="params">delay,fn</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> last</span><br><span class="line">    <span class="keyword">var</span> current =+ <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="keyword">if</span>(current-last &gt; delay)&#123;</span><br><span class="line">        fn() <span class="comment">//具体逻辑</span></span><br><span class="line">        last = current</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
+<h3 id="二、核心代码"><a href="#二、核心代码" class="headerlink" title="二、核心代码"></a>二、核心代码</h3><p>有了上面思路的铺垫，组件的核心代码就呼之欲出了~这里举例的是修改<code>scrollTop</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">const slideTo = (element: HTMLDivElement, scrollElement: HTMLDivElement) =&gt; &#123;</span><br><span class="line">  // 如果正在滚动，不能触发滚动事件，否则开多个定时器会滚动得越来越快</span><br><span class="line">  if (isSlide) return;</span><br><span class="line">  setIsSlide(true);</span><br><span class="line"></span><br><span class="line">  const step = () =&gt; &#123;</span><br><span class="line">    const speed = element.offsetTop / 15;</span><br><span class="line">    scrollElement.scrollTop += speed;</span><br><span class="line">    // 判断是否已经滚动到元素起始处</span><br><span class="line">    if (scrollElement.scrollTop &gt;= element.offsetTop) &#123;</span><br><span class="line"></span><br><span class="line">      // 如果滚动超过了，回到原位</span><br><span class="line">      scrollElement.scrollTop = element.offsetTop;</span><br><span class="line">      setIsSlide(false);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 是否滚动到页面底部（一些元素高度不够，滚到页面底部也停止）</span><br><span class="line">    if (scrollElement.scrollTop &gt;= scrollElement.scrollHeight - scrollElement.clientHeight) &#123;</span><br><span class="line">      scrollElement.scrollTop = scrollElement.scrollHeight - scrollElement.clientHeight;</span><br><span class="line">      setIsSlide(false);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    window.requestAnimationFrame(step);</span><br><span class="line">  &#125;</span><br><span class="line">  window.requestAnimationFrame(step);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、效果演示图"><a href="#三、效果演示图" class="headerlink" title="三、效果演示图"></a>三、效果演示图</h3><p>实现锚点跳转的图片可以在这个github地址中浏览：<a href="https://github.com/DarkerBo/various-components-react" target="_blank" rel="noopener">锚点跳转</a></p>
 
       
 
@@ -257,7 +205,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能优化</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组件开发</a>
         		</li>
       		
 		</ul>
@@ -293,119 +241,55 @@
 
 
   
-    <article id="post-浏览器加载过程及性能优化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-无限播报" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/20/浏览器加载过程及性能优化/">浏览器加载过程及性能优化</a>
+      <a class="article-title" href="/2020/09/15/无限播报/">无限播报</a>
     </h1>
   
 
         
-        <a href="/2018/08/20/浏览器加载过程及性能优化/" class="archive-article-date">
-  	<time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
+        <a href="/2020/09/15/无限播报/" class="archive-article-date">
+  	<time datetime="2020-09-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="浅析浏览器加载、解析、渲染过程"><a href="#浅析浏览器加载、解析、渲染过程" class="headerlink" title="浅析浏览器加载、解析、渲染过程"></a>浅析浏览器加载、解析、渲染过程</h3><p>最近在筹备实习，看了不少关于基础知识的文章，突然觉得豁然开朗，因为里面有些东西虽然自己也一直在使用，但是这之前感觉不太明白所以然 ，比如 http 协议、W3C规范、CDN的好处等。后来我花了时间去了解浏览器的工作，看了一些文章，重点借鉴<how browsers="" work=""> ，现在自己来试着总结一下。</how></p>
-<h4 id="为什么要了解浏览器加载、解析、渲染这个过程？"><a href="#为什么要了解浏览器加载、解析、渲染这个过程？" class="headerlink" title="为什么要了解浏览器加载、解析、渲染这个过程？"></a>为什么要了解浏览器加载、解析、渲染这个过程？</h4><p>了解浏览器的工作过程，有利于前端工作者写出一个最佳实践的界面。</p>
-<ul>
-<li><p>把 css 、js 文件的外链引入到合适的位置，让浏览器以最快的速度将其加载</p>
-</li>
-<li><p>以最优的写法构建 DOM 结构和解析 CSS，提高浏览器的解析速率</p>
-</li>
-<li><p>终极目的是要加快浏览器渲染，减少回流、重画，优化用户体验</p>
-</li>
-</ul>
-<h4 id="浏览器页面加载"><a href="#浏览器页面加载" class="headerlink" title="浏览器页面加载"></a>浏览器页面加载</h4><ul>
-<li>加载资源的形式<ul>
-<li>输入 url（或者跳转页面）加载 html</li>
-<li>加载 html 的静态资源，JS、CSS</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>加载资源的过程<ul>
-<li>输入网址</li>
-<li>浏览器根据 DNS 服务器解析得到域名的 IP 地址</li>
-<li>浏览器给 web 服务器发送一个 HTTP 请求</li>
-<li>服务器收到、处理请求，并返回一个响应</li>
-<li>服务器返回 HTML 响应</li>
-<li>浏览器开始显示 HTML</li>
-<li>浏览器加载 HTML 时，发现嵌在其中的其他连接，会再次发送请求，来重新获取这些文件，这些文件包括 CSS/JS/图片视频等资源，这些资源的地址都要经历一个和 HTML 读取类似的过程</li>
-</ul>
-</li>
-</ul>
-<h4 id="浏览器的解析和渲染"><a href="#浏览器的解析和渲染" class="headerlink" title="浏览器的解析和渲染"></a>浏览器的解析和渲染</h4><p>资源加载得到了，那浏览器是如何把请求得到的资源完整地呈现在我们面前的呢?</p>
-<p>下面是渲染引擎在去的内容之后的基本流程：</p>
-<p><img src="http://myblog.coderhsw.top/assets/pic/%E6%B5%8F%E8%A7%88%E5%99%A8/%E6%B8%B2%E6%9F%93.png" alt="img"> </p>
-<p>如上图，浏览器会这样解析：</p>
+        <h1 id="无限播报（类似广告无限滚动播放）"><a href="#无限播报（类似广告无限滚动播放）" class="headerlink" title="无限播报（类似广告无限滚动播放）"></a>无限播报（类似广告无限滚动播放）</h1><h3 id="零、代码地址"><a href="#零、代码地址" class="headerlink" title="零、代码地址"></a>零、代码地址</h3><p>实现无限播报的代码放在了这个github地址中：<a href="https://github.com/DarkerBo/various-components-react/tree/master/src/LoopPlaybackDemo" target="_blank" rel="noopener">无限播报</a></p>
+<h3 id="一、实现思路"><a href="#一、实现思路" class="headerlink" title="一、实现思路"></a>一、实现思路</h3><p>其实实现该组件并不复杂，主要要注意的点在于：</p>
 <ol>
-<li>浏览器会将HTML解析成一个DOM树，DOM 树的构建过程是一个深度遍历过程：当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点。</li>
-<li>CSSOM，CSS 规则树</li>
-<li>根据DOM树和CSSOM来构造 Rendering Tree。注意：Rendering Tree 渲染树并不等同于 DOM 树，因为一些像 Header 或 display:none 的东西就没必要放在渲染树中了。</li>
-<li>有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系。下一步操作称之为Layout，顾名思义就是计算出每个节点在屏幕中的位置。</li>
-<li>再下一步就是绘制，即遍历render树，并使用UI后端层绘制每个节点。</li>
+<li>如何做到无限循环的效果？</li>
+<li>如何定义该动画？</li>
 </ol>
-<p>上述这个过程是逐步完成的，为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等到所有的html都解析完成之后再去构建和布局render树 。</p>
-<p><strong>几个概念</strong></p>
-<p>1、reflow/layout</p>
-<p>当渲染对象被创建并添加到树中，它们并没有位置和大小，计算这些值的过程称为layout或reflow。 浏览器得到渲染对象后，要花时间去渲染，当它发现了某个部分发生了变化影响了布局，那就需要倒回去重新渲染。</p>
-<p>2、repaint</p>
-<p>如果只是改变了某个元素的背景颜色，文字颜色等，不影响元素周围或内部布局的属性，将只会引起浏览器的repaint，重画某一部分。</p>
-<p>Reflow要比Repaint更花费时间，也就更影响性能。所以在写代码的时候，要尽量避免过多的Reflow。</p>
-<p>在网上的文章中，这是一个比较有趣也写得比较好的 HTML 页面加载和解析流程：</p>
+<p>我们先逐个击破这些问题</p>
+<ul>
+<li><strong>如何做到无限循环的效果？</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scroll"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以想想，假设在水平滚动的组件中，parent 的宽度为100px，scroll 的宽度为150px，开始滚动，滚动到此时scroll的右侧边界和 parent 的边界重合时，继续滚动如何出现 scroll 左侧的元素？</p>
+<p>答案很简单：<strong>设置两个scroll，然后第一个scroll的左侧边界与parent的右侧边界重叠时，瞬间回到最初的状态（scroll的左侧边界在parent的右侧边界）</strong></p>
+<ul>
+<li><strong>如何定义该动画？</strong></li>
+</ul>
+<p>我使用的是<code>document.styleSheets</code>来动态生成一个<code>animation</code>的动画，然后使用<code>insertRule</code>插入到组件的<code>cssRules</code>中。</p>
+<p>下面是 MDN 对<code>document.styleSheets</code>的定义：</p>
 <blockquote>
-<ol>
-<li>用户输入网址（假设是个html页面，并且是第一次访问），浏览器向服务器发出请求，服务器返回html文件； </li>
-<li>浏览器开始载入html代码，发现＜head＞标签内有一个＜link＞标签引用外部CSS文件； </li>
-<li>浏览器又发出CSS文件的请求，服务器返回这个CSS文件； </li>
-<li>浏览器继续载入html中＜body＞部分的代码，并且CSS文件已经拿到手了，可以开始渲染页面了； </li>
-<li>浏览器在代码中发现一个＜img＞标签引用了一张图片，向服务器发出请求。此时浏览器不会等到图片下载完，而是继续渲染后面的代码； </li>
-<li>服务器返回图片文件，由于图片占用了一定面积，影响了后面段落的排布，因此浏览器需要回过头来重新渲染这部分代码； </li>
-<li>浏览器发现了一个包含一行Javascript代码的＜script＞标签，赶快运行它； </li>
-<li>Javascript脚本执行了这条语句，它命令浏览器隐藏掉代码中的某个＜div＞ （style.display=”none”）。突然少了这么一个元素，浏览器不得不重新渲染这部分代码； </li>
-<li>终于等到了＜/html＞的到来，浏览器泪流满面…… </li>
-<li>等等，还没完，用户点了一下界面中的“换肤”按钮，Javascript让浏览器换了一下＜link＞标签的CSS路径； </li>
-<li>浏览器召集了在座的各位＜div＞＜span＞＜ul＞＜li＞们，“大伙儿收拾收拾行李，咱得重新来过……”，浏览器向服务器请求了新的CSS文件，重新渲染页面。</li>
-</ol>
+<p><strong><code>Document.styleSheets</code></strong> 只读属性，返回一个由 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/StyleSheet_" target="_blank" rel="noopener"><code>StyleSheet</code></a>对象组成的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/StyleSheetList" target="_blank" rel="noopener"><code>StyleSheetList</code></a>，每个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/StyleSheet_" target="_blank" rel="noopener"><code>StyleSheet</code></a>对象都是一个文档中链接或嵌入的样式表。</p>
 </blockquote>
-<h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><p>上文提及到了回流和重绘，可想而知，回流和重绘都会是页面渲染速度变慢，延长用户看到页面效果的时间。那么如何才能优化浏览器渲染的性能呢？</p>
-<p><strong>关于CSS</strong></p>
-<p>CSS 选择器的规则是从右到左匹配的，因此，写 css 的时候需要注意：</p>
-<ol>
-<li>CSS 的 link 放在 head 标签内，先得到样式再加载 html，减少重绘</li>
-<li>dom 深度尽量前，减少多重嵌套</li>
-<li>避免后代选择符，尽量使用子选择符。原因：子元素匹配符的概率要大于后代元素匹配符。后代选择符;#tp p{} 子选择符：#tp&gt;p{}</li>
-<li>避免使用通配符，举一个例子，.mod .hd *{font-size:14px;} 根据匹配顺序,将首先匹配通配符,也就是说先匹配出通配符,然后匹配.hd（就是要对dom树上的所有节点进行遍历他的父级元素）,然后匹配.mod,这样的性能耗费可想而知</li>
-</ol>
-<p><strong>关于 script</strong></p>
-<p>浏览器加载 html 文档时，遇到 script 标签会停下来，等到 script 标签里的 js 代码完全下载好并执行完毕之后再继续加载剩下的 html，因此，引入 script 标签时需要注意：</p>
-<ol>
-<li>尽量把 script 标签放到 body 的最后面，这样一来不会阻塞 html 的加载，二来不会导致 script 标签里的某些 dom 结构无法正常操作</li>
-<li>在 script 标签中添加属性，async/defer</li>
-</ol>
-<p><strong>加载优化</strong></p>
-<ol>
-<li>静态资源合并压缩（webpack）</li>
-<li>静态资源缓存，文件名字不变，浏览器不会重新向服务器请求，而是从缓存加载</li>
-<li>使用 CDN 加快资源加载</li>
-<li>SSR 服务端渲染，数据直接渲染到 HTML 中，而不需通过 Ajax（使用vue、react）</li>
-</ol>
-<p><strong>其他渲染优化</strong></p>
-<ol>
-<li>懒加载</li>
-<li>减少 DOM 查询，使用缓存</li>
-<li>减少 DOM 操作，合并操作（使用 document.createDocumentFrament()）</li>
-<li>事件节流</li>
-<li>尽早执行（使用 DOMContentLoaded）</li>
-</ol>
+<p>这是 MDN 对<code>insertRule</code>的定义：</p>
+<blockquote>
+<p><strong><code>CSSStyleSheet.insertRule()</code></strong> 方法用来给当前样式表插入新的样式规则（<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSRule" target="_blank" rel="noopener">CSS rule</a>），并且包含一些<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSStyleSheet/insertRule$edit#Restrictions" target="_blank" rel="noopener">限制</a>。</p>
+<p><strong>注意：</strong>尽管 <code>insertRule()</code> 是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSStyleSheet" target="_blank" rel="noopener"><code>CSSStyleSheet</code></a> 的一个方法，但它实际插入的地方是 <code>CSSStyleSheet.cssRules</code> 的内部 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSRuleList" target="_blank" rel="noopener"><code>CSSRuleList</code></a>。</p>
+</blockquote>
+<h3 id="二、核心代码"><a href="#二、核心代码" class="headerlink" title="二、核心代码"></a>二、核心代码</h3><p>有了上面思路的铺垫，组件的核心代码就呼之欲出了~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 生成随机动画事件名，避免重复，不能直接用Math.random，有小数点的话keyframes的name无法解析</span><br><span class="line">const keyframesName = `scroll$&#123;new Date().valueOf()&#125;`;</span><br><span class="line">scrollElement.style.animation = `$&#123;keyframesName&#125; $&#123;loopTime&#125;s linear infinite`;</span><br><span class="line"></span><br><span class="line">// 这里使用定位top的话会出现字会颤抖的现象</span><br><span class="line">const keyframesValue = `@keyframes $&#123;keyframesName&#125;&#123;</span><br><span class="line">      0% &#123; transform: $&#123;translateDirection&#125;(0px) &#125;</span><br><span class="line">      100%&#123;</span><br><span class="line">           transform: $&#123;translateDirection&#125;(-$&#123;scrollElement[scrollDirection]&#125;px);</span><br><span class="line">          &#125;`;</span><br><span class="line"></span><br><span class="line">const stylesheet = document.styleSheets[document.styleSheets.length - 1] as CSSStyleSheet;</span><br><span class="line">      </span><br><span class="line">stylesheet.insertRule(keyframesValue, stylesheet.cssRules.length);</span><br></pre></td></tr></table></figure>
+<h3 id="三、效果演示图"><a href="#三、效果演示图" class="headerlink" title="三、效果演示图"></a>三、效果演示图</h3><p>实现无限播报的图片可以在这个github地址中浏览：<a href="https://github.com/DarkerBo/various-components-react" target="_blank" rel="noopener">无限播报</a></p>
 
       
 
@@ -419,7 +303,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">性能优化</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组件开发</a>
         		</li>
       		
 		</ul>
@@ -455,165 +339,335 @@
 
 
   
-    <article id="post-计算机网络总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-千分符的处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/20/计算机网络总结/">计算机网络总结</a>
+      <a class="article-title" href="/2020/08/21/千分符的处理/">千分符的处理</a>
     </h1>
   
 
         
-        <a href="/2018/08/20/计算机网络总结/" class="archive-article-date">
-  	<time datetime="2018-08-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-20</time>
+        <a href="/2020/08/21/千分符的处理/" class="archive-article-date">
+  	<time datetime="2020-08-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="计算机网络总结"><a href="#计算机网络总结" class="headerlink" title="计算机网络总结"></a>计算机网络总结</h3><h4 id="一、五层协议的体系结构"><a href="#一、五层协议的体系结构" class="headerlink" title="一、五层协议的体系结构"></a>一、五层协议的体系结构</h4><p>由于OSI的七层体系结构复杂，标准制定周期长，使得产品需要很长时间才能投入使用，因此在目前的市场中并不是很实用。</p>
-<p>五层协议的体系结构是OSI与TCP/IP协议体系结构的一种折中方案，也就是既涉及了OSI也设计了TCP/IP，这样既简洁又能将概念阐述清楚。</p>
-<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="img"> </p>
-<p><strong>应用层</strong></p>
-<hr>
-<p><strong>应用层的任务是通过应用进程间的交互来完成特定网络应用。</strong>应用层协议定义的是应用进程（进程：主机中正在运行的程序）间的通信和交互的规则。对于不同的网络应用需要不同的应用层协议。在互联网中应用层协议很多，如<strong>域名系统DNS</strong>，支持万维网应用的HTTP协议，支持电子邮件的SMTP协议等等。我们把应用层交互的数据单元称为报文。</p>
+        <h1 id="千分符的处理"><a href="#千分符的处理" class="headerlink" title="千分符的处理"></a>千分符的处理</h1><h3 id="1-使用toLocaleString格式化成字符串"><a href="#1-使用toLocaleString格式化成字符串" class="headerlink" title="1. 使用toLocaleString格式化成字符串"></a>1. 使用<code>toLocaleString</code>格式化成字符串</h3><p><code>toLocaleString</code>需要先确保使用它的是一个Number类型的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">15626175911</span>;</span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">parseFloat</span>(num).toLocaleString();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result);           <span class="comment">// 15,626,175,911</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> result);	   <span class="comment">// string</span></span><br></pre></td></tr></table></figure>
+<p><code>toLocaleString</code>还可以用于保留几位数字</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">156.26175911</span>;</span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">parseFloat</span>(num).toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">maximumFractionDigits</span>: <span class="number">2</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result);			<span class="comment">// 156.26</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> result);		<span class="comment">// string</span></span><br></pre></td></tr></table></figure>
+<p>下面是对<code>toLocaleString</code>的解释</p>
+<p>本文参考自 MDN 的文档与日常使用所得，如果你对这个 <code>API</code> 已经相当熟悉，请帮我看下是否有遗漏（笑）；不了解的同学可以浏览一下，应该会对你有所帮助。</p>
 <ul>
-<li><p>DNS</p>
-<ul>
-<li>操作系统会从DNS缓存中查找</li>
-<li>若没有则会去本地配置的DNS服务器中查找（host文件）</li>
-<li>若没有则会去DNS根服务器查找，先找到一级域名的服务器，在查找二级域名的服务器，以此迭代。</li>
+<li><strong>概述</strong></li>
 </ul>
+<p><code>toLocaleString</code> 方法是用于返回格式化对象后的字符串，该字符串格式因不同语言而不同。可以通过传参决定返回的语言与具体的表现，某些场景下相当有用，语法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object.toLocaleString([locales [, options]]);</span><br></pre></td></tr></table></figure>
+<p><code>locales</code> 参数用于指定格式化对象时使用的语言环境，默认为当前环境的语言，可以不传。该参数具体可选的值可以参考 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FIntl%23Locale_identification_and_negotiation" target="_blank" rel="noopener">这里</a>，一般而言使用 <code>en</code> 或 <code>zh</code> 即可应付绝大多数情况。例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>);    <span class="comment">// 2018-4-4 15:08:38</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>);    <span class="comment">// 4/4/2018, 3:08:38 PM</span></span><br></pre></td></tr></table></figure>
+<p>顺带一提，此参数大小写不敏感，已经在浏览器与 Node 验证过。</p>
+<p><code>options</code> 参数为输出样式的配置项，根据 <code>object</code> 类型不同会有不同选项，下文会仔细解释这个参数。但需要注意的是如果不传 <code>locales</code> 参数，那么 <code>options</code> 参数是不会生效的，其实上面的语法其实已经显现出这点。</p>
+<p>最后则是兼容性问题，具体如下图： </p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/4/1628f81ddcf88280?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<p> 使用参数的情况下兼容性稍差，这比较可惜，但总体而言还是比较乐观的。</p>
+<ul>
+<li><strong>Number.prototype.toLocaleString</strong></li>
+</ul>
+<p>先介绍 <code>toLocaleString</code> 在数字类型上的使用。面试偶尔会问到如何格式化数字，使整数部分每三位加一个逗号，这时不妨：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">2333333</span>;</span><br><span class="line">num.toLocaleString();   <span class="comment">// 2,333,333</span></span><br></pre></td></tr></table></figure>
+<p>其实是不需要任何正则的~打完出题者的脸后，我们一起看看 <code>toLocaleString</code> 在数字类型的 <code>options</code> 参数有好用属性，以方便我们偷懒使用。注意，本文不是翻译文档，因而只会介绍一些常用的属性，更具体的选项请查阅 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FNumber%2FtoLocaleString" target="_blank" rel="noopener">MDN</a>相关文档。</p>
+<p><code>style</code> 表示格式化时使用的样式，默认值是 <code>decimal</code> 也就是纯数字，也可为 <code>percent</code> 百分比显示与 <code>currency</code> 货币显示。值为 <code>currency</code> 时必须同时指定 <code>options</code> 中的 <code>currency</code> 属性，否则报错。具体例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">2333333</span>;</span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'decimal'</span> &#125;);   <span class="comment">//2,333,333</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'percent'</span> &#125;);   <span class="comment">//233,333,300%</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'currency'</span> &#125;);    <span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
+<p>接下来的两个属性是 <code>style</code> 设为 <code>currency</code> 时才有用的，它们分别是 <code>currency</code> 与 <code>currencyDisplay</code>，前者指定对应的货币，如 <code>USD</code>、<code>EUR</code> 与 <code>CNY</code> 等，实测也是不区分大小写的。后者是货币符号的展示样式，默认值是 <code>symbol</code>，即对应的符号，如 <code>CNY</code> 是 ￥。该属性的值也可以是 <code>code</code> 与 <code>name</code>，只是用得比较少，看看例子就好了~具体如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">2333333</span>;</span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'currency'</span>, <span class="attr">currency</span>: <span class="string">'CNY'</span> &#125;);    <span class="comment">//￥2,333,333.00</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'currency'</span>, <span class="attr">currency</span>: <span class="string">'cny'</span>, <span class="attr">currencyDisplay</span>: <span class="string">'code'</span> &#125;);      <span class="comment">//CNY2,333,333.00</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'currency'</span>, <span class="attr">currency</span>: <span class="string">'cny'</span>, <span class="attr">currencyDisplay</span>: <span class="string">'name'</span> &#125;);      <span class="comment">//2,333,333.00人民币</span></span><br></pre></td></tr></table></figure>
+<p>最后是两组相当强大的属性，某些场景下能带来极大的便利。第一组是 <code>minimumIntegerDigits</code>、 <code>minimumFractionDigits</code> 与  <code>maximumFractionDigits</code>，用于指定整数最少位数与小数的最少和最多位数，不够则用0去凑。简单说，自动补0！具体例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">2333.3</span>;</span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">minimumIntegerDigits</span>: <span class="number">5</span> &#125;);        <span class="comment">//02,333.3</span></span><br><span class="line"><span class="comment">//如果不想有分隔符，可以指定useGrouping为false</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">minimumIntegerDigits</span>: <span class="number">5</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);        <span class="comment">//02333.3</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">minimumFractionDigits</span>: <span class="number">2</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);     <span class="comment">//2333.30</span></span><br><span class="line"></span><br><span class="line">num = <span class="number">666.666</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">maximumFractionDigits</span>: <span class="number">2</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);     <span class="comment">//666.67</span></span><br></pre></td></tr></table></figure>
+<p>从此之后，补0与控制位数再也不愁~</p>
+<p>另一组是 <code>minimumSignificantDigits</code> 与 <code>maximumSignificantDigits</code>，用于控制有效数字位数，只要设置了这一组属性，第一组属性全部忽略不算，具体如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">1234.5</span>;</span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">minimumSignificantDigits</span>: <span class="number">6</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);      <span class="comment">//1234.50</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">maximumSignificantDigits</span>: <span class="number">4</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);      <span class="comment">//1235</span></span><br></pre></td></tr></table></figure>
+<p>注意，<code>maximumFractionDigits</code> 与 <code>maximumSignificantDigits</code> 均是四舍五入，使用时需要注意。数字类型的 <code>toLocaleString</code> 介绍就告一段落，下面让我们看看日期类型的 <code>toLocaleString</code> 的 <code>options</code> 有什么好用的属性。</p>
+<ul>
+<li><strong>Date.prototype.toLocaleString</strong></li>
+</ul>
+<p>与数字类型不同，日期类型的 <code>locales</code> 对输出的影响十分之大（其实数字类型影响也大，只是一般用不到），因而应该根据实际情况选择合适的语言环境。一般而言，日期显示是有要求的，样式方面需要统一。但如果是内部项目或者是 pm 允许，那么使用 <code>toLocaleString</code> 格式化日期就相当好了。与数字类型一样，只介绍常用属性，详细的属性介绍请查阅<a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FDate%2FtoLocaleString" target="_blank" rel="noopener">MDN</a>文档。</p>
+<p><code>hour12</code> 表示是使用十二小时制还是二十四小时制，默认值视 <code>locales</code> 而定。例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">hour12</span>: <span class="literal">true</span> &#125;);        <span class="comment">//2018/4/4 下午6:57:36</span></span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">hour12</span>: <span class="literal">false</span> &#125;);       <span class="comment">//2018/4/4 18:57:36</span></span><br></pre></td></tr></table></figure>
+<p>之后就是格式化年月日时分秒星期等选项了，<a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FDate%2FtoLocaleString" target="_blank" rel="noopener">MDN</a> 文档说必须按照一定的分组设置属性，实际使用中发现每个属性单独使用并不报错，因而按属性的值分开介绍会比较好理解。</p>
+<p>具体的属性一共有 9 个，分别是 <code>weekday</code>、<code>era</code>、<code>year</code>、<code>month</code>、<code>day</code>、<code>hour</code>、<code>minute</code>、<code>second</code> 与 <code>timeZoneName</code>。具体的意思，看单词估计就能秒懂，不作过多解释。然而需要留意的是他们的可选值。先讨论<code>weekday</code> 与 <code>era</code>，它们均可以取值为 <code>narrow</code>、<code>short</code> 或 <code>long</code>，简单说就是能有多短多短，缩写与正常表现，具体表现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">weekday</span>: <span class="string">'narrow'</span>, <span class="attr">era</span>: <span class="string">'narrow'</span> &#125;);        <span class="comment">//W A</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">weekday</span>: <span class="string">'short'</span>, <span class="attr">era</span>: <span class="string">'short'</span> &#125;);      <span class="comment">//Wed AD</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">weekday</span>: <span class="string">'long'</span>, <span class="attr">era</span>: <span class="string">'long'</span> &#125;);        <span class="comment">//Wednesday Anno Domini</span></span><br></pre></td></tr></table></figure>
+<p>跟着是 <code>timeZoneName</code> 属性，这个属性只有<code>short</code> 或 <code>long</code> 两个值，表现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">timeZoneName</span>: <span class="string">'short'</span> &#125;);   <span class="comment">//2018/4/5 GMT+8 下午7:18:26</span></span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">timeZoneName</span>: <span class="string">'long'</span> &#125;);    <span class="comment">//2018/4/5 中国标准时间 下午7:18:26</span></span><br></pre></td></tr></table></figure>
+<p>剩下的属性，均可以取值为 <code>numeric</code> 与 <code>2-digit</code>，简单说就是否仅用两位数字表示，看码说话：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">year</span>: <span class="string">'numeric'</span>,  <span class="attr">month</span>: <span class="string">'numeric'</span>,  <span class="attr">day</span>: <span class="string">'numeric'</span>,  <span class="attr">hour</span>: <span class="string">'numeric'</span>,  <span class="attr">minute</span>: <span class="string">'numeric'</span>,  <span class="attr">second</span>: <span class="string">'numeric'</span>, &#125;);   <span class="comment">//2018/4/5 下午7:30:17</span></span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">year</span>: <span class="string">'2-digit'</span>,  <span class="attr">month</span>: <span class="string">'2-digit'</span>,  <span class="attr">day</span>: <span class="string">'2-digit'</span>,  <span class="attr">hour</span>: <span class="string">'2-digit'</span>,  <span class="attr">minute</span>: <span class="string">'2-digit'</span>,  <span class="attr">second</span>: <span class="string">'2-digit'</span>  &#125;);   <span class="comment">//18/04/05 下午7:30:17</span></span><br></pre></td></tr></table></figure>
+<p>（比较奇怪的是 <code>hour</code>、<code>minute</code> 与 <code>second</code> 三个属性，无论设置为何值，表现都是一样的，希望有大佬告知原因，我换成 <code>en</code> 环境也是一样的。）</p>
+<p>最后是 <code>month</code> 这个属性，语言对月份有不同的展现，除去 <code>numeric</code> 与 <code>2-digit</code> 外，它额外多三个属性，分别是 <code>narrow</code>、<code>short</code> 与 <code>long</code>。展示如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">month</span>: <span class="string">'narrow'</span> &#125;);     <span class="comment">//A</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">month</span>: <span class="string">'short'</span> &#125;);     <span class="comment">//Apr</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">month</span>: <span class="string">'long'</span> &#125;);     <span class="comment">//April</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>小结</strong></li>
+</ul>
+<p>至此，关于 <code>toLocaleString</code> 的介绍就暂告一段落了。可以看到，在某些场景下需要格式化对象成字符串时，可以发挥极大的作用，不再需要自己苦兮兮地写函数做转换。尽管这个 <code>API</code> 稍微冷门一点，但还是很有意思的。</p>
+<h3 id="2-使用正则匹配"><a href="#2-使用正则匹配" class="headerlink" title="2. 使用正则匹配"></a>2. 使用正则匹配</h3><p>在使用正则之前先了解几个小知识：正向匹配、replace的函数匹配模式</p>
+<ul>
+<li><strong>正向匹配</strong></li>
+</ul>
+<p>正向匹配即<code>?=n</code>（匹配任何其后紧接指定字符串 n 的字符串）。正向预查咋用呢？这里先举个例子：有一个字符串<code>var str = &quot;abaaaaa&quot;;</code>，我们想把后面跟着字符b的字符a表示出来，于是正则表达式写法：<code>var reg = /a(?=b)/g;</code>，匹配的是后面紧跟着字符<code>b</code>的字符<code>a</code>，字符串<code>str</code>中只有一个符合条件的<code>a</code>，最后查看匹配结果为[“a”]。这个例子的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">"abaaaaa"</span>,</span><br><span class="line">    reg = <span class="regexp">/a(?=b)/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg));  <span class="comment">// ['a'] 匹配到的是b紧贴的那个a</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>replace的函数匹配模式</strong>（其实就是参数是函数而不是字符串的时候）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(regexp|substr, newSubStr|<span class="function"><span class="keyword">function</span>)</span></span><br></pre></td></tr></table></figure>
+<p><strong>（1）参数</strong></p>
+<ul>
+<li><p><code>regexp</code>(pattern)</p>
+<p>一个<code>RegExp</code>对象或者其字面量。该正则所匹配的内容会被第二个参数的返回值替换掉。</p>
+</li>
+<li><p><code>substr</code>(pattern)</p>
+<p>一个将被 <code>newSubStr</code> 替换的字符串。其被视为一整个字符串，而不是一个正则表达式。仅第一个匹配项会被替换。</p>
+</li>
+<li><p><code>newSubStr</code> (replacement)</p>
+<p>用于替换掉第一个参数在原字符串中的匹配部分的字符串。该字符串中可以内插一些特殊的变量名。</p>
+</li>
+<li><p><code>function</code> (replacement)</p>
+<p>一个用来创建新子字符串的函数，该函数的返回值将替换掉第一个参数匹配到的结果。</p>
 </li>
 </ul>
+<p><strong>（2）返回值</strong></p>
+<p>一个部分或全部匹配由替代模式所取代的新的字符串。</p>
+<p>该方法并不改变调用它的字符串本身，而只是返回一个新的替换后的字符串。</p>
+<p>在进行全局的搜索替换时，正则表达式需包含 <code>g</code> 标志。</p>
+<p><strong>（3）使用字符串作为参数</strong></p>
+<p>替换字符串可以插入下面的特殊变量名：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>代表的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$$</code></td>
+<td>插入一个 “$”。</td>
+</tr>
+<tr>
+<td><code>$&amp;</code></td>
+<td>插入匹配的子串。</td>
+</tr>
+<tr>
+<td><code>$`</code></td>
+<td>插入当前匹配的子串左边的内容。</td>
+</tr>
+<tr>
+<td><code>$&#39;</code></td>
+<td>插入当前匹配的子串右边的内容。</td>
+</tr>
+<tr>
+<td><code>$*n*</code></td>
+<td>假如第一个参数是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/RegExp" target="_blank" rel="noopener"><code>RegExp</code></a>对象，并且 n 是个小于100的非负整数，那么插入第 n 个括号匹配的字符串。提示：索引是从1开始</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（4）指定一个函数作为参数</strong></p>
+<p>你可以指定一个函数作为第二个参数。在这种情况下，当匹配执行后，该函数就会执行。 函数的返回值作为替换字符串。 (注意：上面提到的特殊替换参数在这里不能被使用。) 另外要注意的是，如果第一个参数是正则表达式，并且其为全局匹配模式，那么这个方法将被多次调用，每次匹配都会被调用。</p>
+<p>下面是该函数的参数：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>代表的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>match</code></td>
+<td>匹配的子串。（对应于上述的$&amp;。）</td>
+</tr>
+<tr>
+<td><code>p1,p2, ...</code></td>
+<td>假如replace()方法的第一个参数是一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/RegExp" target="_blank" rel="noopener"><code>RegExp</code></a> 对象，则代表第n个括号匹配的字符串。（对应于上述的$1，$2等。）例如，如果是用 <code>/(\a+)(\b+)/</code> 这个来匹配，<code>p1</code> 就是匹配的 <code>\a+</code>，<code>p2</code> 就是匹配的 <code>\b+</code>。</td>
+</tr>
+<tr>
+<td><code>offset</code></td>
+<td>匹配到的子字符串在原字符串中的偏移量。（比如，如果原字符串是 <code>&#39;abcd&#39;</code>，匹配到的子字符串是 <code>&#39;bc&#39;</code>，那么这个参数将会是 1）</td>
+</tr>
+<tr>
+<td><code>string</code></td>
+<td>被匹配的原字符串。</td>
+</tr>
+<tr>
+<td>NamedCaptureGroup</td>
+<td>命名捕获组匹配的对象</td>
+</tr>
+</tbody>
+</table>
+<p>(精确的参数个数依赖于 <code>replace()</code> 的第一个参数是否是一个正则表达式（<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/RegExp" target="_blank" rel="noopener"><code>RegExp</code></a>）对象，以及这个正则表达式中指定了多少个括号子串，如果这个正则表达式里使用了命名捕获， 还会添加一个命名捕获的对象)</p>
+<p>下面的例子将会使 <code>newString</code> 变成 <code>&#39;abc - 12345 - #$*%&#39;</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replacer</span>(<span class="params">match, p1, p2, p3, offset, string</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// p1 is nondigits, p2 digits, and p3 non-alphanumerics</span></span><br><span class="line">  <span class="keyword">return</span> [p1, p2, p3].join(<span class="string">' - '</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> newString = <span class="string">'abc12345#$*%'</span>.replace(<span class="regexp">/([^\d]*)(\d*)([^\w]*)/</span>, replacer);</span><br><span class="line"><span class="built_in">console</span>.log(newString);  <span class="comment">// abc - 12345 - #$*%</span></span><br></pre></td></tr></table></figure>
+<p>因此：正则匹配千分符的方法是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">format</span> (<span class="params">num</span>) </span>&#123;  <span class="comment">// eg: num 为15626175911 </span></span><br><span class="line">    <span class="keyword">const</span> reg=<span class="regexp">/\d&#123;1,3&#125;(?=(\d&#123;3&#125;)+$)/g</span>;   </span><br><span class="line">    <span class="built_in">console</span>.log(num.toString().match(reg)); <span class="comment">// [ '15', '626', '175' ]</span></span><br><span class="line">    <span class="keyword">return</span> (num + <span class="string">''</span>).replace(reg, <span class="string">'$&amp;,'</span>);  <span class="comment">// 使用特殊字符$&amp;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解释</strong></p>
 <ul>
-<li><p>TSL握手（HTTPS）</p>
-<p>TSL协议位于应用层之下，传输层之上，主要是使用两种技术：对称加密和非对称加密</p>
+<li>正则表达式 \d{1,3}(?=(\d{3})+$)  表示前面有1~3个数字，后面的至少由一组3个数字结尾</li>
+<li>?=表示正向引用，可以作为匹配的条件，但匹配到的内容不获取，并且作为下一次查询的开始</li>
+<li>$&amp; 表示与正则表达式相匹配的内容，具体的可查看文档</li>
+</ul>
+<p>上面的正则只能匹配整数，若要匹配小数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">format</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> reg = <span class="regexp">/(?=(\B\d&#123;3&#125;)+$)/g</span>;              <span class="comment">// 这是匹配整数的 不加/B会导致最高位的''也能匹配</span></span><br><span class="line">  <span class="keyword">const</span> reg2 = <span class="regexp">/(?&lt;=\b(?&lt;!\.)\d*)\B(?=(\d&#123;3&#125;)+(?=\b))/g</span>;   <span class="comment">// 这是匹配小数的</span></span><br><span class="line">  <span class="keyword">return</span> (num + <span class="string">''</span>).replace(reg, <span class="string">','</span>);</span><br><span class="line">  <span class="comment">// return num.toString().match(reg2);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(format(<span class="number">15626175911</span>));</span><br><span class="line"><span class="built_in">console</span>.log(format(<span class="number">15626175.911</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用for循环"><a href="#3-使用for循环" class="headerlink" title="3. 使用for循环"></a>3. 使用for循环</h3><h3 id="4-使用reduce"><a href="#4-使用reduce" class="headerlink" title="4. 使用reduce"></a>4. 使用reduce</h3>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">常见需求</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Mutation-Observer应用-文字&amp;图片水印" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/06/24/Mutation-Observer应用-文字&图片水印/">Mutation Observer应用 文字&amp;图片水印</a>
+    </h1>
+  
+
+        
+        <a href="/2020/06/24/Mutation-Observer应用-文字&图片水印/" class="archive-article-date">
+  	<time datetime="2020-06-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="文字-amp-图片水印（Mutation-Observer应用-）"><a href="#文字-amp-图片水印（Mutation-Observer应用-）" class="headerlink" title="文字&amp;图片水印（Mutation Observer应用 ）"></a>文字&amp;图片水印（Mutation Observer应用 ）</h3><h4 id="零、代码地址"><a href="#零、代码地址" class="headerlink" title="零、代码地址"></a>零、代码地址</h4><p>​    实现水印的代码放在了这个github地址中：<a href="https://github.com/DarkerBo/various-components-react/tree/master/src/WaterMark" target="_blank" rel="noopener">文字/图片水印代码</a></p>
+<h4 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h4><p>​    在开发公司业务需求时，遇到一个比较常见的需求，给文字和图片加上当前用户的昵称。于是开始着手研究如何给文字和图片加上水印，同时还要兼顾性能和安全等等的问题。</p>
+<h4 id="二、明水印"><a href="#二、明水印" class="headerlink" title="二、明水印"></a>二、明水印</h4><p>由于该水印需求是为了给用户在协作的时候用于表明身份的，因此这次制作的是明水印~</p>
+<p><strong>方案一  使用div制作</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>我是水印<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>思路大概是这样：</p>
 <ul>
-<li><p>客户端发送一个随机值，请求需要的协议和加密方式；</p>
+<li><p>循环这个div多次直到铺满屏幕</p>
+<p>可以获取水印和屏幕的宽高来计算需要多少个水印 div 铺满整个屏幕</p>
 </li>
-<li><p>服务端收到随机值，自己也产生一个随机值，并根据需要的协议和加密方式加密证书（证书有权威的数字认证机构发放）发送给客户端（如需验证客户端的证书需说明）；</p>
+<li><p>用定位（我用的是<code>fixed</code>）将这些水印加深层级（<code>z-index</code>）</p>
 </li>
-<li><p>客户端收到证书并验证是否有效，验证通过后生成一个随机值，通过证书上的公钥加密这个随机值并发回给服务端，如客户端需验证证书则会附带证书；</p>
-</li>
-<li><p>服务端接收到加密的随机值后通过私钥加密获得第三个随机值，此时双方都有三个随机值，接下来的通信就可以按照之前约定的来生成密钥，通过密钥来加密解密。</p>
-</li>
+<li>将这些文字加上透明和旋转的效果</li>
+<li>最后还要增加<code>userSelect</code> 属性使得文字无法选中。</li>
 </ul>
-</li>
-</ul>
-<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E5%9B%BE%E8%A7%A3.jpg" alt="img"> </p>
-<p><strong>传输层</strong></p>
-<hr>
-<p><strong>传输层的主要任务就是负责向两台主机进程之间的通信提供通用的数据传输服务。</strong>应用进程利用该服务传送应用层报文。 “通用的”是指并不针对某一个特定的网络应用，而是多种应用可以使用同一个传输层服务。由于一台主机可同时运行多个线程，因此传输层有复用和分用的功能。所谓复用就是指多个应用层进程可同时使用下面传输层的服务，分用和复用相反，是传输层把收到的信息分别交付上面应用层中的相应进程。</p>
-<p><strong>传输层主要使用两种协议：TCP协议和UDP协议</strong></p>
+<p>该方案实现起来比较简单，但是需要渲染过多的<code>dom</code>，同时性能相对来说很差，因此没有选择该方案</p>
+<p><strong>方案二 使用svg</strong></p>
+<p>思路大概是使用svg将水印转换成图片，然后设置在页面中c<code>ss</code>的属性<code>background-image</code>中</p>
+<p>该方案没有选择的原因是相比较<code>canvas</code>而言我还是更喜欢<code>canvas</code>哈哈哈</p>
+<p><strong>方案三 使用canvas（最终选择方案）</strong></p>
+<p>思路大概是：</p>
 <ul>
-<li>TCP的主要特点：<ul>
-<li>面向连接（就好像打电话一样，通话前需要先拨号建立连接，通话结束后要挂机释放连接）；</li>
-<li>面向字节流，即TCP把应用程序交下来的数据仅仅看成是一连串的无结构的字节流；</li>
-<li>一对一的，每一条TCP连接只能有两个端点；</li>
-<li>TCP提供可靠交付的服务，有超时重传和阻塞机制，无差错、不丢失、不重复、并且按序到达；</li>
-<li>TCP提供全双工通信。TCP允许通信双方的应用进程在任何时候都能发送数据。TCP连接的两端都设有发送缓存和接收缓存，用来临时存放双方通信的数据；</li>
+<li>制作一个水印canvas</li>
+<li>将该canvas转换成<code>base64</code>图片</li>
+<li>使用<code>canvas.toDataURL()</code>获取文件的<code>url</code></li>
+<li>填充到页面的<code>background-image</code>中，设置为<code>repeat</code>铺满页面</li>
 </ul>
-</li>
+<p>核心代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState, useRef, useEffect &#125; from &apos;react&apos;;</span><br><span class="line">import styles from &apos;./styles/Watermark.module.scss&apos;;</span><br><span class="line"></span><br><span class="line">const Watermark: React.FC = () =&gt; &#123;</span><br><span class="line">  // 多个state可以以对象的形式存储</span><br><span class="line">  const [canvasBox, setCanvasBox] = useState(&#123; width: 200, height: 200 &#125;);</span><br><span class="line"></span><br><span class="line">  // 获取水印div和其外框div的dom对象</span><br><span class="line">  const containerRef = useRef&lt;HTMLDivElement&gt;(null);</span><br><span class="line"></span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    createWatermark(</span><br><span class="line">      containerRef.current as HTMLDivElement,</span><br><span class="line">      canvasBox.width,</span><br><span class="line">      canvasBox.height,</span><br><span class="line">      &apos;center&apos;,</span><br><span class="line">      &apos;middle&apos;,</span><br><span class="line">      &apos;这是水印&apos;</span><br><span class="line">    );</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  const createWatermark = (</span><br><span class="line">    containerRef: HTMLDivElement, // 水印div的父组件dom对象，该对象应该饱和</span><br><span class="line">    width = 200, // canvas的宽度，也是水印文字之间的左右间隔</span><br><span class="line">    height = 150, // canvas的高度，也是水印文字之间的上下间隔</span><br><span class="line">    textAlign: CanvasTextAlign, // 水印文本的文本对齐方式</span><br><span class="line">    textBaseline: CanvasTextBaseline, // 当前水印文本基线</span><br><span class="line">    content: string, // 水印内容</span><br><span class="line">    font = &apos;20px microsoft yahei&apos;, // 水印文字大小和字体</span><br><span class="line">    fillStyle = &apos;rgba(184, 184, 184, 0.9)&apos;, // 水印文字颜色和透明度</span><br><span class="line">    rotate = 30, // 水印旋转角度</span><br><span class="line">    zIndex = 1000</span><br><span class="line">  ) =&gt; &#123;</span><br><span class="line">    const canvas = document.createElement(&apos;canvas&apos;);</span><br><span class="line"></span><br><span class="line">    canvas.width = width;</span><br><span class="line">    canvas.height = height;</span><br><span class="line"></span><br><span class="line">    const ctx = canvas.getContext(&apos;2d&apos;) as CanvasRenderingContext2D;</span><br><span class="line"></span><br><span class="line">    ctx.textAlign = textAlign;</span><br><span class="line">    ctx.textBaseline = textBaseline;</span><br><span class="line">    ctx.font = font;</span><br><span class="line">    ctx.fillStyle = fillStyle;</span><br><span class="line">    ctx.rotate((Math.PI / 180) * rotate);</span><br><span class="line">    ctx.fillText(content, width / 2, height / 2);</span><br><span class="line"></span><br><span class="line">    // 生成base64图片地址</span><br><span class="line">    const base64Url = canvas.toDataURL();</span><br><span class="line"></span><br><span class="line">    // 将base64图片地址设置为水印div的背景图片</span><br><span class="line">    containerRef.style.position = &apos;relative&apos;; // 开启父组件定位</span><br><span class="line"></span><br><span class="line">    // 样式字符串</span><br><span class="line">    const styleStr = `</span><br><span class="line">                position: absolute;</span><br><span class="line">                top: 0;</span><br><span class="line">                left: 0;</span><br><span class="line">                bottom: 0;</span><br><span class="line">                right: 0;</span><br><span class="line">                z-index: $&#123;zIndex&#125;;</span><br><span class="line">                pointer-events: none;</span><br><span class="line">                background-repeat: repeat;</span><br><span class="line">                background-image: url(&apos;$&#123;base64Url&#125;&apos;);</span><br><span class="line">            `;</span><br><span class="line"></span><br><span class="line">    const watermarkDiv = document.createElement(&apos;div&apos;);</span><br><span class="line"></span><br><span class="line">    watermarkDiv.style.cssText = styleStr;</span><br><span class="line">    watermarkDiv.classList.add(&apos;watermark&apos;);</span><br><span class="line">    containerRef.appendChild(watermarkDiv);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div className=&#123;styles.container&#125; ref=&#123;containerRef&#125;&gt;</span><br><span class="line">      &#123;/* 内容区 */&#125;</span><br><span class="line">      &lt;div className=&#123;styles.content&#125;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default Watermark;</span><br></pre></td></tr></table></figure>
+<h4 id="三、明水印的安全问题和解决方式"><a href="#三、明水印的安全问题和解决方式" class="headerlink" title="三、明水印的安全问题和解决方式"></a>三、明水印的安全问题和解决方式</h4><p><strong>1. 在浏览器直接删除水印DOM元素</strong></p>
+<p>我们稍微懂得一点浏览器知识都知道，PC项目在浏览器轻轻按下F12打开控制台，将包含水印的<code>div</code>或者<code>canvas</code>去掉（delete 元素）就马上屏蔽水印了，这样我们所设置的水印的安全级别就非常低了，如何尽量避免出现安全问题呢？我们可以使用观察者API：<code>Mutation Observer</code>（需要注意兼容性）</p>
+<p><code>Mutation Observer</code>在MDN的解释中是这样的：<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver" target="_blank" rel="noopener"><code>MutationObserver</code></a>接口提供了监视对DOM树所做更改的能力。</p>
+<p>也就是说<code>Mutation Observer</code>可以用来监听<code>DOM</code>元素是否被删除或者更改属性，具体的使用方式这里就不详细介绍了，MDN文档中有十分详细的<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver" target="_blank" rel="noopener">示例</a>供大家参考~</p>
+<p>直接上核心代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">export const createWatermark = (</span><br><span class="line">  containerRef: HTMLDivElement, // 水印div的父组件dom对象，该对象应该饱和</span><br><span class="line">  width = 200, // canvas的宽度，也是水印文字之间的左右间隔</span><br><span class="line">  height = 150, // canvas的高度，也是水印文字之间的上下间隔</span><br><span class="line">  textAlign: CanvasTextAlign, // 文字的text-align</span><br><span class="line">  textBaseline: CanvasTextBaseline, // 当前文本基线</span><br><span class="line">  content: string, // 水印内容</span><br><span class="line">  font = &apos;20px microsoft yahei&apos;, // 文字大小和字体</span><br><span class="line">  fillStyle = &apos;rgba(184, 184, 184, 0.9)&apos;, // 文字颜色和透明度</span><br><span class="line">  rotate = 30, // 水印旋转角度</span><br><span class="line">  zIndex = 1000</span><br><span class="line">) =&gt; &#123;</span><br><span class="line">  const canvas = document.createElement(&apos;canvas&apos;);</span><br><span class="line"></span><br><span class="line">  canvas.width = width;</span><br><span class="line">  canvas.height = height;</span><br><span class="line"></span><br><span class="line">  const ctx = canvas.getContext(&apos;2d&apos;) as CanvasRenderingContext2D;</span><br><span class="line"></span><br><span class="line">  ctx.textAlign = textAlign;</span><br><span class="line">  ctx.textBaseline = textBaseline;</span><br><span class="line">  ctx.font = font;</span><br><span class="line">  ctx.fillStyle = fillStyle;</span><br><span class="line">  ctx.rotate((Math.PI / 180) * rotate);</span><br><span class="line">  ctx.fillText(content, width / 2, height / 2);</span><br><span class="line"></span><br><span class="line">  // 生成base64图片地址</span><br><span class="line">  const base64Url = canvas.toDataURL();</span><br><span class="line"></span><br><span class="line">  // 将base64图片地址设置为水印div的背景图片</span><br><span class="line">  containerRef.style.position = &apos;relative&apos;; // 开启父组件定位</span><br><span class="line"></span><br><span class="line">  // 样式字符串</span><br><span class="line">  const styleStr = `</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 0;</span><br><span class="line">        left: 0;</span><br><span class="line">        bottom: 0;</span><br><span class="line">        right: 0;</span><br><span class="line">        z-index: $&#123;zIndex&#125;;</span><br><span class="line">        pointer-events: none;</span><br><span class="line">        background-repeat: repeat;</span><br><span class="line">        background-image: url(&apos;$&#123;base64Url&#125;&apos;);</span><br><span class="line">    `;</span><br><span class="line"></span><br><span class="line">  const watermarkDiv = document.createElement(&apos;div&apos;);</span><br><span class="line"></span><br><span class="line">  watermarkDiv.style.cssText = styleStr;</span><br><span class="line">  watermarkDiv.classList.add(&apos;watermark&apos;);</span><br><span class="line">  containerRef.appendChild(watermarkDiv);</span><br><span class="line"></span><br><span class="line">  // 稍微懂一点浏览器的使用或者网页知识的用户，可以用浏览器的开发者工具来动态更改DOM的属性或者结构就可以去掉了</span><br><span class="line">  // 就需要MutationObserver API提供的一种能在某个范围内的DOM树发生变化时作出适当反应的能力。</span><br><span class="line"></span><br><span class="line">  // MutationObserver监测到诸如属性改变、增删子结点等</span><br><span class="line">  // 若被删除了，在container里面重新加回水印div。</span><br><span class="line"></span><br><span class="line">  let mutationObserver: MutationObserver | null = new MutationObserver((mutations, observer) =&gt; &#123;</span><br><span class="line">    for (const mutationItem of mutations) &#123;</span><br><span class="line">      // 当删除水印节点时</span><br><span class="line">      if (mutationItem.removedNodes[0] &amp;&amp; (mutationItem.removedNodes[0] as Element).className === &apos;watermark&apos;) &#123;</span><br><span class="line">        // 避免一直触发，关闭连接，观察器设为null，重新调用方法</span><br><span class="line">        (mutationObserver as MutationObserver).disconnect();</span><br><span class="line">        mutationObserver = null;</span><br><span class="line">        createWatermark(containerRef, width, height, textAlign, textBaseline, content, font, fillStyle, rotate, zIndex);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      // 当属性被改变时删除该水印div重新调用createWatermark方法</span><br><span class="line">      if (mutationItem.attributeName) &#123;</span><br><span class="line">        // watermarkDiv.removeAttribute(&apos;hidden&apos;);</span><br><span class="line">        // 避免一直触发，关闭连接，观察器设为null，重新调用方法</span><br><span class="line">        (mutationObserver as MutationObserver).disconnect();</span><br><span class="line">        mutationObserver = null;</span><br><span class="line"></span><br><span class="line">        containerRef.removeChild(watermarkDiv);</span><br><span class="line">        createWatermark(containerRef, width, height, textAlign, textBaseline, content, font, fillStyle, rotate, zIndex);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  mutationObserver.observe(containerRef, &#123;</span><br><span class="line">    attributes: true, // 观察属性变动</span><br><span class="line">    subtree: true, // 观察后代节点，默认为 false</span><br><span class="line">    childList: true, // 观察目标子节点的变化，是否有添加或者删除</span><br><span class="line">    characterData: true,</span><br><span class="line">    attributeOldValue: true,</span><br><span class="line">    characterDataOldValue: true,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>我将思路直接备注在代码里面了，看到这里，初学者就无法破解这个明水印了~</p>
+<p><strong>2. 通过其他手段禁用 JS 或者删除水印</strong></p>
+<ul>
+<li>打开<code>Chrome Devtools</code>，点击设置 - Debugger - Disabled JavaScript</li>
+</ul>
+<p>设置了禁用 JS 后，此时再删除水印就消失了（打开控制台，<code>Ctrl + F</code> 搜索 <code>watermark</code> 相关字眼）</p>
+<ul>
+<li>复制一个 body 元素，然后将原来 body 元素的删除。</li>
+</ul>
+<p>这种做法的原因是，你创建一个 body 元素，绑定事件，把原来的 body 删了，再创建一个新的，新的body就失去了<code>Mutation Observer</code>的监控了</p>
+<ul>
+<li>打开一个代理工具，例如 <code>charles</code>，将生成水印相关的代码删除。</li>
+</ul>
+<p>解决方法：隐水印</p>
+<p><strong>3. 水印加密</strong></p>
+<p>这个不难，用对称加密比较好，比如用aes或者des加盐，非对称加密也可以，不过要用公钥和私钥这种形式。如果只需要简单加密的话使用<code>md5</code>也没有问题。</p>
+<p>这里简单做个<code>md5</code>加密示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MD5加密库 utility</span></span><br><span class="line"><span class="keyword">const</span> utils = <span class="built_in">require</span>(<span class="string">'utility'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加盐MD5</span></span><br><span class="line">exports.md5 =  <span class="function"><span class="keyword">function</span> (<span class="params">content</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> salt = <span class="string">'microzz_asd!@#IdSDAS~~'</span>; <span class="comment">// 这里可以使用用户id</span></span><br><span class="line">  <span class="keyword">return</span> utils.md5(utils.md5(content + salt));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四、隐水印"><a href="#四、隐水印" class="headerlink" title="四、隐水印"></a>四、隐水印</h4><p>隐水印是一种肉眼不可见的水印方式，可以保持图片美观的同时，保护你的资源版权。</p>
+<h5 id="0-原理"><a href="#0-原理" class="headerlink" title="0. 原理"></a>0. 原理</h5><p>暗水印的生成方式有很多，常见的为通过修改<strong>RGB 分量值的小量变动</strong>、DWT、DCT 和 FFT 等等方法。</p>
+<p>通过介绍前端实现 <strong>RGB 分量值的小量变动</strong> 来揭秘其中的奥秘，主要参考 <a href="http://www.alloyteam.com/2016/03/image-steganography/#prettyPhoto" target="_blank" rel="noopener">不能说的秘密——前端也能玩的图片隐写术 | AlloyTeam</a>。</p>
+<p>我们都知道图片都是有一个个像素点构成的，每个像素点都是由 RGB 三种元素构成。当我们把其中的一个分量修改，人的肉眼是很难看出其中的变化，甚至是像素眼的设计师也很难分辨出。</p>
+<p>更详细的原理可以参考下面这篇文章：<a href="https://juejin.cn/post/6900713052270755847#heading-9" target="_blank" rel="noopener">从破解某设计网站谈前端水印</a></p>
+<h5 id="1-在图片加上隐水印"><a href="#1-在图片加上隐水印" class="headerlink" title="1. 在图片加上隐水印"></a>1. 在图片加上隐水印</h5><p>隐水印我之前的实现方式是简单的将水印的透明度降低为肉眼无法看清的程度，但是在看到上面那篇文章时，才发现隐水印还有更优雅的实现方式：</p>
+<p><strong>（注：react hook 版本我放在该GitHub仓库地址中：<a href="https://github.com/DarkerBo/various-components-react/blob/master/src/WaterMark/hiddenWaterMark.ts" target="_blank" rel="noopener">隐水印 react 实现</a>）</strong></p>
+<p>下面是使用原生 JS 的实现，需要本地开启一个服务，否则使用<code>canvas</code>的<code>getImageData</code>等方法会报图片跨域的错误，这里建议大家使用 vscode 的 <code>live server</code> 插件即可以开启本地服务</p>
+<ul>
+<li><strong>生成隐水印</strong></li>
+</ul>
+<p>index.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span> <span class="attr">style</span>=<span class="string">"width: 500px; height: 500px;"</span>&gt;</span>		<span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> mergeData = <span class="function"><span class="keyword">function</span> (<span class="params">ctx, newData, color, originalData</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> oData = originalData.data;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> bit, offset;  <span class="comment">// offset的作用是找到alpha通道值，这里需要大家自己动动脑筋</span></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">switch</span> (color) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">case</span> <span class="string">'R'</span>:</span></span><br><span class="line"><span class="undefined">          bit = 0;</span></span><br><span class="line"><span class="undefined">          offset = 3;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">break</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">case</span> <span class="string">'G'</span>:</span></span><br><span class="line"><span class="undefined">          bit = 1;</span></span><br><span class="line"><span class="undefined">          offset = 2;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">break</span>;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">case</span> <span class="string">'B'</span>:</span></span><br><span class="line"><span class="undefined">          bit = 2;</span></span><br><span class="line"><span class="undefined">          offset = 1;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">break</span>;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">      <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; oData.length; i++) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (i % <span class="number">4</span> == bit) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="comment">// 只处理目标通道</span></span></span><br><span class="line"><span class="javascript">          <span class="keyword">if</span> (newData[i + offset] === <span class="number">0</span> &amp;&amp; (oData[i] % <span class="number">2</span> === <span class="number">1</span>)) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// 没有信息的像素，该通道最低位置0，但不要越界</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (oData[i] === <span class="number">255</span>) &#123;</span></span><br><span class="line"><span class="undefined">                oData[i]--;</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="undefined">                oData[i]++;</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="javascript">          &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newData[i + offset] !== <span class="number">0</span> &amp;&amp; (oData[i] % <span class="number">2</span> === <span class="number">0</span>)) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">// // 有信息的像素，该通道最低位置1，可以想想上面的斑点效果是怎么实现的</span></span></span><br><span class="line"><span class="undefined">            oData[i]++;</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">      ctx.putImageData(originalData, 0, 0);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">encodeImg</span>(<span class="params">src</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span></span><br><span class="line"><span class="javascript">      ctx.font = <span class="string">'30px Microsoft Yahei'</span>;</span></span><br><span class="line"><span class="javascript">      ctx.fillText(<span class="string">'我是水印'</span>, <span class="number">60</span>, <span class="number">130</span>);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> textData = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, ctx.canvas.height).data;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> img = <span class="keyword">new</span> Image();</span></span><br><span class="line"><span class="javascript">      img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 获取指定区域的canvas像素信息</span></span></span><br><span class="line"><span class="undefined">        ctx.drawImage(img, 0, 0, ctx.canvas.width, ctx.canvas.height);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> originalData = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, ctx.canvas.height);</span></span><br><span class="line"><span class="javascript">        mergeData(ctx, textData, <span class="string">'R'</span>, originalData)</span></span><br><span class="line"><span class="undefined">      &#125;;</span></span><br><span class="line"><span class="undefined">      img.src = src;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    encodeImg(<span class="string">'./strong.jpg'</span>)</span></span><br><span class="line"><span class="undefined"> </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里需要将生成的图片下载下来，用来下面的展示隐水印使用~</p>
+<ul>
+<li><strong>展示隐水印</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span> <span class="attr">style</span>=<span class="string">"width: 500px; height: 500px;"</span>&gt;</span>		<span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">	<span class="keyword">const</span> processData = <span class="function"><span class="keyword">function</span> (<span class="params">ctx, originalData</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">const</span> data = originalData.data;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">if</span> (i % <span class="number">4</span> == <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// R分量</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (data[i] % <span class="number">2</span> == <span class="number">0</span>) &#123;</span></span><br><span class="line"><span class="undefined">          data[i] = 0;</span></span><br><span class="line"><span class="javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="undefined">          data[i] = 255;</span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="javascript">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i % <span class="number">4</span> == <span class="number">3</span>) &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// alpha通道不做处理</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">continue</span>;</span></span><br><span class="line"><span class="javascript">      &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 关闭其他分量，不关闭也不影响答案</span></span></span><br><span class="line"><span class="undefined">        data[i] = 0;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// 将结果绘制到画布</span></span></span><br><span class="line"><span class="undefined">      ctx.putImageData(originalData, 0, 0);</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">decodeImg</span>(<span class="params">src</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> img = <span class="keyword">new</span> Image();</span></span><br><span class="line"><span class="javascript">      img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">// 获取指定区域的canvas像素信息</span></span></span><br><span class="line"><span class="undefined">        ctx.drawImage(img, 0, 0, ctx.canvas.width, ctx.canvas.height);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> originalData = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, ctx.canvas.height);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(originalData)</span></span><br><span class="line"><span class="undefined">        processData(ctx, originalData)</span></span><br><span class="line"><span class="undefined">      &#125;;</span></span><br><span class="line"><span class="undefined">      img.src = src;</span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">    decodeImg(<span class="string">'./strong-encode.jpg'</span>)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-更专业的加隐水印方式"><a href="#2-更专业的加隐水印方式" class="headerlink" title="2. 更专业的加隐水印方式"></a>2. 更专业的加隐水印方式</h5><ul>
+<li>但是实际过程需要更专业的加密方式，例如利用<strong>傅里叶变化公式</strong>，来进行<strong>频域制定数字盲水印</strong>，这里就不详细展开讲了，以后研究完再详细讲~</li>
 </ul>
 <ul>
-<li><p>UDP的主要特点：</p>
-<ul>
-<li>无连接；</li>
-<li>面向报文的</li>
-<li>不保证可靠交付，但尽最大努力交付，因此主机不需要维持复杂的连接状态 ；</li>
-<li>没有阻塞机制，因此网络出现拥塞不会使源主机的发送速率降低（对实时应用很有用，如IP电话，实时视频会议等）；</li>
-<li>UDP支持一对一、一对多、多对一和多对多的交互通信；</li>
-<li>UDP的首部开销小，只有8个字节，比TCP的20个字节的首部要短。</li>
+<li><strong>阿里云的<code>DWT</code>隐水印加密</strong></li>
 </ul>
-</li>
-</ul>
-<p><strong>网络层</strong></p>
-<hr>
-<p><strong>网络层负责为分组交换网上的不同主机提供通信服务。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组和包进行传送，确保传送到目的主机，而这当中两个重要的条件是IP地址和MAC地址</strong></p>
-<p>IP地址指明了节点被分配到的地址，MAC地址指的是网卡所属的固定地址。IP地址可以凭借ARP协议和MAC地址配对，IP地址可变换，而MAC地址基本上是不会更改的。</p>
-<ul>
-<li>ARP协议</li>
-</ul>
-<p>ARP协议是一种用以解析地址的协议，根据通信方的IP地址可以反查出对应的MAC地址。IP间的通信依赖MAC地址，在网络上，通信双方在同一局域网内的状况很少，通常需要多台计算机和网络设备中转才能连接到对方。而在中转时，会利用下一设备的MAC地址来搜索下一中转目标。而这时就需要使用ARP协议。</p>
-<p>这种MAC中转机制成为路由选择。类似快递公司收到寄件人的货物后，快递公司就会在集散中心检查目的地址，判断是否能送到目的地或者明确送往下一个集散中心，下一个集散中心自会再做同样的判断。</p>
-<p>在TCP/IP体系结构中，由于网络层使用IP协议，因此分组也叫IP数据报，简称数据报。</p>
-<p><strong>数据链路层</strong></p>
-<hr>
-<p><strong>数据链路层通常简称为链路层。两台主机之间的数据传输，总是在一段一段的链路上传送的，这就需要使用专门的链路层的协议。</strong>  在两个相邻节点之间传送数据时，<strong>数据链路层将网络层交下来的IP数据报组装程帧，</strong>在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）。</p>
-<p>再接收数据的时候，控制信息使接收端能够知道一个帧是从哪个比特开始，哪个比特结束的。数据链路层在接收到一个帧之后，可以从中提取出数据，再上交给网络层。链路层还可以根据控制信息中的差错控制来查错和纠错，丢弃这个出了差错的帧，以避免继续在网络中传送下去白白浪费网络资源。</p>
-<p><strong>物理层</strong></p>
-<hr>
-<p>在物理层上所传送的数据单位是比特。 物理层的作用是实现相邻计算机节点之间<strong>比特流的透明传送</strong>，尽可能屏蔽掉具体传输介质和物理设备的差异。<strong>使其上面的数据链路层不必考虑网络的具体传输介质是什么。</strong></p>
-<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A7%A3.jpg" alt="img"> </p>
-<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%BA%94%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%9B%BE%E8%A7%A32.png" alt="img"> </p>
-<h4 id="二、TCP三次握手和四次握手"><a href="#二、TCP三次握手和四次握手" class="headerlink" title="二、TCP三次握手和四次握手"></a>二、TCP三次握手和四次握手</h4><hr>
-<p>TCP报文首部字段（部分）</p>
-<p>1  序号，占4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号。例如，一段报文的序号字段值是 301 ，而携带的数据共有100字段，显然下一个报文段（如果还有的话）的数据序号应该从401开始；</p>
-<p>2  确认ACK，仅当ACK=1时，确认号字段才有效。TCP规定，在连接建立后所有报文的传输都必须把ACK置1；</p>
-<p>3  同步SYN，在连接建立时用来同步序号。当SYN=1，ACK=0，表明是连接请求报文，若同意连接，则响应报文中应该使SYN=1，ACK=1；</p>
-<p>4  终止FIN，用来释放连接。当FIN=1，表明此报文的发送方的数据已经发送完毕，并且要求释放；</p>
-<p>5  窗口，占2字节，指的是通知接收方，发送本报文你需要有多大的空间来接受。</p>
-<p><strong>TCP连接建立（三次握手）</strong></p>
-<hr>
-<p>1、服务器进入监听状态 ；</p>
-<p>2、客户端主动请求连接，发送请求连接的报文，报文首部的同步位 SYN =1，同时选择一个初始序列号 seq=x ，此时，TCP客户端进程进入了 SYN-SENT（同步已发送状态）状态；</p>
-<p>3、服务端接收到请求报文，发回确认保温，确认报文中应该 ACK=1，SYN=1，确认号是ack=x+1，同时也要为自己初始化一个序列号 seq=y，此时，TCP服务器进程进入了SYN-RCVD（同步收到）状态；</p>
-<p>4、客户端接收到确认报文， 还需要给服务端确认，给服务端发回一个确认报文，确认报文的ACK=1，ack=y+1，自己的序列号seq=x+1，此时，TCP连接建立，客户端进入ESTABLISHED（已建立连接）状态 ；</p>
-<p>5、当服务端收到确认报文，也进入ESTABLISHED（已建立连接）状态，双方正式开始数据传输。</p>
-<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="img"> </p>
-<p>为什么需要第三次握手</p>
-<blockquote>
-<p>主要使为了防止已经失效的请求报文突然传到服务器，从而产生错误。</p>
-</blockquote>
-<blockquote>
-<p>如果使用两次握手，假设第一次客户端请求服务器的请求报文由于网络问题，在网络节点中滞留的时间太长，由于TCP客户端长时间没有收到服务端发来的确认报文，以为服务端没有收到，此时客户端会重新再发一次请求报文，服务端收到这条请求报文并发挥确认报文，两次握手之后，建立连接，传输数据，关闭连接。后来，网络恢复畅通，第一次发送的请求报文送到了服务器，服务器收到之后发回确认报文，这条报文本该是失效的，但两次握手使得客户端和服务器建立了连接，造成了资源的浪费。</p>
-</blockquote>
-<blockquote>
-<p>如果是三次握手，网络恢复畅通，第一次发送的请求报文发送到服务端，服务端发回确认报文，但客户端不会再发出确认，由于服务器没有收到再次确认的报文，则不会建立连接</p>
-</blockquote>
-<p><strong>TCP连接释放（四次握手）</strong></p>
-<hr>
-<p>1  客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。</p>
-<p>2  服务器收到连接释放的报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。 这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。</p>
-<p>3  客户端收到确认报文后，进入FIN-WAIT-2（终止等待2）状态，等待服务器发来释放连接的报文。</p>
-<p>4  服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</p>
-<p>5  客户端收到连接释放的报文后，发回确认报文，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时， 此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。</p>
-<p>6  当服务器收到了客户端传来的确认报文后，立即进入了CLOSE状态，结束这一次TCP连接，可见服务器结束连接的时间比客户端要早一点。</p>
-<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/%E5%9B%9B%E6%AC%A1%E6%8F%A1%E6%89%8B.png" alt="img"> </p>
-<p><strong>为什么需要等待2MSL</strong></p>
-<blockquote>
-<p>MSL(Maximum Segment Lifetime)：最长报文段寿命</p>
-</blockquote>
-<blockquote>
-<p>1、确保客户端最后一次发出去的确认报文能被服务器接收到，当服务器发送 FIN + ACK 释放连接报文时，如果服务端没有收到客户端发回的确认报文，服务器则认为客户端没有收到，就会重发一遍释放连接的报文，而客户端就可以在这2MSL的时间段内接收这个重传的报文，并返回确认报文，接着重启这个2MSL的定时器。</p>
-</blockquote>
-<blockquote>
-<p>2、防止失效连接出现在新的连接中。当客户端发送最后的确认报文后，在2MSL时间段了，可以使出现在本次持续连接中的所有连接都消失。</p>
-</blockquote>
-<p><strong>若建立连接后客户端故障怎么办</strong></p>
-<blockquote>
-<p> TCP有一个保活计时器，时间为两个小时，当服务器两个小时后没有收到客户端的回应，则会发送一个探测报文，每个75分钟发送一次，总共会发送10次，若一连发送10个探测报文后都没有反应，则服务器认为客户端故障，关闭连接。服务器每次收到客户端的反应，都会复位各个计时器。</p>
-</blockquote>
-<p>关于TCP连接更详细的介绍请参考这篇文章：<a href="https://blog.csdn.net/qzcsu/article/details/72861891" target="_blank" rel="noopener">https://blog.csdn.net/qzcsu/article/details/72861891</a></p>
-<h4 id="三、浏览器输入url到显示页面的过程"><a href="#三、浏览器输入url到显示页面的过程" class="headerlink" title="三、浏览器输入url到显示页面的过程"></a>三、浏览器输入url到显示页面的过程</h4><hr>
-<p><strong>简介版：</strong></p>
-<p><img src="http://myblog.coderhsw.top/assets/pic/%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%80%9A%E8%AF%86/url%E8%AF%B7%E6%B1%82.png" alt="img"> </p>
-<p><strong>详细版：</strong></p>
-<ol>
-<li>浏览器通过DNS协议解析url，找到对应的IP地址；</li>
-<li>开启一个线程，发起HTTP请求；</li>
-<li>与服务器建立TCP连接（三次握手），应用层的数据下发到传输层，这里TCP协议会指明两端的端口号，然后下发到网络层，通过IP协议确定IP地址，然后凭借ARP协议明确路由跳转的方式，然后数据会被封装到链路层的数据帧中，最后就是物理层的传输；</li>
-<li>TCP握手之后会进行TSL（HTTPS）握手，正式开始传数据；</li>
-<li>数据进入服务器之前，可能还会先经过负责负载均衡的服务器，把请求合理分发到多台服务器上，最后服务器返回一个HTML响应；</li>
-<li>浏览器接收到响应后开始解析HTML，如果是压缩文件还需要解压，根据响应实体的首部字段规定的编码方式来解码文件；</li>
-<li>文件解码成功之后开始渲染页面。先根据HTML构建DOM树，如有CSS再构建CSSOM，如有script标签，则判断是否有async和defer属性，若没有，则会阻塞渲染流程，先下载好 JS 文件，再继续HTML的加载；</li>
-<li>CSSOM和DOM树构建完成会生成Render树，浏览器会根据Render树来绘制，将内容显示页面上。</li>
-</ol>
+<p>可以去网站下载图片时，看看有没有向阿里云发送一个POST请求，阿里云含有多种暗隐水印加密方式，为啥我使用了 <code>DWT</code> 呢？因为其他几种都需要原图，而我们刚才的测试，他上传只会上传一个文件到 OSS ，因此大致上排除了需要原图的方案。</p>
+<h4 id="五、隐水印的安全问题"><a href="#五、隐水印的安全问题" class="headerlink" title="五、隐水印的安全问题"></a>五、隐水印的安全问题</h4><p>这里举例阿里云的<code>DWT</code>隐水印抗攻击程度。在图片加元素、截图、大小都能大概显示出隐水印，如果给图片加了一个蒙层的话水印就失效了</p>
 
       
 
@@ -627,7 +681,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">计算机通识</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组件开发</a>
         		</li>
       		
 		</ul>
@@ -953,19 +1007,19 @@
 
 
   
-    <article id="post-数据结构(队列)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-数据结构(链表)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/数据结构(队列)/">数据结构 —— 队列</a>
+      <a class="article-title" href="/2018/08/12/数据结构(链表)/">数据结构 —— 链表</a>
     </h1>
   
 
         
-        <a href="/2018/08/12/数据结构(队列)/" class="archive-article-date">
+        <a href="/2018/08/12/数据结构(链表)/" class="archive-article-date">
   	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
 </a>
         
@@ -973,12 +1027,88 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>队列一个线性结构，特点是在某一端添加数据，在另一端删除数据，遵循先进先出的原则。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/5/20/1637cba2a6155793?w=640&amp;h=419&amp;f=png&amp;s=15737" alt="img"></p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>这里会讲解两种实现队列的方式，分别是单链队列和循环队列。</p>
-<h4 id="单链队列"><a href="#单链队列" class="headerlink" title="单链队列"></a>单链队列</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.queue = []</span><br><span class="line">  &#125;</span><br><span class="line">  enQueue(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.queue.push(item)</span><br><span class="line">  &#125;</span><br><span class="line">  deQueue() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue.shift()</span><br><span class="line">  &#125;</span><br><span class="line">  getHeader() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue[<span class="number">0</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  getLength() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue.length</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getLength() === <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>因为单链队列在出队操作的时候需要 O(n) 的时间复杂度，所以引入了循环队列。循环队列的出队操作平均是 O(1) 的时间复杂度。</p>
-<h3 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SqQueue</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(length) &#123;</span><br><span class="line">    <span class="keyword">this</span>.queue = <span class="keyword">new</span> <span class="built_in">Array</span>(length + <span class="number">1</span>)</span><br><span class="line">    <span class="comment">// 队头</span></span><br><span class="line">    <span class="keyword">this</span>.first = <span class="number">0</span></span><br><span class="line">    <span class="comment">// 队尾</span></span><br><span class="line">    <span class="keyword">this</span>.last = <span class="number">0</span></span><br><span class="line">    <span class="comment">// 当前队列大小</span></span><br><span class="line">    <span class="keyword">this</span>.size = <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  enQueue(item) &#123;</span><br><span class="line">    <span class="comment">// 判断队尾 + 1 是否为队头</span></span><br><span class="line">    <span class="comment">// 如果是就代表需要扩容数组</span></span><br><span class="line">    <span class="comment">// % this.queue.length 是为了防止数组越界</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.first === (<span class="keyword">this</span>.last + <span class="number">1</span>) % <span class="keyword">this</span>.queue.length) &#123;</span><br><span class="line">      <span class="keyword">this</span>.resize(<span class="keyword">this</span>.getLength() * <span class="number">2</span> + <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.queue[<span class="keyword">this</span>.last] = item</span><br><span class="line">    <span class="keyword">this</span>.size++</span><br><span class="line">    <span class="keyword">this</span>.last = (<span class="keyword">this</span>.last + <span class="number">1</span>) % <span class="keyword">this</span>.queue.length</span><br><span class="line">  &#125;</span><br><span class="line">  deQueue() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isEmpty()) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'Queue is empty'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> r = <span class="keyword">this</span>.queue[<span class="keyword">this</span>.first]</span><br><span class="line">    <span class="keyword">this</span>.queue[<span class="keyword">this</span>.first] = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">this</span>.first = (<span class="keyword">this</span>.first + <span class="number">1</span>) % <span class="keyword">this</span>.queue.length</span><br><span class="line">    <span class="keyword">this</span>.size--</span><br><span class="line">    <span class="comment">// 判断当前队列大小是否过小</span></span><br><span class="line">    <span class="comment">// 为了保证不浪费空间，在队列空间等于总长度四分之一时</span></span><br><span class="line">    <span class="comment">// 且不为 2 时缩小总长度为当前的一半</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.size === <span class="keyword">this</span>.getLength() / <span class="number">4</span> &amp;&amp; <span class="keyword">this</span>.getLength() / <span class="number">2</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">this</span>.resize(<span class="keyword">this</span>.getLength() / <span class="number">2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> r</span><br><span class="line">  &#125;</span><br><span class="line">  getHeader() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isEmpty()) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'Queue is empty'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue[<span class="keyword">this</span>.first]</span><br><span class="line">  &#125;</span><br><span class="line">  getLength() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.queue.length - <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.first === <span class="keyword">this</span>.last</span><br><span class="line">  &#125;</span><br><span class="line">  resize(length) &#123;</span><br><span class="line">    <span class="keyword">let</span> q = <span class="keyword">new</span> <span class="built_in">Array</span>(length)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; length; i++) &#123;</span><br><span class="line">      q[i] = <span class="keyword">this</span>.queue[(i + <span class="keyword">this</span>.first) % <span class="keyword">this</span>.queue.length]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.queue = q</span><br><span class="line">    <span class="keyword">this</span>.first = <span class="number">0</span></span><br><span class="line">    <span class="keyword">this</span>.last = <span class="keyword">this</span>.size</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>链表是一个线性结构，同时也是一个天然的递归结构。链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。但是链表失去了数组随机读取的优点，同时链表由于增加了结点的指针域，空间开销比较大。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/22/16388487759b1152?w=1060&amp;h=178&amp;f=png&amp;s=20820" alt="img"></p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>单向链表</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(v, next) &#123;</span><br><span class="line">    <span class="keyword">this</span>.value = v</span><br><span class="line">    <span class="keyword">this</span>.next = next</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="comment">// 链表长度</span></span><br><span class="line">    <span class="keyword">this</span>.size = <span class="number">0</span></span><br><span class="line">    <span class="comment">// 虚拟头部</span></span><br><span class="line">    <span class="keyword">this</span>.dummyNode = <span class="keyword">new</span> Node(<span class="literal">null</span>, <span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  find(header, index, currentIndex) &#123;</span><br><span class="line">    <span class="keyword">if</span> (index === currentIndex) <span class="keyword">return</span> header</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.find(header.next, index, currentIndex + <span class="number">1</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  addNode(v, index) &#123;</span><br><span class="line">    <span class="keyword">this</span>.checkIndex(index)</span><br><span class="line">    <span class="comment">// 当往链表末尾插入时，prev.next 为空</span></span><br><span class="line">    <span class="comment">// 其他情况时，因为要插入节点，所以插入的节点</span></span><br><span class="line">    <span class="comment">// 的 next 应该是 prev.next</span></span><br><span class="line">    <span class="comment">// 然后设置 prev.next 为插入的节点</span></span><br><span class="line">    <span class="keyword">let</span> prev = <span class="keyword">this</span>.find(<span class="keyword">this</span>.dummyNode, index, <span class="number">0</span>)</span><br><span class="line">    prev.next = <span class="keyword">new</span> Node(v, prev.next)</span><br><span class="line">    <span class="keyword">this</span>.size++</span><br><span class="line">    <span class="keyword">return</span> prev.next</span><br><span class="line">  &#125;</span><br><span class="line">  insertNode(v, index) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.addNode(v, index)</span><br><span class="line">  &#125;</span><br><span class="line">  addToFirst(v) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.addNode(v, <span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  addToLast(v) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.addNode(v, <span class="keyword">this</span>.size)</span><br><span class="line">  &#125;</span><br><span class="line">  removeNode(index, isLast) &#123;</span><br><span class="line">    <span class="keyword">this</span>.checkIndex(index)</span><br><span class="line">    index = isLast ? index - <span class="number">1</span> : index</span><br><span class="line">    <span class="keyword">let</span> prev = <span class="keyword">this</span>.find(<span class="keyword">this</span>.dummyNode, index, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">let</span> node = prev.next</span><br><span class="line">    prev.next = node.next</span><br><span class="line">    node.next = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">this</span>.size--</span><br><span class="line">    <span class="keyword">return</span> node</span><br><span class="line">  &#125;</span><br><span class="line">  removeFirstNode() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.removeNode(<span class="number">0</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  removeLastNode() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.removeNode(<span class="keyword">this</span>.size, <span class="literal">true</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  checkIndex(index) &#123;</span><br><span class="line">    <span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; <span class="keyword">this</span>.size) <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'Index error'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  getNode(index) &#123;</span><br><span class="line">    <span class="keyword">this</span>.checkIndex(index)</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isEmpty()) <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.find(<span class="keyword">this</span>.dummyNode, index, <span class="number">0</span>).next</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.size === <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  getSize() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.size</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-算法(排序)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/12/算法(排序)/">算法 —— 排序</a>
+    </h1>
+  
+
+        
+        <a href="/2018/08/12/算法(排序)/" class="archive-article-date">
+  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h4><p>原理：从第一个元素开始，把当前元素和它的下一个索引元素对比，若当前元素比较大，则与下一索引元素交换位置，重复操作直到最后一个元素，那么此时最后一个元素的位置是已经排序正确的。下一轮重复以上操作，但因为最后一个元素已经是正确的，所以只需对比到倒数第二个元素（length - 1），重复操作至对比到第一个元素为止。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubble</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        [arr[j], arr[j + <span class="number">1</span>]] = [arr[j + <span class="number">1</span>], arr[j]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bubble(arr)</span><br></pre></td></tr></table></figure>
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a><strong>快速排序</strong></h4><p>原理：随机找一个基准值，以基准值为界线分为左侧和右侧，遍历除基准值以外的元素，把比基准值小的元素放在左侧，比基准值大的元素放在右侧，一轮之后，基准值的位置就已经排序正确了，下一轮再找另一个基准值执行相同操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>] </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line">  <span class="comment">//找基准</span></span><br><span class="line">  <span class="keyword">let</span> pivotIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">let</span> pivot = arr.splice(pivotIndex, <span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> left = []</span><br><span class="line">  <span class="keyword">let</span> right = []</span><br><span class="line"></span><br><span class="line">  <span class="comment">//排序</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] &lt; pivot) &#123;</span><br><span class="line">      left.push(arr[i])</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[i] &gt; pivot) &#123;</span><br><span class="line">      right.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> quickSort(left).concat([pivot], quickSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = quickSort(arr)</span><br></pre></td></tr></table></figure>
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>原理：把数组拆分成最多包含两个元素，先把最小单位的数组排序后，再逐渐合并起来排序。例如有一个数组<code>[3,2,4,1,5]</code>，先拆分成<code>[3,2]</code>、<code>[4,1,5]</code>，再拆分成<code>[4]</code>、<code>[1,5]</code>，然后排序<code>[2,3]</code>、<code>[1,4,5]</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//排序&amp;合并</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> temp = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (left.length &amp;&amp; right.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left[<span class="number">0</span>] &lt; right[<span class="number">0</span>]) &#123;</span><br><span class="line">      temp.push(left.shift(<span class="number">0</span>))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      temp.push(right.shift(<span class="number">0</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> temp.concat(left, right)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//拆分</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> index = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> left, right</span><br><span class="line"></span><br><span class="line">  left = arr.slice(<span class="number">0</span>, index)</span><br><span class="line">  right = arr.slice(index)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = mergeSort(arr)</span><br></pre></td></tr></table></figure>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>原理：默认第一个元素是已排的元素，从第二个元素开始与前面的元素比较，若第二个元素较小，则交换位置，后面的元素重复这个操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertion</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">        ;[arr[j - <span class="number">1</span>], arr[j]] = [arr[j], arr[j - <span class="number">1</span>]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = insertion(arr)</span><br></pre></td></tr></table></figure>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>原理：遍历数组，把其中最小的元素索引设置成0，并且把该元素与第一个元素互换，此时第一个元素就是最小元素，下一轮从索引为1的元素开始重复上述操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selection</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> minIndex = i</span><br><span class="line">    <span class="comment">//找最小值索引</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &lt; arr.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>] &amp;&amp; arr[minIndex] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        minIndex = j + <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//替换</span></span><br><span class="line">    ;[arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">selection(arr)</span><br></pre></td></tr></table></figure>
       
 
       
@@ -1074,160 +1204,6 @@
 <p><strong>面试题</strong>：两个数不使用四则运算得出和</p>
 <p>这道题中可以按位异或，因为按位异或就是不进位加法，<code>8 ^ 8 = 0</code> 如果进位了，就是 16 了，所以我们只需要将两个数进行异或操作，然后进位。那么也就是说两个二进制都是 1 的位置，左边应该有一个进位 1，所以可以得出以下公式 <code>a + b = (a ^ b) + ((a &amp; b) &lt;&lt; 1)</code> ，然后通过迭代的方式模拟加法</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>) <span class="keyword">return</span> b</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">let</span> newA = a ^ b</span><br><span class="line">    <span class="keyword">let</span> newB = (a &amp; b) &lt;&lt; <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> sum(newA, newB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数据结构(栈)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/数据结构(栈)/">数据结构 —— 栈</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/12/数据结构(栈)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>栈是一个线性结构，在计算机中是一个相当常见的数据结构。</p>
-<p>栈的特点是只能在某一端添加或删除数据，遵循先进后出的原则</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/5/20/1637b785d2d68735?w=640&amp;h=460&amp;f=png&amp;s=6932" alt="img"></p>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>每种数据结构都可以用很多种方式来实现，其实可以把栈看成是数组的一个子集，所以这里使用数组来实现</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack = []</span><br><span class="line">  &#125;</span><br><span class="line">  push(item) &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.push(item)</span><br><span class="line">  &#125;</span><br><span class="line">  pop() &#123;</span><br><span class="line">    <span class="keyword">this</span>.stack.pop()</span><br><span class="line">  &#125;</span><br><span class="line">  peek() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack[<span class="keyword">this</span>.getCount() - <span class="number">1</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  getCount() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.stack.length</span><br><span class="line">  &#125;</span><br><span class="line">  isEmpty() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getCount() === <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>选取了 <a href="https://leetcode.com/problems/valid-parentheses/submissions/1" target="_blank" rel="noopener">LeetCode 上序号为 20 的题目</a></p>
-<p>题意是匹配括号，可以通过栈的特性来完成这道题目</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isValid = <span class="function"><span class="keyword">function</span> (<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> map = &#123;</span><br><span class="line">    <span class="string">'('</span>: <span class="number">-1</span>,</span><br><span class="line">    <span class="string">')'</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="string">'['</span>: <span class="number">-2</span>,</span><br><span class="line">    <span class="string">']'</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="string">'&#123;'</span>: <span class="number">-3</span>,</span><br><span class="line">    <span class="string">'&#125;'</span>: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> stack = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (map[s[i]] &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      stack.push(s[i])</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> last = stack.pop()</span><br><span class="line">      <span class="keyword">if</span> (map[last] + map[s[i]] != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (stack.length &gt; <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">数据结构与算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-算法(排序)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/12/算法(排序)/">算法 —— 排序</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/12/算法(排序)/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a><strong>冒泡排序</strong></h4><p>原理：从第一个元素开始，把当前元素和它的下一个索引元素对比，若当前元素比较大，则与下一索引元素交换位置，重复操作直到最后一个元素，那么此时最后一个元素的位置是已经排序正确的。下一轮重复以上操作，但因为最后一个元素已经是正确的，所以只需对比到倒数第二个元素（length - 1），重复操作至对比到第一个元素为止。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubble</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = arr.length - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        [arr[j], arr[j + <span class="number">1</span>]] = [arr[j + <span class="number">1</span>], arr[j]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bubble(arr)</span><br></pre></td></tr></table></figure>
-<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a><strong>快速排序</strong></h4><p>原理：随机找一个基准值，以基准值为界线分为左侧和右侧，遍历除基准值以外的元素，把比基准值小的元素放在左侧，比基准值大的元素放在右侧，一轮之后，基准值的位置就已经排序正确了，下一轮再找另一个基准值执行相同操作。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>] </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line">  <span class="comment">//找基准</span></span><br><span class="line">  <span class="keyword">let</span> pivotIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">let</span> pivot = arr.splice(pivotIndex, <span class="number">1</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> left = []</span><br><span class="line">  <span class="keyword">let</span> right = []</span><br><span class="line"></span><br><span class="line">  <span class="comment">//排序</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] &lt; pivot) &#123;</span><br><span class="line">      left.push(arr[i])</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (arr[i] &gt; pivot) &#123;</span><br><span class="line">      right.push(arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> quickSort(left).concat([pivot], quickSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = quickSort(arr)</span><br></pre></td></tr></table></figure>
-<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>原理：把数组拆分成最多包含两个元素，先把最小单位的数组排序后，再逐渐合并起来排序。例如有一个数组<code>[3,2,4,1,5]</code>，先拆分成<code>[3,2]</code>、<code>[4,1,5]</code>，再拆分成<code>[4]</code>、<code>[1,5]</code>，然后排序<code>[2,3]</code>、<code>[1,4,5]</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">//排序&amp;合并</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> temp = []</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (left.length &amp;&amp; right.length) &#123;</span><br><span class="line">    <span class="keyword">if</span> (left[<span class="number">0</span>] &lt; right[<span class="number">0</span>]) &#123;</span><br><span class="line">      temp.push(left.shift(<span class="number">0</span>))</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      temp.push(right.shift(<span class="number">0</span>))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> temp.concat(left, right)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//拆分</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> index = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> left, right</span><br><span class="line"></span><br><span class="line">  left = arr.slice(<span class="number">0</span>, index)</span><br><span class="line">  right = arr.slice(index)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> merge(mergeSort(left), mergeSort(right))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = mergeSort(arr)</span><br></pre></td></tr></table></figure>
-<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>原理：默认第一个元素是已排的元素，从第二个元素开始与前面的元素比较，若第二个元素较小，则交换位置，后面的元素重复这个操作。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertion</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &gt; <span class="number">0</span>; j--) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &lt; arr[j - <span class="number">1</span>]) &#123;</span><br><span class="line">        ;[arr[j - <span class="number">1</span>], arr[j]] = [arr[j], arr[j - <span class="number">1</span>]]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">arr = insertion(arr)</span><br></pre></td></tr></table></figure>
-<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>原理：遍历数组，把其中最小的元素索引设置成0，并且把该元素与第一个元素互换，此时第一个元素就是最小元素，下一轮从索引为1的元素开始重复上述操作。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">3</span>, <span class="number">44</span>, <span class="number">20</span>, <span class="number">13</span>, <span class="number">6</span>, <span class="number">22</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selection</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length &lt; <span class="number">2</span>) <span class="keyword">return</span> arr</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> minIndex = i</span><br><span class="line">    <span class="comment">//找最小值索引</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j &lt; arr.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>] &amp;&amp; arr[minIndex] &gt; arr[j + <span class="number">1</span>]) &#123;</span><br><span class="line">        minIndex = j + <span class="number">1</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//替换</span></span><br><span class="line">    ;[arr[i], arr[minIndex]] = [arr[minIndex], arr[i]]</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">selection(arr)</span><br></pre></td></tr></table></figure>
       
 
       
@@ -1470,7 +1446,7 @@
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1482,7 +1458,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 Bowen
+    		&copy; 2020 Bowen
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1561,11 +1537,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">性能优化</a>
+                <a href="javascript:void(0)" class="js-tag color5">组件开发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">计算机通识</a>
+                <a href="javascript:void(0)" class="js-tag color5">常见需求</a>
               </li>
              
               <li class="article-tag-list-item">

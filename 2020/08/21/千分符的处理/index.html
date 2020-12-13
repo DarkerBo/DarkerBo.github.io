@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | Bowen_blog</title>
+  <title>千分符的处理 | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Bowen">
-<meta name="keywords" content="前端,Html,css,JavaScript,Vue">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bowen_blog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
+  <meta name="description" content="千分符的处理1. 使用toLocaleString格式化成字符串toLocaleString需要先确保使用它的是一个Number类型的值 12345const num = 15626175911;const result = parseFloat(num).toLocaleString();console.log(result);           // 15,626,175,911consol">
+<meta name="keywords" content="常见需求">
+<meta property="og:type" content="article">
+<meta property="og:title" content="千分符的处理">
+<meta property="og:url" content="http://yoursite.com/2020/08/21/千分符的处理/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="Bowen">
+<meta property="og:description" content="千分符的处理1. 使用toLocaleString格式化成字符串toLocaleString需要先确保使用它的是一个Number类型的值 12345const num = 15626175911;const result = parseFloat(num).toLocaleString();console.log(result);           // 15,626,175,911consol">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/4/4/1628f81ddcf88280?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2020-12-05T11:00:30.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bowen_blog">
-<meta name="twitter:description" content="Bowen">
+<meta name="twitter:title" content="千分符的处理">
+<meta name="twitter:description" content="千分符的处理1. 使用toLocaleString格式化成字符串toLocaleString需要先确保使用它的是一个Number类型的值 12345const num = 15626175911;const result = parseFloat(num).toLocaleString();console.log(result);           // 15,626,175,911consol">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/4/4/1628f81ddcf88280?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
   
@@ -140,291 +143,335 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-千分符的处理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      千分符的处理
+    </h1>
+  
+
+        
+        <a href="/2020/08/21/千分符的处理/" class="archive-article-date">
+  	<time datetime="2020-08-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="千分符的处理"><a href="#千分符的处理" class="headerlink" title="千分符的处理"></a>千分符的处理</h1><h3 id="1-使用toLocaleString格式化成字符串"><a href="#1-使用toLocaleString格式化成字符串" class="headerlink" title="1. 使用toLocaleString格式化成字符串"></a>1. 使用<code>toLocaleString</code>格式化成字符串</h3><p><code>toLocaleString</code>需要先确保使用它的是一个Number类型的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">15626175911</span>;</span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">parseFloat</span>(num).toLocaleString();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result);           <span class="comment">// 15,626,175,911</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> result);	   <span class="comment">// string</span></span><br></pre></td></tr></table></figure>
+<p><code>toLocaleString</code>还可以用于保留几位数字</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">156.26175911</span>;</span><br><span class="line"><span class="keyword">const</span> result = <span class="built_in">parseFloat</span>(num).toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">maximumFractionDigits</span>: <span class="number">2</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(result);			<span class="comment">// 156.26</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> result);		<span class="comment">// string</span></span><br></pre></td></tr></table></figure>
+<p>下面是对<code>toLocaleString</code>的解释</p>
+<p>本文参考自 MDN 的文档与日常使用所得，如果你对这个 <code>API</code> 已经相当熟悉，请帮我看下是否有遗漏（笑）；不了解的同学可以浏览一下，应该会对你有所帮助。</p>
+<ul>
+<li><strong>概述</strong></li>
+</ul>
+<p><code>toLocaleString</code> 方法是用于返回格式化对象后的字符串，该字符串格式因不同语言而不同。可以通过传参决定返回的语言与具体的表现，某些场景下相当有用，语法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object.toLocaleString([locales [, options]]);</span><br></pre></td></tr></table></figure>
+<p><code>locales</code> 参数用于指定格式化对象时使用的语言环境，默认为当前环境的语言，可以不传。该参数具体可选的值可以参考 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FIntl%23Locale_identification_and_negotiation" target="_blank" rel="noopener">这里</a>，一般而言使用 <code>en</code> 或 <code>zh</code> 即可应付绝大多数情况。例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>);    <span class="comment">// 2018-4-4 15:08:38</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>);    <span class="comment">// 4/4/2018, 3:08:38 PM</span></span><br></pre></td></tr></table></figure>
+<p>顺带一提，此参数大小写不敏感，已经在浏览器与 Node 验证过。</p>
+<p><code>options</code> 参数为输出样式的配置项，根据 <code>object</code> 类型不同会有不同选项，下文会仔细解释这个参数。但需要注意的是如果不传 <code>locales</code> 参数，那么 <code>options</code> 参数是不会生效的，其实上面的语法其实已经显现出这点。</p>
+<p>最后则是兼容性问题，具体如下图： </p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/4/4/1628f81ddcf88280?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<p> 使用参数的情况下兼容性稍差，这比较可惜，但总体而言还是比较乐观的。</p>
+<ul>
+<li><strong>Number.prototype.toLocaleString</strong></li>
+</ul>
+<p>先介绍 <code>toLocaleString</code> 在数字类型上的使用。面试偶尔会问到如何格式化数字，使整数部分每三位加一个逗号，这时不妨：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">2333333</span>;</span><br><span class="line">num.toLocaleString();   <span class="comment">// 2,333,333</span></span><br></pre></td></tr></table></figure>
+<p>其实是不需要任何正则的~打完出题者的脸后，我们一起看看 <code>toLocaleString</code> 在数字类型的 <code>options</code> 参数有好用属性，以方便我们偷懒使用。注意，本文不是翻译文档，因而只会介绍一些常用的属性，更具体的选项请查阅 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FNumber%2FtoLocaleString" target="_blank" rel="noopener">MDN</a>相关文档。</p>
+<p><code>style</code> 表示格式化时使用的样式，默认值是 <code>decimal</code> 也就是纯数字，也可为 <code>percent</code> 百分比显示与 <code>currency</code> 货币显示。值为 <code>currency</code> 时必须同时指定 <code>options</code> 中的 <code>currency</code> 属性，否则报错。具体例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">2333333</span>;</span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'decimal'</span> &#125;);   <span class="comment">//2,333,333</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'percent'</span> &#125;);   <span class="comment">//233,333,300%</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'currency'</span> &#125;);    <span class="comment">//报错</span></span><br></pre></td></tr></table></figure>
+<p>接下来的两个属性是 <code>style</code> 设为 <code>currency</code> 时才有用的，它们分别是 <code>currency</code> 与 <code>currencyDisplay</code>，前者指定对应的货币，如 <code>USD</code>、<code>EUR</code> 与 <code>CNY</code> 等，实测也是不区分大小写的。后者是货币符号的展示样式，默认值是 <code>symbol</code>，即对应的符号，如 <code>CNY</code> 是 ￥。该属性的值也可以是 <code>code</code> 与 <code>name</code>，只是用得比较少，看看例子就好了~具体如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">2333333</span>;</span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'currency'</span>, <span class="attr">currency</span>: <span class="string">'CNY'</span> &#125;);    <span class="comment">//￥2,333,333.00</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'currency'</span>, <span class="attr">currency</span>: <span class="string">'cny'</span>, <span class="attr">currencyDisplay</span>: <span class="string">'code'</span> &#125;);      <span class="comment">//CNY2,333,333.00</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">style</span>: <span class="string">'currency'</span>, <span class="attr">currency</span>: <span class="string">'cny'</span>, <span class="attr">currencyDisplay</span>: <span class="string">'name'</span> &#125;);      <span class="comment">//2,333,333.00人民币</span></span><br></pre></td></tr></table></figure>
+<p>最后是两组相当强大的属性，某些场景下能带来极大的便利。第一组是 <code>minimumIntegerDigits</code>、 <code>minimumFractionDigits</code> 与  <code>maximumFractionDigits</code>，用于指定整数最少位数与小数的最少和最多位数，不够则用0去凑。简单说，自动补0！具体例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">2333.3</span>;</span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">minimumIntegerDigits</span>: <span class="number">5</span> &#125;);        <span class="comment">//02,333.3</span></span><br><span class="line"><span class="comment">//如果不想有分隔符，可以指定useGrouping为false</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">minimumIntegerDigits</span>: <span class="number">5</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);        <span class="comment">//02333.3</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">minimumFractionDigits</span>: <span class="number">2</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);     <span class="comment">//2333.30</span></span><br><span class="line"></span><br><span class="line">num = <span class="number">666.666</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">maximumFractionDigits</span>: <span class="number">2</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);     <span class="comment">//666.67</span></span><br></pre></td></tr></table></figure>
+<p>从此之后，补0与控制位数再也不愁~</p>
+<p>另一组是 <code>minimumSignificantDigits</code> 与 <code>maximumSignificantDigits</code>，用于控制有效数字位数，只要设置了这一组属性，第一组属性全部忽略不算，具体如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> num = <span class="number">1234.5</span>;</span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">minimumSignificantDigits</span>: <span class="number">6</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);      <span class="comment">//1234.50</span></span><br><span class="line">num.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">maximumSignificantDigits</span>: <span class="number">4</span>, <span class="attr">useGrouping</span>: <span class="literal">false</span> &#125;);      <span class="comment">//1235</span></span><br></pre></td></tr></table></figure>
+<p>注意，<code>maximumFractionDigits</code> 与 <code>maximumSignificantDigits</code> 均是四舍五入，使用时需要注意。数字类型的 <code>toLocaleString</code> 介绍就告一段落，下面让我们看看日期类型的 <code>toLocaleString</code> 的 <code>options</code> 有什么好用的属性。</p>
+<ul>
+<li><strong>Date.prototype.toLocaleString</strong></li>
+</ul>
+<p>与数字类型不同，日期类型的 <code>locales</code> 对输出的影响十分之大（其实数字类型影响也大，只是一般用不到），因而应该根据实际情况选择合适的语言环境。一般而言，日期显示是有要求的，样式方面需要统一。但如果是内部项目或者是 pm 允许，那么使用 <code>toLocaleString</code> 格式化日期就相当好了。与数字类型一样，只介绍常用属性，详细的属性介绍请查阅<a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FDate%2FtoLocaleString" target="_blank" rel="noopener">MDN</a>文档。</p>
+<p><code>hour12</code> 表示是使用十二小时制还是二十四小时制，默认值视 <code>locales</code> 而定。例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">hour12</span>: <span class="literal">true</span> &#125;);        <span class="comment">//2018/4/4 下午6:57:36</span></span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">hour12</span>: <span class="literal">false</span> &#125;);       <span class="comment">//2018/4/4 18:57:36</span></span><br></pre></td></tr></table></figure>
+<p>之后就是格式化年月日时分秒星期等选项了，<a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fzh-CN%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FDate%2FtoLocaleString" target="_blank" rel="noopener">MDN</a> 文档说必须按照一定的分组设置属性，实际使用中发现每个属性单独使用并不报错，因而按属性的值分开介绍会比较好理解。</p>
+<p>具体的属性一共有 9 个，分别是 <code>weekday</code>、<code>era</code>、<code>year</code>、<code>month</code>、<code>day</code>、<code>hour</code>、<code>minute</code>、<code>second</code> 与 <code>timeZoneName</code>。具体的意思，看单词估计就能秒懂，不作过多解释。然而需要留意的是他们的可选值。先讨论<code>weekday</code> 与 <code>era</code>，它们均可以取值为 <code>narrow</code>、<code>short</code> 或 <code>long</code>，简单说就是能有多短多短，缩写与正常表现，具体表现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">weekday</span>: <span class="string">'narrow'</span>, <span class="attr">era</span>: <span class="string">'narrow'</span> &#125;);        <span class="comment">//W A</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">weekday</span>: <span class="string">'short'</span>, <span class="attr">era</span>: <span class="string">'short'</span> &#125;);      <span class="comment">//Wed AD</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">weekday</span>: <span class="string">'long'</span>, <span class="attr">era</span>: <span class="string">'long'</span> &#125;);        <span class="comment">//Wednesday Anno Domini</span></span><br></pre></td></tr></table></figure>
+<p>跟着是 <code>timeZoneName</code> 属性，这个属性只有<code>short</code> 或 <code>long</code> 两个值，表现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">timeZoneName</span>: <span class="string">'short'</span> &#125;);   <span class="comment">//2018/4/5 GMT+8 下午7:18:26</span></span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">timeZoneName</span>: <span class="string">'long'</span> &#125;);    <span class="comment">//2018/4/5 中国标准时间 下午7:18:26</span></span><br></pre></td></tr></table></figure>
+<p>剩下的属性，均可以取值为 <code>numeric</code> 与 <code>2-digit</code>，简单说就是否仅用两位数字表示，看码说话：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">year</span>: <span class="string">'numeric'</span>,  <span class="attr">month</span>: <span class="string">'numeric'</span>,  <span class="attr">day</span>: <span class="string">'numeric'</span>,  <span class="attr">hour</span>: <span class="string">'numeric'</span>,  <span class="attr">minute</span>: <span class="string">'numeric'</span>,  <span class="attr">second</span>: <span class="string">'numeric'</span>, &#125;);   <span class="comment">//2018/4/5 下午7:30:17</span></span><br><span class="line">date.toLocaleString(<span class="string">'zh'</span>, &#123; <span class="attr">year</span>: <span class="string">'2-digit'</span>,  <span class="attr">month</span>: <span class="string">'2-digit'</span>,  <span class="attr">day</span>: <span class="string">'2-digit'</span>,  <span class="attr">hour</span>: <span class="string">'2-digit'</span>,  <span class="attr">minute</span>: <span class="string">'2-digit'</span>,  <span class="attr">second</span>: <span class="string">'2-digit'</span>  &#125;);   <span class="comment">//18/04/05 下午7:30:17</span></span><br></pre></td></tr></table></figure>
+<p>（比较奇怪的是 <code>hour</code>、<code>minute</code> 与 <code>second</code> 三个属性，无论设置为何值，表现都是一样的，希望有大佬告知原因，我换成 <code>en</code> 环境也是一样的。）</p>
+<p>最后是 <code>month</code> 这个属性，语言对月份有不同的展现，除去 <code>numeric</code> 与 <code>2-digit</code> 外，它额外多三个属性，分别是 <code>narrow</code>、<code>short</code> 与 <code>long</code>。展示如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">month</span>: <span class="string">'narrow'</span> &#125;);     <span class="comment">//A</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">month</span>: <span class="string">'short'</span> &#125;);     <span class="comment">//Apr</span></span><br><span class="line">date.toLocaleString(<span class="string">'en'</span>, &#123; <span class="attr">month</span>: <span class="string">'long'</span> &#125;);     <span class="comment">//April</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>小结</strong></li>
+</ul>
+<p>至此，关于 <code>toLocaleString</code> 的介绍就暂告一段落了。可以看到，在某些场景下需要格式化对象成字符串时，可以发挥极大的作用，不再需要自己苦兮兮地写函数做转换。尽管这个 <code>API</code> 稍微冷门一点，但还是很有意思的。</p>
+<h3 id="2-使用正则匹配"><a href="#2-使用正则匹配" class="headerlink" title="2. 使用正则匹配"></a>2. 使用正则匹配</h3><p>在使用正则之前先了解几个小知识：正向匹配、replace的函数匹配模式</p>
+<ul>
+<li><strong>正向匹配</strong></li>
+</ul>
+<p>正向匹配即<code>?=n</code>（匹配任何其后紧接指定字符串 n 的字符串）。正向预查咋用呢？这里先举个例子：有一个字符串<code>var str = &quot;abaaaaa&quot;;</code>，我们想把后面跟着字符b的字符a表示出来，于是正则表达式写法：<code>var reg = /a(?=b)/g;</code>，匹配的是后面紧跟着字符<code>b</code>的字符<code>a</code>，字符串<code>str</code>中只有一个符合条件的<code>a</code>，最后查看匹配结果为[“a”]。这个例子的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> str = <span class="string">"abaaaaa"</span>,</span><br><span class="line">    reg = <span class="regexp">/a(?=b)/g</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(reg));  <span class="comment">// ['a'] 匹配到的是b紧贴的那个a</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>replace的函数匹配模式</strong>（其实就是参数是函数而不是字符串的时候）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(regexp|substr, newSubStr|<span class="function"><span class="keyword">function</span>)</span></span><br></pre></td></tr></table></figure>
+<p><strong>（1）参数</strong></p>
+<ul>
+<li><p><code>regexp</code>(pattern)</p>
+<p>一个<code>RegExp</code>对象或者其字面量。该正则所匹配的内容会被第二个参数的返回值替换掉。</p>
+</li>
+<li><p><code>substr</code>(pattern)</p>
+<p>一个将被 <code>newSubStr</code> 替换的字符串。其被视为一整个字符串，而不是一个正则表达式。仅第一个匹配项会被替换。</p>
+</li>
+<li><p><code>newSubStr</code> (replacement)</p>
+<p>用于替换掉第一个参数在原字符串中的匹配部分的字符串。该字符串中可以内插一些特殊的变量名。</p>
+</li>
+<li><p><code>function</code> (replacement)</p>
+<p>一个用来创建新子字符串的函数，该函数的返回值将替换掉第一个参数匹配到的结果。</p>
+</li>
+</ul>
+<p><strong>（2）返回值</strong></p>
+<p>一个部分或全部匹配由替代模式所取代的新的字符串。</p>
+<p>该方法并不改变调用它的字符串本身，而只是返回一个新的替换后的字符串。</p>
+<p>在进行全局的搜索替换时，正则表达式需包含 <code>g</code> 标志。</p>
+<p><strong>（3）使用字符串作为参数</strong></p>
+<p>替换字符串可以插入下面的特殊变量名：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>代表的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$$</code></td>
+<td>插入一个 “$”。</td>
+</tr>
+<tr>
+<td><code>$&amp;</code></td>
+<td>插入匹配的子串。</td>
+</tr>
+<tr>
+<td><code>$`</code></td>
+<td>插入当前匹配的子串左边的内容。</td>
+</tr>
+<tr>
+<td><code>$&#39;</code></td>
+<td>插入当前匹配的子串右边的内容。</td>
+</tr>
+<tr>
+<td><code>$*n*</code></td>
+<td>假如第一个参数是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/RegExp" target="_blank" rel="noopener"><code>RegExp</code></a>对象，并且 n 是个小于100的非负整数，那么插入第 n 个括号匹配的字符串。提示：索引是从1开始</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（4）指定一个函数作为参数</strong></p>
+<p>你可以指定一个函数作为第二个参数。在这种情况下，当匹配执行后，该函数就会执行。 函数的返回值作为替换字符串。 (注意：上面提到的特殊替换参数在这里不能被使用。) 另外要注意的是，如果第一个参数是正则表达式，并且其为全局匹配模式，那么这个方法将被多次调用，每次匹配都会被调用。</p>
+<p>下面是该函数的参数：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>代表的值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>match</code></td>
+<td>匹配的子串。（对应于上述的$&amp;。）</td>
+</tr>
+<tr>
+<td><code>p1,p2, ...</code></td>
+<td>假如replace()方法的第一个参数是一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/RegExp" target="_blank" rel="noopener"><code>RegExp</code></a> 对象，则代表第n个括号匹配的字符串。（对应于上述的$1，$2等。）例如，如果是用 <code>/(\a+)(\b+)/</code> 这个来匹配，<code>p1</code> 就是匹配的 <code>\a+</code>，<code>p2</code> 就是匹配的 <code>\b+</code>。</td>
+</tr>
+<tr>
+<td><code>offset</code></td>
+<td>匹配到的子字符串在原字符串中的偏移量。（比如，如果原字符串是 <code>&#39;abcd&#39;</code>，匹配到的子字符串是 <code>&#39;bc&#39;</code>，那么这个参数将会是 1）</td>
+</tr>
+<tr>
+<td><code>string</code></td>
+<td>被匹配的原字符串。</td>
+</tr>
+<tr>
+<td>NamedCaptureGroup</td>
+<td>命名捕获组匹配的对象</td>
+</tr>
+</tbody>
+</table>
+<p>(精确的参数个数依赖于 <code>replace()</code> 的第一个参数是否是一个正则表达式（<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/RegExp" target="_blank" rel="noopener"><code>RegExp</code></a>）对象，以及这个正则表达式中指定了多少个括号子串，如果这个正则表达式里使用了命名捕获， 还会添加一个命名捕获的对象)</p>
+<p>下面的例子将会使 <code>newString</code> 变成 <code>&#39;abc - 12345 - #$*%&#39;</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replacer</span>(<span class="params">match, p1, p2, p3, offset, string</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// p1 is nondigits, p2 digits, and p3 non-alphanumerics</span></span><br><span class="line">  <span class="keyword">return</span> [p1, p2, p3].join(<span class="string">' - '</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> newString = <span class="string">'abc12345#$*%'</span>.replace(<span class="regexp">/([^\d]*)(\d*)([^\w]*)/</span>, replacer);</span><br><span class="line"><span class="built_in">console</span>.log(newString);  <span class="comment">// abc - 12345 - #$*%</span></span><br></pre></td></tr></table></figure>
+<p>因此：正则匹配千分符的方法是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">format</span> (<span class="params">num</span>) </span>&#123;  <span class="comment">// eg: num 为15626175911 </span></span><br><span class="line">    <span class="keyword">const</span> reg=<span class="regexp">/\d&#123;1,3&#125;(?=(\d&#123;3&#125;)+$)/g</span>;   </span><br><span class="line">    <span class="built_in">console</span>.log(num.toString().match(reg)); <span class="comment">// [ '15', '626', '175' ]</span></span><br><span class="line">    <span class="keyword">return</span> (num + <span class="string">''</span>).replace(reg, <span class="string">'$&amp;,'</span>);  <span class="comment">// 使用特殊字符$&amp;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>解释</strong></p>
+<ul>
+<li>正则表达式 \d{1,3}(?=(\d{3})+$)  表示前面有1~3个数字，后面的至少由一组3个数字结尾</li>
+<li>?=表示正向引用，可以作为匹配的条件，但匹配到的内容不获取，并且作为下一次查询的开始</li>
+<li>$&amp; 表示与正则表达式相匹配的内容，具体的可查看文档</li>
+</ul>
+<p>上面的正则只能匹配整数，若要匹配小数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">format</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> reg = <span class="regexp">/(?=(\B\d&#123;3&#125;)+$)/g</span>;              <span class="comment">// 这是匹配整数的 不加/B会导致最高位的''也能匹配</span></span><br><span class="line">  <span class="keyword">const</span> reg2 = <span class="regexp">/(?&lt;=\b(?&lt;!\.)\d*)\B(?=(\d&#123;3&#125;)+(?=\b))/g</span>;   <span class="comment">// 这是匹配小数的</span></span><br><span class="line">  <span class="keyword">return</span> (num + <span class="string">''</span>).replace(reg, <span class="string">','</span>);</span><br><span class="line">  <span class="comment">// return num.toString().match(reg2);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(format(<span class="number">15626175911</span>));</span><br><span class="line"><span class="built_in">console</span>.log(format(<span class="number">15626175.911</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="3-使用for循环"><a href="#3-使用for循环" class="headerlink" title="3. 使用for循环"></a>3. 使用for循环</h3><h3 id="4-使用reduce"><a href="#4-使用reduce" class="headerlink" title="4. 使用reduce"></a>4. 使用reduce</h3>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Math&Date/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Math&Date/">JavaScript Math&amp;Date</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">常见需求</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/08/21/千分符的处理/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Async/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/09/15/无限播报/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          无限播报
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/24/Mutation-Observer应用-文字&图片水印/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mutation Observer应用 文字&amp;图片水印</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Async/">JavaScript Async</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Event/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Event/">JavaScript Event</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript RegExp/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript RegExp/">JavaScript RegExp</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Object/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Object/">JavaScript Object</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript DOM/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript DOM/">JavaScript DOM</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Ajax/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Ajax/">JavaScript Ajax</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2018/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -448,8 +495,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

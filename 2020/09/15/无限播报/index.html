@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | Bowen_blog</title>
+  <title>无限播报 | Bowen_blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Bowen">
-<meta name="keywords" content="前端,Html,css,JavaScript,Vue">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Bowen_blog">
-<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
+  <meta name="description" content="无限播报（类似广告无限滚动播放）零、代码地址实现无限播报的代码放在了这个github地址中：无限播报 一、实现思路其实实现该组件并不复杂，主要要注意的点在于：  如何做到无限循环的效果？ 如何定义该动画？  我们先逐个击破这些问题  如何做到无限循环的效果？  123&amp;lt;div class=&quot;parent&quot;&amp;gt;	&amp;lt;div class=&quot;scroll&quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;">
+<meta name="keywords" content="组件开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无限播报">
+<meta property="og:url" content="http://yoursite.com/2020/09/15/无限播报/index.html">
 <meta property="og:site_name" content="Bowen_blog">
-<meta property="og:description" content="Bowen">
+<meta property="og:description" content="无限播报（类似广告无限滚动播放）零、代码地址实现无限播报的代码放在了这个github地址中：无限播报 一、实现思路其实实现该组件并不复杂，主要要注意的点在于：  如何做到无限循环的效果？ 如何定义该动画？  我们先逐个击破这些问题  如何做到无限循环的效果？  123&amp;lt;div class=&quot;parent&quot;&amp;gt;	&amp;lt;div class=&quot;scroll&quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-12-06T05:43:53.386Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bowen_blog">
-<meta name="twitter:description" content="Bowen">
+<meta name="twitter:title" content="无限播报">
+<meta name="twitter:description" content="无限播报（类似广告无限滚动播放）零、代码地址实现无限播报的代码放在了这个github地址中：无限播报 一、实现思路其实实现该组件并不复杂，主要要注意的点在于：  如何做到无限循环的效果？ 如何定义该动画？  我们先逐个击破这些问题  如何做到无限循环的效果？  123&amp;lt;div class=&quot;parent&quot;&amp;gt;	&amp;lt;div class=&quot;scroll&quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;">
   
     <link rel="alternative" href="/atom.xml" title="Bowen_blog" type="application/atom+xml">
   
@@ -140,291 +141,203 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-无限播报" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      无限播报
+    </h1>
+  
+
+        
+        <a href="/2020/09/15/无限播报/" class="archive-article-date">
+  	<time datetime="2020-09-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-15</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="无限播报（类似广告无限滚动播放）"><a href="#无限播报（类似广告无限滚动播放）" class="headerlink" title="无限播报（类似广告无限滚动播放）"></a>无限播报（类似广告无限滚动播放）</h1><h3 id="零、代码地址"><a href="#零、代码地址" class="headerlink" title="零、代码地址"></a>零、代码地址</h3><p>实现无限播报的代码放在了这个github地址中：<a href="https://github.com/DarkerBo/various-components-react/tree/master/src/LoopPlaybackDemo" target="_blank" rel="noopener">无限播报</a></p>
+<h3 id="一、实现思路"><a href="#一、实现思路" class="headerlink" title="一、实现思路"></a>一、实现思路</h3><p>其实实现该组件并不复杂，主要要注意的点在于：</p>
+<ol>
+<li>如何做到无限循环的效果？</li>
+<li>如何定义该动画？</li>
+</ol>
+<p>我们先逐个击破这些问题</p>
+<ul>
+<li><strong>如何做到无限循环的效果？</strong></li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scroll"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以想想，假设在水平滚动的组件中，parent 的宽度为100px，scroll 的宽度为150px，开始滚动，滚动到此时scroll的右侧边界和 parent 的边界重合时，继续滚动如何出现 scroll 左侧的元素？</p>
+<p>答案很简单：<strong>设置两个scroll，然后第一个scroll的左侧边界与parent的右侧边界重叠时，瞬间回到最初的状态（scroll的左侧边界在parent的右侧边界）</strong></p>
+<ul>
+<li><strong>如何定义该动画？</strong></li>
+</ul>
+<p>我使用的是<code>document.styleSheets</code>来动态生成一个<code>animation</code>的动画，然后使用<code>insertRule</code>插入到组件的<code>cssRules</code>中。</p>
+<p>下面是 MDN 对<code>document.styleSheets</code>的定义：</p>
+<blockquote>
+<p><strong><code>Document.styleSheets</code></strong> 只读属性，返回一个由 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/StyleSheet_" target="_blank" rel="noopener"><code>StyleSheet</code></a>对象组成的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/StyleSheetList" target="_blank" rel="noopener"><code>StyleSheetList</code></a>，每个 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/StyleSheet_" target="_blank" rel="noopener"><code>StyleSheet</code></a>对象都是一个文档中链接或嵌入的样式表。</p>
+</blockquote>
+<p>这是 MDN 对<code>insertRule</code>的定义：</p>
+<blockquote>
+<p><strong><code>CSSStyleSheet.insertRule()</code></strong> 方法用来给当前样式表插入新的样式规则（<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSRule" target="_blank" rel="noopener">CSS rule</a>），并且包含一些<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSStyleSheet/insertRule$edit#Restrictions" target="_blank" rel="noopener">限制</a>。</p>
+<p><strong>注意：</strong>尽管 <code>insertRule()</code> 是 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSStyleSheet" target="_blank" rel="noopener"><code>CSSStyleSheet</code></a> 的一个方法，但它实际插入的地方是 <code>CSSStyleSheet.cssRules</code> 的内部 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/CSSRuleList" target="_blank" rel="noopener"><code>CSSRuleList</code></a>。</p>
+</blockquote>
+<h3 id="二、核心代码"><a href="#二、核心代码" class="headerlink" title="二、核心代码"></a>二、核心代码</h3><p>有了上面思路的铺垫，组件的核心代码就呼之欲出了~</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 生成随机动画事件名，避免重复，不能直接用Math.random，有小数点的话keyframes的name无法解析</span><br><span class="line">const keyframesName = `scroll$&#123;new Date().valueOf()&#125;`;</span><br><span class="line">scrollElement.style.animation = `$&#123;keyframesName&#125; $&#123;loopTime&#125;s linear infinite`;</span><br><span class="line"></span><br><span class="line">// 这里使用定位top的话会出现字会颤抖的现象</span><br><span class="line">const keyframesValue = `@keyframes $&#123;keyframesName&#125;&#123;</span><br><span class="line">      0% &#123; transform: $&#123;translateDirection&#125;(0px) &#125;</span><br><span class="line">      100%&#123;</span><br><span class="line">           transform: $&#123;translateDirection&#125;(-$&#123;scrollElement[scrollDirection]&#125;px);</span><br><span class="line">          &#125;`;</span><br><span class="line"></span><br><span class="line">const stylesheet = document.styleSheets[document.styleSheets.length - 1] as CSSStyleSheet;</span><br><span class="line">      </span><br><span class="line">stylesheet.insertRule(keyframesValue, stylesheet.cssRules.length);</span><br></pre></td></tr></table></figure>
+<h3 id="三、效果演示图"><a href="#三、效果演示图" class="headerlink" title="三、效果演示图"></a>三、效果演示图</h3><p>实现无限播报的图片可以在这个github地址中浏览：<a href="https://github.com/DarkerBo/various-components-react" target="_blank" rel="noopener">无限播报</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Math&Date/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Math&Date/">JavaScript Math&amp;Date</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">组件开发</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/15/无限播报/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Async/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/10/05/锚点跳转/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          锚点跳转
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/08/21/千分符的处理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">千分符的处理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Async/">JavaScript Async</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Event/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Event/">JavaScript Event</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript RegExp/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript RegExp/">JavaScript RegExp</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Object/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Object/">JavaScript Object</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript DOM/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript DOM/">JavaScript DOM</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/12/JavaScript Ajax/" class="archive-article-date">
-  	<time datetime="2018-08-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/12/JavaScript Ajax/">JavaScript Ajax</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">JavaScript</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2018/">&laquo; Prev</a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -448,8 +361,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
